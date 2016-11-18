@@ -10,6 +10,7 @@ Then run these commands to update conda, create a virtual environment and instal
 ```sh
 conda config --add channels conda-forge
 conda update conda pip -y
+conda install conda-env -y
 conda env create -f environment.yml
 ```
 
