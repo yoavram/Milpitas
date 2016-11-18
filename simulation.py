@@ -1,8 +1,26 @@
-## Automatically generated with __main__ from simulation.ipynb
+# -*- coding: utf-8 -*-
+"""
+TODO
 
-import matplotlib.pyplot as plt
+Created on Thu Nov 17 16:24:45 2016
+
+@author: yoav@yoavram.com
+"""
+import datetime
+import os
+import gzip
+import json
+import warnings
+# filter seaborn nasty warning
+warnings.filterwarnings('ignore', 'The `IPython.html` package has been deprecated. You should import from `notebook` instead. `IPython.html.widgets` has moved to `ipywidgets`.')
+
+import click
 import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns
+
+__version__ = '0.0.1'
+output_folder = 'output'
 sns.set(style='ticks', context='paper', font_scale=1.3)
 
 def simulation(N, n, η, ω0, ω1, π0, ϵ=None):
@@ -176,3 +194,64 @@ def plot_η(η_bar, η1, η2, ax=None):
     ax.set_clip_on(False)
     sns.despine()
     return ax
+
+def write_json(filename, data):
+    filename = os.path.join(output_folder, '{}_{}.json'.format('params', filename))
+    click.echo("Writing parameters to {}".format(filename))
+    with open(filename, 'wt') as f:
+        json.dump(data, f)
+
+def write_csv_gz(filename, prefix, data):
+    filename = os.path.join(output_folder, '{}_{}.csv.gz'.format(prefix, filename))
+    click.echo("Writing {} to {}".format(prefix, filename))
+    with gzip.open(filename, 'w') as f:
+        np.savetxt(f, data, delimiter=', ')
+
+
+@click.command()
+@click.version_option(version=__version__, prog_name=__name__)
+@click.option('--N', default=100, help="Population size")
+@click.option('--n', default=10, help="Number of generations")
+@click.option('--η1', default=0.1, help="Learning rate")
+@click.option('--η2', default=None, help="Invader modifier learning rate")
+@click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
+@click.option('--ω1', default=0, help="Fitness of phenotype 0 in environment 1")
+@click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
+@click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
+def main(N=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
+    now = datetime.datetime.now()
+    params = dict(N=N, n=n, η1=η1, η2=η2, ω0=ω0, ω1=ω1, π0=π0, env=env)
+    click.echo("Starting simulation {} with parameters:\n{!r}".format(now, params))
+    
+    if env == 'A':
+        ϵ = np.random.choice(2, n, True, [0.7, 0.3])
+    elif env == 'B':
+        ϵ, a = np.zeros(n, dtype=int), 0
+        while a < ϵ.size:
+            a += np.random.geometric(1/10)
+            g = np.random.geometric(1/5)
+            ϵ[a: a + g] = 1
+            a += g
+    elif env == 'C':
+        ϵ = np.array([0] * 40 + [1] * 40 + [0] * 20)
+    else:
+        raise ValueError("Unknown value for env: {}".format(env))
+
+    if η2 is None:
+        π = simulation(N, n, η1, ω0, ω1, π0, ϵ)
+    else:
+        π, η_bar = simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ)
+
+    filename = now.isoformat().replace(':', '-')
+    if not os.path.exists(output_folder):
+        os.mkdir(output_folder)
+    
+    write_json(filename, params)
+    write_csv_gz(filename, 'π', π)
+    write_csv_gz(filename, 'ϵ', ϵ)    
+    if η2 is not None:
+        write_csv_gz(filename, 'η', η_bar)
+
+
+if __name__ == '__main__':
+    main()

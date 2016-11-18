@@ -9,18 +9,26 @@ dependencies:
 - conda-forge::blas=1.1=openblas
 - conda-forge::ca-certificates=2016.9.26=0
 - conda-forge::certifi=2016.9.26=py35_0
+- conda-forge::click=6.6=py35_1
 - conda-forge::cycler=0.10.0=py35_0
 - conda-forge::decorator=4.0.10=py35_0
+- conda-forge::entrypoints=0.2.2=py35_0
 - conda-forge::freetype=2.6.3=1
 - conda-forge::ipykernel=4.5.0=py35_0
 - conda-forge::ipython=5.1.0=py35_1
 - conda-forge::ipython_genutils=0.1.0=py35_0
+- conda-forge::jinja2=2.8=py35_1
+- conda-forge::jsonschema=2.5.1=py35_0
 - conda-forge::jupyter_client=4.4.0=py35_0
 - conda-forge::jupyter_core=4.2.0=py35_0
 - conda-forge::libgfortran=3.0.0=0
 - conda-forge::libpng=1.6.26=0
 - conda-forge::libsodium=1.0.10=0
+- conda-forge::markupsafe=0.23=py35_0
 - conda-forge::matplotlib=1.5.3=np111py35_2
+- conda-forge::mistune=0.7.3=py35_0
+- conda-forge::nbconvert=4.2.0=py35_0
+- conda-forge::nbformat=4.1.0=py35_0
 - conda-forge::ncurses=5.9=9
 - conda-forge::numpy=1.11.2=py35_blas_openblas_201
 - conda-forge::openblas=0.2.18=6
@@ -58,14 +66,21 @@ dependencies:
 - pip:
   - backports.shutil-get-terminal-size==1.0.0
   - certifi==2016.9.26
+  - click==6.6
   - cycler==0.10.0
   - decorator==4.0.10
   - ipykernel==4.5.0
   - ipython==5.1.0
   - ipython-genutils==0.1.0
+  - jinja2==2.8
+  - jsonschema==2.5.1
   - jupyter-client==4.4.0
   - jupyter-core==4.2.0
+  - markupsafe==0.23
   - matplotlib==1.5.3
+  - mistune==0.7.3
+  - nbconvert==4.2.0
+  - nbformat==4.1.0
   - numpy==1.11.2
   - pandas==0.19.1
   - patsy==0.4.1

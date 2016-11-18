@@ -8,21 +8,31 @@ Download and install [Anaconda](https://www.continuum.io/downloads) or [Minicond
 Then run these commands to update conda, create a virtual environment and install required packages:
 
 ```sh
-conda update conda pip -y
 conda config --add channels conda-forge
+conda update conda pip -y
 conda env create -f environment.yml
 ```
 
-Remove `source` if running on Windows.
-
-## Running a simulation
-
-Activate the virtual environment:
+Before using the notebook or the simulation you must always activate the environment you just created:
 
 ```sh
 source activate Xue2016
 ```
 
-and start the simulation:
+Remove `source` if running on Windows.
 
-TBD
+## Using the notebook
+
+The notebook allows you to reproduce the figure from Xue & Leibler 2016 and to run single simulations and plot their results.
+
+To start the notebook, call `jupyter notebook` inside the repository folder.
+
+## Running a simulation
+
+To run a the simulation:
+
+```sh
+python simulation.py
+```
+
+To simulate a competition between two modifier alleles, specify `η2`.
