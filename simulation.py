@@ -210,19 +210,20 @@ def write_csv_gz(filename, prefix, data):
 
 @click.command()
 @click.version_option(version=__version__, prog_name=__name__)
-@click.option('--N', default=100, help="Population size")
+@click.option('--Ne', type=int, help="Population size")
 @click.option('--n', default=10, help="Number of generations")
 @click.option('--η1', default=0.1, help="Learning rate")
 @click.option('--η2', default=None, help="Invader modifier learning rate")
 @click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
-@click.option('--ω1', default=0, help="Fitness of phenotype 0 in environment 1")
+@click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
 @click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
-def main(N=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
+def main(ne=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
+    N = ne
     now = datetime.datetime.now()
     params = dict(N=N, n=n, η1=η1, η2=η2, ω0=ω0, ω1=ω1, π0=π0, env=env)
     click.echo("Starting simulation {} with parameters:\n{!r}".format(now, params))
-    
+
     if env == 'A':
         ϵ = np.random.choice(2, n, True, [0.7, 0.3])
     elif env == 'B':
@@ -247,7 +248,7 @@ def main(N=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
         os.mkdir(output_folder)
     
     write_json(filename, params)
-    write_csv_gz(filename, 'π', π)
+    write_csv_gz(filename, 'π', π.mean(axis=1))
     write_csv_gz(filename, 'ϵ', ϵ)    
     if η2 is not None:
         write_csv_gz(filename, 'η', η_bar)
