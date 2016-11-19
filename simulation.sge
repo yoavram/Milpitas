@@ -1,0 +1,13 @@
+#!/bin/bash
+#$ -V
+#$ -cwd
+#$ -j y
+#$ -N Xue2016
+#$ -l lilach,mem_free=2G
+
+#$ -v env=A
+
+module load gcc/gcc620
+
+python simulation.py --Ne 100000 --n 500 --η1 0.1 --η2 0.2 --ω0 2.0 --ω1 0.2  --π0 0.5  --env ${env}
+
