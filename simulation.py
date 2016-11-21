@@ -23,7 +23,7 @@ __version__ = '0.0.1'
 output_folder = 'output'
 sns.set(style='ticks', context='paper', font_scale=1.3)
 
-def simulation(N, n, η, ω0, ω1, π0, ϵ=None):
+def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     """Run a single simulation.
     
     Parameters
@@ -34,6 +34,8 @@ def simulation(N, n, η, ω0, ω1, π0, ϵ=None):
         number of generations
     η : float
         learning rate, 0 <= η <= 1
+    μ : float
+        mutation rate, 0 <= μ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
     π0 : float
@@ -66,7 +68,8 @@ def simulation(N, n, η, ω0, ω1, π0, ϵ=None):
         # selection & reproduction; idx is the indexes of reproducing individuals
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
-        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        μ_ = μ * np.random.choice((-1, 1), N, True)
+        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_ 
         
     return π
 
@@ -123,7 +126,7 @@ def plot_logNtN0(π, ω0, ω1, p0, ϵ, ax=None):
     return ax
 
 
-def simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ=None):
+def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ=None):
     """Run a single simulation.
     
     Parameters
@@ -134,6 +137,8 @@ def simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ=None):
         number of generations
     η1, η2 : float
         learning rate, 0 <= η <= 1
+    μ1, μ2 : float
+        mutation rate, 0 <= μ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
     π0 : float
@@ -161,6 +166,12 @@ def simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ=None):
     η[N//2:] = η2
     η_bar = np.empty(n, dtype=float)
     η_bar[0] = η.mean()
+    # μ[t, i] is the mutation rate for individual i
+    μ = np.empty(N, dtype=float)
+    μ[:N//2] = μ1
+    μ[N//2:] = μ2
+    μ_bar = np.empty(n, dtype=float)
+    μ_bar[0] = η.mean()
     
     for t in range(n - 1):
         # phenotype of each individual
@@ -174,9 +185,12 @@ def simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ=None):
         # offspring phenotype probability
         η = η[idx]
         η_bar[t + 1] = η.mean()
-        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        μ = μ[idx]
+        μ_bar[t + 1] = μ.mean()
+        μ_ = μ * np.random.choice((-1, 1), N, True)
+        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_
     
-    return π, η_bar
+    return π, η_bar, μ_bar
 
 
 def plot_η(η_bar, η1, η2, ax=None):    
@@ -214,14 +228,16 @@ def write_csv_gz(filename, prefix, data):
 @click.option('--n', default=10, help="Number of generations")
 @click.option('--η1', default=0.1, help="Learning rate")
 @click.option('--η2', default=None, help="Invader modifier learning rate")
+@click.option('--μ1', default=0.0, help="Mutation rate")
+@click.option('--μ2', default=None, type=float, help="Invader modifier mutation rate")
 @click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
 @click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
 @click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
-def main(ne=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
+def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
     N = ne
     now = datetime.datetime.now()
-    params = dict(N=N, n=n, η1=η1, η2=η2, ω0=ω0, ω1=ω1, π0=π0, env=env)
+    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, env=env)
     click.echo("Starting simulation {} with parameters:\n{!r}".format(now, params))
 
     if env == 'A':
@@ -239,10 +255,14 @@ def main(ne=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
     else:
         raise ValueError("Unknown value for env: {}".format(env))
 
-    if η2 is None:
-        π = simulation(N, n, η1, ω0, ω1, π0, ϵ)
+    if η2 is None and μ2 is None:
+        π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ)
     else:
-        π, η_bar = simulation_modifiers(N, n, η1, η2, ω0, ω1, π0, ϵ)
+        if μ2 is None:
+            μ2 = μ1
+        if η2 is None:
+            η2 = η1
+        π, η_bar, μ_bar = simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ)
 
     filename = now.isoformat().replace(':', '-')
     if not os.path.exists(output_folder):
@@ -251,9 +271,10 @@ def main(ne=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
     write_json(filename, params)
     write_csv_gz(filename, 'π', π.mean(axis=1))
     write_csv_gz(filename, 'ϵ', ϵ)    
-    if η2 is not None:
+    if η2 is not None and η2 != η1:
         write_csv_gz(filename, 'η', η_bar)
-
+    if μ2 is not None and μ2 != μ1:
+        write_csv_gz(filename, 'μ', μ_bar)
 
 if __name__ == '__main__':
     main()
