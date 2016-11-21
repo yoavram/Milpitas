@@ -126,7 +126,7 @@ def plot_logNtN0(π, ω0, ω1, p0, ϵ, ax=None):
     return ax
 
 
-def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ=None):
+def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None):
     """Run a single simulation.
     
     Parameters
@@ -143,6 +143,8 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ=None):
         two fitness values for the two phenotyes in the two environments, ω > 0
     π0 : float
         initial value for π
+    κ : float
+        modifier mutation rate, 0 <= κ <= 1
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
@@ -184,8 +186,19 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ=None):
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
         η = η[idx]
-        η_bar[t + 1] = η.mean()
         μ = μ[idx]
+        if κ > 0:
+            κ_idx = np.random.random(N) < κ
+            κ_idx1 = (η==η1) & κ_idx
+            κ_idx2 = (η==η2) & κ_idx
+            η[κ_idx1] = η2
+            η[κ_idx2] = η1
+            κ_idx = np.random.random(N) < κ
+            κ_idx1 = (μ==μ1) & κ_idx
+            κ_idx2 = (μ==μ2) & κ_idx
+            μ[κ_idx1] = μ2
+            μ[κ_idx2] = μ1
+        η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
         μ_ = μ * np.random.choice((-1, 1), N, True)
         π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_
@@ -199,11 +212,12 @@ def plot_η(η_bar, η1, η2, ax=None):
     ax.plot(η_bar)
     ax.axhline(η1, color='k', ls='--')
     ax.axhline(η2, color='k', ls='--')
-    ηm, ηM = η1 * 0.9, η2 * 1.1
+    ηm, ηM = η1, η2
     if ηm == 0 and ηM == 0:
         ηm, ηM = 0, 0.1
     if ηm > ηM:
         ηm, ηM = ηM, ηm
+    ηm, ηM = ηm * 0.9, ηM * 1.1
     ax.set(
         xlabel='t',
         ylabel=r'$\bar{\eta}$',
@@ -245,11 +259,12 @@ def write_csv_gz(filename, prefix, data):
 @click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
 @click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
+@click.option('--κ', default=0.0, help="Modifier mutation rate")
 @click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
-def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
+def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A'):
     N = ne
     now = datetime.datetime.now()
-    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, env=env)
+    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
     click.echo("Starting simulation {} with parameters:\n{!r}".format(now, params))
 
     if env == 'A':
@@ -274,7 +289,7 @@ def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π
             μ2 = μ1
         if η2 is None:
             η2 = η1
-        π, η_bar, μ_bar = simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, ϵ)
+        π, η_bar, μ_bar = simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, ϵ)
 
     filename = now.isoformat().replace(':', '-')
     if not os.path.exists(output_folder):
