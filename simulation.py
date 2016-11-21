@@ -189,15 +189,9 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
         μ = μ[idx]
         if κ > 0:
             κ_idx = np.random.random(N) < κ
-            κ_idx1 = (η==η1) & κ_idx
-            κ_idx2 = (η==η2) & κ_idx
-            η[κ_idx1] = η2
-            η[κ_idx2] = η1
+            η[κ_idx] = np.random.choice((η1, η2), κ_idx.sum(), True)
             κ_idx = np.random.random(N) < κ
-            κ_idx1 = (μ==μ1) & κ_idx
-            κ_idx2 = (μ==μ2) & κ_idx
-            μ[κ_idx1] = μ2
-            μ[κ_idx2] = μ1
+            μ[κ_idx] = np.random.choice((μ1, μ2), κ_idx.sum(), True)            
         η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
         μ_ = μ * np.random.choice((-1, 1), N, True)
