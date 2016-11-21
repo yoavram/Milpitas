@@ -235,6 +235,7 @@ def main(ne=100, n=100, η1=0.1, η2=None, ω0=2.0, ω1=0.2, π0=0.5, env='A'):
             a += g
     elif env == 'C':
         ϵ = np.array(([0] * 40 + [1] * 40) * (n//80 + 1))
+        ϵ = ϵ[:n]
     else:
         raise ValueError("Unknown value for env: {}".format(env))
 
