@@ -199,14 +199,26 @@ def plot_η(η_bar, η1, η2, ax=None):
     ax.plot(η_bar)
     ax.axhline(η1, color='k', ls='--')
     ax.axhline(η2, color='k', ls='--')
+    ηm, ηM = η1 * 0.9, η2 * 1.1
+    if ηm == 0 and ηM == 0:
+        ηm, ηM = 0, 0.1
+    if ηm > ηM:
+        ηm, ηM = ηM, ηm
     ax.set(
         xlabel='t',
         ylabel=r'$\bar{\eta}$',
-        ylim=(0.9 * η1, η2 * 1.1),
+        ylim=(ηm, ηM),
     )
 
     ax.set_clip_on(False)
     sns.despine()
+    return ax
+
+def plot_μ(μ_bar, μ1, μ2, ax=None):
+    ax = plot_η(μ_bar, μ1, μ2, ax=ax)   
+    ax.set(
+        ylabel=r'$\bar{\mu}$',
+    )
     return ax
 
 def write_json(filename, data):
