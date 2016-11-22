@@ -241,25 +241,10 @@ def write_csv_gz(filename, prefix, data):
     with gzip.open(filename, 'w') as f:
         np.savetxt(f, data, delimiter=', ')
 
-
-@click.command()
-@click.version_option(version=__version__, prog_name=__name__)
-@click.option('--Ne', type=int, help="Population size")
-@click.option('--n', default=10, help="Number of generations")
-@click.option('--η1', default=0.1, help="Learning rate")
-@click.option('--η2', default=None, help="Invader modifier learning rate")
-@click.option('--μ1', default=0.0, help="Mutation rate")
-@click.option('--μ2', default=None, type=float, help="Invader modifier mutation rate")
-@click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
-@click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
-@click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
-@click.option('--κ', default=0.0, help="Modifier mutation rate")
-@click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
-def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A'):
-    N = ne
-    now = datetime.datetime.now()
+def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
-    click.echo("Starting simulation {} with parameters:\n{!r}".format(now, params))
+    now = datetime.datetime.now()
+    click.echo("Simulation started: {}".format(now, params))
 
     if env == 'A':
         ϵ = np.random.choice(2, n, True, [0.7, 0.3])
@@ -296,6 +281,39 @@ def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, ω0=2.0, ω1=0.2, π
         write_csv_gz(filename, 'η', η_bar)
     if μ2 is not None and μ2 != μ1:
         write_csv_gz(filename, 'μ', μ_bar)
+
+
+@click.command()
+@click.version_option(version=__version__, prog_name=__name__)
+@click.option('--Ne', type=int, help="Population size")
+@click.option('--n', default=10, help="Number of generations")
+@click.option('--η1', default=0.1, help="Learning rate")
+@click.option('--η2', default=None, help="Invader modifier learning rate")
+@click.option('--μ1', default=0.0, help="Mutation rate")
+@click.option('--μ2', default=None, type=float, help="Invader modifier mutation rate")
+@click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
+@click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
+@click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
+@click.option('--κ', default=0.0, help="Modifier mutation rate")
+@click.option('--reps', default=1, help="Number of simulations to run")
+@click.option('--cpus', default=1, help="Number of CPUs to use")
+@click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
+def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, 
+         ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A', reps=1, cpus=1):
+    if cpus == 1:
+        for _ in range(reps):
+            _main(ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env) 
+    else:
+        from multiprocessing import cpu_count
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+        if cpus < 1:
+            cpus = cpu_count()
+        with ProcessPoolExecutor(cpus) as executor:
+            futures = [executor.submit(_main, ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env) for _ in range(reps)]
+            for fut in as_completed(futures):
+                if fut.exception():
+                    warnings.warn(fut.exception())
+
 
 if __name__ == '__main__':
     main()
