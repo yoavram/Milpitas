@@ -195,7 +195,11 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
         η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
         μ_ = μ * np.random.choice((-1, 1), N, True)
-        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_
+        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_
+        π_[π_ > 1] = 1
+        π_[π_ < 0] = 0
+        π[t + 1, :] = π_
+
     
     return π, η_bar, μ_bar
 
