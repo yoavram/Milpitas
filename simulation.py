@@ -10,6 +10,7 @@ import datetime
 import os
 import gzip
 import json
+import glob
 import warnings
 # filter seaborn nasty warning
 warnings.filterwarnings('ignore', 'The `IPython.html` package has been deprecated. You should import from `notebook` instead. `IPython.html.widgets` has moved to `ipywidgets`.')
@@ -233,17 +234,63 @@ def plot_μ(μ_bar, μ1, μ2, ax=None):
     )
     return ax
 
-def write_json(filename, data):
+def write_json(output_folder, filename, data):
     filename = os.path.join(output_folder, '{}_{}.json'.format('params', filename))
     click.echo("Writing parameters to {}".format(filename))
     with open(filename, 'wt') as f:
         json.dump(data, f)
 
-def write_csv_gz(filename, prefix, data):
+def write_csv_gz(output_folder, filename, prefix, data):
     filename = os.path.join(output_folder, '{}_{}.csv.gz'.format(prefix, filename))
     click.echo("Writing {} to {}".format(prefix, filename))
     with gzip.open(filename, 'w') as f:
         np.savetxt(f, data, delimiter=', ')
+
+def read_json(output_folder, filename):
+    filename = os.path.join(output_folder, '{}_{}.json'.format('params', filename))
+    with open(filename, 'r') as f:
+        return json.load(f)
+
+def read_csv_gz(output_folder, filename, prefix):
+    filename = os.path.join(output_folder, '{}_{}.csv.gz'.format(prefix, filename))
+    with gzip.open(filename, 'r') as f:
+        return np.loadtxt(f, delimiter=', ', dtype=float)
+
+def read_output_folder(output_folder):
+    dfs = []
+    for filename in glob.glob(os.path.join(output_folder, 'params*json')):
+        filename = os.path.split(filename)[-1]
+        filename = filename.replace('params_', '').replace('.json', '')
+        params = read_json(output_folder, filename)
+        π = read_csv_gz(output_folder, filename, 'π')
+        ϵ = read_csv_gz(output_folder, filename, 'ϵ')
+        η = read_csv_gz(output_folder, filename, 'η')
+        μ = read_csv_gz(output_folder, filename, 'μ')
+        t = np.arange(len(π))
+        ϵ = ϵ[:len(t)]
+        dfs.append(pd.DataFrame(dict(ID=filename, t=t, π=π, ϵ=ϵ, η=η, μ=μ, **params)))
+    return pd.concat(dfs)
+
+def plot_simulations(df, samples=10):
+    fig, ax = plt.subplots(3, 3, sharex='col', sharey='row', figsize=(12,6))
+    red, green, blue = sns.color_palette('Set1', 3)
+    for i, env in enumerate(('A', 'B', 'C')):
+        _df = df[df.env == env]
+        ids = np.random.choice(_df.ID.unique(), samples)
+        grp = _df[_df.ID.isin(ids)].groupby('ID')
+        sns.tsplot(_df, time='t', unit='ID', value='π', lw=2, color=blue, ci=False, ax=ax[0, i])
+        grp.plot('t', 'π', color=blue, alpha=2/samples, ax=ax[0, i])
+        sns.tsplot(_df, time='t', unit='ID', value='η', lw=2, color=green, ci=False, ax=ax[1, i])
+        grp.plot('t', 'η', color=green, alpha=2/samples, ax=ax[1, i])
+        sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
+        grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
+        ax[0, i].axhline(_df.ϵ.mean(), color='k', ls='--')
+        ax[0, i].legend().set_visible(False)
+        ax[1, i].legend().set_visible(False)
+        ax[2, i].legend().set_visible(False)
+
+    sns.despine()
+    return ax
 
 def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
@@ -278,13 +325,13 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
     
-    write_json(filename, params)
-    write_csv_gz(filename, 'π', π.mean(axis=1))
-    write_csv_gz(filename, 'ϵ', ϵ)    
+    write_json(output_folder, filename, params)
+    write_csv_gz(output_folder, filename, 'π', π.mean(axis=1))
+    write_csv_gz(output_folder, filename, 'ϵ', ϵ)    
     if η2 is not None and η2 != η1:
-        write_csv_gz(filename, 'η', η_bar)
+        write_csv_gz(output_folder, filename, 'η', η_bar)
     if μ2 is not None and μ2 != μ1:
-        write_csv_gz(filename, 'μ', μ_bar)
+        write_csv_gz(output_folder, filename, 'μ', μ_bar)
 
 
 @click.command()
