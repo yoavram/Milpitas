@@ -39,8 +39,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         mutation rate, 0 <= μ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
-    π0 : float
-        initial value for π
+    π0 : float or function
+        initial value for π: if float then using Normal(π0, π0/10), if function then calling it with N.
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
@@ -55,7 +55,10 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         ϵ = np.random.randint(0, 2, n)
     # π[t, i] is the probability for phenotype 0 at individual i at time t
     π = np.zeros((n, N), dtype=float)
-    π[0, :] = np.random.normal(π0, np.sqrt(π0 / 10), N)
+    if isinstance(π0, (float, int)):
+        π0_ = π0
+        π0 = lambda N: np.random.normal(π0_, np.sqrt(π0_ / 10), N)
+    π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
     π[0, π[0, :] > 1] = 1
 
@@ -142,8 +145,8 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
         mutation rate, 0 <= μ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
-    π0 : float
-        initial value for π
+    π0 : float or function
+        initial value for π: if float then using Normal(π0, π0/10), if function then calling it with N.
     κ : float
         modifier mutation rate, 0 <= κ <= 1
     ϵ : numpy.ndarray
@@ -160,7 +163,9 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
         ϵ = np.random.randint(0, 2, n)
     # π[t, i] is the probability for phenotype 0 at individual i at time t
     π = np.zeros((n, N), dtype=float)
-    π[0, :] = np.random.normal(π0, np.sqrt(π0 / 10), N)
+    if isinstance(π0, (float, int)):
+        π0 = lambda N: np.random.normal(π0, np.sqrt(π0 / 10), N)
+    π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
     π[0, π[0, :] > 1] = 1
     # η[t, i] is the learning rate for individual i
