@@ -285,7 +285,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
 
 @click.command()
 @click.version_option(version=__version__, prog_name=__name__)
-@click.option('--Ne', type=int, help="Population size")
+@click.option('--Ne', default=1000, help="Population size")
 @click.option('--n', default=10, help="Number of generations")
 @click.option('--η1', default=0.1, help="Learning rate")
 @click.option('--η2', default=None, help="Invader modifier learning rate")
