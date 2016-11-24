@@ -24,11 +24,13 @@ where $\delta_{A,\phi_j}$ is  1 if parent had phenotype A and 0 otherwise.
 The frequency of a trait $\pi$ (with specific value) changes from generation to generation according to this recurrence equation:
 
 $$
-\bar{\omega}(t) \cdot  f_{t+1}(\pi) =  f_{t}\big( \frac{\pi-\eta}{1-\eta} \big) \cdot \frac{\pi-\eta}{1-\eta} \cdot \omega_A^{\epsilon(t)}
-					+ f_{t}\big( \frac{\pi}{1-\eta} \big) \cdot \frac{\pi}{1-\eta} \cdot \omega_B^{\epsilon(t)}
+\bar{\omega}(t) \cdot  f_{t+1}(\pi) =
+f_{t}\big( \frac{\pi-\eta}{1-\eta} \big) \cdot \frac{\pi-\eta}{1-\eta} \cdot \omega_A^{\epsilon(t)}
+					+ 
+f_{t}\big( \frac{\pi}{1-\eta} \big) \cdot \big( 1- \frac{\pi}{1-\eta} \big) \cdot \omega_B^{\epsilon(t)}
 $$
 
-where $\bar{\omega}(t) = \int_0^1{f_t(\pi) (\pi \omega_A^{\epsilon(t)} + (1-\pi)\omega_B^{\epsilon(t)} ) d \pi}$ is the population mean fitness at generation t.
+where $\bar{\omega}(t) = \int_0^1{f_t(\pi) \cdot [\pi ֿ\cdot\omega_A^{\epsilon(t)} + (1-\pi) \cdot\omega_B^{\epsilon(t)} ] \; d \pi}$ is the population mean fitness at generation t.
 
 # Simple cases
 
