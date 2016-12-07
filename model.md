@@ -29,7 +29,8 @@ f_{t}\big( \frac{\pi-\eta}{1-\eta} \big) \cdot \frac{\pi-\eta}{1-\eta} \cdot \om
 f_{t}\big( \frac{\pi}{1-\eta} \big) \cdot \big( 1- \frac{\pi}{1-\eta} \big) \cdot \omega_B^{\epsilon(t)}
 $$
 
-where $\bar{\omega}(t) = \int_0^1{f_t(\pi) \cdot [\pi ֿ\cdot\omega_A^{\epsilon(t)} + (1-\pi) \cdot\omega_B^{\epsilon(t)} ] \; d \pi}$ is the population mean fitness at generation t.
+where $\bar{\omega}(t)$ is the population mean fitness at generation t,
+calculated as the integral of the RHS of the equation for $0 \le \pi \le 1$.
 
 # Simple cases
 
