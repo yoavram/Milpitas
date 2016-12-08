@@ -6,10 +6,10 @@ import numpy as np
 import simulation
 
 
-class ConstantEnvironment(TestCase):
+class SimulationConstantEnvironment(TestCase):
 
     def setUp(self):
-        self.ε = np.array([0]*1000)
+        self.ε = np.zeros(1000, dtype=int)
 
     def test_default_pop(self):
         π = simulation.simulation(1000, 200, 0.1, 0, 2.0, 0.2, 0.5, self.ε)
@@ -41,3 +41,23 @@ class ConstantEnvironment(TestCase):
 
         assert np.allclose(π[-1, :], 0.5), np.unique(π[-1, :])
 
+
+class DeterministicConstantEnvironment(TestCase):
+
+    def setUp(self):
+        self.ε = np.zeros(1000, dtype=int)
+
+    def test_isogenic_pop_η_0_s_0(self):
+        π, f = simulation.deterministic(1000, 100, 0, 0, 1, 0, 0.5, self.ϵ)
+
+        assert np.allclose(π[-1], 0.5), np.unique(π[-1])
+
+    def test_isogenic_pop_η_0(self):
+        π, f = simulation.deterministic(1000, 200, 0.1, 0, 1, 0, 0.5, self.ϵ)
+
+        assert np.allclose(π[-1], 1), np.unique(π[-1])
+
+    def test_uniform_pop_η_0(self):
+        π, f = simulation.deterministic(1000, 200, 0.1, 0, 1, 0, lambda: simulation.uniform(10), self.ϵ)
+
+        assert np.allclose(π[-1], 1), np.unique(π[-1])

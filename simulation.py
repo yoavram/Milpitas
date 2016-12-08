@@ -297,6 +297,69 @@ def plot_simulations(df, samples=10):
     sns.despine()
     return ax
 
+
+def deterministic(N, n, η, μ, ω0, ω1, π0, ϵ=None):
+    π = [None] * n
+    f = [None] * n
+    if isinstance(π0, (float, int)):
+        π[0] = [π0]
+        f[0] = [1]
+    else:
+        π[0], f[0] = π0()
+
+    for t in range(1, n):
+        ω0_ = ω0 * (ϵ[t]==0) + ω1 * (ϵ[t]==1)
+        ω1_ = ω0 * (ϵ[t]==1) + ω1 * (ϵ[t]==0)
+
+        π_ = [x * (1 - η) + η for x in π[t-1]] + [x * (1 - η) for x in π[t-1]]
+        f_ = [
+            f[t-1][i] * x * ω0_
+            for i, x in enumerate(π[t-1])
+        ] + [
+            f[t-1][i] * (1 - x) * ω1_
+            for i, x in enumerate(π[t-1])
+        ]
+
+        fsum = np.sum(f_)
+        π[t] = [x for i, x in enumerate(π_) if (f_[i]/fsum) > (1/N)]
+        f_ = [x for x in f_ if (x/fsum) > (1/N)]
+        fsum = np.sum(f_)
+        f[t] = [x/fsum for x in f_]
+
+        assert len(f[t]) == len(π[t])
+        assert all((0 <= x <= 1 for x in f[t]))
+        assert all((0 <= x <= 1 for x in π[t]))
+    return π, f
+
+
+def uniform(n):
+    return [1/(n-1) * x for x in range(n)], [1/n for x in range(n)]
+
+
+def plot_π_deterministic(π, f, ϵ, ax=None):
+    if ax is None:
+        fig, ax = plt.subplots()
+    n = len(f)
+    m = [0] * n
+    for t, π_, f_ in zip(range(n), π, f):
+        l = []
+        for x, p in zip(π_, f_):
+            l += [x] * int(p*N)
+            m[t] += x * p
+        ax.plot([t]* len(l), l, '.b', alpha=0.005)
+
+    ax.plot(range(n), m, c='y', lw=3)
+    ax.axhline((ϵ == 0).mean(), color='k')
+    ax.set(
+        ylim=(0, 1),
+        ylabel='$π_A$',
+        xlabel='t'
+    )
+    ax.set_clip_on(False)
+    sns.despine()
+    return ax
+
+
 def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
     now = datetime.datetime.now()
