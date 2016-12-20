@@ -336,20 +336,23 @@ def uniform(n):
     return [1/(n-1) * x for x in range(n)], [1/n for x in range(n)]
 
 
-def plot_π_deterministic(π, f, ϵ, ax=None):
+def plot_π_deterministic(π, f, ϵ, N, only_mean=False, color='y', label=None, ax=None):
     if ax is None:
         fig, ax = plt.subplots()
     n = len(f)
     m = [0] * n
+
     for t, π_, f_ in zip(range(n), π, f):
         l = []
         for x, p in zip(π_, f_):
-            l += [x] * int(p*N)
+            if not only_mean:
+                l += [x] * int(p*N)
             m[t] += x * p
-        ax.plot([t]* len(l), l, '.b', alpha=0.005)
+        if not only_mean:
+            ax.plot([t]* len(l), l, '.b', alpha=0.005)
 
-    ax.plot(range(n), m, c='y', lw=3)
-    ax.axhline((ϵ == 0).mean(), color='k')
+    ax.plot(range(n), m, c=color, label=label, lw=2)
+    ax.axhline((ϵ == 0).mean(), color='k', ls='--')
     ax.set(
         ylim=(0, 1),
         ylabel='$π_A$',
