@@ -73,8 +73,10 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
         μ_ = μ * np.random.choice((-1, 1), N, True)
-        π[t + 1, :] = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_ 
-        
+        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_ 
+        π_[π_ > 1] = 1
+        π_[π < 0] = 0
+        π[t + 1, :] = π_
     return π
 
 
@@ -164,8 +166,9 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
     # π[t, i] is the probability for phenotype 0 at individual i at time t
     π = np.zeros((n, N), dtype=float)
     if isinstance(π0, (float, int)):
-        π0 = lambda N: np.random.normal(π0, np.sqrt(π0 / 10), N)
-    π[0, :] = π0(N)
+        π[0, :] = np.random.normal(π0, np.sqrt(π0 / 10), N)
+    else:
+        π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
     π[0, π[0, :] > 1] = 1
     # η[t, i] is the learning rate for individual i
