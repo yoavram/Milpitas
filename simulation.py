@@ -301,9 +301,9 @@ def plot_simulations(df, samples=10):
     return ax
 
 
-def deterministic(N, n, η, μ, ω0, ω1, π0, ϵ=None):
-    π = [None] * n
-    f = [None] * n
+def deterministic(N, n, η, μ, ωA, ωB, π0, ϵ=None):
+    π = [None] * n # π values
+    f = [None] * n # frequency of π values
     if isinstance(π0, (float, int)):
         π[0] = [π0]
         f[0] = [1]
@@ -311,26 +311,29 @@ def deterministic(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         π[0], f[0] = π0()
 
     for t in range(1, n):
-        ω0_ = ω0 * (ϵ[t]==0) + ω1 * (ϵ[t]==1)
-        ω1_ = ω0 * (ϵ[t]==1) + ω1 * (ϵ[t]==0)
+        ωA_ = ωA * (ϵ[t]==0) + ωB * (ϵ[t]==1) # fitness of A at time t
+        ωB_ = ωA * (ϵ[t]==1) + ωB * (ϵ[t]==0) # fitness of B at time t
 
+        # all possible π values at time t+1
         π_ = [x * (1 - η) + η for x in π[t-1]] + [x * (1 - η) for x in π[t-1]]
+        # frequencies for π_
         f_ = [
-            f[t-1][i] * x * ω0_
+            f[t-1][i] * x * ωA_
             for i, x in enumerate(π[t-1])
         ] + [
-            f[t-1][i] * (1 - x) * ω1_
+            f[t-1][i] * (1 - x) * ωB_
             for i, x in enumerate(π[t-1])
         ]
-
+        # remove π values for which f<1/N
         fsum = np.sum(f_)
-        π[t] = [x for i, x in enumerate(π_) if (f_[i]/fsum) > (1/N)]
-        f_ = [x for x in f_ if (x/fsum) > (1/N)]
+        π[t] = [x for x, fx in zip(π_, f_) if (fx/fsum) > (1/N)]
+        f_ = [fx for fx in f_ if (fx/fsum) > (1/N)]
+        # normalize frequencies
         fsum = np.sum(f_)
-        f[t] = [x/fsum for x in f_]
+        f[t] = [fx/fsum for fx in f_]
 
         assert len(f[t]) == len(π[t])
-        assert all((0 <= x <= 1 for x in f[t]))
+        assert all((0 <= fx <= 1 for fx in f[t]))
         assert all((0 <= x <= 1 for x in π[t]))
     return π, f
 
