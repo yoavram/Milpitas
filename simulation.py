@@ -87,7 +87,7 @@ def plot_π(π, ϵ, ax=None):
         low, high = np.percentile(π, [0.5*(2**i), 100-0.5*(2**i)], 1)
         ax.fill_between(range(π.shape[0]), low, high, color='b', alpha=0.1)
     ax.plot(π.mean(axis=1), c='y', lw=3)
-    ax.axhline((ϵ==0).mean(), color='k')
+    ax.axhline((ϵ == 0).mean(), color='k', ls='--')
     ax.set(
         ylim=(0, 1),
         ylabel='$π_A$',
@@ -355,7 +355,7 @@ def plot_π_deterministic(π, f, ϵ, N, only_mean=False, color='y', label=None, 
                 l += [x] * int(p*N)
             m[t] += x * p
         if not only_mean:
-            ax.plot([t]* len(l), l, '.b', alpha=0.005)
+            ax.plot([t] * len(l), l, '.b', alpha=0.005)
 
     ax.plot(range(n), m, c=color, label=label, lw=2)
     ax.axhline((ϵ == 0).mean(), color='k', ls='--')
