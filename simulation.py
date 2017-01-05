@@ -75,7 +75,7 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         μ_ = μ * np.random.choice((-1, 1), N, True)
         π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_ 
         π_[π_ > 1] = 1
-        π_[π < 0] = 0
+        π_[π_ < 0] = 0
         π[t + 1, :] = π_
     return π
 
