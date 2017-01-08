@@ -44,6 +44,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
+    if μ > 0:
+        raise NotImplementedError("μ is not implemented")
     ω = np.array(
         [
             [ω0, ω1],
@@ -72,10 +74,9 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         # selection & reproduction; idx is the indexes of reproducing individuals
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
-        μ_ = μ * np.random.choice((-1, 1), N, True)
-        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_ 
-        π_[π_ > 1] = 1
-        π_[π_ < 0] = 0
+        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        assert (π_ <= 1).all(), π_[π_ > 1]
+        assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
     return π
 
@@ -154,6 +155,9 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
+    if μ1 > 0 or μ2 > 0:
+        raise NotImplementedError("μ is not implemented")
+
     ω = np.array(
         [
             [ω0, ω1],
@@ -203,13 +207,11 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
             μ[κ_idx] = np.random.choice((μ1, μ2), κ_idx.sum(), True)            
         η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
-        μ_ = μ * np.random.choice((-1, 1), N, True)
-        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0) + μ_
-        π_[π_ > 1] = 1
-        π_[π_ < 0] = 0
+        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        assert (π_ <= 1).all(), π_[π_ > 1]
+        assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
 
-    
     return π, η_bar, μ_bar
 
 
@@ -302,6 +304,8 @@ def plot_simulations(df, samples=10):
 
 
 def deterministic(N, n, η, μ, ωA, ωB, π0, ϵ=None):
+    if μ > 0:
+        raise NotImplementedError("μ not implemented")
     π = [None] * n # π values
     f = [None] * n # frequency of π values
     if isinstance(π0, (float, int)):
