@@ -5,9 +5,9 @@
 #$ -N Xue2016
 #$ -l lilach,mem_free=2G
 
-#$ -v env=A
+#$ -v η=0
 
 module load gcc/gcc620
+source ~/miniconda3/bin/activate Xue2016
 
-python simulation.py --Ne 100000 --n 500 --η1 0.1 --η2 0.2 --ω0 2.0 --ω1 0.2  --π0 0.5  --env ${env}
-
+python simulation.py --Ne 100000 --n 500 --η1 ${η} --ω0 2.0 --ω1 0.2  --π0 0.7  --env A
