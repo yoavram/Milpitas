@@ -21,7 +21,7 @@ I will explicitly formulate the model of Xue & Leibler 2016. This will follow ho
 
 #### Reproduction 
 
-For each offspring in the population of generation _t+1_ we choose a parent from the population of generation _t_ and this choice depends on the parent relative fitness: the probability that individual _i_ is the parent is given by its relative fitness, $\frac{\omega_i}{\bar{\omega}}$. Therefore, reproduction is modeled by a multinomial distribution.
+For each offspring in the population of generation _t+1_ we choose a parent from the population of generation _t_ and this choice depends on the parent relative fitness: the probability that individual _i_ is the parent is relative to its fitness, $\omega_i$. Therefore, reproduction is modeled by a multinomial distribution.
 
 #### Inheritance
 
@@ -33,14 +33,16 @@ The offspring inherits the phetnoype choice of the parent with a modification: i
 
 Note that the notation here is different from Eq. 1 in Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
 
+#### Iteration
+
 At each generation _t_ the **set of phenotype choices** in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$, is updated accoring to the following steps. Initial values can be determined (_i.e._, $\forall i \; \pi_i=0.5$), or values can be drawn from an initial distribution (_i.e._, $\pi_i \sim TN(0.5, 0.05)$, _TN_ is the truncated normal distribution). In addition, the sequence $\epsilon_t$ is given and is independent of the iteration.
 
 At each time _t_:
 
 1. **Development**: the phenotypes of all individuals are drawn from corresponding Bernoulli distributions: $P(\phi_i=A)=\pi_i$.
-2. **Fitness**: the fitness of all individuals is set: $\omega_i = \omega^+ \cdot 1_{\phi_i=\epsilon_t}+ \omega^- \cdot 1_{\phi_i \ne \epsilon_t}$, and popuoation mean fitness is set $\bar{\omega}=\frac{1}{N}\sum_i{\omega_i}$.
-3. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\omega_i/\bar{\omega}\}_{1 \le i \le N})$, such that $P(b_1 =x_1, …, b_N=x_N)=\frac{N!}{x_1! \cdot … \cdot x_N!}\cdot \frac{\omega_1}{\bar{\omega}}^{x_1} \cdot … \cdot \frac{\omega_N}{\bar{\omega}}^{x_N}$.
-   1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}​$, is updated using Eq. 2 such that for each $i​$, $\Pi_{t+1}​$ includes exactly $b_i​$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})​$.
+2. **Fitness**: the fitness of all individuals is set: $\omega_i = \omega^+ \cdot 1_{\phi_i=\epsilon_t}+ \omega^- \cdot 1_{\phi_i \ne \epsilon_t}$.
+3. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\omega_i/\bar{\omega}\}_{1 \le i \le N})$, such that $P(b_1 =x_1, …, b_N=x_N)=\frac{N!}{x_1! \cdot … \cdot x_N!}\cdot (\frac{\omega_1}{\sum_i{\omega_i}})^{x_1} \cdot … \cdot (\frac{\omega_N}{\sum_i{\omega_i}})^{x_N}$.
+   1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using Eq. 2 such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$.
 
 Note that only development and reproduction are stochastic, natural selection and drift occur at the reproduction step, and inheritance 
 
