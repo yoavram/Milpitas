@@ -1,6 +1,6 @@
 # Explicit Wright-Fisher model 
 
-## Jan 9, 2017
+## Jan 10, 2017
 
 
 
