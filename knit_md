@@ -1,4 +1,2 @@
-pandoc -s $1.md -o $1.tex --bibliography=/Users/yoavram/Documents/library.bib
-pandoc $1.tex -o $1.pdf --latex-engine=xelatex
-rm $1.tex
+pandoc -s $1.md -o $1.pdf --filter pandoc-crossref --filter pandoc-citeproc --bibliography=/Users/yoavram/Documents/library.bib --csl ./evolution.csl --latex-engine=xelatex
 open $1.pdf
