@@ -1,1 +1,0 @@
-dot graph.dot -Tpng -Kdot -ograph.png

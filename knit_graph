@@ -1,1 +1,2 @@
-dot graph.dot -Tpng -Kdot -ograph.png
+dot graph.dot -Tpdf -Kdot -ofigures/model_diagram.pdf
+open figures/model_diagram.pdf
