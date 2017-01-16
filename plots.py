@@ -21,7 +21,7 @@ def plot_π(π, ϵ, ax=None):
     ax.axhline((ϵ == 0).mean(), color='k', ls='--')
     ax.set(
         ylim=(0, 1),
-        ylabel='$π_A$',
+        ylabel='$π$',
         xlabel='t'
     )
     ax.set_clip_on(False)
@@ -91,7 +91,7 @@ def plot_μ(μ_bar, μ1, μ2, ax=None):
     return ax
 
 def plot_simulations(df, samples=10):
-    fig, ax = plt.subplots(3, 3, sharex='col', sharey='row', figsize=(12,6))
+    fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(12,6))
     red, green, blue = sns.color_palette('Set1', 3)
     for i, env in enumerate(('A', 'B', 'C')):
         _df = df[df.env == env]
@@ -101,15 +101,16 @@ def plot_simulations(df, samples=10):
         grp.plot('t', 'π', color=blue, alpha=2/samples, ax=ax[0, i])
         sns.tsplot(_df, time='t', unit='ID', value='η', lw=2, color=green, ci=False, ax=ax[1, i])
         grp.plot('t', 'η', color=green, alpha=2/samples, ax=ax[1, i])
-        sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
-        grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
+        # sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
+        # grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
         ax[0, i].axhline(_df.ϵ.mean(), color='k', ls='--')
         ax[0, i].legend().set_visible(False)
         ax[1, i].legend().set_visible(False)
-        ax[2, i].legend().set_visible(False)
+        # ax[2, i].legend().set_visible(False)
 
     sns.despine()
     return ax
+
 
 def plot_π_deterministic(π, f, ϵ, N, only_mean=False, color='y', label=None, ax=None):
     if ax is None:
@@ -130,7 +131,7 @@ def plot_π_deterministic(π, f, ϵ, N, only_mean=False, color='y', label=None, 
     ax.axhline((ϵ == 0).mean(), color='k', ls='--')
     ax.set(
         ylim=(0, 1),
-        ylabel='$π_A$',
+        ylabel='$π$',
         xlabel='t'
     )
     ax.set_clip_on(False)
