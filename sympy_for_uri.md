@@ -1,4 +1,4 @@
-_Jan 16, 2017, v.3_
+_Jan 16, 2017, v.3.1_
 
 Given this recurrence equation:
 
@@ -13,7 +13,9 @@ $$
 We are looking for a solution to $x''=x$, which evaluates to a quartic polynomial. Two solutions are 0 and 1 (assign to eq 1), but there are two more potential solutions solutions, such that 
 
 $$
-0=x''-x=x(1-x)G(x)\\G(x)=Ax^2+Bx+C
+0=x''-x=x(1-x)G(x),
+\;\;\;
+G(x)=Ax^2+Bx+C
 $$
 
 Using [SymPy](http://sympy.org/) (a Python library for symbolic mathematics, a free alternative to Wolfram Mathematica™), we find all four solution of $x''-x=0$:
