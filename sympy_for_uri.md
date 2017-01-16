@@ -1,13 +1,24 @@
-_Jan 16, 2017, v.3.1_
+_Jan 16, 2017, v.3.2_
 
-Given this recurrence equation:
-
-$$
-x^{'} = x \frac{(1-\eta)x(\omega_A - \omega_B)+(\eta \omega_A + (1-\eta)\omega_B)}{x(\omega_A-\omega_B)+\omega_B}
-$$
+Define _x_ as the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
+Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ are _A_, according to the "learning" rule:
 
 $$
-x^{''}=x' \frac{(1-\eta)x'(\omega_B - \omega_A)+(\eta \omega_B + (1-\eta)\omega_A)}{x(\omega_B-\omega_A)+\omega_A}
+x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x
+$$
+
+When we write a similar recurrence for the probability that an individual is _B_ ($(1-x)' = F(1-x)$) and sum the two equations, we find that $\bar{\omega} = x \omega_A + (1-x) \omega_B$ is the mean fitness.
+
+This recurrence equation can be reorganized to:
+
+$$
+x^{'} = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
+$$
+
+Here we concentrate on a deterministic periodic environment with period 2 in which $\omega_A$ and $\omega_B$ swap values every generation. Therefore, a second recurrence can be written for the next-next generation:
+
+$$
+x^{''}=x' \frac{x' (1-\eta) (\omega_B - \omega_A) + \eta \omega_B + (1-\eta)\omega_A}{x' (\omega_B-\omega_A) + \omega_A}
 $$
 
 We are looking for a solution to $x''=x$, which evaluates to a quartic polynomial. Two solutions are 0 and 1 (assign to eq 1), but there are two more potential solutions solutions, such that 
