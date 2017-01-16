@@ -129,7 +129,7 @@ How does the distribution of $\pi$ in the population changes during a single ada
 
 ## Periodic environment
 
-We now explore the dynamics in an environment that -@Xue2016 did not explore, a period environment that deterministically switches from _A_ to _B_ every generation - denoted _ABAB_ - or every other generation for environment _A_ - denoted _AABAAB_.
+We now explore the dynamics in an environment that -@Xue2016 did not explore, a periodic environment that deterministically switches from _A_ to _B_ every generation - denoted _ABAB_ - or every other generation for environment _A_ - denoted _AABAAB_.
 
 ![Population mean $\pi$ in a deterministic and stochastic rapidly changing environments](figures/periodic_environment.pdf){#fig:periodic_environment}
 
