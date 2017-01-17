@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram, Uri Liberman, and Marcus W. Feldman
-% Jan 12, 2017, v.2
+% Jan 17, 2017, v.2
 
 # Models
 
@@ -154,7 +154,7 @@ $$
 
 where the outer sum is over the different environments/phenotypes, $p_j$ is the frequency of environment _j_, $\pi_j$ is the probability for becoming phenotype _j_, and $\omega_i^j$ is the fitness of phenotype _i_ in environment _j_ (note this notation is different from the one proposed here).
 
-### Results on stochastic rapidly chaning environments
+### Results on stochastic rapidly changing environments
 
 First, we solve the above equation for two environments, _A_ and _B_, to find that for $0 < p_A < 1, \omega_A \ne \omega_B$:
 
@@ -172,7 +172,7 @@ We look at simulations with different learning rates $\eta$ and look at $\bar{\p
 
 With extreme selection ([@Fig:bethedging_timeseries], bottom row) $\bar{\pi}_A$ does seem to fluctute around $p_A=0.7$ (blue dashed lines), and fluctuations increase with $\eta$. This is in accordance with [@Xue2016].
 
-With non-extreme selection ([@Fig:bethedging_timeseries], top row), $\bar{\pi}_A$ (black lines for multiple simulations) fluctuates around $\pi_A^*=0.744..$ (red lines) which is **higher** then $p_A=0.7$ (blue lines). 
+With non-extreme selection ([@Fig:bethedging_timeseries], top row), $\bar{\pi}_A$ (black lines for multiple simulations) fluctuates around $\pi_A^*=0.744...$ (red lines) which is **higher** then $p_A=0.7$ (blue lines). 
 These fluctuations increase with $\eta$ (from $\eta=0$ in the leftmost panel to $\eta=0.1$ in second panel from the right), except for $\eta=1$ for which almost all individuals are $\pi_A=1$ (rightmost panel). 
 
 We also examine the histograms of $\bar{\pi}_A$ in the above simulations, but only for $t>250$, so that we ignore the time required for the population to adapt from $\bar{\pi}_A \approx 0.5$ to $\bar{\pi}_A \approx \pi_A^*$.
@@ -183,6 +183,27 @@ The layout [@Fig:bethedging_histograms] is the same as [@Fig:bethedging_timeseri
 
 With extreme selection ([@Fig:bethedging_histograms], bottom), indeed $\bar{\pi}_A$ fluctuates around $p_A=0.7$ as the histograms are more or less centered around 0.7 (dashed blue line), as expected from [@Xue2016].
 
-With non-extreme selection, the histograms are not centered around $p_A=0.7$ but rather around $\pi_A^*=0.744..$, which does not coincide with $p_A=0.7$ ([@Fig:bethedging_timeseries], bottom panel).
+With non-extreme selection, the histograms are not centered around $p_A=0.7$ but rather around $\pi_A^*=0.744...$, which does not coincide with $p_A=0.7$ ([@Fig:bethedging_timeseries], bottom panel).
+
+### Optimality 
+
+Xue & Leibler assert that this $\pi^*$ is an optimal bet-hedging strategy:
+
+> ... the proposed learning mechanism enables the population to reach the **optimal phenotype distribution for bet hedging**. Eq. 3 also implies that the phenotype distribution $\pi_i$ converges to the optimal distribution exponentially, following the direction of fastest adaption.
+
+"Optimality" is explained in _Materials and Methods_, where they show the optimal strategy maximizes the _asymptotic growth rate_ of a population (Eq. 11):
+
+$$
+\Lambda(\pi) = \sum_j p_j \Big(\log{\sum_i{\pi_i \omega_i^j} \Big)}
+$$
+
+This $\Lambda(\pi)$ term is the time averaged _Malthusian fitness_ [@Orr2009].
+
+We checked this optimality criterion by competing _N_=100000 individuals with an initial uniform distribution of $\pi$ values (such that there are initially 100 individuals with each $\pi \in \{\frac{k}{999} | 0 \le k \le 999 \})$ and with $\eta=0$ so that any change in frequencies of $\pi$ values can only be attributed to natural selection and genetic drift.
+
+[@Fig:bethedging_competitions] shows the $\bar{\pi}$ in yellow, dispersion in blue, $p$ (frequency of environment _A_) in black, and $\pi^*$ in red.
+$\bar{pi}$ indeed converges to $\pi^*$, which means that individuals that were initially $\pi^*$ out-compete individuals with other $\pi$ values, and therefore $\pi^*$ represents an evolutionary optimal bet-hedging strategy.
+
+![Competitions between different $\pi$ strategies in rapidly changing environments; $\eta=0, N=1,000,000$ means that change in frequencies mainly due to natural selection.](figures/bethedging_competitions.pdf){#fig:bethedging_competitions}
 
 # References
