@@ -1,6 +1,10 @@
 % Evolution of Learning
-% Yoav Ram, Uri Liberman, and Marcus W. Feldman
+% Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
 % Jan 18, 2017, v.2
+
+[^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
+[^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
+[^mwf]: Department of Biology, Stanford University, Stanford, CA 94305-5020, mfeldman@stanford.edu
 
 # Models
 
@@ -269,7 +273,7 @@ We also examine the histograms of $\bar{\pi}_A$ in the above simulations, but on
 
 The layout [@Fig:bethedging_histograms] is the same as [@Fig:bethedging_timeseries], but it shows histograms of $\bar{\pi}_A$ for _t>250_. The red line represent $\pi_A^*$, and the blue dashed lines represent $p_A$. Note that columns have different x-scale; we can get an impression of relative x-scales from the y-scales in [@Fig:bethedging_timeseries].
 
-With extreme selection ([@Fig:bethedging_histograms], bottom), indeed $\bar{\pi}_A$ fluctuates around $p_A=0.7$ as the histograms are more or less centered around 0.7 (dashed blue line), as expected from [@Xue2016].
+With extreme selection ([@Fig:bethedging_histograms], bottom), indeed $\bar{\pi}_A$ fluctuates around $p_A=0.7$ as the histograms are more or less centered around 0.7 (dashed blue line), as expected from @Xue2016.
 
 With non-extreme selection, the histograms are not centered around $p_A=0.7$ but rather around $\pi_A^*=0.744...$, which does not coincide with $p_A=0.7$ ([@Fig:bethedging_timeseries], bottom panel).
 
