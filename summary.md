@@ -256,7 +256,7 @@ Second, we focus on environments in which the environment is drawn at every gene
 
 We look at simulations with different learning rates $\eta$ and look at $\bar{\pi}_A$, the population mean value of $\pi_A$, over time.
 
-![$\bar{\pi}_A$ over time for different $\eta$ values (columns) and extreme (bottom) or non-extreme (top) selection ($\omega_1 =0$ or $0.2$, respectively). The red lines represent $\pi_A^*$, the blue lines represent $p_A$, the empirical frequency of environment _A_.](bethedging_timeseries.png){#fig:bethedging_timeseries}
+![$\bar{\pi}_A$ over time for different $\eta$ values (columns) and extreme (bottom) or non-extreme (top) selection ($\omega_1 =0$ or $0.2$, respectively). The red lines represent $\pi_A^*$, the blue lines represent $p_A$, the empirical frequency of environment _A_.](figures/bethedging_timeseries.png){#fig:bethedging_timeseries}
 
 With extreme selection ([@Fig:bethedging_timeseries], bottom row) $\bar{\pi}_A$ does seem to fluctuate around $p_A=0.7$ (blue dashed lines), and fluctuations increase with $\eta$. This is in accordance with [@Xue2016].
 
@@ -265,7 +265,7 @@ These fluctuations increase with $\eta$ (from $\eta=0$ in the leftmost panel to 
 
 We also examine the histograms of $\bar{\pi}_A$ in the above simulations, but only for $t>250$, so that we ignore the time required for the population to adapt from $\bar{\pi}_A \approx 0.5$ to $\bar{\pi}_A \approx \pi_A^*$.
 
-![Histograms of  $\bar{\pi}_A$ in multiple simulations](bethedging_histograms.png){#fig:bethedging_histograms}
+![Histograms of  $\bar{\pi}_A$ in multiple simulations](figures/bethedging_histograms.png){#fig:bethedging_histograms}
 
 The layout [@Fig:bethedging_histograms] is the same as [@Fig:bethedging_timeseries], but it shows histograms of $\bar{\pi}_A$ for _t>250_. The red line represent $\pi_A^*$, and the blue dashed lines represent $p_A$. Note that columns have different x-scale; we can get an impression of relative x-scales from the y-scales in [@Fig:bethedging_timeseries].
 
