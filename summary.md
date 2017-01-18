@@ -1,12 +1,12 @@
 % Evolution of Learning
 % Yoav Ram, Uri Liberman, and Marcus W. Feldman
-% Jan 17, 2017, v.2
+% Jan 18, 2017, v.2
 
 # Models
 
 ## Wright-Fisher model
 
-Here we explicitly formulate the model of -@Xue2016. This will follow how we understand their simulations (final paragraph of _Materials & Methods_) and how I implemented our simulations using a Wright-Fisher model.
+Here we explicitly formulate the model of @Xue2016. This will follow how we understand their simulations (final paragraph of _Materials & Methods_) and how I implemented our simulations using a Wright-Fisher model.
 
 ### Definitions
 
@@ -20,7 +20,6 @@ Here we explicitly formulate the model of -@Xue2016. This will follow how we und
 - $\pi_i$: phenotype choice, the probability that individual $i$ becomes phenotype _A_, $1 \le i \le N$.
 - $\eta$:  learning rate or non-genetic inheritance parameter, $0 \le \eta \le 1$. 
 
-
 ### Reproduction 
 
 For each offspring in the population of generation _t+1_ we choose a parent from the population of generation _t_ and this choice depends on the parent relative fitness: the probability that individual _i_ is the parent is relative to its fitness, $\omega_i$. Therefore, reproduction is modeled by a multinomial distribution.
@@ -28,27 +27,54 @@ For each offspring in the population of generation _t+1_ we choose a parent from
 ### Inheritance
 
 The inheritance of the phenotype choice follows this "learning" rule for parent _k_ and offspring _i_:
+
 $$
 \pi_i = \pi_k \cdot (1-\eta) + \eta \cdot 1_{\phi_k=A}
-$$
-The offspring inherits the phetnoype choice of the parent with a modification: if the parent became _A_, then the offspring is even more likely to be _A_; if the parent was _B_, then the offspring is less likely to be _A_.
+$$ {#eq:learning_rule}
 
-Note that the notation here is different from Eq. 1 in @Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
+The offspring inherits the phenotype choice of the parent with a modification: if the parent became _A_, then the offspring is even more likely to be _A_; if the parent was _B_, then the offspring is less likely to be _A_.
+
+Note that the notation in [@eq:learning_rule] is different from Eq. 1 in @Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
 
 ### Iteration
 
-At each generation _t_ the **set of phenotype choices** in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$, is updated accoring to the following steps. Initial values can be determined (_i.e._, $\forall i \; \pi_i=0.5$), or values can be drawn from an initial distribution (_i.e._, $\pi_i \sim TN(0.5, 0.05)$, _TN_ is the truncated normal distribution). In addition, the sequence $\epsilon_t$ is given and is independent of the iteration.
+At each generation _t_ the **set of phenotype choices** in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$, is updated according to the following steps. Initial values can be determined (_i.e._, $\forall i \; \pi_i=0.5$), or values can be drawn from an initial distribution (_i.e._, $\pi_i \sim TN(0.5, 0.05)$, _TN_ is the truncated normal distribution). In addition, the sequence $\epsilon_t$ is given and is independent of the iteration.
 
 At each time _t_:
 
 1. **Development**: the phenotypes of all individuals are drawn from corresponding Bernoulli distributions: $P(\phi_i=A)=\pi_i$.
-2. **Fitness**: the fitness of all individuals is set: $\omega_i = \omega^+ \cdot 1_{\phi_i=\epsilon_t}+ \omega^- \cdot 1_{\phi_i \ne \epsilon_t}$.
-3. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\omega_i/\bar{\omega}\}_{1 \le i \le N})$, such that $P(b_1 =x_1, …, b_N=x_N)=\frac{N!}{x_1! \cdot … \cdot x_N!}\cdot (\frac{\omega_1}{\sum_i{\omega_i}})^{x_1} \cdot … \cdot (\frac{\omega_N}{\sum_i{\omega_i}})^{x_N}$.
-   1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using Eq. 2 such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$.
+1. **Fitness**: the fitness of all individuals is set: $\omega_i = \omega^+ \cdot 1_{\phi_i=\epsilon_t}+ \omega^- \cdot 1_{\phi_i \ne \epsilon_t}$.
+1. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\omega_i/\bar{\omega}\}_{1 \le i \le N})$, such that 
+$$
+P(b_1 =x_1, …, b_N=x_N)=\frac{N!}{x_1! \cdot … \cdot x_N!}\cdot (\frac{\omega_1}{\sum_i{\omega_i}})^{x_1} \cdot … \cdot (\frac{\omega_N}{\sum_i{\omega_i}})^{x_N}
+$$.
+1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using [@Eq:learning_rule] such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$.
 
 Note that only development and reproduction are stochastic, natural selection and drift occur at the reproduction step, and inheritance 
 
 If $\eta=0$ and we only allow $\pi_i \in \{0,1\}$  and $\epsilon_t=A$, then we have a standard single locus bi-allelic selection-drift Wright-Fisher model.
+
+## Recurrence equation {#sec:recurrence-equation}
+
+This is an approximation of the model using a recurrence equation.
+
+Define _x_ as the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
+
+Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ are _A_, according to the "learning" rule:
+
+$$
+x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x
+$$
+
+Where $\omega_A$ and $\omega_B$ are the fitness of phenotypes _A_ and _B_ in the current generation (depending on $\epsilon_t$).
+
+When we write a similar recurrence for the probability that an individual is _B_ ($(1-x)' = F(1-x)$) and sum the two equations, we find that $\bar{\omega} = x \omega_A + (1-x) \omega_B$ is the mean fitness.
+
+This recurrence equation can be reorganized to:
+
+$$
+x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
+$$
 
 ## Thoughts
 
@@ -137,24 +163,86 @@ The top row in [@Fig:periodic_environment] shows the dynamics in such determinis
 
 The dynamics in a similar stochastic environments, in which the environment is drawn every generation with 1:1 odds for _A_ and _B_ ([@Fig:periodic_environment]C, similar to left panel in [@Fig:figure2_original]) or 2:1 odds ([@Fig:periodic_environment]D), are very similar, except that there seems to be more variance in [@Fig:periodic_environment]C, where stochastic consecutive _A_s can drive the population mean $\pi$ to a value significantly higher than 0.5. Note, however, that the population mean $\pi$ is also influenced by other stochastic events even when the environment is deterministic ([@Fig:periodic_environment]A), specifically, random genetic drift and phenotype choice.
 
+### Analytic approximation
+
+We use the recurrence equation [@Sec:recurrence-equation] to study deterministic 1-period environments(_ABABAB_) such that:
+
+$$
+x^{'} = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
+$${#eq:recurrence1}
+
+$$
+x^{''}=x' \frac{x' (1-\eta) (\omega_B - \omega_A) + \eta \omega_B + (1-\eta)\omega_A}{x' (\omega_B-\omega_A) + \omega_A}
+$${#eq:recurrence2}
+
+Note that here $\omega_A$ and $\omega_B$ are the fitness of _A_ and _B_ in the initial generation, and the changes in fitness are baked in to the equations.
+
+We are looking for a solution to $x''=x$, which evaluates to a quartic polynomial. Two solutions are 0 and 1 (assign to [@Eq:recurrence1]), but there are two more potential solutions solutions, such that 
+
+$$
+0=x''-x=x(1-x)G(x),
+\;\;\;
+G(x)=Ax^2+Bx+C
+$$
+
+Using [SymPy](http://sympy.org/), a Python library for symbolic mathematics, a free alternative to Wolfram Mathematica™[@SymPyDevelopmentTeam2014], we find all four solution of $x''-x=0$:
+
+$$
+0=x''- x = x(1-x)(x^2 - \frac{\omega_A (1-\eta) - \omega_B (3-\eta)}{(2-\eta)(\omega_A - \omega_B)} x - \frac{\omega_B}{(2-\eta)(\omega_A - \omega_B)})
+$$
+
+or 
+
+$$
+G(x) = x^2 - \frac{\omega_A (1-\eta) - \omega_B (3-\eta)}{(2-\eta)(\omega_A - \omega_B)} x - \frac{\omega_B}{(2-\eta)(\omega_A - \omega_B)}
+$$
+
+Assume $\omega_A , \omega_B >0, 0 \le \eta \le 1$. If $\omega_A>\omega_B$:
+
+$$
+G(0) = \frac{-\omega_B}{(2-\eta)(\omega_A - \omega_B)} < 0
+$$
+
+$$
+G(1) = 
+1 - \frac{\omega_A (1-\eta) - \omega_B (3-\eta)}{(2-\eta)(\omega_A - \omega_B)} - \frac{\omega_B}{(2-\eta)(\omega_A - \omega_B)} = \\
+\frac{\omega_A}{(2-\eta)(\omega_A - \omega_B)} > 0
+$$
+
+and $lim_{x-> \pm \infty}{G(x)} = +\infty$.  If instead $\omega_B>\omega_A$, then $G(0)>0, G(1)<0$. 
+
+Therefore, there are two roots to $G(x)$. If $\omega_A>\omega_B$, then one of them is negative and one of them, $\tilde{x}$, is positive and below 1. If $\omega_B>\omega_A$, then both are positive but only one of them, $\tilde{x}$,  is below 1.
+
+Let $\delta=\frac{-B-\sqrt{B^2-4AC}}{2A}-\frac{-B+\sqrt{B^2-4AC}}{2A}$ (where _A_, _B_, _C_ are the coefficients of $G(x)$, defined in eq. 3). Then, $\delta=\frac{\sqrt{(\omega_A+\omega_B)^2-\eta(2-\eta)(\omega_A-\omega_B)^2}}{(2-\eta)(\omega_A-\omega_B)}$. Because $\eta(2-\eta)$ is maximized at 1, 
+
+$$
+(\omega_A+\omega_B)^2-\eta(2-\eta)(\omega_A-\omega_B)^2 > (\omega_A+\omega_B)^2-(\omega_A-\omega_B)^2=4\omega_A\omega_B  >0
+$$
+
+so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the positive root; if $\omega_B>\omega_A$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the smaller root; either way, $\tilde{x}=\frac{-B-\sqrt{B^2-4AC}}{2A}$.
+
+
+[@Fig:deterministic_periodic_environment] shows $\tilde{x}$ in dashed lines and the numerical iteration of [@Eq:recurrence1; @Eq:recurrence2] in solid lines for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $x(0)=0.5$. Note that the figure shows _x_ in **every other generation**.
+
+![Analytic approximation (dashed line) to the evolution of $\bar{\pi}$ (solid line) in a deterministic 1-period environment (_ABABAB_).](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
+
 ## Bet-hedging in stochastic rapidly changing environments
 
 We next focus on stochastic environments that change every generation, such as in [@Fig:periodic_environment]C.
+
 The authors [@Xue2016] argued that (notation slightly different from our notation, so $\pi_i$ is the probability to become phenotype _i_ and $p_i$ is the frequency of environment _i_):
 
 > Now, suppose that the environment switches repeatedly during
 > that timescale $\tau_{ad}$; _i.e._, the typical duration of an environment, $\tau_{env}$, is much shorter than $\tau_{ad}$. Then, through the learning mechanism, the phenotype probability distribution $\pi_i$ converges to a steady distribution $\pi_i^*$ and fluctuates around it... which yields $\pi_i^*=p_i$...
 
-They presented analysis (eq. [3]) that shows that when selection is extreme, $\bar{\pi}$ fluctuates around $p$, the empirical frequency of environment _A_. The analysis is presented in Materials and Methods (eq. [10]) and assumes both extreme selection (fitness in the unfavorable environment is 0) and $\eta \ll 1$ via eq. [13]. 
-In addition, they analyse the case of non-extreme selection (see SI), and suggest that $\bar{\pi}$ fluctuates around $\pi^*$ which satisfies (see eq. S6 in SI):
+They presented analysis (eq. [3]) showing that when selection is extreme, $\bar{\pi}$ fluctuates around $p$, the empirical frequency of environment _A_. The analysis is presented in Materials and Methods (eq. [10]) and assumes both extreme selection (fitness in the unfavorable environment is 0) and $\eta \ll 1$ via eq. [13]. 
+In addition, they analyze the case of non-extreme selection (see SI), and suggest that $\bar{\pi}$ fluctuates around $\pi^*$ which satisfies (see eq. S6 in SI):
 
 $$
 pi_i^* = \sum_{j}{p_j \frac{\omega_i^j \pi_i^*}{\sum_k{\omega_k^j \pi_k^*}}}
 $$
 
 where the outer sum is over the different environments/phenotypes, $p_j$ is the frequency of environment _j_, $\pi_j$ is the probability for becoming phenotype _j_, and $\omega_i^j$ is the fitness of phenotype _i_ in environment _j_ (note this notation is different from the one proposed here).
-
-### Results on stochastic rapidly changing environments
 
 First, we solve the above equation for two environments, _A_ and _B_, to find that for $0 < p_A < 1, \omega_A \ne \omega_B$:
 
@@ -170,7 +258,7 @@ We look at simulations with different learning rates $\eta$ and look at $\bar{\p
 
 ![$\bar{\pi}_A$ over time for different $\eta$ values (columns) and extreme (bottom) or non-extreme (top) selection ($\omega_1 =0$ or $0.2$, respectively). The red lines represent $\pi_A^*$, the blue lines represent $p_A$, the empirical frequency of environment _A_.](bethedging_timeseries.png){#fig:bethedging_timeseries}
 
-With extreme selection ([@Fig:bethedging_timeseries], bottom row) $\bar{\pi}_A$ does seem to fluctute around $p_A=0.7$ (blue dashed lines), and fluctuations increase with $\eta$. This is in accordance with [@Xue2016].
+With extreme selection ([@Fig:bethedging_timeseries], bottom row) $\bar{\pi}_A$ does seem to fluctuate around $p_A=0.7$ (blue dashed lines), and fluctuations increase with $\eta$. This is in accordance with [@Xue2016].
 
 With non-extreme selection ([@Fig:bethedging_timeseries], top row), $\bar{\pi}_A$ (black lines for multiple simulations) fluctuates around $\pi_A^*=0.744...$ (red lines) which is **higher** then $p_A=0.7$ (blue lines). 
 These fluctuations increase with $\eta$ (from $\eta=0$ in the leftmost panel to $\eta=0.1$ in second panel from the right), except for $\eta=1$ for which almost all individuals are $\pi_A=1$ (rightmost panel). 
@@ -179,7 +267,7 @@ We also examine the histograms of $\bar{\pi}_A$ in the above simulations, but on
 
 ![Histograms of  $\bar{\pi}_A$ in multiple simulations](bethedging_histograms.png){#fig:bethedging_histograms}
 
-The layout [@Fig:bethedging_histograms] is the same as [@Fig:bethedging_timeseries], but it shows histograms of $\bar{\pi}_A$ for _t>250_. The red line represent $\pi_A^*$, and the blue dashed lines represent $p_A$. Note that colums have different x-scale; we can get an impression of relative x-scales from the y-scales in [@Fig:bethedging_timeseries].
+The layout [@Fig:bethedging_histograms] is the same as [@Fig:bethedging_timeseries], but it shows histograms of $\bar{\pi}_A$ for _t>250_. The red line represent $\pi_A^*$, and the blue dashed lines represent $p_A$. Note that columns have different x-scale; we can get an impression of relative x-scales from the y-scales in [@Fig:bethedging_timeseries].
 
 With extreme selection ([@Fig:bethedging_histograms], bottom), indeed $\bar{\pi}_A$ fluctuates around $p_A=0.7$ as the histograms are more or less centered around 0.7 (dashed blue line), as expected from [@Xue2016].
 
@@ -187,7 +275,7 @@ With non-extreme selection, the histograms are not centered around $p_A=0.7$ but
 
 ### Optimality 
 
-Xue & Leibler assert that this $\pi^*$ is an optimal bet-hedging strategy:
+@Xue2016 assert that this $\pi^*$ is an optimal bet-hedging strategy:
 
 > ... the proposed learning mechanism enables the population to reach the **optimal phenotype distribution for bet hedging**. Eq. 3 also implies that the phenotype distribution $\pi_i$ converges to the optimal distribution exponentially, following the direction of fastest adaption.
 
