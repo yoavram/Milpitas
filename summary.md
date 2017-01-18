@@ -58,9 +58,9 @@ Note that only development and reproduction are stochastic, natural selection an
 
 If $\eta=0$ and we only allow $\pi_i \in \{0,1\}$  and $\epsilon_t=A$, then we have a standard single locus bi-allelic selection-drift Wright-Fisher model.
 
-## Recurrence equation {#sec:recurrence-equation}
+## Recurrence on single lineage {#sec:recurrence-equation}
 
-This is an approximation of the model using a recurrence equation.
+This is an approximation of the model using a recurrence equation focusing on a single lineage.
 
 Define _x_ as the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
 
@@ -79,6 +79,54 @@ This recurrence equation can be reorganized to:
 $$
 x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
 $$
+
+## Continuous recurrence
+
+We assume a very large population so that we can talk about the frequency and density functions, $f_t$, of _A_ and $\pi$, respectively.
+
+The frequency of phenotype _A_ at time _t_, $f_{t+1}(A)$ in the next generation depends on the current generation $f_t(A)=\int_0^1{f(\pi) \pi \; d\pi}$: 
+
+$$
+\bar{\omega}(t) \cdot  f_{t+1} =
+\int_0^1{f_t(\pi) \Big[\pi \cdot \omega_A^{\epsilon_t} \cdot ((1-\eta)\pi + \eta) +
+ (1-\pi) \cdot \omega_B^{\epsilon_t} \cdot (1-\eta)\pi \Big] \; d\pi}
+$$ {#eq:cont_recurrence}
+
+where $\bar{\omega}(t)$ is a normalization factor. 
+The integrand is built from the frequency of $\pi$, 
+multiplied by probability that the parent is _A_ (based on $\pi$), 
+the probability that the parent reproduces, $\omega_{i}^{\epsilon_t}$), 
+and the probability that the offspring, with an updated $\pi$ values, becomes _A_.
+
+In general, for a random variable $X$ with density function $f(x)$ and continuous function $g(x)$,
+$\int{f(x) \cdot g(x) dx} = E[g(x)]$. We apply this to [@Eq:cont_recurrence]:
+
+$$
+\bar{\omega}(t) \cdot  f_{t+1}(A) = 
+  E_t[\pi] (\eta \cdot \omega_A^{\epsilon_t} + (1-\eta) \cdot \omega_B^{\epsilon_t}) + 
+  E_t[\pi^2] \cdot (1- \eta) \cdot (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t})
+$$ {#eq:moments_recurrence}
+
+Reordering the RHS of  [@Eq:moments_recurrence] we can get 
+$E_t[\pi-\pi^2](\eta \omega_A + (1-\eta) \omega_B) + \omega_A E_t[\pi^2]$, 
+and after adding and subtracting $\omega_A E_t[\pi]$, we have
+
+$$
+\bar{\omega}(t) \cdot  f_{t+1}(A) = \omega_A \cdot E_t[\pi] - (1-\eta) (\omega_A-\omega_B) E_t[\pi-\pi^2]
+$$ {#eq:reorder_moments_recurrence}
+
+We treat the number of individuals with phenotype _A_ as a Poisson binomial random variable:
+
+- The expected number of individuals at time _t_ with phenotype _A_ in a population of size _N_ is $E_t[A] = N E_t[\pi]$ (the first expectation is over realizations and the second is over the population).
+- The variance of the number of _A_ individuals is $V_t[A] = N E_t[\pi-(1-\pi)]$, for a constant population size _N_
+(again, the variance is over realizations and the expectation is over the population).
+- The frequency of individuals at time _t_ with phenotype _A_ is $f_t(A)=E_t[A]/N$.
+
+So, we can re-write [@eq:reorder_moments_recurrence] as:
+
+$$
+\bar{\omega}(t) \cdot  E_{t+1}[A] = \omega_A \cdot E_t[A] - (1-\eta) (\omega_A-\omega_B) V_t[A]
+$$ {#eq:phenotype_recurrence}
 
 ## Thoughts
 
