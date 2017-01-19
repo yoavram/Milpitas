@@ -8,20 +8,21 @@
 
 # Models
 
-## Wright-Fisher model
+## Wright-Fisher model {#sec:wright-fisher-model}
 
-Here we explicitly formulate the model of @Xue2016. This will follow how we understand their simulations (final paragraph of _Materials & Methods_) and how I implemented our simulations using a Wright-Fisher model.
+Here we explicitly formulate the model of @Xue2016 based on how we understand their simulations (final paragraph of _Materials & Methods_) and how I implemented our simulations using a Wright-Fisher model.
 
 ### Definitions
 
 - N: constant population size.
 - $\phi_i$: phenotype of individual _i_, $1 \le i \le N, \phi_i \in \{A,B\}$.
-- $\epsilon_t$: the environment in generation _t_, $\epsilon_t \in \{A, B\}$. This is a sequence of Bernoulli random variables.
-- $\omega^+$: individual fitness when phenotype and environment match $\phi_i = \epsilon_t$.
-- $\omega^-$: individual fitness when phenotype and environment do not match $\phi_i \ne \epsilon_t$.
-- $\omega_i$: fitness of individual _i_ at time _t_, $\omega_i=\omega^{+}$ if $\phi_i = \epsilon_t$ and $\omega_i=\omega^-$ otherwise.
+- $\epsilon_t$: the environment at generation _t_, $\epsilon_t \in \{A, B\}$.
+- $\omega^+$: individual fitness when phenotype and environment match, $\phi_i = \epsilon_t$.
+- $\omega^-$: individual fitness when phenotype and environment do not match, $\phi_i \ne \epsilon_t$.
+- $\omega_i$: fitness of individual _i_ at time _t_, $\omega_i=\omega^{+} \cdot 1_{\phi_i = \epsilon_t} + \omega^{-} \cdot 1_{\phi_i \ne \epsilon_t}$.
 - $\bar{\omega}$: population mean fitness.
 - $\pi_i$: phenotype choice, the probability that individual $i$ becomes phenotype _A_, $1 \le i \le N$.
+- $\Pi_t$: set of phenotype choices in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$
 - $\eta$:  learning rate or non-genetic inheritance parameter, $0 \le \eta \le 1$. 
 
 ### Reproduction 
@@ -30,41 +31,40 @@ For each offspring in the population of generation _t+1_ we choose a parent from
 
 ### Inheritance
 
-The inheritance of the phenotype choice follows this "learning" rule for parent _k_ and offspring _i_:
+The inheritance of the phenotype choice follows a "learning" rule: The offspring inherits the phenotype choice of the parent with a modification -- if the parent became _A_, then the offspring is even more likely to be _A_; if the parent was _B_, then the offspring is less likely to be _A_. Specifically, for parent _k_ and offspring _i_:
 
 $$
 \pi_i = \pi_k \cdot (1-\eta) + \eta \cdot 1_{\phi_k=A}
 $$ {#eq:learning_rule}
 
-The offspring inherits the phenotype choice of the parent with a modification: if the parent became _A_, then the offspring is even more likely to be _A_; if the parent was _B_, then the offspring is less likely to be _A_.
 
-Note that the notation in [@eq:learning_rule] is different from Eq. 1 in @Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
+Note that the notation in [@Eq:learning_rule] is different from Eq. 1 in @Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
 
 ### Iteration
 
-At each generation _t_ the **set of phenotype choices** in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$, is updated according to the following steps. Initial values can be determined (_i.e._, $\forall i \; \pi_i=0.5$), or values can be drawn from an initial distribution (_i.e._, $\pi_i \sim TN(0.5, 0.05)$, _TN_ is the truncated normal distribution). In addition, the sequence $\epsilon_t$ is given and is independent of the iteration.
+At each generation _t_, $\Pi_t$, is updated according to the following steps. Initial values can be determined (_i.e._, $\forall i, \; \pi_i=0.5$), or values can be drawn from an initial distribution (_i.e._, $\pi_i \sim TN(0.5, 0.05)$, _TN_ is the truncated normal distribution). In addition, the sequence $\epsilon_t$ is given and is independent of the iteration.
 
 At each time _t_:
 
 1. **Development**: the phenotypes of all individuals are drawn from corresponding Bernoulli distributions: $P(\phi_i=A)=\pi_i$.
 1. **Fitness**: the fitness of all individuals is set: $\omega_i = \omega^+ \cdot 1_{\phi_i=\epsilon_t}+ \omega^- \cdot 1_{\phi_i \ne \epsilon_t}$.
-1. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\omega_i/\bar{\omega}\}_{1 \le i \le N})$, such that 
+1. **Reproduction**: the number of offspring of each individual, $b_i$, is drawn from a multinomial distribution $MN(N, \{\frac{\omega_i}{\sum_i{\omega_i}}\}_{1 \le i \le N})$, such that 
 $$
-P(b_1 =x_1, …, b_N=x_N)=\frac{N!}{x_1! \cdot … \cdot x_N!}\cdot (\frac{\omega_1}{\sum_i{\omega_i}})^{x_1} \cdot … \cdot (\frac{\omega_N}{\sum_i{\omega_i}})^{x_N}
+P(b_1 =x_1, \ldots, b_N=x_N)=\frac{N!}{x_1! \cdot \ldots \cdot x_N!}\cdot \Big(\frac{\omega_1}{\sum_i{\omega_i}}\Big)^{x_1} \cdot \ldots \cdot \Big(\frac{\omega_N}{\sum_i{\omega_i}}\Big)^{x_N}
 $$.
-1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using [@Eq:learning_rule] such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$.
+1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using [@Eq:learning_rule] such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$
 
-Note that only development and reproduction are stochastic, natural selection and drift occur at the reproduction step, and inheritance 
+Note that only development and reproduction are stochastic; natural selection and drift occur at the reproduction step.
 
-If $\eta=0$ and we only allow $\pi_i \in \{0,1\}$  and $\epsilon_t=A$, then we have a standard single locus bi-allelic selection-drift Wright-Fisher model.
+If $\eta=0$ and we only allow $\pi_i \in \{0,1\}$  and $\epsilon_t \equiv A$, then we have a standard single locus bi-allelic selection-drift Wright-Fisher model.
 
-## Recurrence on single lineage {#sec:recurrence-equation}
+## Recurrence on a single lineage {#sec:recurrence-equation}
 
 This is an approximation of the model using a recurrence equation focusing on a single lineage.
 
 Define _x_ as the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
 
-Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ are _A_, according to the "learning" rule:
+Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ phenotypes to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ phenotypes eventually become _A_, according to the "learning" rule ([@Eq:learning_rule]:
 
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x
@@ -78,78 +78,69 @@ This recurrence equation can be reorganized to:
 
 $$
 x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
-$$
+$$ {#eq:recurrence0}
 
 ## Continuous recurrence
 
-We assume a very large population so that we can talk about the frequency and density functions, $f_t$, of _A_ and $\pi$, respectively.
+We assume a very large population so that we can talk about $f_t$, the frequency and density functions of _A_ and $\pi$, respectively.
 
-The frequency of phenotype _A_ at time _t_, $f_{t+1}(A)$ in the next generation depends on the current generation $f_t(A)=\int_0^1{f(\pi) \pi \; d\pi}$: 
+The frequency of phenotype _A_ at time _t_, $f_{t+1}(A)$ in the next generation depends on the current generation, $f_t(A)=\int_0^1{f(\pi) \pi \; d\pi}$: 
 
 $$
-\bar{\omega}(t) \cdot  f_{t+1} =
+\bar{\omega}_t \cdot  f_{t+1} =
 \int_0^1{f_t(\pi) \Big[\pi \cdot \omega_A^{\epsilon_t} \cdot ((1-\eta)\pi + \eta) +
  (1-\pi) \cdot \omega_B^{\epsilon_t} \cdot (1-\eta)\pi \Big] \; d\pi}
 $$ {#eq:cont_recurrence}
 
-where $\bar{\omega}(t)$ is a normalization factor. 
-The integrand is built from the frequency of $\pi$, 
-multiplied by probability that the parent is _A_ (based on $\pi$), 
-the probability that the parent reproduces, $\omega_{i}^{\epsilon_t}$), 
+where $\bar{\omega}_t$ is a normalization factor. 
+The integrand is made from the density of $\pi$, 
+multiplied by the probability that the parent is _A_ (conditioned on $\pi$), 
+the probability that the parent reproduces, $\omega_{i}^{\epsilon_t}$, 
 and the probability that the offspring, with an updated $\pi$ values, becomes _A_.
 
-In general, for a random variable $X$ with density function $f(x)$ and continuous function $g(x)$,
-$\int{f(x) \cdot g(x) dx} = E[g(x)]$. We apply this to [@Eq:cont_recurrence]:
+In general, for a random variable $X$ with density function $f(x)$ and an arbitrary continuous function $g(x)$,
+$\int{f(x) \cdot g(x) \; dx} = E[g(x)]$. We apply this to [@Eq:cont_recurrence]:
 
 $$
-\bar{\omega}(t) \cdot  f_{t+1}(A) = 
+\bar{\omega}_t \cdot  f_{t+1}(A) = 
   E_t[\pi] (\eta \cdot \omega_A^{\epsilon_t} + (1-\eta) \cdot \omega_B^{\epsilon_t}) + 
   E_t[\pi^2] \cdot (1- \eta) \cdot (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t})
 $$ {#eq:moments_recurrence}
 
 Reordering the RHS of  [@Eq:moments_recurrence] we can get 
-$E_t[\pi-\pi^2](\eta \omega_A + (1-\eta) \omega_B) + \omega_A E_t[\pi^2]$, 
-and after adding and subtracting $\omega_A E_t[\pi]$, we have
+$E_t[\pi-\pi^2](\eta \cdot \omega_A^{\epsilon_t} + (1-\eta) \omega_B^{\epsilon_t}) + \omega_A^{\epsilon_t} E_t[\pi^2]$, 
+and after adding and subtracting $\omega_A^{\epsilon_t} E_t[\pi]$, we have
 
 $$
-\bar{\omega}(t) \cdot  f_{t+1}(A) = \omega_A \cdot E_t[\pi] - (1-\eta) (\omega_A-\omega_B) E_t[\pi-\pi^2]
+\bar{\omega}_t \cdot  f_{t+1}(A) = \omega_A^{\epsilon_t} \cdot E_t[\pi] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E_t[\pi-\pi^2]
 $$ {#eq:reorder_moments_recurrence}
 
-We treat the number of individuals with phenotype _A_ as a Poisson binomial random variable:
+Denote the number of individuals with phenotype _A_ at time _t_ $Y_t$. Then $Y_t$ is a Poisson binomial random variable:
 
-- The expected number of individuals at time _t_ with phenotype _A_ in a population of size _N_ is $E_t[A] = N E_t[\pi]$ (the first expectation is over realizations and the second is over the population).
-- The variance of the number of _A_ individuals is $V_t[A] = N E_t[\pi-(1-\pi)]$, for a constant population size _N_
+- The expected number of individuals at time _t_ with phenotype _A_ in a population of size _N_ is $E[Y_t] = N E_t[\pi]$ (the first expectation is over realizations and the second is over the population).
+- The variance of the number of _A_ individuals is $V[Y_t] = N E_t[\pi-(1-\pi)]$, for a constant population size _N_
 (again, the variance is over realizations and the expectation is over the population).
-- The frequency of individuals at time _t_ with phenotype _A_ is $f_t(A)=E_t[A]/N$.
+- The expected frequency of individuals with phenotype _A_ at time _t_ is $f_t(A) =\frac{E[Y_t]}{N}$.
 
 So, we can re-write [@eq:reorder_moments_recurrence] as:
 
 $$
-\bar{\omega}(t) \cdot  E_{t+1}[A] = \omega_A \cdot E_t[A] - (1-\eta) (\omega_A-\omega_B) V_t[A]
+\bar{\omega}_t \cdot  E[Y_{t+1}] = \omega_A^{\epsilon_t} \cdot E[Y_t] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) \cdot V[Y_t]
 $$ {#eq:phenotype_recurrence}
 
-## Thoughts
+When $\eta=1$, _i.e._ full heritability of the phenotype ([@Eq:lerning_rule]), the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
 
-I think that the following notations can be useful for developing a tractable analysis of the Wright-Fisher model. 
-
-The idea is that $X_t$ is the histogram of $\Pi_t$ and $Y_t$ counts the number of _A_ phenotypes.
-
-- $X_t$: a sequence of random variables corresponding to the probability that a random individual at time _t_ will become  _A_; $ֿ\forall x \in [0,1], \; P(X_t= x)=\frac{|\{\pi_i\in\Pi_t | \pi_i = x\}|}{N}$.
-- $Y_t$: the number of individuals with phenotype _A_ at time _t_, $\sum_i {1_{\phi_i=A}}$. This is a [Poisson binomial random variable](https://en.wikipedia.org/wiki/Poisson_binomial_distribution) , $Y_t \sim PB(\Pi_t)$, and we have $E[Y_t|X_t] =N\cdot E[X_t]$. 
-
-I think that we would like to find a transformation $L$ such that $X_{t+1}=LX_t$ or else maybe $Y_{t+1} = LY_t$.
+To proceed with this analysis we probably need a recurrence for the variance, $V[Y_t]$.
 
 # Results
 
-The following is a set of simulation results. The individual-based simulation follows the $\pi$ values of all individuals over time, and is true to the above model definition.
+The following is a set of simulation results. The individual-based simulation follows the $\pi$ values of all individuals over time, and is true to the model definition in [@Sec:wright-fisher-model].
 
 ## Reproduction of previous results
 
-We start by reproducing Fig. 2 from -@Xue2016:
+We start by reproducing Fig. 2 from -@Xue2016. The top row in [@Fig:figure2_original] shows the average $\pi$ in the population over time and the distribution in blue, the bottom row the effective population growth rate.
 
 ![Original Figure 2 from -@Xue2016. Parameters: _N_=100,000, _n_=100, $\eta$=0.1, $\omega_0$=2, $\omega_1$=0.2.](figures/figure2_original.jpg){#fig:figure2_original}
-
-The top row in [@Fig:figure2_original] shows the average $\pi$ in the population over time and the distribution in blue, the bottom row the effective population growth rate.
 
 The different columns represent 3 environments, used throughout this document.
 
@@ -159,7 +150,7 @@ The different columns represent 3 environments, used throughout this document.
 
 The population is initialized such that $\Pi_0 \sim Normal(0.5, 0.05)$.
 
-![Figure 2 reproduction](figures/figure2_reproduction.pdf){#fig:figure2_reproduction}
+![Reproduction of Figure 2 from -@Xue2016, see [@Fig:figure2_original].](figures/figure2_reproduction.pdf){#fig:figure2_reproduction}
 
 # Modifier competition
 
@@ -168,15 +159,15 @@ We now extend the model:
 1. There are two learning modifiers $\eta_1, \eta_2$, that can have different values. Each individual has one and only one of these modifiers.
 1. Mutations in the modifier loci, with probability $\kappa$, convert $\eta_i$ to $\eta_j$.
 
-[@Fig:modifiers_eta0.1_eta0_kappa0] shows the dynamics from  with competition between modifiers.
-
 ![Learning rate modifiers competition with $\eta_1=0.1, \eta_2=0, \kappa=0$](figures/modifiers_eta0.1_eta0_kappa0.pdf){#fig:modifiers_eta0.1_eta0_kappa0}
 
-The top row in [@Fig:modifiers_eta0.1_eta0_kappa0] shows the population mean $\pi$ over time in yellow and the distribution in blue. The bottom row shows the population mean $\eta$ over time. The three columns represent the environments (see below).
-
-[@Fig:modifiers_eta0.1_eta0_kappa0.001] shows the dynamics from  with competition between modifiers with mutation between the modifier alleles.
-
 ![Learning rate modifiers competition with $\eta_1=0.1, \eta_2=0, \kappa=0.001$](figures/modifiers_eta0.1_eta0_kappa0.001.pdf){#fig:modifiers_eta0.1_eta0_kappa0.001}
+
+The top row in [@Fig:modifiers_eta0.1_eta0_kappa0; @Fig:modifiers_eta0.1_eta0_kappa0.001] shows the population mean $\pi$ over time in yellow and the dispersion in blue. The bottom row shows the population mean $\eta$ over time. The three columns represent the environments (as in [@Fig:figure2_original]).
+
+Both with $\kappa=0$ ([@Fig:modifiers_eta0.1_eta0_kappa0]) and with $\kappa=0.001$ ([@Fig:modifiers_eta0.1_eta0_kappa0.001), lower learning rate is favored in a stochastic rapidly changing environment (left column), whereas a fast learning rate is favored in more slowly changing environments (middle and right columns).
+
+As we can see in [@Sec:bethedging_stochastic], there is an optimal $\pi$ value in rapidly changing environments, and once the population reaches this optimal value, further "learning" (as given by [@Eq:learning_rule]) drives individuals to sub-optimal values and is therefore selected against.
 
 ### Multiple competitions
 
@@ -184,24 +175,26 @@ The top row in [@Fig:modifiers_eta0.1_eta0_kappa0] shows the population mean $\p
 
 ![Multiple competitions between $\eta_1$=0.1 and $\eta_2$=0.2](figures/modifiers_eta1_0.1_eta2_0.2_kappa_0.pdf){#fig:modifiers_eta1_0.1_eta2_0.2_kappa_0}
 
-The black solid lines the the average $\pi$ (top) and $\eta$ (bottom) in the population. The blue lines represent randomly chosen single simulations, to represent variance.
+The black solid lines the the average $\pi$ (top) and $\eta$ (bottom) in the population. The blue lines represent randomly chosen single simulations, to represent variance. These results generally agree with the results in single simulations ([@Fig:modifiers_eta0.1_eta0_kappa0; @Fig:modifiers_eta0.1_eta0_kappa0.001]):
 
-The figures shows that
-- Left panel: there is selection against learning after the population reached the "optimal" strategy.
-- Right panel: there is selection for learning, and the dynamics are very much deterministic. Note that as long as the low learning rate modifier exists, it is briefly selected for following every environmental change, because it is more likely to be associated with advantageous $\pi$ values - this follows from the fact it was disadvantageous before the environmental change.
-- Middle panel: requires longer simulations. See below.
+- Left panel -- there is selection against learning after the population reached the "optimal" strategy.
+- Right panel -- there is selection for learning, and the dynamics are very much deterministic. Note that as long as the low learning rate modifier exists, it is briefly selected for following every environmental change, because it is more likely to be associated with advantageous $\pi$ values - this follows from the fact it was disadvantageous before the environmental change.
+- Middle panel -- requires longer simulations.
 
 ## Diversity
 
-We now look a the diversity of the population, in terms of $\pi$ values, when evolving in slowly changing environments (left panels in the above figures).
+We now look a the diversity of the population, in terms of $\pi$ values, when evolving in slowly changing environments (_i.e._ right panel in [@Fig:figure2_original]).
 
-For tractability, the population now starts fixed at $\pi_i=0.5 \; \forall i$ and then evolves.
+For tractability, the population is initially fixed at 0.5 ($\forall i, \; \pi_i=0.5$).
 
 ![Population $\pi$ diversity in a highly stochastic environment](figures/diversity_envA.pdf){#fig:diversity_envA}
 
-[@Fig:diversity_envA] shows the richness (# of different value; top), true diversity (exponent of Shannon index, _i.e._ $exp(-sum_{\pi}{\log{(f(\pi))} f(\pi)})$ where $f(\pi)$ is the frequency of $\pi$ in the population); center) and average (bottom) of $\pi$ in the population.
+[@Fig:diversity_envA] shows the richness[^richness] (top), true diversity[^true_diversity] (center) and average (bottom) of $\pi$ in the population.
 
-How does the distribution of $\pi$ in the population changes during a single adaptation event? [@Fig:pi_distribution_in_env_change] shows the histogram of $pi$ following an environmental change that changes the optimal phenotype from _A_ to _B_, and therefore the optimal $\pi$ from 0 to 1. This figure shows that between adaptation events the distribution of $\pi$ is very narrow, since both selection and learning drive it in the same direction. During the adaptive event, the distribution shifts to 1, and it has a pronounced "front", which includes the individuals who are most likely to reach $\pi$=1 first. These organisms probably have the highest reproductive value, although before the environmental change they had the lowest reproductive value - "When Everybody Zigs, You Zag".
+[^richness]: number of different values of $\pi$, _i.e._ $|\Pi_t|$.
+[^true_diversity]: Exponent of Shannon index, _i.e._ $exp(-\sum_{\pi \in \Pi_t}{\log{(f(\pi))} f(\pi)}$ where $f(\pi)$ is the density of $\pi$ in the population.
+
+How does the distribution of $\pi$ in the population changes during a single adaptation event? [@Fig:pi_distribution_in_env_change] shows the histogram of $\pi$ following an environmental change that changes the favorable phenotype from _A_ to _B_, and therefore the optimal $\pi$ from 0 to 1. This figure shows that between adaptation events the distribution of $\pi$ is narrow, since both selection and learning drive it in the same direction. During the adaptive event, the distribution shifts to 1, and it has a pronounced "front", which includes the individuals who are most likely to reach $\pi$=1 first. These organisms probably have the highest reproductive value, although before the environmental change they had the lowest reproductive value (_"When Everybody Zigs, You Zag"_).
 
 ![Distribution of $\pi$ in a population undergoing adaptation](figures/pi_distribution_in_env_change.pdf){#fig:pi_distribution_in_env_change}
 
@@ -213,11 +206,11 @@ We now explore the dynamics in an environment that -@Xue2016 did not explore, a 
 
 The top row in [@Fig:periodic_environment] shows the dynamics in such deterministic periodic environments. The initial population distribution was uniform ($\Pi_0 \sim U(0,1)$), but in the symmetric environment _ABAB_ ([@Fig:periodic_environment]A) the population mean $\pi$ fluctuates around 0.5. In contrast, if the _A_ environment is more frequent than _B_, as in the _AABAAB_ environment ([@Fig:periodic_environment]B), than the population mean $\pi$ goes to 1, and the diversity in the population (given by the blue shading) becomes narrower with time.
 
-The dynamics in a similar stochastic environments, in which the environment is drawn every generation with 1:1 odds for _A_ and _B_ ([@Fig:periodic_environment]C, similar to left panel in [@Fig:figure2_original]) or 2:1 odds ([@Fig:periodic_environment]D), are very similar, except that there seems to be more variance in [@Fig:periodic_environment]C, where stochastic consecutive _A_s can drive the population mean $\pi$ to a value significantly higher than 0.5. Note, however, that the population mean $\pi$ is also influenced by other stochastic events even when the environment is deterministic ([@Fig:periodic_environment]A), specifically, random genetic drift and phenotype choice.
+The dynamics in similar stochastic environments, in which the environment is drawn every generation with 1:1 odds for _A_ and _B_ ([@Fig:periodic_environment]C, similar to left panel in [@Fig:figure2_original]) or 2:1 odds ([@Fig:periodic_environment]D), are very similar, except that there seems to be more variance in [@Fig:periodic_environment]C, where stochastic consecutive _A_ can drive the population mean $\pi$ to a value significantly higher than 0.5. Note, however, that the population mean $\pi$ is also influenced by other stochastic events even when the environment is deterministic ([@Fig:periodic_environment]A), specifically, random genetic drift and phenotype choice.
 
 ### Analytic approximation
 
-We use the recurrence equation [@Sec:recurrence-equation] to study deterministic 1-period environments(_ABABAB_) such that:
+We use the recurrence equation ([@Eq:recurrence0]) to study deterministic 1-period environments (_ABABAB_) such that:
 
 $$
 x^{'} = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A-\omega_B) + \omega_B}
@@ -229,7 +222,7 @@ $${#eq:recurrence2}
 
 Note that here $\omega_A$ and $\omega_B$ are the fitness of _A_ and _B_ in the initial generation, and the changes in fitness are baked in to the equations.
 
-We are looking for a solution to $x''=x$, which evaluates to a quartic polynomial. Two solutions are 0 and 1 (assign to [@Eq:recurrence1]), but there are two more potential solutions solutions, such that 
+We are looking for a solution to $x''=x$, which evaluates to a quartic polynomial. Two solutions are 0 and 1 (assign to [@Eq:recurrence1]), but there are two more potential solutions, such that 
 
 $$
 0=x''-x=x(1-x)G(x),
@@ -237,7 +230,7 @@ $$
 G(x)=Ax^2+Bx+C
 $$
 
-Using [SymPy](http://sympy.org/), a Python library for symbolic mathematics, a free alternative to Wolfram Mathematica™[@SymPyDevelopmentTeam2014], we find all four solution of $x''-x=0$:
+Using [SymPy](http://sympy.org/), a Python library for symbolic mathematics, a free alternative to Wolfram Mathematica™ [@SymPyDevelopmentTeam2014], we find all four solution of $x''-x=0$:
 
 $$
 0=x''- x = x(1-x)(x^2 - \frac{\omega_A (1-\eta) - \omega_B (3-\eta)}{(2-\eta)(\omega_A - \omega_B)} x - \frac{\omega_B}{(2-\eta)(\omega_A - \omega_B)})
@@ -278,7 +271,7 @@ so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, th
 
 ![Analytic approximation (dashed line) to the evolution of $\bar{\pi}$ (solid line) in a deterministic 1-period environment (_ABABAB_).](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
 
-## Bet-hedging in stochastic rapidly changing environments
+## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
 We next focus on stochastic environments that change every generation, such as in [@Fig:periodic_environment]C.
 
@@ -341,9 +334,9 @@ This $\Lambda(\pi)$ term is the time averaged _Malthusian fitness_ [@Orr2009].
 
 We checked this optimality criterion by competing _N_=100000 individuals with an initial uniform distribution of $\pi$ values (such that there are initially 100 individuals with each $\pi \in \{\frac{k}{999} | 0 \le k \le 999 \})$ and with $\eta=0$ so that any change in frequencies of $\pi$ values can only be attributed to natural selection and genetic drift.
 
+![Competitions between different $\pi$ strategies in rapidly changing environments; $\eta=0, N=1,000,000$ means that change in frequencies mainly due to natural selection.](figures/bethedging_competitions.pdf){#fig:bethedging_competitions}
+
 [@Fig:bethedging_competitions] shows the $\bar{\pi}$ in yellow, dispersion in blue, $p$ (frequency of environment _A_) in black, and $\pi^*$ in red.
 $\bar{pi}$ indeed converges to $\pi^*$, which means that individuals that were initially $\pi^*$ out-compete individuals with other $\pi$ values, and therefore $\pi^*$ represents an evolutionary optimal bet-hedging strategy.
-
-![Competitions between different $\pi$ strategies in rapidly changing environments; $\eta=0, N=1,000,000$ means that change in frequencies mainly due to natural selection.](figures/bethedging_competitions.pdf){#fig:bethedging_competitions}
 
 # References
