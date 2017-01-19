@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Jan 18, 2017, v.2
+% Jan 19, 2017, v.2
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
