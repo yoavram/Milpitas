@@ -105,9 +105,6 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
-    if μ1 > 0 or μ2 > 0:
-        raise NotImplementedError("μ is not implemented")
-
     ω = np.array(
         [
             [ω0, ω1],
@@ -157,7 +154,9 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
             μ[κ_idx] = np.random.choice((μ1, μ2), κ_idx.sum(), True)            
         η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
-        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        π_ = π[t, idx]
+        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
+        π_ = (1 - μ) * π_ + μ * np.random.randint(0, 2, π_.shape) # mutation
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
@@ -316,7 +315,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
 @click.version_option(version=__version__, prog_name=__name__)
 @click.option('--Ne', default=1000, help="Population size")
 @click.option('--n', default=10, help="Number of generations")
-@click.option('--η1', default=0.1, help="Learning rate")
+@click.option('--η1', default=0.0, help="Learning rate")
 @click.option('--η2', default=None, help="Invader modifier learning rate")
 @click.option('--μ1', default=0.0, help="Mutation rate")
 @click.option('--μ2', default=None, type=float, help="Invader modifier mutation rate")
