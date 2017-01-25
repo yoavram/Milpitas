@@ -101,12 +101,12 @@ def plot_simulations(df, samples=10):
         grp.plot('t', 'π', color=blue, alpha=2/samples, ax=ax[0, i])
         sns.tsplot(_df, time='t', unit='ID', value='η', lw=2, color=green, ci=False, ax=ax[1, i])
         grp.plot('t', 'η', color=green, alpha=2/samples, ax=ax[1, i])
-        # sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
-        # grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
+        sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
+        grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
         ax[0, i].axhline(_df.ϵ.mean(), color='k', ls='--')
         ax[0, i].legend().set_visible(False)
         ax[1, i].legend().set_visible(False)
-        # ax[2, i].legend().set_visible(False)
+        ax[2, i].legend().set_visible(False)
 
     sns.despine()
     return ax
