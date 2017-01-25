@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 output_folder = 'output'
 sns.set(style='ticks', context='paper', font_scale=1.3)
 
@@ -45,8 +45,6 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
-    if μ > 0:
-        raise NotImplementedError("μ is not implemented")
     ω = np.array(
         [
             [ω0, ω1],
@@ -75,7 +73,9 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         # selection & reproduction; idx is the indexes of reproducing individuals
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
-        π_ = (1 - η) * π[t, idx] + η * (φ[idx] == 0)
+        π_ = π[t, idx]
+        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
+        π_ = (1 - μ) * π_ + μ * np.random.randint(0, 2, π_.shape) # mutation
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
