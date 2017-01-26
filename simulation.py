@@ -17,14 +17,11 @@ warnings.filterwarnings('ignore', 'The `IPython.html` package has been deprecate
 
 import click
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import pandas as pd
 from ultrachronic import repeat
 
 __version__ = '0.0.2'
 output_folder = 'output'
-sns.set(style='ticks', context='paper', font_scale=1.3)
 
 def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     """Run a single simulation.
