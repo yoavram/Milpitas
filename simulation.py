@@ -20,6 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+from ultrachronic import repeat
 
 __version__ = '0.0.2'
 output_folder = 'output'
@@ -328,19 +329,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
 @click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
 def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, 
          ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A', reps=1, cpus=1):
-    if cpus == 1:
-        for _ in range(reps):
-            _main(ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env) 
-    else:
-        from multiprocessing import cpu_count
-        from concurrent.futures import ProcessPoolExecutor, as_completed
-        if cpus < 1:
-            cpus = cpu_count()
-        with ProcessPoolExecutor(cpus) as executor:
-            futures = [executor.submit(_main, ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env) for _ in range(reps)]
-            for fut in as_completed(futures):
-                if fut.exception():
-                    warnings.warn(fut.exception())
+    repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
 
 
 if __name__ == '__main__':

@@ -5,12 +5,13 @@ Reproducing results of Xue &amp; Leiber, PNAS 2016
 
 Download and install [Anaconda](https://www.continuum.io/downloads) or [Miniconda](http://conda.pydata.org/miniconda.html) to get Python **3.5** and the conda package manager.
 
-Then run these commands to update conda, create a virtual environment and install required packages:
+Run these commands to update conda, create a virtual environment and install required packages:
 
 ```sh
 conda config --add channels conda-forge
 conda update conda pip -y
 conda install python=3.5 numpy matplotlib seaborn click -y
+pip install ultrachronic
 ```
 ## Using the notebook
 
