@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Jan 19, 2017, v.2
+% Jan 25, 2017, v.2.1
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
@@ -52,7 +52,7 @@ At each time _t_:
 $$
 P(b_1 =x_1, \ldots, b_N=x_N)=\frac{N!}{x_1! \cdot \ldots \cdot x_N!}\cdot \Big(\frac{\omega_1}{\sum_i{\omega_i}}\Big)^{x_1} \cdot \ldots \cdot \Big(\frac{\omega_N}{\sum_i{\omega_i}}\Big)^{x_N}
 $$.
-1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using [@Eq:learning_rule] such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$
+1. **Inheritance**: the set of phenotype choices of the offspring generation, $\Pi_{t+1}$, is updated using [@Eq:learning_rule] such that for each $i$, $\Pi_{t+1}$ includes exactly $b_i$ copies of $(\pi_i \cdot (1-\eta) + \eta \cdot 1_{\phi_i=A})$.
 
 Note that only development and reproduction are stochastic; natural selection and drift occur at the reproduction step.
 
@@ -64,7 +64,7 @@ This is an approximation of the model using a recurrence equation focusing on a 
 
 Define _x_ as the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
 
-Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ phenotypes to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ phenotypes eventually become _A_, according to the "learning" rule ([@Eq:learning_rule]:
+Assuming an "infinite" population undergoing exponential growth, this depends on  (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ phenotypes to the next generation in terms of fitness, and (iii) on the probability that offspring of _A_ or _B_ phenotypes eventually become _A_, according to the "learning" rule ([@Eq:learning_rule]):
 
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x
@@ -128,7 +128,7 @@ $$
 \bar{\omega}_t \cdot  E[Y_{t+1}] = \omega_A^{\epsilon_t} \cdot E[Y_t] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) \cdot V[Y_t]
 $$ {#eq:phenotype_recurrence}
 
-When $\eta=1$, _i.e._ full heritability of the phenotype ([@Eq:lerning_rule]), the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
+When $\eta=1$, _i.e._ full heritability of the phenotype ([@Eq:learning_rule]), the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
 
 To proceed with this analysis we probably need a recurrence for the variance, $V[Y_t]$.
 
@@ -165,7 +165,7 @@ We now extend the model:
 
 The top row in [@Fig:modifiers_eta0.1_eta0_kappa0; @Fig:modifiers_eta0.1_eta0_kappa0.001] shows the population mean $\pi$ over time in yellow and the dispersion in blue. The bottom row shows the population mean $\eta$ over time. The three columns represent the environments (as in [@Fig:figure2_original]).
 
-Both with $\kappa=0$ ([@Fig:modifiers_eta0.1_eta0_kappa0]) and with $\kappa=0.001$ ([@Fig:modifiers_eta0.1_eta0_kappa0.001), lower learning rate is favored in a stochastic rapidly changing environment (left column), whereas a fast learning rate is favored in more slowly changing environments (middle and right columns).
+Both with $\kappa=0$ ([@Fig:modifiers_eta0.1_eta0_kappa0]) and with $\kappa=0.001$ ([@Fig:modifiers_eta0.1_eta0_kappa0.001]), lower learning rate is favored in a stochastic rapidly changing environment (left column), whereas a fast learning rate is favored in more slowly changing environments (middle and right columns).
 
 As we can see in [@Sec:bethedging_stochastic], there is an optimal $\pi$ value in rapidly changing environments, and once the population reaches this optimal value, further "learning" (as given by [@Eq:learning_rule]) drives individuals to sub-optimal values and is therefore selected against.
 
