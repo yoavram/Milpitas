@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_π(π, ϵ, bands=8, ax=None):    
+def plot_π(π, ϵ, bands=8, label=None, ax=None):    
     if ax is None:
         fig, ax = plt.subplots()
     for i in range(bands):
@@ -24,6 +24,8 @@ def plot_π(π, ϵ, bands=8, ax=None):
         ylabel='$π$',
         xlabel='t'
     )
+    if label is not None:
+        ax.set_label(label)
     ax.set_clip_on(False)
     sns.despine()
     return ax
