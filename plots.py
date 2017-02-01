@@ -11,14 +11,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_π(π, ϵ, bands=8, label=None, ax=None):    
+def plot_π(π, ϵ=None, bands=8, label=None, ax=None):    
     if ax is None:
         fig, ax = plt.subplots()
     for i in range(bands):
         low, high = np.percentile(π, [0.5*(2**i), 100-0.5*(2**i)], 1)
         ax.fill_between(range(π.shape[0]), low, high, color='b', alpha=0.1)
     ax.plot(π.mean(axis=1), c='y', lw=3)
-    ax.axhline((ϵ == 0).mean(), color='k', ls='--')
+    if ϵ is not None:
+        ax.axhline((ϵ == 0).mean(), color='k', ls='--')
     ax.set(
         ylim=(0, 1),
         ylabel='$π$',
