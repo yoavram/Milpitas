@@ -1,0 +1,14 @@
+#!/bin/bash
+#$ -V
+#$ -cwd
+#$ -j y
+#$ -N bethedging
+#$ -l lilach,mem_free=2G
+
+
+module load gcc/gcc620
+alias python=/groups/lilach_hadany/yoavram/miniconda3/envs/Milpitas/bin/python
+which python
+echo "Starting: `date`"
+source bethedging.sh
+echo "Simulation: `date`"
