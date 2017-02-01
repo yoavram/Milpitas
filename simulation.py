@@ -67,7 +67,7 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         φ[np.random.random(N) > π[t, :]] = 1
         # fitness of each invidividual in current environment
         ω_t = ω[ϵ[t], φ]
-        assert (ω_t > 0).any()
+        assert (ω_t > 0).any(), "Population extinct, ω_t=0"
         ω_t = ω_t / ω_t.sum()
         # selection & reproduction; idx is the indexes of reproducing individuals
         idx = np.random.choice(N, N, True, ω_t)
