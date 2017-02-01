@@ -240,7 +240,7 @@ or
 
 $$
 G(x) = x^2 - \frac{\omega_A (1-\eta) - \omega_B (3-\eta)}{(2-\eta)(\omega_A - \omega_B)} x - \frac{\omega_B}{(2-\eta)(\omega_A - \omega_B)}
-$$
+$$ {#eq:recurrence_solution}
 
 Assume $\omega_A , \omega_B >0, 0 \le \eta \le 1$. If $\omega_A>\omega_B$:
 
@@ -269,7 +269,7 @@ so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, th
 
 [@Fig:deterministic_periodic_environment] shows $\tilde{x}$ in dashed lines and the numerical iteration of [@Eq:recurrence1; @Eq:recurrence2] in solid lines for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $x(0)=0.5$. Note that the figure shows _x_ in **every other generation**.
 
-![Analytic approximation (dashed line) to the evolution of $\bar{\pi}$ (solid line) in a deterministic 1-period environment (_ABABAB_).](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
+![Analytic approximation calculated using iteration of [@Eq:recurrence1; @Eq:recurrence2] (red line) and the solution in [@Eq:recurrence_solution] (dashed green line) to the evolution of $\bar{\pi}$ (yellow line for WF simulations) in a deterministic 1-period environment (_ABABAB_). This plot shows $\bar{\pi}$ in every other generation. Population size _N_=100,000; ](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
 
 ## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
