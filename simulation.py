@@ -285,7 +285,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
         ϵ = np.array(([0] * 40 + [1] * 40) * (n//80 + 1))
         ϵ = ϵ[:n]
     elif env == 'ABAB':
-        ϵ = np.array([0, 1] * n // 2)
+        ϵ = np.array([0, 1] * (n // 2))
     else:
         raise ValueError("Unknown value for env: {}".format(env))
 
