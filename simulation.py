@@ -20,8 +20,7 @@ import numpy as np
 import pandas as pd
 from ultrachronic import repeat
 
-__version__ = '0.0.2'
-output_folder = 'output'
+__version__ = '0.0.3'
 
 def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     """Run a single simulation.
@@ -268,7 +267,7 @@ def uniform(n):
     return [1/(n-1) * x for x in range(n)], [1/n for x in range(n)]
 
 
-def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
+def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
     params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
     now = datetime.datetime.now()
     click.echo("Simulation started: {}".format(now, params))
@@ -285,6 +284,8 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     elif env == 'C':
         ϵ = np.array(([0] * 40 + [1] * 40) * (n//80 + 1))
         ϵ = ϵ[:n]
+    elif env == 'ABAB':
+        ϵ = np.array([0, 1] * n // 2)
     else:
         raise ValueError("Unknown value for env: {}".format(env))
 
@@ -322,12 +323,12 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
 @click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
 @click.option('--κ', default=0.0, help="Modifier mutation rate")
-@click.option('--reps', default=1, help="Number of simulations to run")
-@click.option('--cpus', default=1, help="Number of CPUs to use")
-@click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
-def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, 
-         ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A', reps=1, cpus=1):
-    repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
+@click.option('--env', default='A', type=click.Choice('A B C ABAB'.split()), help="Type of environment: A, B, C correspond to Fig. 2; ABAB is a deterministic periodic environment")
+@click.option('--output_folder', default='output', type=click.Path(), help="Output folder to which results will be written, defaults to 'output'")
+@click.option('--reps', default=1, type=click.IntRange(1, None, clamp=False), help="Number of simulations to run")
+@click.option('--cpus', default=1, help="Number of CPUs to use; if non-positive, will use all available CPUs")
+def main(ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder, reps=1, cpus=1):
+    repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env, output_folder=output_folder)
 
 
 if __name__ == '__main__':
