@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Jan 25, 2017, v.2.1
+% Feb 2, 2017, v.2.2
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
@@ -267,9 +267,9 @@ $$
 so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the positive root; if $\omega_B>\omega_A$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the smaller root; either way, $\tilde{x}=\frac{-B-\sqrt{B^2-4AC}}{2A}$.
 
 
-[@Fig:deterministic_periodic_environment] shows $\tilde{x}$ in dashed lines and the numerical iteration of [@Eq:recurrence1; @Eq:recurrence2] in solid lines for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $x(0)=0.5$. Note that the figure shows _x_ in **every other generation**.
+[@Fig:deterministic_periodic_environment] shows several values of $\tilde{x}$ (or $\bar{\pi}$): the analytic solution of the recurrence ([@Eq:recurrence_solution]) in dashed green, the numerical iteration of the recurrence [@Eq:recurrence1; @Eq:recurrence2] in solid blue, and a stochastic simulation of the Wright-Fisher model ([@Sec:wright-fisher-model]) in solid orange for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows **every other generation**.
 
-![Analytic approximation calculated using iteration of [@Eq:recurrence1; @Eq:recurrence2] (red line) and the solution in [@Eq:recurrence_solution] (dashed green line) to the evolution of $\bar{\pi}$ (yellow line for WF simulations) in a deterministic 1-period environment (_ABABAB_). This plot shows $\bar{\pi}$ in every other generation. Population size _N_=100,000; ](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
+![Population mean $\pi$ in a deterministic rapidly changing environments.](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
 
 ## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
