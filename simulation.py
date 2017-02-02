@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 from ultrachronic import repeat
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 output_folder = 'output'
 
 def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
@@ -285,6 +285,8 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
     elif env == 'C':
         ϵ = np.array(([0] * 40 + [1] * 40) * (n//80 + 1))
         ϵ = ϵ[:n]
+    elif env == 'ABAB':
+        ϵ = np.array([0, 1] * n // 2)
     else:
         raise ValueError("Unknown value for env: {}".format(env))
 
@@ -324,7 +326,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env):
 @click.option('--κ', default=0.0, help="Modifier mutation rate")
 @click.option('--reps', default=1, help="Number of simulations to run")
 @click.option('--cpus', default=1, help="Number of CPUs to use")
-@click.option('--env', default='A', type=click.Choice('A B C'.split()), help="Type of environment, corresponding to Fig. 2")
+@click.option('--env', default='A', type=click.Choice('A B C ABAB'.split()), help="Type of environment, corresponding to Fig. 2")
 def main(ne=100, n=100, η1=0.1, η2=None, μ1=0, μ2=None, 
          ω0=2.0, ω1=0.2, π0=0.5, κ=0, env='A', reps=1, cpus=1):
     repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
