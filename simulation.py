@@ -11,6 +11,7 @@ import os
 import gzip
 import json
 import glob
+import re
 import warnings
 # filter seaborn nasty warning
 warnings.filterwarnings('ignore', 'The `IPython.html` package has been deprecated. You should import from `notebook` instead. `IPython.html.widgets` has moved to `ipywidgets`.')
@@ -20,7 +21,8 @@ import numpy as np
 import pandas as pd
 from ultrachronic import repeat
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
+env_pattern = re.compile("A(?P<k>\d+)B(?P<l>\d+)")
 
 def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     """Run a single simulation.
@@ -287,7 +289,12 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
     elif env == 'ABAB':
         ϵ = np.array([0, 1] * (n // 2))
     else:
-        raise ValueError("Unknown value for env: {}".format(env))
+        m = env_pattern.match(env)
+        if not m:
+            raise ValueError("Unknown value for env: {}".format(env))
+        k = int(m.groupdict()['k'])
+        l = int(m.groupdict()['l'])
+        ϵ = np.array(([0] * k + [1] * l) * (n // (k+l) + 1))[:n]
 
     if η2 is None and μ2 is None:
         π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ)
@@ -323,7 +330,8 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
 @click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
 @click.option('--κ', default=0.0, help="Modifier mutation rate")
-@click.option('--env', default='A', type=click.Choice('A B C ABAB'.split()), help="Type of environment: A, B, C correspond to Fig. 2; ABAB is a deterministic periodic environment")
+@click.option('--env', default='A', type=str, 
+    help="Type of environment: A, B, C correspond to Fig. 2; AkBl is a deterministic periodic environment with k As followed by l Bs")
 @click.option('--output_folder', default='output', type=click.Path(), help="Output folder to which results will be written, defaults to 'output'")
 @click.option('--reps', default=1, type=click.IntRange(1, None, clamp=False), help="Number of simulations to run")
 @click.option('--cpus', default=1, help="Number of CPUs to use; if non-positive, will use all available CPUs")
