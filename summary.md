@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Feb 2, 2017, v.2.2
+% Feb 6, 2017, v.2.3
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
@@ -267,9 +267,11 @@ $$
 so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the positive root; if $\omega_B>\omega_A$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the smaller root; either way, $\tilde{x}=\frac{-B-\sqrt{B^2-4AC}}{2A}$.
 
 
-[@Fig:deterministic_periodic_environment] shows several values of $\tilde{x}$ (or $\bar{\pi}$): the analytic solution of the recurrence ([@Eq:recurrence_solution]) in dashed green, the numerical iteration of the recurrence [@Eq:recurrence1; @Eq:recurrence2] in solid blue, and a stochastic simulation of the Wright-Fisher model ([@Sec:wright-fisher-model]) in solid orange for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows **every other generation**.
+[@Fig:env_A1B1] shows several values of $\tilde{x}$ (or $\bar{\pi}$): the analytic solution of the recurrence ([@Eq:recurrence_solution]) in dashed green, the numerical iteration of the recurrence [@Eq:recurrence1; @Eq:recurrence2] in solid blue, and a stochastic simulation of the Wright-Fisher model ([@Sec:wright-fisher-model]) in solid orange for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows **every other generation**. [@Fig:env_A2B1] similarly shows results when the environment is deterministic with twice _A_ followed by a single _B_. In both _ABAB_ and in _AABAAB_ it can be seen that the analytic approximation is good when selection is extreme ($\omega_1=0$), but overestimates $\bar{\pi}$ when selection in not extreme ($\omega_1=0.1$).
 
-![Population mean $\pi$ in a deterministic rapidly changing environments.](figures/deterministic_periodic_environment.pdf){#fig:deterministic_periodic_environment}
+![Population mean $\pi$ in a deterministic rapidly changing environment _ABAB_.](figures/env_A1B1.pdf){#fig:env_A1B1}
+
+![Population mean $\pi$ in a deterministic rapidly changing environment _AABAAB_](figures/env_A2B1.pdf){#fig:env_A2B1}
 
 ## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
