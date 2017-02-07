@@ -39,8 +39,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         mutation rate, 0 <= μ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
-    π0 : float or function
-        initial value for π: if float then using Normal(π0, π0/10), if function then calling it with N.
+    π0 : function
+        function that given N, returns an initial value for π.
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
     """
@@ -55,9 +55,6 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         ϵ = np.random.randint(0, 2, n)
     # π[t, i] is the probability for phenotype 0 at individual i at time t
     π = np.zeros((n, N), dtype=float)
-    if isinstance(π0, (float, int)):
-        π0_ = π0
-        π0 = lambda N: np.random.normal(π0_, np.sqrt(π0_ / 10), N)
     π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
     π[0, π[0, :] > 1] = 1
@@ -295,6 +292,22 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
         k = int(m.groupdict()['k'])
         l = int(m.groupdict()['l'])
         ϵ = np.array(([0] * k + [1] * l) * (n // (k+l) + 1))[:n]
+    
+    try:
+        if π0 == 'U':
+            π0 = lambda N: np.random.uniform(0, 1, N)
+        elif π0[0] == 'N':
+            π0_ = float(π0[1:])
+            π0 = lambda N: np.random.normal(π0_, np.sqrt(π0_ / 10), N)
+        elif π0[0] == 'C':
+            π0_ = float(π0[1:])
+            π0 = lambda N: np.ones(N) * π0_
+        else:
+            # if π0 is a float, using Normal(π0, π0/10)
+            π0_ = float(π0)
+            π0 = lambda N: np.random.normal(π0_, np.sqrt(π0_ / 10), N)
+    except ValueError:
+        raise ValueError("Unknown value for π0: {}".format(π0))
 
     if η2 is None and μ2 is None:
         π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ)
@@ -328,7 +341,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
 @click.option('--μ2', default=None, type=float, help="Invader modifier mutation rate")
 @click.option('--ω0', default=2.0, help="Fitness of phenotype 0 in environment 0")
 @click.option('--ω1', default=0.0, help="Fitness of phenotype 0 in environment 1")
-@click.option('--π0', default=0.5, help="Initial probability of phenotype 0")
+@click.option('--π0', default='0.5', type=str, help="Initial density of phenotype 0; one of Nx, U, Cx, x where 0<x<1, N is normal (default), U is uniform, C is constant.")
 @click.option('--κ', default=0.0, help="Modifier mutation rate")
 @click.option('--env', default='A', type=str, 
     help="Type of environment: A, B, C correspond to Fig. 2; AkBl is a deterministic periodic environment with k As followed by l Bs")
