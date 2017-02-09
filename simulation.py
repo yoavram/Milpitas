@@ -265,12 +265,7 @@ def deterministic(N, n, η, μ, ωA, ωB, π0, ϵ=None):
 def uniform(n):
     return [1/(n-1) * x for x in range(n)], [1/n for x in range(n)]
 
-
-def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
-    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
-    now = datetime.datetime.now()
-    click.echo("Simulation started: {}".format(now, params))
-
+def parse_env(env, n):
     if env == 'A':
         ϵ = np.random.choice(2, n, True, [0.7, 0.3])
     elif env == 'B':
@@ -292,7 +287,9 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
         k = int(m.groupdict()['k'])
         l = int(m.groupdict()['l'])
         ϵ = np.array(([0] * k + [1] * l) * (n // (k+l) + 1))[:n]
-    
+    return ϵ
+
+def parse_π0(π0):
     try:
         if π0 == 'U':
             π0 = lambda N: np.random.uniform(0, 1, N)
@@ -308,6 +305,15 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
             π0 = lambda N: np.random.normal(π0_, np.sqrt(π0_ / 10), N)
     except ValueError:
         raise ValueError("Unknown value for π0: {}".format(π0))
+    return π0
+
+def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
+    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
+    now = datetime.datetime.now()
+    click.echo("Simulation started: {}".format(now, params))
+
+    ϵ = parse_env(env, n)
+    π0 = parse_π0(π0)
 
     if η2 is None and μ2 is None:
         π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ)
