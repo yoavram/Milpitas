@@ -71,8 +71,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
         π_ = π[t, idx]
-        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         π_ = (1 - μ) * π_ + μ * np.random.randint(0, 2, π_.shape) # mutation
+        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
@@ -152,8 +152,8 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
         η_bar[t + 1] = η.mean()
         μ_bar[t + 1] = μ.mean()
         π_ = π[t, idx]
-        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         π_ = (1 - μ) * π_ + μ * np.random.randint(0, 2, π_.shape) # mutation
+        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
         π[t + 1, :] = π_
