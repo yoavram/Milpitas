@@ -94,7 +94,7 @@ def plot_μ(μ_bar, μ1, μ2, ax=None):
     return ax
 
 def plot_simulations(df, samples=10):
-    fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(12,6))
+    fig, ax = plt.subplots(3, 3, sharex='col', sharey='row', figsize=(12,6))
     red, green, blue = sns.color_palette('Set1', 3)
     for i, env in enumerate(('A', 'B', 'C')):
         _df = df[df.env == env]
@@ -102,14 +102,16 @@ def plot_simulations(df, samples=10):
         grp = _df[_df.ID.isin(ids)].groupby('ID')
         sns.tsplot(_df, time='t', unit='ID', value='π', lw=2, color=blue, ci=False, ax=ax[0, i])
         grp.plot('t', 'π', color=blue, alpha=2/samples, ax=ax[0, i])
-        sns.tsplot(_df, time='t', unit='ID', value='η', lw=2, color=green, ci=False, ax=ax[1, i])
-        grp.plot('t', 'η', color=green, alpha=2/samples, ax=ax[1, i])
-        sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
-        grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
+        if 'η' in df.columns:
+            sns.tsplot(_df, time='t', unit='ID', value='η', lw=2, color=green, ci=False, ax=ax[1, i])
+            grp.plot('t', 'η', color=green, alpha=2/samples, ax=ax[1, i])
+        if 'μ' in df.columns:
+            sns.tsplot(_df, time='t', unit='ID', value='μ', lw=2, color=red, ci=False, ax=ax[2, i])
+            grp.plot('t', 'μ', color=red, alpha=0.02, ax=ax[2, i])
         ax[0, i].axhline(_df.ϵ.mean(), color='k', ls='--')
-        ax[0, i].legend().set_visible(False)
-        ax[1, i].legend().set_visible(False)
-        ax[2, i].legend().set_visible(False)
+        for j in range(3):
+            lg = ax[j, i].legend()
+            if lg: lg.set_visible(False)
 
     sns.despine()
     return ax
