@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Feb 6, 2017, v.2.3
+% Feb 15, 2017, v.2.5
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
@@ -23,7 +23,7 @@ Here we explicitly formulate the model of @Xue2016 based on how we understand th
 - $\bar{\omega}$: population mean fitness.
 - $\pi_i$: phenotype choice, the probability that individual $i$ becomes phenotype _A_, $1 \le i \le N$.
 - $\Pi_t$: set of phenotype choices in the population, $\Pi_t = \{ \pi_i \}_{1 \le i \le N}$
-- $\eta$:  learning rate or non-genetic inheritance parameter, $0 \le \eta \le 1$. 
+- $\eta$:  learning rate or non-genetic inheritance parameter, $0 \le \eta \le 1$. This can also be defined as the contribution on the phenotype to the inherited trait in terms of [@Rivoire2014].
 
 ### Reproduction 
 
@@ -84,10 +84,10 @@ $$ {#eq:recurrence0}
 
 We assume a very large population so that we can talk about $f_t$, the frequency and density functions of _A_ and $\pi$, respectively.
 
-The frequency of phenotype _A_ at time _t_, $f_{t+1}(A)$ in the next generation depends on the current generation, $f_t(A)=\int_0^1{f(\pi) \pi \; d\pi}$: 
+The frequency of phenotype _A_ in the next generation $f_{t+1}(A)$ depends on the phenotype frequency in the current generation, $f_t(A)=\int_0^1{f_t(\pi) \pi \; d\pi}$: 
 
 $$
-\bar{\omega}_t \cdot  f_{t+1} =
+\bar{\omega}_t \cdot  f_{t+1}(A) =
 \int_0^1{f_t(\pi) \Big[\pi \cdot \omega_A^{\epsilon_t} \cdot ((1-\eta)\pi + \eta) +
  (1-\pi) \cdot \omega_B^{\epsilon_t} \cdot (1-\eta)\pi \Big] \; d\pi}
 $$ {#eq:cont_recurrence}
@@ -112,13 +112,13 @@ $E_t[\pi-\pi^2](\eta \cdot \omega_A^{\epsilon_t} + (1-\eta) \omega_B^{\epsilon_t
 and after adding and subtracting $\omega_A^{\epsilon_t} E_t[\pi]$, we have
 
 $$
-\bar{\omega}_t \cdot  f_{t+1}(A) = \omega_A^{\epsilon_t} \cdot E_t[\pi] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E_t[\pi-\pi^2]
+\bar{\omega}_t \cdot  f_{t+1}(A) = \omega_A^{\epsilon_t} \cdot E_t[\pi] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E_t[\pi(1-\pi)]
 $$ {#eq:reorder_moments_recurrence}
 
 Denote the number of individuals with phenotype _A_ at time _t_ $Y_t$. Then $Y_t$ is a Poisson binomial random variable:
 
 - The expected number of individuals at time _t_ with phenotype _A_ in a population of size _N_ is $E[Y_t] = N E_t[\pi]$ (the first expectation is over realizations and the second is over the population).
-- The variance of the number of _A_ individuals is $V[Y_t] = N E_t[\pi-(1-\pi)]$, for a constant population size _N_
+- The variance of the number of _A_ individuals is $V[Y_t] = N E_t[\pi (1-\pi)]$, for a constant population size _N_
 (again, the variance is over realizations and the expectation is over the population).
 - The expected frequency of individuals with phenotype _A_ at time _t_ is $f_t(A) =\frac{E[Y_t]}{N}$.
 
@@ -131,6 +131,46 @@ $$ {#eq:phenotype_recurrence}
 When $\eta=1$, _i.e._ full heritability of the phenotype ([@Eq:learning_rule]), the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
 
 To proceed with this analysis we probably need a recurrence for the variance, $V[Y_t]$.
+
+# Unbiased inheritance
+
+We suggest a new form of inheritance that is independent of the phenotype, or "unbiased". In terms of [@Rivoire2014], instead of having the inheritance operator _H_ accepting inputs from the genotype ($\gamma$) and the phenotype (_F_ line), we have _H_ accepting inputs from the genotype ($\gamma$) and introducing "noise" or variance ($\nu_H$). That is, we redefine the [@Eq:learning_rule] to be:
+
+$$
+\pi_i = \pi_k \cdot (1-\mu) + \mu \cdot B_i
+$$
+
+where $B_i \sim Bernoulli(\frac{1}{2})$.
+
+## Continuous recurrence
+
+We now derive the continuous recurrence for unbiased inheritance.
+
+$$
+\bar{\omega}_t \cdot  f_{t+1}(A) =
+\int_0^1{f_t(\pi) 
+    (\pi \omega_A^{\epsilon_t} + (1-\pi) \omega_B^{\epsilon_t}) 
+    \Big(\frac{1}{2} \pi (1-\mu) + \frac{1}{2} (\pi (1-\mu) + \mu)\Big)
+\; d\pi}
+$$
+
+Similar to our approach in deriving [@Eq:reorder_moments_recurrence] we get:
+
+$$
+\bar{\omega}_t \cdot  f_{t+1}(A) =
+    \frac{1}{2} \mu (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E_t[\pi]
+    - (1-\mu) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E_t[\pi(1-\pi)]
+    + \frac{1}{2} \mu \cdot \omega_B^{\epsilon_t}
+$$
+
+And in terms of $Y_t$ (as in [@Eq:phenotype_recurrence]), we can write:
+
+$$
+\bar{\omega}_t \cdot E[Y_{t+1}] = 
+    \frac{1}{2} \mu (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E[Y_t]
+    - (1-\mu) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) V[Y_t]
+    + \frac{1}{2} \mu \cdot \omega_B^{\epsilon_t}
+$$
 
 # Results
 
