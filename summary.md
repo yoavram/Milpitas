@@ -334,13 +334,11 @@ How does the distribution of $\pi$ in the population changes during a single ada
 
 ## Periodic environment
 
-We now explore the dynamics in an environment that -@Xue2016 did not explore, a periodic environment that deterministically switches from _A_ to _B_ every generation - denoted _ABAB_ - or every other generation for environment _A_ - denoted _AABAAB_.
+We now explore the dynamics in a periodic environment that deterministically switches from _A_ to _B_ every generation - denoted _ABAB_ - or every other generation for environment _A_ - denoted _AABAAB_.
 
-![Population mean $\pi$ in a deterministic and stochastic rapidly changing environments](figures/periodic_environment.pdf){#fig:periodic_environment}
+![Distribution of $\pi$ in populations evolving in periodical deterministic environments. From left to right: A1B1, A2B1, A40B40. N=100000, $\eta$=0.01, $\omega^{+}$=1, $\omega^{-}$=0.1.](figures/env_period_overview.pdf){#fig:env_period_overview}
 
-The top row in [@Fig:periodic_environment] shows the dynamics in such deterministic periodic environments. The initial population distribution was uniform ($\Pi_0 \sim U(0,1)$), but in the symmetric environment _ABAB_ ([@Fig:periodic_environment]A) the population mean $\pi$ fluctuates around 0.5. In contrast, if the _A_ environment is more frequent than _B_, as in the _AABAAB_ environment ([@Fig:periodic_environment]B), than the population mean $\pi$ goes to 1, and the diversity in the population (given by the blue shading) becomes narrower with time.
-
-The dynamics in similar stochastic environments, in which the environment is drawn every generation with 1:1 odds for _A_ and _B_ ([@Fig:periodic_environment]C, similar to left panel in [@Fig:figure2_original]) or 2:1 odds ([@Fig:periodic_environment]D), are very similar, except that there seems to be more variance in [@Fig:periodic_environment]C, where stochastic consecutive _A_ can drive the population mean $\pi$ to a value significantly higher than 0.5. Note, however, that the population mean $\pi$ is also influenced by other stochastic events even when the environment is deterministic ([@Fig:periodic_environment]A), specifically, random genetic drift and phenotype choice.
+@Fig:env_period_overview shows the evolution of the distribution of $\pi$ in a population evolving in an environment that flips between _A_ and _B_ every generation (left panel); where 2 _A_s are followed by one _B_ (middle panel); and where 40 _A_s are followed by 40 _B_s (right panel; similar to @Fig:figure2_original C). 
 
 ### Analytic approximation
 
@@ -465,7 +463,7 @@ With extreme selection ([@Fig:bethedging_histograms], bottom), indeed $\bar{\pi}
 
 With non-extreme selection, the histograms are not centered around $p_A=0.7$ but rather around $\pi_A^*=0.744...$, which does not coincide with $p_A=0.7$ ([@Fig:bethedging_timeseries], bottom panel).
 
-### Optimality 
+### Optimal $\pi$ for bet-hedging 
 
 @Xue2016 assert that this $\pi^*$ is an optimal bet-hedging strategy:
 
