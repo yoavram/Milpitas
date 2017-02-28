@@ -405,8 +405,11 @@ so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, th
 
 ![Population mean $\pi$ in a deterministic rapidly changing environment _AABAAB_](figures/env_A2B1.pdf){#fig:env_A2B1}
 
-We now focus on the evolution of the distribution of $pi$ in the population, rather than $\bar{\pi}$. We used WF simulations to follow the population distribution in a deterministic environment, where environment is periodic with _k_ occurrences of _A_ and then _l_ occurrences of _B_. 
-{@Fig:env_A10_B2} shows the results of such a simulation. The left panel shows the distribution (y-axis for $\pi$ values from 0 to 1, brightness for frequency) evolves over time (x-axis), starting from a population in which $\pi=0.01$ in all individuals. The right panel shows the final distribution of $\pi$ in the population.
+### Periodic asymmetric environments
+
+We now focus on the evolution of the distribution of $pi$ in the population, rather than $\bar{\pi}$, in a periodic environment with _k_ occurrences of _A_ and then _l_ occurrences of _B_.
+
+{@Fig:env_A10_B2} shows the results of such a WF simulation. The left panel shows the distribution (y-axis for $\pi$ values from 0 to 1, brightness for frequency) evolves over time (x-axis), starting from a population in which $\pi=0.01$ in all individuals. The right panel shows the final distribution of $\pi$ in the population.
 
 ![Population distribution of $\pi$ in a deterministic rapidly changing environment _A10B2_. N=100000, $\eta$=0.01, $\omega^{+}$=1, $\omega^{-}$=0.1.](figures/env_A10_B2.pdf){#fig:env_A10_B2}
 
@@ -415,6 +418,24 @@ For example, [@Fig:env_A10B1_A10B2] shows the evolution of $\pi$ in two populati
 
 ![Population distribution of $\pi$ in a deterministic rapidly changing environments with 10 _A_s followed by either one or two _B_s. N=100000, $\eta$=0.01, $\omega^{+}$=1, $\omega^{-}$=0.1.](figures/env_A10B1_A10B2.pdf){#fig:env_A10B1_A10B2}
 
+### Optimal learning rate $\nu$ in periodic symmetric environments
+
+When the environments change periodically and deterministically with equal durations $k=l$, or in the notation of @Xue2016, $\tau_{env}$, then the optimal learning rate $\eta^*$ maximizes the asymptotic population growth rate (see Eq. S12 in @Xue2016), or the the time averaged _Malthusian fitness_ [@Orr2009]:
+$$
+\Lambda(\eta) \approx \sum_{t=0}^{\tau_{env}-1}{\log{\Big(
+    1 - \frac{(1-\eta)^t}{1+(1-\eta)^{\tau_{env}}}
+\Big)}}
+$$ {#eq:optimal_eta}
+
+This approximation assumes that extreme selection ($\omega^{-}$=0).
+
+@Fig:analytic_optimal_eta shows the optimal learning rate $\eta^*$ calculated by numerically solving @Eq:optimal_nu for different environment durations ($k=l=\tau_{env}$).
+
+![Optimal learning rate $\eta^*$ in different environments.](figures/analytic_optimal_eta.pdf){#fig:analytic_optimal_eta}
+
+To test this optimality criterion, we used the WF simulations to compete two learning rate modifiers - the optimal rate modifier and a competing modifier, both starting at 50% of the population. We ran 50 simulations for each competition, and the results are presented in @Fig:optimal_eta_competitions, where thin lines represent the population mean learning rate $\bar{\eta}$ over time and the thick dashed line shows the average dynamics over 50 simulations, which provides insight the expected results. In the top two panels, the optimal modifier competes with a modifier with a lower rate; it out competes a much lower rate but is tied with a 10% lower modifier ($\eta_2=0.17$). In the bottom two panels, the optimal modifier wins competitions with modifier with higher learning rates.
+
+![Competitions between an optimal learning modifier $\eta_1$ and a competitor modifier $\eta_2$. Initial $\pi$ distribution was uniform, N=100000, $\omega^{+}$=1, $\omega^{-}$=0.1, environment A40B40 ($\tau_{env}=40$).](figures/optimal_eta_competitions.pdf){#fig:optimal_eta_competitions}
 
 ## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
@@ -469,7 +490,7 @@ With non-extreme selection, the histograms are not centered around $p_A=0.7$ but
 
 > ... the proposed learning mechanism enables the population to reach the **optimal phenotype distribution for bet hedging**. Eq. 3 also implies that the phenotype distribution $\pi_i$ converges to the optimal distribution exponentially, following the direction of fastest adaption.
 
-"Optimality" is explained in _Materials and Methods_, where they show the optimal strategy maximizes the _asymptotic growth rate_ of a population (Eq. 11):
+"Optimality" is explained in _Materials and Methods_, where they show the optimal strategy maximizes the asymptotic growth rate_ of a population (Eq. 11):
 
 $$
 \Lambda(\pi) = \sum_j p_j \Big(\log{\sum_i{\pi_i \omega_i^j} \Big)}
