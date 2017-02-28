@@ -1,6 +1,6 @@
 % Evolution of Learning
 % Yoav Ram[^yr], Uri Liberman[^ul], and Marcus W. Feldman[^mwf]
-% Feb 15, 2017, v.2.5
+% Feb 28, 2017, v.2.6
 
 [^yr]: Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com
 [^ul]: School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il
@@ -37,8 +37,15 @@ $$
 \pi_i = \pi_k \cdot (1-\eta) + \eta \cdot 1_{\phi_k=A}
 $$ {#eq:learning_rule}
 
-
 Note that the notation in [@Eq:learning_rule] is different from Eq. 1 in @Xue2016, as _i_ denotes individual, rather than phenotype. But the process is the same. 
+
+Also, note that given conditioned on parent's $\pi_k$,
+
+$$
+E[\pi_i - \pi_k | \pi_k] = 0
+$$
+
+That is, the inheritance process is essentially a Martingale.
 
 ### Iteration
 
@@ -115,7 +122,7 @@ $$
 \bar{\omega}_t \cdot  f_{t+1}(A) = \omega_A^{\epsilon_t} \cdot E_t[\pi] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E_t[\pi(1-\pi)]
 $$ {#eq:reorder_moments_recurrence}
 
-Denote the number of individuals with phenotype _A_ at time _t_ $Y_t$. Then $Y_t$ is a Poisson binomial random variable:
+Denote $Y_t$ to be the number of individuals with phenotype _A_ at time _t_. Then $Y_t$ is a Poisson binomial random variable:
 
 - The expected number of individuals at time _t_ with phenotype _A_ in a population of size _N_ is $E[Y_t] = N E_t[\pi]$ (the first expectation is over realizations and the second is over the population).
 - The variance of the number of _A_ individuals is $V[Y_t] = N E_t[\pi (1-\pi)]$, for a constant population size _N_
@@ -128,23 +135,37 @@ $$
 \bar{\omega}_t \cdot  E[Y_{t+1}] = \omega_A^{\epsilon_t} \cdot E[Y_t] - (1-\eta) (\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) \cdot V[Y_t]
 $$ {#eq:phenotype_recurrence}
 
-When $\eta=1$, _i.e._ full heritability of the phenotype ([@Eq:learning_rule]), the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
+When $\eta=0$, inheritance is completely through the genotype, and we get 
+$$
+E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_{t}] - \frac{\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}}{\bar{\omega}_t} V[Y_{t}]
+$$
+where the first term is the effect of selection and the second term is the effect of drift.
+
+When $\eta=1$, inheritance is completely through the phenotype; the variance term vanishes and selection drives the process: $E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_t]$.
 
 To proceed with this analysis we probably need a recurrence for the variance, $V[Y_t]$.
 
-# Unbiased inheritance
+# Non-phenotypic inheritance
 
-We suggest a new form of inheritance that is independent of the phenotype, or "unbiased". In terms of [@Rivoire2014], instead of having the inheritance operator _H_ accepting inputs from the genotype ($\gamma$) and the phenotype (_F_ line), we have _H_ accepting inputs from the genotype ($\gamma$) and introducing "noise" or variance ($\nu_H$). That is, we redefine the [@Eq:learning_rule] to be:
+We suggest a new form of inheritance that is independent of the phenotype. In terms of [@Rivoire2014], instead of having the inheritance operator _H_ accepting inputs from the genotype ($\gamma$) and the phenotype (_F_ line), we have _H_ accepting inputs from the genotype ($\gamma$) and introducing "noise" or variance ($\nu_H$). That is, we redefine the [@Eq:learning_rule] to be:
 
 $$
 \pi_i = \pi_k \cdot (1-\mu) + \mu \cdot B_i
 $$
 
-where $B_i \sim Bernoulli(\frac{1}{2})$.
+where $\pi_k$ is the parent trait value and $B_i \sim Bernoulli(\frac{1}{2})$.
+
+Note that, in contrast to [@Eq:learning_rule], this inheritance process is not a Martingale ($E[\pi_i-\pi_k|\pi_k] \ne 0$); given a parent $\pi_k$, the offspring expected trait value is:
+
+$$
+E[\pi_i - \pi_k | \pi_k] = \mu \Big( \frac{1}{2} - \pi_k \Big)
+$$
+
+which is positive for $\pi_k < \frac{1}{2}$ and negative for $\pi_k > \frac{1}{2}$, so that inheritance is driving $\pi$ towards $\frac{1}{2}$, which is in contrast to selection, which at each given generation drives $\pi$ towards either 0 or 1.
 
 ## Continuous recurrence
 
-We now derive the continuous recurrence for unbiased inheritance.
+We now derive the continuous recurrence for non-phenotypic inheritance.
 
 $$
 \bar{\omega}_t \cdot  f_{t+1}(A) =
@@ -158,7 +179,7 @@ Similar to our approach in deriving [@Eq:reorder_moments_recurrence] we get:
 
 $$
 \bar{\omega}_t \cdot  f_{t+1}(A) =
-    \frac{1}{2} \mu (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E_t[\pi]
+    \Big( \omega_A^{\epsilon_t} - \frac{1}{2} \mu (\omega_A^{\epsilon_t} + \omega_B^{\epsilon_t}) \Big) E_t[\pi]
     - (1-\mu) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E_t[\pi(1-\pi)]
     + \frac{1}{2} \mu \cdot \omega_B^{\epsilon_t}
 $$
@@ -166,11 +187,23 @@ $$
 And in terms of $Y_t$ (as in [@Eq:phenotype_recurrence]), we can write:
 
 $$
-\bar{\omega}_t \cdot E[Y_{t+1}] = 
-    \frac{1}{2} \mu (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E[Y_t]
+\bar{\omega}_t \cdot  E[Y_{t+1}] =
+    \Big( \omega_A^{\epsilon_t} - \frac{1}{2} \mu (\omega_A^{\epsilon_t} + \omega_B^{\epsilon_t}) \Big) E[Y_t]
     - (1-\mu) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) V[Y_t]
-    + \frac{1}{2} \mu \cdot \omega_B^{\epsilon_t}
+    + \frac{N}{2} \mu \cdot \omega_B^{\epsilon_t}
 $$
+
+When $\mu=0$, inheritance is completely through the genotype and is faithful, similar to the case of $\eta=0$, and we get 
+$$
+E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_{t}] - \frac{\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}}{\bar{\omega}_t} V[Y_{t}]
+$$
+where the first term is the effect of selection and the second term is the effect of drift.
+
+When $\mu=1$, there is effectively no inheritance, the phenotypes are randomly determined and selection has no effect. We get 
+$$
+\bar{\omega}_t \cdot  E[Y_{t+1}] = \frac{1}{2}(\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E[Y_t] + \frac{N}{2}\omega_B^{\epsilon_t} = \frac{1}{2} \bar{\omega}_t
+$$
+so that the expected number of individuals with phenotype _A_ is $\frac{1}{2}$.
 
 # Results
 
