@@ -401,11 +401,22 @@ $$
 so $sign(\delta)=sign(\omega_A-\omega_B)$. Therefore, is $\omega_A>\omega_B$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the positive root; if $\omega_B>\omega_A$, then $\frac{-B-\sqrt{B^2-4AC}}{2A}$ is the smaller root; either way, $\tilde{x}=\frac{-B-\sqrt{B^2-4AC}}{2A}$.
 
 
-[@Fig:env_A1B1] shows several values of $\tilde{x}$ (or $\bar{\pi}$): the analytic solution of the recurrence ([@Eq:recurrence_solution]) in dashed green, the numerical iteration of the recurrence [@Eq:recurrence1; @Eq:recurrence2] in solid blue, and a stochastic simulation of the Wright-Fisher model ([@Sec:wright-fisher-model]) in solid orange for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows **every other generation**. [@Fig:env_A2B1] similarly shows results when the environment is deterministic with twice _A_ followed by a single _B_. In both _ABAB_ and in _AABAAB_ it can be seen that the analytic approximation is good when selection is extreme ($\omega_1=0$), but overestimates $\bar{\pi}$ when selection in not extreme ($\omega_1=0.1$).
+[@Fig:env_A1B1] shows several values of $\tilde{x}$ (or $\bar{\pi}$): the analytic solution of the recurrence ([@Eq:recurrence_solution]) in dashed green, the numerical iteration of the recurrence [@Eq:recurrence1; @Eq:recurrence2] in solid blue, and a stochastic simulation of the Wright-Fisher model ([@Sec:wright-fisher-model]) in solid orange for a several combinations of $\eta, \omega_A, \omega_B$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows **every other generation**. [@Fig:env_A2B1] similarly shows results when the environment is deterministic with twice _A_ followed by a single _B_. In both _ABAB_ and in _AABAAB_ it can be seen that the analytic approximation is good when selection is extreme ($\omega_1=0$), but overestimates $\bar{\pi}$ when selection in not extreme ($\omega_1=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$).
 
 ![Population mean $\pi$ in a deterministic rapidly changing environment _ABAB_.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 ![Population mean $\pi$ in a deterministic rapidly changing environment _AABAAB_](figures/env_A2B1.pdf){#fig:env_A2B1}
+
+We now focus on the evolution of the distribution of $pi$ in the population, rather than $\bar{\pi}$. We used WF simulations to follow the population distribution in a deterministic environment, where environment is periodic with _k_ occurrences of _A_ and then _l_ occurrences of _B_. 
+{@Fig:env_A10_B2} shows the results of such a simulation. The left panel shows the distribution (y-axis for $\pi$ values from 0 to 1, brightness for frequency) evolves over time (x-axis), starting from a population in which $\pi=0.01$ in all individuals. The right panel shows the final distribution of $\pi$ in the population.
+
+![Population distribution of $\pi$ in a deterministic rapidly changing environment _A10B2_. N=100000, $\eta$=0.01, $\omega^{+}$=1, $\omega^{-}$=0.1.](figures/env_A10_B2.pdf){#fig:env_A10_B2}
+
+Interestingly, for some values of _k, l_ the final distribution is concentrated at 0 or 1, whereas for other values the distribution is wide and the mean is in $(0, 1)$.
+For example, [@Fig:env_A10B1_A10B2] shows the evolution of $\pi$ in two populations where the only difference is that that in the first population (top row) 10 _A_s are followed by a single _B_, whereas in the second population 10 _A_s are followed by two _B_s. The left column shows the evolution of the distribution of $\pi$, simulated with the WF model; the right column shows the evolution of the population mean $\bar{\pi}$, found by iteration of a suitable  recurrence ([@Eq:recurrence0]). It's easy to see that when there is only a single _B_ after every 10 _A_s, $pi=1$ fixes in the population. However, when there are two _B_s, $pi=1$ doesn't fixate; moreover, it remains in a low frequency, and the final population mean is $\approx\frac{10}{11}$.
+
+![Population distribution of $\pi$ in a deterministic rapidly changing environments with 10 _A_s followed by either one or two _B_s. N=100000, $\eta$=0.01, $\omega^{+}$=1, $\omega^{-}$=0.1.](figures/env_A10B1_A10B2.pdf){#fig:env_A10B1_A10B2}
+
 
 ## Bet-hedging in stochastic rapidly changing environments {#sec:bethedging_stochastic}
 
