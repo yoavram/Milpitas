@@ -145,9 +145,9 @@ When $\eta=1$, inheritance is completely through the phenotype; the variance ter
 
 To proceed with this analysis we probably need a recurrence for the variance, $V[Y_t]$.
 
-# Non-phenotypic inheritance
+# "Standard" genetic inheritance
 
-We suggest a new form of inheritance that is independent of the phenotype. In terms of [@Rivoire2014], instead of having the inheritance operator _H_ accepting inputs from the genotype ($\gamma$) and the phenotype (_F_ line), we have _H_ accepting inputs from the genotype ($\gamma$) and introducing "noise" or variance ($\nu_H$). That is, we redefine the [@Eq:learning_rule] to be:
+We suggest another form of inheritance that is independent of the phenotype, or anything else besides the genotype. In terms of [@Rivoire2014], instead of having the inheritance operator _H_ accepting inputs from the genotype ($\gamma$) and the phenotype (_F_ line), we have _H_ accepting inputs from the genotype ($\gamma$) and introducing "noise" or variance ($\nu_H$). That is, we redefine the [@Eq:learning_rule] to be:
 
 $$
 \pi_i = \pi_k \cdot (1-\mu) + \mu \cdot B_i
@@ -165,7 +165,7 @@ which is positive for $\pi_k < \frac{1}{2}$ and negative for $\pi_k > \frac{1}{2
 
 ## Continuous recurrence
 
-We now derive the continuous recurrence for non-phenotypic inheritance.
+We now derive the continuous recurrence for genetic inheritance.
 
 $$
 \bar{\omega}_t \cdot  f_{t+1}(A) =
@@ -204,6 +204,67 @@ $$
 \bar{\omega}_t \cdot  E[Y_{t+1}] = \frac{1}{2}(\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}) E[Y_t] + \frac{N}{2}\omega_B^{\epsilon_t} = \frac{1}{2} \bar{\omega}_t
 $$
 so that the expected number of individuals with phenotype _A_ is $\frac{1}{2}$.
+
+# Environment-dependent inheritance
+
+We now focus on another form of inheritance, this one dependent on the environment and the genotype (but not the phenotype), or anything else besides the genotype. In terms of [@Rivoire2014], the inheritance operator _H_ accepts inputs from the genotype ($\gamma$) and the environment (_L_ line). That is, we redefine the [@Eq:learning_rule] to be:
+
+$$
+\pi_i = \pi_k \cdot (1-\zeta) + \zeta \cdot 1_{\epsilon_t=A}
+$$
+
+where $\pi_k$ is the parent trait value and $\epsilon_t \in \{A, B\}$, as defined above, is the environment at generation $t$.
+
+This inheritance process is also not a Martingale ($E[\pi_i-\pi_k|\pi_k] \ne 0$); given a parent $\pi_k$, the offspring expected trait value is:
+
+$$
+E[\pi_i - \pi_k | \pi_k] = \zeta \Big( E[\epsilon_t] - \pi_k \Big)
+$$
+
+which is only 0 if $\pi_k = E[\epsilon_t]$.
+
+## Continuous recurrence
+
+We now derive the continuous recurrence for environmental-dependent inheritance. Denote $P_A = 1_{\epsilon_t=A}$.
+
+$$
+\bar{\omega}_t \cdot  f_{t+1}(A) =
+\int_0^1{f_t(\pi) 
+    (\pi \omega_A^{\epsilon_t} + (1-\pi) \omega_B^{\epsilon_t}) 
+    \Big(\pi (1-\zeta) + \zeta \cdot P_A \Big)
+\; d\pi}
+$$
+
+Similar to our approach in deriving [@Eq:reorder_moments_recurrence] we get:
+
+$$
+\bar{\omega}_t \cdot  f_{t+1}(A) =
+    \Big( (1-\zeta) \omega_A^{\epsilon_t} + P_A \cdot \zeta (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t} \Big) E_t[\pi]
+    - (1-\zeta) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) E_t[\pi(1-\pi)]
+    + P_A \cdot \zeta \omega_B^{\epsilon_t}
+$$
+
+And in terms of $Y_t$ (as in [@Eq:phenotype_recurrence]), we can write:
+
+$$
+\bar{\omega}_t \cdot  E[Y_{t+1}] =
+    \Big( (1-\zeta) \omega_A^{\epsilon_t} + P_A \cdot \zeta (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t} \Big) E[Y_t]
+    - (1-\zeta) (\omega_A^{\epsilon_t} - \omega_B^{\epsilon_t}) V[Y_t]
+    + N \cdot P_A \cdot \zeta \omega_B^{\epsilon_t}
+$$
+
+When $\zeta=0$, inheritance is completely through the genotype and is faithful, similar to the case of $\eta=0$ and $\mu=0$, and we get
+$$
+E[Y_{t+1}] = \frac{\omega_A^{\epsilon_t}}{\bar{\omega}_t} E[Y_{t}] - \frac{\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t}}{\bar{\omega}_t} V[Y_{t}]
+$$
+where the first term is the effect of selection and the second term is the effect of drift.
+
+When $\zeta=1$, inheritance is completely through the environment; the variance term vanishes and selection drives the process (note that $\bar{\omega}_t=E[Y_t]/N \omega_A^{\epsilon_t} + (1-E[Y_t]/N)\omega_B^{\epsilon_t}$:
+$$
+E[Y_{t+1}] = N \cdot P_A \frac{(\omega_A^{\epsilon_t}-\omega_B^{\epsilon_t})E[Y_t]/N - \omega_B^{\epsilon_t}}{\bar{\omega}_t} = N \cdot P_A
+$$
+
+so that either all individuals are $A$ or all individuals are $B$, depending on $\epsilon_t$.
 
 # Results
 
