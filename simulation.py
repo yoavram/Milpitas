@@ -290,6 +290,7 @@ def parse_env(env, n):
     return ϵ
 
 def parse_π0(π0):
+    π0 = str(π0)
     try:
         if π0 == 'U':
             π0 = lambda N: np.random.uniform(0, 1, N)
