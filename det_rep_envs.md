@@ -84,7 +84,7 @@ $\blacksquare$
 ## $k \ne l$ 
 
 ### Proposition: $k=1$
-If $k=1$ and $n>(1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^{1+n}(0)<1$.
+If $n>(1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^{1+n}(0)<1$.
 
 ### Proof
 
