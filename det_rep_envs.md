@@ -84,7 +84,7 @@ $\blacksquare$
 ## $k \ne l$ 
 
 ### Proposition: $k=1$
-If $k=1$ and $n>(1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B(0)^n<1$.
+If $k=1$ and $n>(1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^{1+n}(0)<1$.
 
 ### Proof
 
@@ -103,7 +103,7 @@ $$
 and therefore
 
 \begin{multline*}
-f_A(0) f_B^n(0) = \\
+f_A(0) f_B^{1+n}(0) = \\
 \Big(1+\eta(1-\eta)\frac{(W-w)^2}{Ww}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n \le \\
 \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}}
 \end{multline*}
