@@ -20,9 +20,9 @@ f_A(0) =  1+\eta(\frac{W-w}{w}) \\
 f_B(0) =  1+\eta(\frac{w-W}{W})
 \end{eqnarray}
 
-Similarly, $f_B(x) = 1 - \eta + \eta \frac{w}{W}$, since in environment _B_, the fitness values flip, and phenotype _A_ has fitness $w$.
+since in environment _B_, the fitness values flip, and phenotype _A_ has fitness $w$.
 
-For _k_ generations with environment _A_ and _l_ generations with environment _B_, in any given order, starting with $x=x_0$, we can write:
+For _k_ generations in environment _A_, and _l_ generations with environment _B_, in any given order, starting with $x=x_0$, we can write:
 
 $$
 x_{k+l} = x_0 f_A^k(x_0) f_B^l(x_0) + o(x_0)
@@ -83,44 +83,66 @@ $\blacksquare$
 
 ## $k \ne l$ 
 
-### Proposition: $k=1$
-If $n>(1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^{1+n}(0)<1$.
+### Proposition for $k=1$
+If $l> 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0)<1$.
 
 ### Proof
 
-Assuming $W>w, 0 \le \eta \le 1$, we have $0 \le \frac{W-w}{W} \le 1$ and $0 \le \eta \le 1$ means that $-1 \le \eta \frac{w-W}{W} \le 0$. This allows us to use the the inequality:
+Set $n = l - 1$. Then,
+\begin{multline}
+n > (1-\eta)\frac{W-w}{w} \Leftrightarrow \\
+\eta n \frac{W-w}{W} > \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+1 - \eta n \frac{w-W}{W} > 1 + \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+\frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\
+\end{multline}
+
+Now, assuming $w<W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \eta \le 1$ we get $-1 \le \eta \frac{w-W}{W} \le 0$. This allows us to use the the inequality:
 
 $$
-(1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in N.
+(1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
 $$
 
 So we have: 
 
-$$
+\begin{equation}
 \Big(1+\eta \frac{w-W}{W}\Big)^n \le \frac{1}{1 - n \eta \frac{w-W}{W}},
+\end{equation}
+
+Taken together,
+
+\begin{multline*}
+f_A(0) f_B^{n+1}(0) = \\
+\Big(1+\eta\frac{W-w}{w}\Big)\Big(1+\eta\frac{w-W}{W}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n = \\
+\Big(1+\eta(1-\eta)\frac{(W-w)^2}{Ww}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n \le \\
+\frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\\blacksquare
+\end{multline*}
+
+### Proposition for general case
+
+If $l > k \Big( 1 + (1 - \eta) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$.
+
+### Proof
+
+First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\eta)\frac{W-w}{w}$.
+
+$$
+f_A^k(0) f_B^l(0) = \\
+f_A^k(0) f_B^{(n+1)k}(0) = \\
+(f_A(0) f_B^{n+1}(0))^k < 1
 $$
 
-and therefore
+where the inequality results from the previous proposition and $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
 
-\begin{multline*}
-f_A(0) f_B^{1+n}(0) = \\
-\Big(1+\eta(1-\eta)\frac{(W-w)^2}{Ww}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n \le \\
-\frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}}
-\end{multline*}
+Next, relax the assumption $\frac{l-k}{k} \in \mathbb{N}$; set $n = \lceil{\frac{l-k}{k}}\rceil > \frac{l-k}{k} > (1-\eta)\frac{W-w}{w}$, then
 
-Next:
+$$
+f_A^k(0) f_B^l(0) < \\
+f_A^k(0) f_B^{(n+1)k}(0) = \\
+(f_A(0) f_B^{n+1}(0))^k < 1
+$$
 
-\begin{multline*}
-n > (1-\eta)\frac{W-w}{w} \Leftrightarrow \\
--n < (1-\eta)\frac{w-W}{w} \Leftrightarrow \\
--n \eta \frac{W-w}{W} < \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
--n \eta \frac{w-W}{W} > \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-1 - n \eta \frac{w-W}{W} > 1 + \eta (1-\eta)\frac{(w-W)^2}{Ww} \Leftrightarrow \\
-\frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\
-\blacksquare
-\end{multline*}
-
-
+and again, the previous proposition provides the last inequality.
+$\blacksquare$
 
 
 
