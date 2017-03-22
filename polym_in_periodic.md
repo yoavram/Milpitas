@@ -39,17 +39,17 @@ If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not a stable equilibrium; by symmetry,
 
 Following are some cases for examining this approximation.
 
-## $W = w$
+# $W = w$
 
 In this case, there is no selection and evolution is neutral.
 Indeed, we get $f_i(x) \equiv 1$ (without an approximation).
 
-## $\eta = 0$
+# $\eta = 0$
 
 In this case inheritance does not depend on the phenotype; since there is nothing else that generates variance, evolution is neutral.
 Indeed, we get $f_i(x) \equiv 1$.
 
-## $\eta = 1$
+# $\eta = 1$
 
 In this case, after a single generation the model becomes a standard two-type genetic model with only selection playing a role.
 Indeed, we get $f_A(x) = \frac{W}{x W + (1-x) w}$ and $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
@@ -62,12 +62,12 @@ $$
 \end{cases}
 $$
 
-## $k=l$ 
+# $k=l$ 
 
-### Proposition
+## Proposition
 If $k=l, 0 < w < W, 0 < \eta < 1$, then $f_A^k(0) f_B^l(0) > 1$.
 
-### Proof
+## Proof
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
 
 To show the latter,
@@ -84,12 +84,12 @@ f_A(0) f_B(0) = \\
 which, under the proposition conditions, is _> 1_.
 $\blacksquare$
 
-## $k \ne l$ 
+# $k \ne l$ 
 
-### Proposition for $k=1$
+## Proposition for $k=1$
 If $l> 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0)<1$.
 
-### Proof
+## Proof
 
 Set $n = l - 1$. Then,
 \begin{multline}
@@ -120,11 +120,11 @@ f_A(0) f_B^{n+1}(0) = \\
 \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\\blacksquare
 \end{multline*}
 
-### Proposition for general case
+## Proposition for general case
 
 If $l > k \Big( 1 + (1 - \eta) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$.
 
-### Proof
+## Proof
 
 First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\eta)\frac{W-w}{w}$.
 
