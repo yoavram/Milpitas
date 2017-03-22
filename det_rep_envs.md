@@ -1,4 +1,5 @@
-# Deterministic repetitive environments
+% *Protected polymorphism*s in periodic environments
+% Mar 22, 2017, v.1.0
 
 Given the recurrence equation in environment _A_ ($\epsilon_t=A$):
 
@@ -34,7 +35,9 @@ $$
 \frac{x_{k+l}}{x_0} \approx f_A^k(0) f_B^l(0)
 $$
 
-Some cases for estimating this approximation follow.
+If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not a stable equilibrium; by symmetry, $x=1$ is not stable either, and we have a *protected polymorphism* somewhere at $0 < x < 1$. In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is stable and the *protected polymorphism* disappears.
+
+Following are some cases for examining this approximation.
 
 ## $W = w$
 
