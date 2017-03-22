@@ -99,7 +99,7 @@ n > (1-\eta)\frac{W-w}{w} \Leftrightarrow \\
 \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\
 \end{multline}
 
-Now, assuming $w<W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \eta \le 1$ we get $-1 \le \eta \frac{w-W}{W} \le 0$. This allows us to use the the inequality:
+Now, assuming $w<W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \eta \le 1$ we get $-1 \le \eta \frac{w-W}{W} \le 0$. This allows us to use this Bernoulli inequality (proof with induction) :
 
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
