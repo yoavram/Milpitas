@@ -147,5 +147,17 @@ $$
 and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
+## Proposition
+
+If $l < k \Big( 1 + \frac{(1-\eta) \frac{W-w}{w}}{1 + \eta (1-\eta) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$.
+
+## Proof
+
+Similar to previous proposition, but using a different Bernoulli inequality:
+
+$$
+(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R}\\(0,1).
+$$
+$\blacksquare$
 
 
