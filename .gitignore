@@ -91,5 +91,9 @@ ENV/
 # Mac
 .DS_Store
 
-# output folder
+# project organization
 output/
+data/
+archive/
+figures/
+

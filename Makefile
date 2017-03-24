@@ -4,7 +4,7 @@ pdf=ms/ms.pdf
 md=ms/ms.md
 csl=ms/evolution.csl
 
-diagram_dot = model_diagram.dot
+diagram_dot = src/model_diagram.dot
 diagram_pdf = figures/model_diagram.pdf
 
 list:
@@ -12,7 +12,7 @@ list:
 no_targets__:
 
 $(ms_bib): $(main_bib) $(md)
-	python ms/getbib.py $(main_bib) $(md) $@
+	python src/getbib.py $(main_bib) $(md) $@
 
 $(pdf): $(md) $(ms_bib)
 	pandoc -r markdown+simple_tables+table_captions+yaml_metadata_block -s -S $< -o $@ --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --latex-engine=xelatex --number-sections
@@ -20,6 +20,10 @@ $(pdf): $(md) $(ms_bib)
 
 $(diagram_pdf): $(diagram_dot)
 	dot graph.dot -Tpdf -Kdot -ofigures/model_diagram.pdf
+
+model_diagram: $(diagram_pdf)
+
+bib: $(ms_bib)
 
 build: $(pdf)
 

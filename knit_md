@@ -1,2 +1,0 @@
-pandoc --standalone $1.md -o $1.pdf --filter pandoc-crossref --filter pandoc-citeproc --bibliography=/Users/yoavram/Documents/library.bib --csl pandoc/evolution.csl --latex-engine=xelatex --number-sections
-open $1.pdf
