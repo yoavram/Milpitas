@@ -10,4 +10,4 @@
 
 module load gcc/gcc620
 
-~/miniconda3/envs/Xue2016/bin/python simulation.py --Ne 100000 --n 500 --η1 ${eta} --ω0 2.0 --ω1 ${omega1}  --π0 0.7  --env A
+~/miniconda3/envs/Milpitas/bin/python src/simulation.py --Ne 100000 --n 500 --η1 ${eta} --ω0 2.0 --ω1 ${omega1}  --π0 0.7  --env A

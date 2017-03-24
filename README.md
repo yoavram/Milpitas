@@ -1,6 +1,3 @@
-# Xue2016
-Reproducing results of Xue &amp; Leiber, PNAS 2016
-
 ## Setting up
 
 Download and install [Anaconda](https://www.continuum.io/downloads) or [Miniconda](http://conda.pydata.org/miniconda.html) to get Python **3.5** and the conda package manager.
@@ -10,35 +7,34 @@ Run these commands to update conda, create a virtual environment and install req
 ```sh
 conda config --add channels conda-forge
 conda update conda pip -y
-conda install python=3.5 numpy matplotlib seaborn click -y
-pip install ultrachronic
+conda create env -n Milpitas -f environment.yml
 ```
-## Using the notebook
+## Using the notebooks
 
-The notebook allows you to reproduce the figure from Xue & Leibler 2016 and to run single simulations and plot their results.
+The notebooks allow you to reproduce the figures and to run single simulations and plot their results.
 
-To start the notebook, call `jupyter notebook` inside the repository folder.
+To start the notebooks, call `jupyter notebook` inside the repository folder, and then browse over to the `notebooks` folder.
 
-## Running a simulation
+## Running simulations
 
 To get help for the simulation:
 
 ```sh
-python simulation.py --help
+python src/simulation.py --help
 ```
 
-to run it:
+to run them:
 
 ```sh
-python simulation.py --Ne 100000 --n 500 --η1 0.1 --ω0 2.0 --ω1 0.2  --π0 0.5  --env A
+python src/simulation.py --Ne 100000 --n 500 --η1 0.1 --ω0 2.0 --ω1 0.2  --π0 0.5  --env A
 ```
 
-To simulate a competition between two modifier alleles, specify `--η2 0.2` (with `η2>η1`).s
+To simulate a competition between two modifier alleles, specify `--η2 0.2` (with `η2>η1`).
 
 To run simulations on SGE cluster, call
 
 ```sh
-qsub -t 1-1000 -v env=C simulation.sge'
+qsub -t 1-1000 -v env=C cluster/simulation.sge'
 ```
 
 replacing `1000` with the required number of replicate simulations, and `C` with the environment name (`A`, `B` and `C`).
