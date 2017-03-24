@@ -14,7 +14,7 @@ no_targets__:
 $(ms_bib): $(main_bib) $(md)
 	python src/getbib.py $(main_bib) $(md) $@
 
-$(pdf): $(md) $(ms_bib)
+$(pdf): $(md) $(ms_bib) $(diagram_pdf)
 	pandoc -r markdown+simple_tables+table_captions+yaml_metadata_block -s -S $< -o $@ --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --latex-engine=xelatex --number-sections
 	@open $(pdf)
 
@@ -32,5 +32,3 @@ edit: $(md)
 
 read: $(pdf)
 	@open $(pdf)
-
-all: $(pdf) $(diagram_pdf)
