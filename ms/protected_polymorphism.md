@@ -11,7 +11,7 @@ where:
 
 \begin{eqnarray*}
 f_A(x) = \frac{x (1-\eta)(W - w) + \eta W + (1-\eta) w}{x (W - w) + w} \\
-f_B(x) = \frac{x (1-\eta)(w - W) + \eta w + (1-\eta) w}{x (w - W) + W} \\
+f_B(x) = \frac{x (1-\eta)(w - W) + \eta w + (1-\eta) W}{x (w - W) + W} \\
 \end{eqnarray*}
 
 We can use a linear approximation around $x=0$ of the form $f_A(x) = f_A(0) + o(x)$ and $f_B(x) = f_B(0) + o(x)$, where:
