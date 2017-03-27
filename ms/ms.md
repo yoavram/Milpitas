@@ -94,7 +94,11 @@ $$ {#eq:recurrence0}
 
 # Results {-}
 
-## Periodic environments
+## Constant environment
+
+TODO
+
+## Periodic environment
 
 We concentrate on periodic environments in which both environments occur exactly the same number of generations in each "period". A simple example is _A1B1=ABABABAB..._, in which the environment switches every generation every generation from _A_ to _B_ and vice versa, or _A2B1=AABAABAAB..._ in which the every two _A_s are followed by a single _B_. In general, _AkBl_ denotes an environmental regime in which the period is of length _k+l_ and composed of exactly _k_ _A_s and _l_ _B_s.
 
@@ -102,7 +106,7 @@ We simulated evolution in such environments, and @Fig:env_period_overview shows 
 
 ![Distribution of $\pi$ in populations evolving in periodic environments. **(A)** A1B1, **(B)** A2B1, **(C)** A40B40. Parameters: _N_=100,000, $\eta$=0.01, $W$=1, $w$=0.1.](figures/env_period_overview.pdf){#fig:env_period_overview}
 
-## _A1B1_ regime
+### _A1B1_ regime
 
 When the environment changes every generation, we can write the following recursion, which sets $\omega_A=W, \omega_B=w$ in [@Eq:recurrence0] to determine $x'$ and and then sets $\omega_A=w, \omega_B=W$ to determine $x''$:
 
@@ -150,7 +154,7 @@ $$ {#eq:recurrenceA1B1_solution_tildex}
 
 ![Population mean $\pi$ in environment regime _A1B1_. _N_=100,000.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
-## _A2B1_ regime
+### _A2B1_ regime
 
 In the _A2B1_ regime (every two generations in the _A_ environment are followed by a generation in environment _B_), an analytic approximation is not possible, as solving $x'''-x=0$ requires solving a polynomial of degree 6. However, iterating the relevant recurrence equation:
 $$\begin{aligned}
@@ -162,7 +166,7 @@ provides similar results: the equilibrium value is in good fit with Wright-Fishe
 
 ![Population mean $\pi$ in environment regime _A2B1_. _N_=100,000.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
-## Protected polymorphisms in _AkBl_ regime
+### Protected polymorphisms in _AkBl_ regime
 
 What can we say about the more general case of _k_ generations in environment _A_ and _l_ generations in _B_? We examine the existence of a _protected polymorphism_ [@Prout1968], which means that none of the phenotypes become extinct even when initially rare. Environments _A_ and _B_ select for $\pi=1$ and $\pi=0$, respectively, and these are absorbing states: if all individuals are, for example, $\pi=0$, then they are all of phenotype $B$ and all offspring will be $\pi=0$, too. Mathematically, we examine the stability of $x=0$ and $x=1$; if both are unstable, then a protected polymorphism occurs. Intuitively, this will happen if neither environment occurs enough to fix it's preferred state. 
 
@@ -192,22 +196,22 @@ so that if we start very close to zero ($x_0 \sim 0$), the multiplicative change
 
 If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (due to $l \ge k$), then we have a *protected polymorphism* somewhere ($0 < x(t) < 1$ for any generation _t_). In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is stable and the *protected polymorphism* disappears.
 
-Following are some cases for examining the protected polymorphism.
+Following we examine the protected polymorphism in several special and general cases.
 
-### $W = w$
+#### $W = w$
 
-In this case, there is no selection and evolution is neutral.
-Indeed, we get $f_A(x) = f_B(x) = \equiv 1$ (without an approximation).
+In this case, fitness in both environments is equivalent, there is no selection, and therefore evolution is neutral.
+Indeed, we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
 
-### $\eta = 0$
+#### $\eta = 0$
 
-In this case inheritance does not depend on the phenotype; since there is nothing else that generates variance, evolution is neutral.
+In this case, there is no feedback between phenotype and inheritance, and only drift generates genetic variance, and evolution is neutral.
 Indeed, we get $f_A(x) = f_B(x) = \equiv 1$.
 
-### $\eta = 1$
+#### $\eta = 1$
 
-In this case, after a single generation the model becomes a standard two-type genetic model with only selection playing a role.
-Indeed, we get $f_A(x) = \frac{W}{x W + (1-x) w}$ and $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
+In this case, development is not stochastic, and after one generation the model becomes a standard two-type genetic model. Only genetic drift generates genetic variance, but natural selection does play a role.
+Indeed, we get $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
 
 $$
 \begin{cases}
@@ -217,10 +221,8 @@ $$
 \end{cases}
 $$
 
-### $k=l$ 
-
-#### Proposition
-If $k=l, 0 < w < W, 0 < \eta < 1$, then $f_A^k(0) f_B^l(0) > 1$.
+#### Proposition for $k=l$
+If $k=l, W > w > 0, 1 > \eta > 0$, then $f_A^k(0) f_B^l(0) > 1$.
 
 #### Proof
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
@@ -229,45 +231,44 @@ To show the latter,
 
 \begin{multline*}
 f_A(0) f_B(0) = \\
-(1 - \eta + \eta \frac{W}{w}) \cdot (1 - \eta + \eta \frac{w}{W}) = \\
-(1-\eta)^2 + \eta^2 + \eta(1-\eta) \cdot \frac{W}{w} \cdot \frac{w}{W} = \\
-1 - 2\eta(1-\eta) + \eta(1-\eta) \frac{{W}^2 + {w}^2}{W w} = \\
-1 + \eta (1-\eta)\frac{{W}^2 - 2 W w + {w}^2}{W w} = \\
+(1 + \eta \frac{W-w}{w}) \cdot (1 + \eta \frac{w-W}{W}) = \\
+(1 - \eta + \eta\frac{W}{w}) \cdot (1 - \eta + \eta\frac{w}{W}) = \\
+(1-\eta)^2 +\eta^2 +\eta(1-\eta)(\frac{W}{w}+\frac{w}{W}) = \\
+1 - 2\eta(1-\eta) +\eta(1-\eta)(\frac{W^2+w^2}{Ww}) = \\
+1 + \eta (1-\eta)\frac{W^2 - 2 W w + w^2}{Ww} = \\
 1 + \eta (1-\eta)\frac{(W - w)^2}{W w}
 \end{multline*}
 
 which, under the proposition conditions, is _> 1_.
 $\blacksquare$
 
-### $k \ne l$ 
-
-#### Proposition for $k=1$
-If $l> 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0)<1$.
+#### Proposition for $l>k=1$
+If $l > 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$.
 
 #### Proof
 
 Set $n = l - 1$. Then,
-\begin{multline}
+
+\begin{multline}\label{eq:l_g_k_eq_1_A}
 n > (1-\eta)\frac{W-w}{w} \Leftrightarrow \\
-\eta n \frac{W-w}{W} > \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-1 - \eta n \frac{w-W}{W} > 1 + \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-\frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\
+ n \eta \frac{W-w}{W}  > \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+1 - n \eta \frac{w-W}{W} > 1 + \eta (1-\eta)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+1 >  \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} \\
 \end{multline}
 
-Now, assuming $w<W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \eta \le 1$ we get $-1 \le \eta \frac{w-W}{W} \le 0$. This allows us to use this Bernoulli inequality (proof with induction) :
+Now, $W > w \Rightarrow 1 \ge \frac{W-w}{W} \ge 0$, and together with $1 \ge \eta \ge 0$ we get $0 \ge \eta \frac{w-W}{W} \ge -1$. These conditions allow us to use the following Bernoulli inequality (proof with induction):
 
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
+$$ {#eq:bernoulli1}
+
+From the Bernoulli inequality we have: 
+
 $$
+\Big(1+\eta \frac{w-W}{W}\Big)^n \le \frac{1}{1 - n \eta \frac{w-W}{W}}
+$$ {#eq:l_g_k_eq_1_B}
 
-So we have: 
-
-\begin{equation}
-\Big(1+\eta \frac{w-W}{W}\Big)^n \le \frac{1}{1 - n \eta \frac{w-W}{W}},
-\end{equation}
-
-Taken together,
-
+Taken together, @Eq:l_g_k_eq_1_A and @Eq:l_g_k_eq_1_B imply that:
 \begin{multline*}
 f_A(0) f_B^{n+1}(0) = \\
 \Big(1+\eta\frac{W-w}{w}\Big)\Big(1+\eta\frac{w-W}{W}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n = \\
@@ -275,21 +276,21 @@ f_A(0) f_B^{n+1}(0) = \\
 \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\\blacksquare
 \end{multline*}
 
-#### Proposition for general case
+##### Proposition for general case: $l > k \ge 1$
 
 If $l > k \Big( 1 + (1 - \eta) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$.
 
-#### Proof
+##### Proof
 
 First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\eta)\frac{W-w}{w}$.
 
+Now, using the previous proposition,
 $$
 f_A^k(0) f_B^l(0) = \\
 f_A^k(0) f_B^{(n+1)k}(0) = \\
 (f_A(0) f_B^{n+1}(0))^k < 1
 $$
-
-where the inequality results from the previous proposition and $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
+because $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
 
 Next, relax the assumption $\frac{l-k}{k} \in \mathbb{N}$; set $n = \lceil{\frac{l-k}{k}}\rceil > \frac{l-k}{k} > (1-\eta)\frac{W-w}{w}$, then
 
@@ -302,18 +303,25 @@ $$
 and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
-#### Proposition
+##### Proposition
 
 If $l < k \Big( 1 + \frac{(1-\eta) \frac{W-w}{w}}{1 + \eta (1-\eta) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$.
 
-#### Proof
+##### Proof
 
 Similar to previous proposition, but using a different Bernoulli inequality:
 
+$$\begin{aligned}
+(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R}\(0,1).\\
+\blacksquare
+\end{aligned}
 $$
-(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R}\\(0,1).
-\; \blacksquare
-$$
+
+### Random environments
+
+TODO: 
+- local stochastic stability
+- see Levikson & Karlin, 1970's; Liberman & Karlin, 1970's
 
 # Supporting figures {label="S"}
 
