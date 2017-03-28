@@ -292,6 +292,7 @@ def parse_env(env, n):
         k = int(m.groupdict()['k'])
         l = int(m.groupdict()['l'])
         ϵ = np.array(([0] * k + [1] * l) * (n // (k+l) + 1))[:n]
+    assert len(ϵ) == n
     return ϵ
 
 def parse_π0(π0):
@@ -344,7 +345,7 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
 
 
 @click.command()
-@click.version_option(version=__version__, prog_name=__name__)
+@click.version_option(version=__version__, prog_name=__file__)
 @click.option('--Ne', default=1000, help="Population size")
 @click.option('--n', default=10, help="Number of generations")
 @click.option('--η1', default=0.0, help="Learning rate")
