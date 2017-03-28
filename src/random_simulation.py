@@ -15,11 +15,11 @@ from simulation import _main as simulation_main
 
 @click.command()
 @click.version_option(version=__version__, prog_name=prog_name)
-@click.option('--Ne', default=None, help="Population size")
+@click.option('--Ne', default=None, type=int, help="Population size")
 @click.option('--n', default=500, help="Number of generations")
-@click.option('--η', default=None, help="Learning rate")
+@click.option('--η', default=None, type=float, help="Learning rate")
 @click.option('--ω0', default=1.0, help="Fitness of phenotype 0 in environment 0")
-@click.option('--ω1', default=None, help="Fitness of phenotype 0 in environment 1")
+@click.option('--ω1', default=None, type=float, help="Fitness of phenotype 0 in environment 1")
 @click.option('--π0', default='0.5', type=str, help="Initial density of phenotype 0; one of Nx, U, Cx, x where 0<x<1, N is normal (default), U is uniform, C is constant.")
 @click.option('--env', default='A', type=str, 
     help="Type of environment: A, B, C correspond to Fig. 2; AkBl is a deterministic periodic environment with k As followed by l Bs")
