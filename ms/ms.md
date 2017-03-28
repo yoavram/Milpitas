@@ -312,10 +312,9 @@ If $l < k \Big( 1 + \frac{(1-\eta) \frac{W-w}{w}}{1 + \eta (1-\eta) \frac{(W-w)^
 Similar to previous proposition, but using a different Bernoulli inequality:
 
 $$\begin{aligned}
-(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R}\(0,1).\\
+(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R} \smallsetminus (0,1). \\
 \blacksquare
-\end{aligned}
-$$
+\end{aligned}$$
 
 ### Random environments
 
