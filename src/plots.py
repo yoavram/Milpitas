@@ -9,6 +9,7 @@ Created on Sun Jan 08 10:43:42 2017
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from simulation import simulation, parse_env, parse_π0
 
 
 def plot_π(π, ϵ=None, bands=8, label=None, ax=None):    
@@ -142,3 +143,41 @@ def plot_π_deterministic(π, f, ϵ, N, only_mean=False, color='y', label=None, 
     ax.set_clip_on(False)
     sns.despine()
     return ax
+
+def plot_simulation_k_l(π0, env, period, N, n, η, ω0, ω1, 
+                        nbins=101, ax=None, save=False, title=True):
+    if ax is None:
+        fig, ax = plt.subplots()
+    else:
+        fig = ax.figure
+    ϵ = parse_env(env, n)
+    π = simulation(N=N, n=n, η=η, μ=0, ω0=ω0, ω1=ω1, 
+                   ϵ=ϵ, π0=parse_π0(π0))
+    π = π[::period]
+    ϵ = ϵ[::period]
+
+    bins = np.linspace(0, 1, nbins)
+    freq = np.array([
+        np.histogram(π[t,:], bins=bins)[0] 
+        for t in range(n//period)
+    ])
+    aspect = freq.shape[0]/freq.shape[1]
+    im = ax.imshow(freq.T, aspect=aspect, cmap='viridis', 
+                   origin=(0,0), vmin=0, vmax=N//(nbins//10))
+    if title:
+        ax.set_title('{}, π0={}\nη={}, ω0={}, ω1={}'.format(env, π0, η, ω0, ω1))
+    ax.set(
+        ylabel='$\pi$',
+        yticks=np.linspace(0, nbins, 6, dtype=int),
+        yticklabels=map(
+            lambda x: round(x, 2),
+            bins[np.linspace(0, nbins, 6, dtype=int)[:-1]].tolist() + [1]
+        ),
+        xlabel='Periods (τ={:d})'.format(period)
+    )
+    sns.despine()
+    if save: 
+        fig.savefig('../figures/{}_π0_{}_η_{}_ω0_{}_ω1_{}.png'.format(
+            env, π0, η, ω0, ω1
+        ))
+    return π, freq, ax
