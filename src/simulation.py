@@ -43,6 +43,11 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         function that given N, returns an initial value for π.
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
+
+    Returns
+    -------
+    π : np.ndarray
+        π[t, i] is the probability for phenotype 0 in individual i at time t
     """
     ω = np.array(
         [
@@ -53,7 +58,7 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     
     if ϵ is None:
         ϵ = np.random.randint(0, 2, n)
-    # π[t, i] is the probability for phenotype 0 at individual i at time t
+    # π[t, i] is the probability for phenotype 0 atin individual i at time t
     π = np.zeros((n, N), dtype=float)
     π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
