@@ -32,7 +32,7 @@ SBATCH --error=output/polymorphism.%j.out
 # sherlock automatically allocates 8 Gigs of RAM/CPU, if you ask for 8 CPUs you will need 32 Gigs of RAM, so either 
 # leave --mem commented out or request >= to the RAM needed for your CPU request.
  
-#SBATCH --mem=2000
+SBATCH --mem=4000
 #################
 
 # Have SLURM send you an email when the job ends or fails, careful, the email could end up in your clutter folder
@@ -48,4 +48,4 @@ export PATH=/home/yoavram/miniconda3/bin:$PATH
 # You can use srun if your job is parallel
 which python
 python --version
-source cluster/polymorphism.sh 
+python src/random_simulation.py --Ne 100000 --ω0 1 --π0 C0.01 --output_folder polymorphism
