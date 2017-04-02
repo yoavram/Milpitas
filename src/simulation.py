@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-TODO
-
 Created on Thu Nov 17 16:24:45 2016
 
 @author: yoav@yoavram.com
@@ -21,10 +19,11 @@ import numpy as np
 import pandas as pd
 from ultrachronic import repeat
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 env_pattern = re.compile("A(?P<k>\d+)B(?P<l>\d+)")
 
-def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
+
+def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None, light=False):
     """Run a single simulation.
     
     Parameters
@@ -43,6 +42,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         function that given N, returns an initial value for π.
     ϵ : numpy.ndarray
         ϵ[t] is the environment at time t
+    light : bool
+        if True, simulation is memory-light, returning only π of last generation
 
     Returns
     -------
@@ -59,17 +60,26 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
     if ϵ is None:
         ϵ = np.random.randint(0, 2, n)
     # π[t, i] is the probability for phenotype 0 atin individual i at time t
-    π = np.zeros((n, N), dtype=float)
+    if light:
+        π = np.zeros((2, N), dtype=float)
+    else:
+        π = np.zeros((n, N), dtype=float)
     π[0, :] = π0(N)
     π[0, π[0, :] < 0] = 0
     π[0, π[0, :] > 1] = 1
+    π[1, :] = π[0, :] # for light simulations
 
     for t in range(n - 1):
+        ϵ_ = ϵ[t]
+        t_ = t + 1
+        if light:
+            t = t % 2
+            t_ = t_ % 2
         # phenotype of each individual
         φ = np.zeros(N, dtype=int)
         φ[np.random.random(N) > π[t, :]] = 1
         # fitness of each invidividual in current environment
-        ω_t = ω[ϵ[t], φ]
+        ω_t = ω[ϵ_, φ]
         assert (ω_t > 0).any(), "Population extinct, ω_t=0"
         ω_t = ω_t / ω_t.sum()
         # selection & reproduction; idx is the indexes of reproducing individuals
@@ -80,9 +90,11 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None):
         π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
-        π[t + 1, :] = π_
-    return π
-
+        π[t_, :] = π_
+    if light:
+        return π_
+    else:
+        return π
 
 
 def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None):
@@ -165,11 +177,13 @@ def simulation_modifiers(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ=0, ϵ=None)
 
     return π, η_bar, μ_bar
 
+
 def write_json(output_folder, filename, data):
     filename = os.path.join(output_folder, '{}_{}.json'.format('params', filename))
     click.echo("Writing parameters to {}".format(filename))
     with open(filename, 'wt') as f:
         json.dump(data, f)
+
 
 def write_csv_gz(output_folder, filename, prefix, data):
     filename = os.path.join(output_folder, '{}_{}.csv.gz'.format(prefix, filename))
@@ -177,15 +191,18 @@ def write_csv_gz(output_folder, filename, prefix, data):
     with gzip.open(filename, 'w') as f:
         np.savetxt(f, data, delimiter=', ')
 
+
 def read_json(output_folder, filename):
     filename = os.path.join(output_folder, '{}_{}.json'.format('params', filename))
     with open(filename, 'r') as f:
         return json.load(f)
 
+
 def read_csv_gz(output_folder, filename, prefix):
     filename = os.path.join(output_folder, '{}_{}.csv.gz'.format(prefix, filename))
     with gzip.open(filename, 'r') as f:
         return np.loadtxt(f, delimiter=', ', dtype=float)
+
 
 def read_output_folder(output_folder):
     dfs = []
@@ -201,6 +218,7 @@ def read_output_folder(output_folder):
         ϵ = ϵ[:len(t)]
         dfs.append(pd.DataFrame(dict(ID=filename, t=t, π=π, ϵ=ϵ, η=η, μ=μ, **params)))
     return pd.concat(dfs)
+
 
 def load_simulations(folder, load_η, load_μ):
     dfs = []
@@ -227,6 +245,7 @@ def load_simulations(folder, load_η, load_μ):
             data['μ'] = μ
         dfs.append(pd.DataFrame(data))
     return pd.concat(dfs)
+
 
 def deterministic(N, n, η, μ, ωA, ωB, π0, ϵ=None):
     if μ > 0:
@@ -270,6 +289,7 @@ def deterministic(N, n, η, μ, ωA, ωB, π0, ϵ=None):
 def uniform(n):
     return [1/(n-1) * x for x in range(n)], [1/n for x in range(n)]
 
+
 def parse_env(env, n):
     if env == 'A':
         ϵ = np.random.choice(2, n, True, [0.7, 0.3])
@@ -295,6 +315,7 @@ def parse_env(env, n):
     assert len(ϵ) == n
     return ϵ
 
+
 def parse_π0(π0):
     π0 = str(π0)
     try:
@@ -314,8 +335,9 @@ def parse_π0(π0):
         raise ValueError("Unknown value for π0: {}".format(π0))
     return π0
 
-def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
-    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env)
+
+def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder, light):
+    params = dict(N=N, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env, light=light)
     now = datetime.datetime.now()
     click.echo("Simulation started: {}".format(now, params))
 
@@ -323,8 +345,10 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
     π0 = parse_π0(π0)
 
     if η2 is None and μ2 is None:
-        π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ)
+        π = simulation(N, n, η1, μ1, ω0, ω1, π0, ϵ, light=light)
     else:
+        if light:
+            raise NotImplementedError('light simulation not implemented for modifiers competition')
         if μ2 is None:
             μ2 = μ1
         if η2 is None:
@@ -336,7 +360,10 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
         os.mkdir(output_folder)
     
     write_json(output_folder, filename, params)
-    write_csv_gz(output_folder, filename, 'π', π.mean(axis=1))
+    if light:
+        write_csv_gz(output_folder, filename, 'π', π)
+    else:
+        write_csv_gz(output_folder, filename, 'π', π.mean(axis=1))
     write_csv_gz(output_folder, filename, 'ϵ', ϵ)    
     if η2 is not None and η2 != η1:
         write_csv_gz(output_folder, filename, 'η', η_bar)
@@ -359,10 +386,11 @@ def _main(N, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder):
 @click.option('--env', default='A', type=str, 
     help="Type of environment: A, B, C correspond to Fig. 2; AkBl is a deterministic periodic environment with k As followed by l Bs")
 @click.option('--output_folder', default='output', type=click.Path(), help="Output folder to which results will be written, defaults to 'output'")
+@click.option('--light', default=False, is_flag=True, help="Follow only last generation to save memory")
 @click.option('--reps', default=1, type=click.IntRange(1, None, clamp=False), help="Number of simulations to run")
 @click.option('--cpus', default=1, help="Number of CPUs to use; if non-positive, will use all available CPUs")
-def main(ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder, reps=1, cpus=1):
-    repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env, output_folder=output_folder)
+def main(ne, n, η1, η2, μ1, μ2, ω0, ω1, π0, κ, env, output_folder, light, reps=1, cpus=1):
+    repeat(_main, reps, cpus, N=ne, n=n, η1=η1, η2=η2, μ1=μ1, μ2=μ2, ω0=ω0, ω1=ω1, π0=π0, κ=κ, env=env, output_folder=output_folder, light=light)
 
 
 if __name__ == '__main__':
