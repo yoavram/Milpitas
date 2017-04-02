@@ -25,9 +25,10 @@ def max_l_for_no_fixation(k, η, W, w):
 @click.option('--ω0', default=1.0, help="Fitness of phenotype 0 in environment 0")
 @click.option('--π0', default='0.5', type=str,
               help="Initial density of phenotype 0; one of Nx, U, Cx, x where 0<x<1, N is normal (default), U is uniform, C is constant.")
+@click.option('--light', default=False, is_flag=True, help="Follow only last generation to save memory")
 @click.option('--output_folder', default='output', type=click.Path(),
               help="Output folder to which results will be written, defaults to 'output'")
-def main(ne, ω0, π0, output_folder):
+def main(ne, ω0, π0, output_folder, light):
     W = ω0
     N = ne
     η = round(10 ** np.random.uniform(-3, -1), 4)
@@ -44,10 +45,10 @@ def main(ne, ω0, π0, output_folder):
     Ls = map(int, Ls)
 
     for l in Ls:
-        n = min(5000, int(100 * (k + l)))
+        n = min(1000000, int(500 * (k + l)))
         env = 'A{:d}B{:d}'.format(k, l)
         print('env={}, n={}'.format(env, n))
-        _main(N, n, η, None, 0, None, W, w, π0, 0, env, output_folder)
+        _main(N, n, η, None, 0, None, W, w, π0, 0, env, output_folder, light)
 
 
 if __name__ == '__main__':
