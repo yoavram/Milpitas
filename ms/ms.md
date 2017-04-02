@@ -4,7 +4,7 @@ author:
 - Yoav Ram^[Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com]
 - Uri Liberman^[School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il]
 - Marcus W. Feldman^[Department of Biology, Stanford University, Stanford, CA 94305-5020, mfeldman@stanford.edu; Corresponding author]
-date: March 31, 2017 | v3.0
+date: April 2, 2017 | v3.1
 year: 2017
 abstract: |
     TODO
