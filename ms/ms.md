@@ -80,7 +80,7 @@ Assuming an "infinite" population undergoing exponential growth, this depends on
 
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x
-$$
+$$ {#eq:recurrence}
 
 Where $\omega_A$ and $\omega_B$ are the fitness of phenotypes _A_ and _B_ in the current generation (depending on $\epsilon_t$).
 
@@ -96,7 +96,72 @@ $$ {#eq:recurrence0}
 
 ## Constant environment
 
-TODO
+We start with a constant environment $\epsilon_t=A \; \forall t$, such that $\omega_A = W > w = \omega_B$. 
+
+### Proposition for $\eta=0$
+
+If $\eta = 0$ then any $x \in [0,1]$ solves $x'=x$.
+
+### Proof
+
+Set $x'=x, \eta=0$ in @Eq:recurrence0:
+$$
+x = x \frac{x (\omega_A - \omega_B) + \omega_B}{x (\omega_A - \omega_B) + \omega_B}
+$$
+
+First, $x=0$ solves this equality. Otherwise, for $x>0$:
+$$
+\Leftrightarrow x (\omega_A - \omega_B) + \omega_B = x (\omega_A - \omega_B) + \omega_B
+$$
+which is an identity $\blacksquare$.
+
+### Proposition for $W=w$
+
+If $W = w$ then any $x \in [0,1]$ solves $x'=x$.
+
+### Proof
+
+Set $W = w > 0, x' = x \ne 0$ in @Eq:recurrence0:
+
+\begin{multline*}
+x =  x {\eta W + (1-\eta)W}{W} \Leftrightarrow \\
+1 =  1 {\eta + (1-\eta)}{1} \Leftrightarrow \\
+1 =  1 \\
+\blacksquare
+\end{multline*}
+
+### Proposition for general case
+
+If $\eta > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the only solution for $x'=x$.
+
+### Proof
+
+First, we check that $x^*=1$ solves $x'=x$. Set $x=1$ in @Eq:recurrence0:
+
+\begin{multline*}
+x' = 
+\frac{1-\eta)(\omega_A-\omega_B)+\eta \omega_A+(1-\eta)\omega_B}{\omega_A} = \\
+\frac{\omega_A}{\omega_A} = 1
+\end{multline*}
+
+Next, we check that $x=0$ doesn't solve $x'=x$ by setting $x=0$ in @Eq:recurrence0:
+$$
+x' = \frac{\eta \omega_A + (1-\eta) \omega_B}{\omega_B} > 0
+$$
+since both the denominator and the numerator are positive.
+
+Next, we check that any $0 < x < 1$ doesn't solve $x'=x$. Set $x'=x$ in @Eq:recurrence and substituting $\bar{\omega} = x \omega_A + (1-x) \omega_B$:
+
+\begin{multline*}
+x = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x \Leftrightarrow \\
+\bar{\omega} = \omega_A \cdot ((1-\eta)x+\eta) + (1-x) \cdot \omega_B \cdot (1-\eta) \Leftrightarrow \\
+x \omega_A + (1-x) \omega_B = (1-\eta) x \omega_A + \eta \omega_A +  (1-\eta) (1-x) \omega_B \Leftrightarrow \\
+\eta (x \omega_A + (1-x) \omega_B) = \eta \omega_A \Leftrightarrow \\
+x \omega_A + (1-x) \omega_B =  \omega_A \Leftrightarrow \\
+(1-x) \omega_A = (1-x) \omega_B \Leftrightarrow \\
+x = 1 \\
+\blacksquare
+\end{multline*}
 
 ## Periodic environment
 
@@ -269,6 +334,7 @@ $$
 $$ {#eq:l_g_k_eq_1_B}
 
 Taken together, @Eq:l_g_k_eq_1_A and @Eq:l_g_k_eq_1_B imply that:
+
 \begin{multline*}
 f_A(0) f_B^{n+1}(0) = \\
 \Big(1+\eta\frac{W-w}{w}\Big)\Big(1+\eta\frac{w-W}{W}\Big)\Big(1+\eta\frac{w-W}{W}\Big)^n = \\
