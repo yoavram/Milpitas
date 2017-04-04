@@ -95,13 +95,14 @@ $$ {#eq:recurrence0}
 
 In addition to the recurrence equation approximation, we develop a diffusion equation approximation [@Otto2007, ch. 15], which takes into account the variance due to the development process. 
 
-Specifically, we derive the mean and variance of $x'-x$:
+Specifically, we derive the mean of $x'-x$:
 
 $$
-\begin{aligned}
-\mu = \eta x (1-x) \frac{\omega_A - \omega_B}{\bar{\omega}} \\
-\sigma^2 = \eta^2 x (1-x) \Big( \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big)
-\end{aligned}
+\mu(x) = \eta x (1-x) \frac{\omega_A - \omega_B}{\bar{\omega}}
+$$
+and the mean of $(x'-x)^2$:
+$$
+\sigma^2(x) = \eta^2 x (1-x) \Big( \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big)
 $$
 
 and we use these quantities to write the diffusion equation (or the _forward Kolmogorov equation_):
@@ -143,8 +144,8 @@ If $W = w$ then any $x \in [0,1]$ solves $x'=x$.
 Set $W = w > 0, x' = x \ne 0$ in @Eq:recurrence0:
 
 \begin{multline*}
-x =  x {\eta W + (1-\eta)W}{W} \Leftrightarrow \\
-1 =  1 {\eta + (1-\eta)}{1} \Leftrightarrow \\
+x =  x \frac{\eta W + (1-\eta)W}{W} \Leftrightarrow \\
+1 =  1 \frac{\eta + (1-\eta)}{1} \Leftrightarrow \\
 1 =  1 \\
 \blacksquare
 \end{multline*}
@@ -157,11 +158,11 @@ If $\eta > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the only solution for
 
 First, we check that $x^*=1$ solves $x'=x$. Set $x=1$ in @Eq:recurrence0:
 
-\begin{multline*}
+$$
 x' = 
 \frac{1-\eta)(\omega_A-\omega_B)+\eta \omega_A+(1-\eta)\omega_B}{\omega_A} = \\
 \frac{\omega_A}{\omega_A} = 1
-\end{multline*}
+$$
 
 Next, we check that $x=0$ doesn't solve $x'=x$ by setting $x=0$ in @Eq:recurrence0:
 $$
@@ -181,6 +182,8 @@ x \omega_A + (1-x) \omega_B =  \omega_A \Leftrightarrow \\
 x = 1 \\
 \blacksquare
 \end{multline*}
+
+![Probability for fixation at $\pi=1$. The figure shows the fixation probability at $\pi=1$ for variable initial $\pi$ and for different (A) fitness values or (B) phenotype inheritance rate. Calculated using the diffusion equation approximation [@Otto2007, recipe 15.1]. Parameters: (A) $\eta=0.1$; (B) W=1, w=0.1.](figures/diffusion_fix_prob.pdf){#fig:diffusion_fix_prob}
 
 ## Periodic environment
 
