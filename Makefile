@@ -1,3 +1,5 @@
+version=`git rev-parse --short HEAD`
+
 md=ms/ms.md
 pdf=ms/ms.pdf
 docx=ms/ms.docx
@@ -11,7 +13,7 @@ csl=ms/evolution.csl
 diagram_dot = src/model_diagram.dot
 diagram_pdf = figures/model_diagram.pdf
 
-pandoc_opts=-r markdown+simple_tables+table_captions+yaml_metadata_block -s -S --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --toc --template=$(template)
+pandoc_opts=-r markdown+simple_tables+table_captions+yaml_metadata_block -s -S --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --toc --template=$(template) --variable=version:$(version)
 
 list:
 	@sh -c "$(MAKE) -p no_targets__ | awk -F':' '/^[a-zA-Z0-9][^\$$#\/\\t=]*:([^=]|$$)/ {split(\$$1,A,/ /);for(i in A)print A[i]}' | grep -v '__\$$' | grep -v 'make\[1\]' | grep -v 'Makefile' | sort"
@@ -27,7 +29,7 @@ $(docx): $(md) $(ms_bib) $(diagram_pdf)
 	pandoc $< -o $@ $(pandoc_opts)
 	@open $(docx)
 
-$(pdf): $(md) $(ms_bib) $(diagram_pdf)
+$(pdf): $(md) $(ms_bib) $(diagram_pdf) $(template)
 	pandoc $< -o $@ --latex-engine=xelatex $(pandoc_opts)
 	@open $(pdf)
 
@@ -43,3 +45,6 @@ edit: $(md)
 
 read: $(pdf)
 	@open $(pdf)
+
+version:
+	@echo $(version)
