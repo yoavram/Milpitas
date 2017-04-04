@@ -91,6 +91,26 @@ $$
 x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A - \omega_B) + \omega_B}
 $$ {#eq:recurrence0}
 
+## Diffusion equation
+
+In addition to the recurrence equation approximation, we develop a diffusion equation approximation [@Otto2007, ch. 15], which takes into account the variance due to the development process. 
+
+Specifically, we derive the mean and variance of $x'-x$:
+
+$$
+\begin{aligned}
+\mu = \eta x (1-x) \frac{\omega_A - \omega_B}{\bar{\omega}} \\
+\sigma^2 = \eta^2 x (1-x) \Big( \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big)
+\end{aligned}
+$$
+
+and we use these quantities to write the diffusion equation (or the _forward Kolmogorov equation_):
+$$
+\frac{\partial f(x, t)}{\partial t} = -\mu \frac{\partial f(x, t)}{\partial x} +\frac{1}{2} \sigma^2 \frac{\partial^2 f(x, t)}{\partial x^2}
+$$ {#eq:diffusion}
+
+@Fig:sde_example shows a comparison of the recurrence and diffusion approximations.
+
 # Results {-}
 
 ## Constant environment
@@ -389,7 +409,10 @@ TODO:
 
 # Supporting figures {label="S"}
 
+- @Fig:sde_example
 - @Fig:env_A1B1_π0
+
+![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.9$.](figures/sde_example.pdf){#fig:sde_example}
 
 ![Population mean $\pi$ in environment regime _A1B1_. Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
