@@ -77,7 +77,7 @@ Assuming an "infinite" population undergoing exponential growth, this depends on
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x,
 $$ {#eq:recurrence}
-where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on $\epsilon_t$.
+where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on $\epsilon_t$ (@Fig:recurrence_example).
 
 A similar recurrence for the probability that an individual is _B_  can be written ($(1-x)' = F(1-x)$); summing the two equations produces an expression for the mean fitness: $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
 
@@ -131,34 +131,19 @@ Set $W = w > 0, x' = x \ne 0$ in @Eq:recurrence0 $\blacksquare$
 
 ### Proposition for general case
 
-If $\eta > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the only solution for $x'=x$.
+If $\eta > 0$ and $\omega_A > \omega_B$, then $x = 1$ is the only solution for $x'=x$ and the recurrence converges to $x = 1$ for any initial $x>0$.
 
 ### Proof
 
-First, we check that $x^*=1$ solves $x'=x$. Set $x=1$ in @Eq:recurrence0:
-$$
-x' = 
-\frac{1-\eta)(\omega_A-\omega_B)+\eta \omega_A+(1-\eta)\omega_B}{\omega_A} = \\
-\frac{\omega_A}{\omega_A} = 1
-$$
-Next, we check that $x=0$ doesn't solve $x'=x$ by setting $x=0$ in @Eq:recurrence0:
-$$
-x' = \frac{\eta \omega_A + (1-\eta) \omega_B}{\omega_B} > 0
-$$
-since both the denominator and the numerator are positive.
+Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\eta)(\omega_A - \omega_B)x + \eta \omega_A + (1-\eta)\omega_B$ and $g(x) = (\omega_A - \omega_B)x + \omega_B$.
 
-Next, we check that any $0 < x < 1$ doesn't solve $x'=x$. Set $x'=x$ in @Eq:recurrence and substituting $\bar{\omega} = x \omega_A + (1-x) \omega_B$:
+Clearly, $x'=x$ if and only if $f(x)=g(x)$ or $x=0$. 
+However, _f_ and _g_ are both linear in _x_ and therefore can only intersect at one point.
+Indeed, _f_ and _g_ intersect at $x=1$: $f(1)=g(1)=\omega_A$, which means that $x=1$ solves $x'=x$. 
+Since $f(0) = \omega_B + \eta(\omega_A + \omega_B) > \omega_B = g(0)$, we can deduce that $\forall x<1, \; f(x) > g(x) \Rightarrow x' > x$.
 
-\begin{multline*}
-x = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\eta)x+\eta) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\eta)x \Leftrightarrow \\
-\bar{\omega} = \omega_A \cdot ((1-\eta)x+\eta) + (1-x) \cdot \omega_B \cdot (1-\eta) \Leftrightarrow \\
-x \omega_A + (1-x) \omega_B = (1-\eta) x \omega_A + \eta \omega_A +  (1-\eta) (1-x) \omega_B \Leftrightarrow \\
-\eta (x \omega_A + (1-x) \omega_B) = \eta \omega_A \Leftrightarrow \\
-x \omega_A + (1-x) \omega_B =  \omega_A \Leftrightarrow \\
-(1-x) \omega_A = (1-x) \omega_B \Leftrightarrow \\
-x = 1 \\
-\blacksquare
-\end{multline*}
+Therefore, $x \to x'$ is strictly monotone transformation in $x \in (0,1)$ (@Fig:recurrence_example), and the recurrence converges to 1 for any initial value $0 < x< 1$
+$\blacksquare$
 
 ![Probability for fixation at $\pi=1$. The figure shows the fixation probability at $\pi=1$ for variable initial $\pi$ and for different (A) fitness values or (B) phenotype inheritance rate. Calculated using the diffusion equation approximation [@Otto2007, recipe 15.1]. Parameters: (A) $\eta=0.1$; (B) W=1, w=0.1.](figures/diffusion_fix_prob.pdf){#fig:diffusion_fix_prob}
 
@@ -255,7 +240,9 @@ This, starting very close to zero ($x_0 \sim 0$), the multiplicative change over
 
 If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (due to $l \ge k$), then we have a protected polymorphism somewhere ($0 < x(t) < 1$ for any generation _t_). In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is stable and the protected polymorphism disappears.
 
-In the following, we examine the conditions for a protected polymorphism in several special and general cases.
+In the following, we examine the conditions for a protected polymorphism. In general, we find that:
+1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\eta){frac{W-w}{w}}}{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}$.
+1. $x=0$ is a steady equilibrium if $\frac{l}{k} = 1 + (1-\eta)\frac{W-w}{w}$.
 
 #### $W = w$
 
@@ -278,6 +265,7 @@ $$
 > 1 &, k > l
 > \end{cases}
 $$
+
 #### Proposition for $k=l$
 If $k=l, W > w > 0, 1 > \eta > 0$, then $f_A^k(0) f_B^l(0) > 1$.
 
@@ -359,11 +347,11 @@ $$
 and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
-##### Proposition
+#### Proposition
 
 If $l < k \Big( 1 + \frac{(1-\eta) \frac{W-w}{w}}{1 + \eta (1-\eta) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$.
 
-##### Proof
+#### Proof
 
 Similar to previous proposition, but using a different Bernoulli inequality:
 
@@ -380,8 +368,11 @@ TODO:
 
 # Supporting figures {label="S"}
 
+- @Fig:recurrence_example
 - @Fig:sde_example
 - @Fig:env_A1B1_π0
+
+![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\eta$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
 ![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.9$.](figures/sde_example.pdf){#fig:sde_example}
 
