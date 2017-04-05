@@ -210,7 +210,7 @@ $$ {#eq:recurrenceA1B1_solution_tildex}
 
 @Fig:env_A1B1 compares $\tilde{x}$ (dashed green) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
-![Population mean $\pi$ in environment regime _A1B1_. _N_=100,000.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 ### _A2B1_ regime
 
@@ -219,10 +219,10 @@ $$\begin{aligned}
 x' = x \frac{x (1-\eta) (W-w) + \eta W + (1-\eta)w}{x (W-w) + w} \\
 x'' = x' \frac{x' (1-\eta) (W-w) + \eta W + (1-\eta)w}{x' (W-w) + w} \\
 x''' = x'' \frac{x'' (1-\eta) (w-W) + \eta w + (1-\eta)W}{x'' (w-W) + W}
-\end{aligned}$$ {#eq:recurrenceA1B1}
-provides similar results: the equilibrium value fits the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-=estimates the equilibrium otherwise (@Fig:env_A2B1). 
+\end{aligned}$$ {#eq:recurrenceA2B1}
+provides similar results: the equilibrium value fits the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-estimates the equilibrium otherwise (@Fig:env_A2B1). 
 
-![Population mean $\pi$ in environment regime _A2B1_. $\eta=?$, _N_=100,000.](figures/env_A2B1.pdf){#fig:env_A2B1}
+![Population mean $\pi$ in environment regime _A2B1_. Comparison of Wright-Fisher simulations (orange; average of >65 simulations) and recurrence equation iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
 ### Protected polymorphisms in _AkBl_ regime
 
@@ -385,6 +385,6 @@ TODO:
 
 ![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.9$.](figures/sde_example.pdf){#fig:sde_example}
 
-![Population mean $\pi$ in environment regime _A1B1_. Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
+![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex).  Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. Parameters: _W_=1, $\eta$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
 # References {-}
