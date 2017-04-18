@@ -70,7 +70,7 @@ $$
 
 We present a deterministic population analog of the individual above model. This recurrence equation model is equivalent to the Wright-Fisher model when the population is composed of a single lineage -- for example, when selection is extreme and there is a common ancestor.
 
-Define _x_ to be the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring of that individual is _A_?
+Define _x_ to be the probability that a random individual in the population is _A_. What is _x'_, the probability that a random offspring is _A_?
 
 Assuming an "infinite" population undergoing exponential growth, this depends on (i) if the parent was _A_ or _B_, with probabilities _x_ and _1-x_, (ii) on the relative contribution of _A_ and _B_ phenotypes to the next generation in terms of fitness, and (iii) on the probability that offspring of parental _A_ or _B_ phenotypes eventually become _A_, according to the inheritance process ([@Eq:learning_rule]):
 
@@ -93,11 +93,11 @@ In addition to the recurrence equation approximation, we develop a diffusion equ
 Specifically, we derive the mean of $x'-x$:
 
 $$
-\mu(x) = \eta x (1-x) \frac{\omega_A - \omega_B}{\bar{\omega}}
+\mu(x) = \eta x (1-x) E\Big[ \frac{\omega_A - \omega_B}{\bar{\omega}} \Big]
 $$
 and the mean of $(x'-x)^2$:
 $$
-\sigma^2(x) = \eta^2 x (1-x) \Big( \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big)
+\sigma^2(x) = \eta^2 x (1-x) E\Big[ \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big]
 $$
 
 and we use these quantities to write the diffusion equation (or the _forward Kolmogorov equation_):
@@ -105,7 +105,7 @@ $$
 \frac{\partial f(x, t)}{\partial t} = -\mu \frac{\partial f(x, t)}{\partial x} +\frac{1}{2} \sigma^2 \frac{\partial^2 f(x, t)}{\partial x^2}
 $$ {#eq:diffusion}
 
-@Fig:sde_example shows a comparison of the recurrence and diffusion approximations.
+@Fig:sde_example shows a comparison of the recurrence and diffusion equations.
 
 # Results {-}
 
@@ -372,7 +372,7 @@ TODO:
 
 ![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\eta$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
-![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.9$.](figures/sde_example.pdf){#fig:sde_example}
+![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.1$.](figures/sde_example.pdf){#fig:sde_example}
 
 ![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex).  Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. Parameters: _W_=1, $\eta$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
