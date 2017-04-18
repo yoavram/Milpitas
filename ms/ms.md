@@ -173,27 +173,25 @@ $$ {#eq:recurrenceA1B1_solution}
 
 Since $W > w \ge 0, 1 \ge \eta \ge 0$,
 $$
-G(0) = \frac{-w}{(2-\eta)(W-w)} < 0
+G(0) = C = \frac{-w}{(2-\eta)(W-w)} < 0
 $$
 and
 $$\begin{aligned}
-G(1) = 1 - \frac{W (1-\eta) - w (3-\eta)}{(2-\eta)(W-w)} - \frac{w}{(2-\eta)(W-w)} = \\
+G(1) =
+1 + B + C =
+1 - \frac{W (1-\eta) - w (3-\eta) - w}{(2-\eta)(W-w)} = \\
 \frac{W}{(2-\eta)(W-w)} > 0
 \end{aligned}$$
-and $lim_{x-> \pm \infty}{G(x)} = +\infty$.
+and $lim_{x \to \pm \infty}{G(x)} = +\infty$.
 
-Therefore, one root of $G(x)$ is negative and one, $\tilde{x}$, is positive and less than 1. Let $\delta=\frac{1}{2}-\frac{-B+\sqrt{B^2-4C}}{2}$ (where _B_ and _C_ are defined in @Eq:recurrenceA1B1_solution). Then, $\delta=\frac{\sqrt{(W+w)^2-\eta(2-\eta)(W-w)^2}}{(2-\eta)(W-w)}$. Because $\eta(2-\eta)$ is maximized at 1, 
-$$
-(W+w)^2-\eta(2-\eta)(W-w)^2 > (
-W+w)^2-(W-w)^2=4Ww  > 0
-$$
-so $\delta > 0$. Therefore, the positive root is:
+Therefore, one root of $G(x)$ is negative and one, $\tilde{x}$, is positive and less than 1. $C<0$  and therefore $B < \sqrt{B^2-4C}$. Thus, $-B+\sqrt{B^2-4C}>0$ and $-B-\sqrt{B^2-4C}<0$, regardless of the sign of $B$, and:
+$$\begin{aligned}
+\tilde{x} = 
+\frac{-B+\sqrt{B^2-4C}}{2} = & \\ &
+\frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
+\end{aligned}$$ {#eq:recurrenceA1B1_solution_tildex}
 
-$$
-\tilde{x}=\frac{-B-\sqrt{B^2-4C}}{2}
-$$ {#eq:recurrenceA1B1_solution_tildex}
-
-@Fig:env_A1B1 compares $\tilde{x}$ (dashed green) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
+@Fig:env_A1B1 compares $\tilde{x}$ (dashed green; @eq:recurrenceA1B1_solution_tildex) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
 ![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
