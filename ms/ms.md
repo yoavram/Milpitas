@@ -97,7 +97,7 @@ $$
 $$
 and the mean of $(x'-x)^2$:
 $$
-\sigma^2(x) = \eta^2 x (1-x) E\Big[ \frac{\omega_A + \omega_B}{\bar{\omega}} - 1 \Big]
+\sigma^2(x) = \eta^2 x (1-x) E\Big[ \frac{(1-x) \omega_A + x \omega_B}{\bar{\omega}} \Big]
 $$
 
 and we use these quantities to write the diffusion equation (or the _forward Kolmogorov equation_):
