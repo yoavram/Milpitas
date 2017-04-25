@@ -6,7 +6,7 @@ import click
 @click.argument('markdown_filename', type=click.Path(exists=True, file_okay=True, dir_okay=False, readable=True))
 @click.argument('keys_filename', type=click.Path(file_okay=True, dir_okay=False, writable=True))
 def main(markdown_filename, keys_filename):
-	pattern = re.compile('@(\w+\d{4})')
+	pattern = re.compile('@(\w+\d{4}[a-z]?)')
 	with open(markdown_filename) as f:
 		groups = (pattern.findall(line) for line in f)
 		groups = sum((g for g in groups if g), [])	
