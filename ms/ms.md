@@ -161,7 +161,7 @@ When the environment changes every generation, we can write the following recurs
 
 $$\begin{aligned}
 x' = x \frac{x (1-\eta) (W - w) + \eta W + (1-\eta)w}{x (W-w) + w} \\
-x'' = x' \frac{x (1-\eta) (w - W) + \eta w + (1-\eta)W}{x' (w-W) + W}
+x'' = x' \frac{x' (1-\eta) (w - W) + \eta w + (1-\eta)W}{x' (w-W) + W}
 \end{aligned}$$ {#eq:recurrenceA1B1} 
 
 We are looking for solutions for $x''=x$, which involves solving a quartic polynomial. Two solutions are $x=0,1$ (assign to [@Eq:recurrenceA1B1] to check), but there are two other potential solutions which are roots of a quadratic equation $G(x) = 0$ where $G(x) = Ax^2 + Bx + C$.
@@ -190,6 +190,14 @@ $$\begin{aligned}
 \frac{-B+\sqrt{B^2-4C}}{2} = & \\ &
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_tildex}
+
+**Notes**:
+
+- $\eta=0 \Rightarrow \tilde{x} = 1/2$ and $\eta=1 \Rightarrow \tilde{x} = \frac{\sqrt{1+s} - 1}{s}$
+- the mean fitness after each _AB_ cycle as a function of $\eta$, $\tilde{\omega}(\eta)=\frac{s(1-\eta)-2+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}$. 
+- $\tilde{\omega}(0)=1+\frac{s}{2}$
+- $\tilde{\omega}(1) = \sqrt{1+s} = \tilde{\omega}(0) + \frac{s^2}{8} + o(s^2)$ 
+- $\tilde{\omega}(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$.
 
 @Fig:env_A1B1 compares $\tilde{x}$ (dashed green; @eq:recurrenceA1B1_solution_tildex) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
