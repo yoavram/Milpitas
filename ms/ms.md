@@ -184,22 +184,25 @@ G(1) =
 \end{aligned}$$
 and $lim_{x \to \pm \infty}{G(x)} = +\infty$.
 
-Therefore, one root of $G(x)$ is negative and one, $\tilde{x}$, is positive and less than 1. $C<0$  and therefore $B < \sqrt{B^2-4C}$. Thus, $-B+\sqrt{B^2-4C}>0$ and $-B-\sqrt{B^2-4C}<0$, regardless of the sign of $B$, and:
+Therefore, one root of $G(x)$ is negative and one, $x^*$, is positive and less than 1. $C<0$  and therefore $B < \sqrt{B^2-4C}$. Thus, $-B+\sqrt{B^2-4C}>0$ and $-B-\sqrt{B^2-4C}<0$, regardless of the sign of $B$, and:
 $$\begin{aligned}
-\tilde{x} = 
+x^* = 
 \frac{-B+\sqrt{B^2-4C}}{2} = & \\ &
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_tildex}
 
 **Notes**:
 
-- $\eta=0 \Rightarrow \tilde{x} = 1/2$ and $\eta=1 \Rightarrow \tilde{x} = \frac{\sqrt{1+s} - 1}{s}$
-- the mean fitness after each _AB_ cycle as a function of $\eta$, $\tilde{\omega}(\eta)=\frac{s(1-\eta)-2+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}$. 
-- $\tilde{\omega}(0)=1+\frac{s}{2}$
-- $\tilde{\omega}(1) = \sqrt{1+s} = \tilde{\omega}(0) + \frac{s^2}{8} + o(s^2)$ 
-- $\tilde{\omega}(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$.
+- $\eta=0 \Rightarrow x^* = 1/2$ and $\eta=1 \Rightarrow x^* = \frac{\sqrt{1+s} - 1}{s}$
+- the mean fitness after each _AB_ cycle as a function of $\eta$:
+$$
+\bar{\omega}^*(\eta)=\frac{s(1-\eta)-2+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}
+$$ 
+- $\bar{\omega}^*(0)=1+\frac{s}{2}$
+- $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$ 
+- $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$.
 
-@Fig:env_A1B1 compares $\tilde{x}$ (dashed green; @eq:recurrenceA1B1_solution_tildex) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
+@Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_tildex) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
 ![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
