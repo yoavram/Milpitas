@@ -34,4 +34,10 @@ Since there is no recombination in the model ($r=0$), if we substitute $\sigma =
 
 This means that the spectral radius of $L^*_{ex}$ is strictly **increasing** when $\eta$ increases. $\eta$ controls how much of the phenotype is inherited from the genotype ($\pi$) and how much is inherited from the phenotype. With $\eta=1$, the phenotype is fully-inherited and there is essentially no plasticity, which makes sense in a constant environment. In a rapidly and randomly changing environment, however, we expect that once the optimal bet-hedging strategy $\pi^*=P(\epsilon_t=A)$ is reached the learning rate will be **reduced**, this doesn't make sense, but I guess that for that we need to define **D** (@Eq:D) differently.
 
+@Xue2016 have shown numerically (in SI) that with extreme selection, in a rapidly changing environment, $\eta^* \to 0$, whereas if environmental changes are farther apart (>9), then $\eta^* > 0$. This was done by maximizing mean fitness, which has been shown (@Carja2014) to fit with simulation results in analyses of evolution of stable modification rates.
+
+There has been a body of work on models in which the phenotype is genetically encoded by two alleles (_A_ and _a_) and the transition between these alleles is determined by a mutation modifier allele [see summary in @Liberman2011]. In these models, under fluctuating environment, the evolutionary stable mutation rate is ~1/n if the favored allele changes deterministicly every _n_ generations, but can be different if _n_ is random or if selection is not symmetric. In the model presented in @Xue2016, however, the phenotype switching rate is (epi)genetically encoded, and mutation is not needed for transitioning between the phenotypes. Moreover, the transition rate is modified by the phenotype (@Eq:learning_rule). If  we assume that the rate of this modification, $\eta$, is determined by a modifier locus, then the dynamics of alleles at this modifier locus are different from those of a mutation modifier locus.
+
+
+
 # References {-}
