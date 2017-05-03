@@ -36,15 +36,5 @@ $(pdf): $(md) $(ms_bib) $(diagram_pdf) $(template)
 $(diagram_pdf): $(diagram_dot)
 	dot $< -Tpdf -Kdot -o$@
 
-pdf: $(pdf)
-
-docx: $(docx)
-
-edit: $(md)
-	@subl $<
-
-read: $(pdf)
-	@open $(pdf)
-
 version:
 	@echo $(version)
