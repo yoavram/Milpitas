@@ -110,27 +110,6 @@ q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 \bar{\omega}_{M} = y \omega_A + (1-y) \omega_B
 \end{aligned}$$ {#eq:recurrence_modifiers}
 
-## Diffusion equation
-
-In addition to the recurrence equation approximation, we develop a diffusion equation approximation [@Otto2007, ch. 15], which takes into account the variance due to the development process. 
-
-Specifically, we derive the mean of $x'-x$:
-
-$$
-\mu(x) = \eta x (1-x) E\Big[ \frac{\omega_A - \omega_B}{\bar{\omega}} \Big]
-$$
-and the mean of $(x'-x)^2$:
-$$
-\sigma^2(x) = \eta^2 x (1-x) E\Big[ \frac{(1-x) \omega_A + x \omega_B}{\bar{\omega}} \Big]
-$$
-
-and we use these quantities to write the diffusion equation (or the _forward Kolmogorov equation_):
-$$
-\frac{\partial f(x, t)}{\partial t} = -\mu \frac{\partial f(x, t)}{\partial x} +\frac{1}{2} \sigma^2 \frac{\partial^2 f(x, t)}{\partial x^2}
-$$ {#eq:diffusion}
-
-@Fig:sde_example shows a comparison of the recurrence and diffusion equations.
-
 # Results {-}
 
 ## Constant environment
@@ -168,8 +147,6 @@ Since $f(0) = \omega_B + \eta(\omega_A + \omega_B) > \omega_B = g(0)$, we can de
 
 Therefore, $x \to x'$ is strictly monotone transformation in $x \in (0,1)$ (@Fig:recurrence_example), and the recurrence converges to 1 for any initial value $0 < x< 1$
 $\blacksquare$
-
-![Probability for fixation at $\pi=1$. The figure shows the fixation probability at $\pi=1$ for variable initial $\pi$ and for different (A) fitness values or (B) phenotype inheritance rate. Calculated using the diffusion equation approximation [@Otto2007, recipe 15.1]. Parameters: (A) $\eta=0.1$; (B) W=1, w=0.1.](figures/diffusion_fix_prob.pdf){#fig:diffusion_fix_prob}
 
 ## Periodic environmental regime
 
@@ -427,18 +404,14 @@ $$\begin{aligned}
 ## Random environments
 
 TODO: 
-- local stochastic stability / diffusion?
-- see Levikson & Karlin, 1970's; Liberman & Karlin, 1970's
+- local stochastic stability- Liberman & Karlin, 1970's
 
 # Supporting figures {label="S"}
 
 - @Fig:recurrence_example
-- @Fig:sde_example
 - @Fig:env_A1B1_π0
 
 ![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\eta$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
-
-![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.1$.](figures/sde_example.pdf){#fig:sde_example}
 
 ![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_x_star).  Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. Parameters: _W_=1, $\eta$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
