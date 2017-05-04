@@ -192,16 +192,7 @@ x^* =
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
-**Notes**:
-
-- $\eta=0 \Rightarrow x^* = 1/2$ and $\eta=1 \Rightarrow x^* = \frac{\sqrt{1+s} - 1}{s}$
-- the mean fitness after each _AB_ cycle as a function of $\eta$:
-$$
-\bar{\omega}^*(\eta)=1 + \frac{W(1-\eta)-w(3-\eta)+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}
-$$ 
-- $\bar{\omega}^*(0)=1+\frac{s}{2}$
-- $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$ 
-- $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$.
+Note that with $\eta=0 \Rightarrow x^* = 1/2$ and with $\eta=1 \Rightarrow x^* = \frac{\sqrt{1+s} - 1}{s}$. 
 
 @Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
@@ -235,8 +226,19 @@ $$
 \frac{\partial }{\partial H} \lambda(\eta, H) = 
 \frac{-s^2 x (1-x)}{1 + s + s^2 (1-\eta) x^*(1-x^*)} < 0,
 $$
-and because $\lambda(\eta, \eta)= 1$, we can deduce that if $H<\eta$ then $\lambda(\eta, H) > 1$ and _M_ can invade _m_; and vice verse, if $H>\eta$ then $\lambda(\eta, H) < 1$ and _m_ is cannot be invaded by _M_. 
-It follows that in the _A1B1_ regime, the only rate that can lead to evolutionary genetic stability [@Lessard1990] is $\eta=0$.
+and because $\lambda(\eta, \eta)= 1$, we can deduce that if $H<\eta$ then $\lambda(\eta, H) > 1$ and _M_ can invade _m_; and vice verse, if $H>\eta$ then $\lambda(\eta, H) < 1$ and _m_ cannot be invaded by _M_. 
+It follows that in the _A1B1_ regime, the only phenotypic inheritance rate that can lead to evolutionary genetic stability [@Lessard1990] is $\eta=0$ (@Fig:EGS_A1B1).
+
+Note that the stable population mean fitness after each _AB_ cycle as a function of $\eta$ is (@Fig:EGS_A1B1):
+$$
+\bar{\omega}^*(\eta)=1 + \frac{W(1-\eta)-w(3-\eta)+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)},
+$$ {#eq:A1B1_mean_fitness}
+
+With $\eta=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
+whereas with $\eta=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$; 
+in general, $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$ (@Fig:EGS_A1B1).
+
+![Evolutionary stability of $\eta=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the phenotypic inheritance rate $\eta$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, H)$ (equation ref) inducing rate $H$ and invading to a population fixed at $\eta=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:EGS_A1B1}
 
 ### _A2B1_ regime
 
