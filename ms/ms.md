@@ -86,6 +86,30 @@ $$
 x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{x (\omega_A - \omega_B) + \omega_B}
 $$ {#eq:recurrence0}
 
+## Recurrence with two modifier alleles
+
+Consider two modifier alleles _m_ and _M_ that induce rates $\eta$ and _H_,
+and denote their frequencies by _p_ and _q_ ($p+q=1$). _x_ is the probability that a random individual with modifier allele _m_ is _A_,
+and _y_ is that probability for a random individual with allele _M_:
+
+|      | mA  | mB     | MA  | MB     |
+|------|-----|--------|-----|--------|
+| freq.    | $p \cdot x$  | $p(1-x)$ | $q \cdot y$  | $q(1-y)$ |
+| fitness    | $\omega_A$ | $\omega_B$    | $\omega_A$ | $\omega_B$    |
+| rate | $\eta$   | $\eta$      | _H_   | _H_      |
+
+and therefore the population recursion is (based on @eq:recurrence0):
+
+$$\begin{aligned}
+x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{\bar{\omega}_{m}} \\
+y' = y \frac{y (1-H) (\omega_A - \omega_B) + H \omega_A + (1-H)\omega_B}{\bar{\omega}_{M}} \\
+p' = p \frac{x \omega_A + (1-x) \omega_B}{\bar{\omega}} \\
+q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
+\bar{\omega} = p \bar{\omega}_{m}  + q \bar{\omega}_{M} \\
+\bar{\omega}_{m} = x \omega_A + (1-x) \omega_B \\
+\bar{\omega}_{M} = y \omega_A + (1-y) \omega_B
+\end{aligned}$$ {#eq:recurrence_modifiers}
+
 ## Diffusion equation
 
 In addition to the recurrence equation approximation, we develop a diffusion equation approximation [@Otto2007, ch. 15], which takes into account the variance due to the development process. 
@@ -189,22 +213,53 @@ $$\begin{aligned}
 x^* = 
 \frac{-B+\sqrt{B^2-4C}}{2} = & \\ &
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
-\end{aligned}$$ {#eq:recurrenceA1B1_solution_tildex}
+\end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
 **Notes**:
 
 - $\eta=0 \Rightarrow x^* = 1/2$ and $\eta=1 \Rightarrow x^* = \frac{\sqrt{1+s} - 1}{s}$
 - the mean fitness after each _AB_ cycle as a function of $\eta$:
 $$
-\bar{\omega}^*(\eta)=\frac{s(1-\eta)-2+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}
+\bar{\omega}^*(\eta)=1 + \frac{W(1-\eta)-w(3-\eta)+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)}
 $$ 
 - $\bar{\omega}^*(0)=1+\frac{s}{2}$
 - $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$ 
 - $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$.
 
-@Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_tildex) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
+@Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
-![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+
+#### Evolutionary genetic stability of $\eta=0$
+
+We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers). 
+Let's assume that _m_ is fixed such that $p=1, q=0$ and that the population is at an equilibrium $x=x^*$ (@eq:recurrenceA1B1_solution_x_star).
+
+If another modifier allele _M_ appears in low frequency $q \ll 1$ such that initially $y=x^*$, can _M_ invade the population and increase in frequency, or is the equilibrium $p=1, x=x^*$ stable?
+
+To answer this question, we will examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the preferred phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the preferred phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, and we can write $\lambda$ as a function of the two rates $\eta$ and $H$ using @eq:recurrence_modifiers:
+\begin{multline*}
+\lambda(\eta, H) = \frac{q''}{q} = \frac{q''}{q'} \cdot \frac{q'}{q} = \\
+\frac{y' + (1-y') (1+s)}{x' + (1-x') (1+s)} \cdot 
+    \frac{y (1+s) + (1-y)}{x (1+s) + (1-x)} = \\
+\frac{1 + s - s y'}{1 + s - s x'} \cdot \frac{1 + s y}{1 + s x} = \\
+\frac{1 + s + s^2 (1-H) x^* (1-x^*)}{1 + s + s^2 (1-\eta) x^* (1-x^*)},
+\end{multline*}
+where both the _m_ and the _M_ populations are initially at the equilibrium value ($x=y=x^*$),
+and we use @eq:recurrence_modifiers to calculate $x', y'$.
+
+For $1 > H > \eta=0$, we have $x^* = x^{**} = \frac{1}{2}$, which leads to
+$\lambda(0,H) = 1 - H(\frac{s}{2+s})^2 < 1$.
+
+For $\eta = 1 > H > 0$, we have $x^* = \frac{\sqrt{1+s}-1}{s}, x^{**}=x^* \sqrt{1+s}$, which leads to $\lambda(1,H) = 1 + (1-H)\frac{(\sqrt{1+s}-1)^2}{\sqrt{1+s}} > 1$.
+
+More generally,
+$$
+\frac{\partial }{\partial H} \lambda(\eta, H) = 
+\frac{-s^2 x (1-x)}{1 + s + s^2 (1-\eta) x^*(1-x^*)} < 0,
+$$
+and because $\lambda(\eta, \eta)= 1$, we can deduce that if $H<\eta$ then $\lambda(\eta, H) > 1$ and _M_ can invade _m_; and vice verse, if $H>\eta$ then $\lambda(\eta, H) < 1$ and _m_ is cannot be invaded by _M_. 
+It follows that in the _A1B1_ regime, the only rate that can lead to evolutionary genetic stability [@Lessard1990] is $\eta=0$.
 
 ### _A2B1_ regime
 
@@ -385,6 +440,6 @@ TODO:
 
 ![Comparison of recurrence and diffusion approximations. Recurrence equation approximation (black line; solved by iteration of @eq:recurrence) and diffusion equation approximation (color lines; solved by stochastic integration of @eq:diffusion). **(A)** Environment constant at _A_. **(B)** Environment randomly changes between _A_ and _B_ every generation. **(C)** Environment changes between _A_ and _B_ exactly every 50 generations. Parameters: $\eta=0.1, W=1, w=0.1$.](figures/sde_example.pdf){#fig:sde_example}
 
-![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_tildex).  Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. Parameters: _W_=1, $\eta$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
+![Population mean $\pi$ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and recurrence solution (dashed green; @eq:recurrenceA1B1_solution_x_star).  Initial population distribution: (A) $\pi_i$=0.01; (B) $\pi_i$=0.5; (C) $\pi_i$=0.99; (D) $\pi_i \sim Uniform(0,1)$. Parameters: _W_=1, $\eta$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
 # References {-}
