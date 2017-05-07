@@ -408,8 +408,151 @@ $$\begin{aligned}
 
 ## Random environments
 
-TODO: 
-- local stochastic stability- Liberman & Karlin, 1970's
+Consider a random environmental regime in which the fitness of phenotypes _A_ and _B_ at generation $t$ are $1+s_t$ and $1$, respectively, where the random variables $s_t \; (t=0, 1, 2, ...)$ are independent and identically distributed (i.i.d) and there are positive constants _C_ and _D_ such that $P(C \le s_t \le D) = 1$.
+
+The recurrence for this model can be rewritten as (based on @eq:recurrence0):
+$$
+x_{t+1} = x_t \frac{1 + \eta s_t + x_t (1-\eta) s_t}{1 + s_t x_t}.
+$$ {#eq:recurrence_random_env}
+
+The following analysis follows @Karlin1975 (see also @Carja2013).
+
+### _Stochastic local stability_
+
+#### Definition
+
+An equilibrium state $x^*$ is said to be _stochastically locally stable_ if for any $\epsilon>0$ there exists $\delta>0$ such that
+$$
+x_0 < \delta \Rightarrow P(\lim_{t \to \infty}{x_t} = x^*) \ge 1-\epsilon
+$$ {#eq:SLS}
+
+Thus, _stochastic local stability_ of $x^*$ means that if the frequency $x_t$ is sufficiently close to $x^*$, then it will eventually converge to $x^*$ with _high probability_. Note, however, that convergence is likely, but not certain.
+
+#### Theorem 1
+
+_Suppose $\mathbb{E}[\log{(1+\eta s_t)}] > 0$, then $x^*=0$ is not _stochastically locally stable_, 
+and in fact $P(\lim_{t \to \infty}{x_t}=0) = 0$._
+
+##### Proof
+
+Rewrite the recurrence (@eq:recurrence_random_env):
+$$
+\frac{x_{t+1}}{x_{t}} = (1 + \eta s_t) \Big(1 - x_t \frac{\eta s_t (1+s_t)}{(1+\eta s_t)(1+x_t s_t)} \Big)
+$$
+
+Taking the log of both sides leads to:
+$$
+\log{x_{t+1}} - \log{x_{t}} = 
+\log{(1+\eta s_t)} +
+\log{\Big(1 - x_t \frac{\eta s_t (1+s_t)}{(1+\eta s_t)(1+x_t s_t)} \Big)}
+$$
+
+Summation yields:
+$$
+\frac{1}{t} (\log{x_{t}} - \log{x_{0}}) = 
+\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\eta s_n)}} + 
+\frac{1}{t} \sum_{n=0}^{t-1}{\log{\Big(1 - x_n \frac{\eta s_n (1+s_n)}{(1+\eta s_n)(1+x_n s_n)} \Big)}}
+$$
+
+Let $\mu = \mathbb{E}[\log{(1+\eta s_t)}]$.
+Because $\{s_t\}_{t \ge 0}$ are i.i.d. random variables, the strong law of large numbers (SLLN) applies and almost surely
+$$
+\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\eta s_n)}}} = \mu.
+$$
+
+Consider $\xi$ such that $\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\eta s_n(\xi))}}} = \mu, C \le s_t(\xi) \le D$ and assume that almost certainly $x^* = 0$, i.e.:
+$$
+\lim_{t \to \infty}{x_t(\xi)} = 0.
+$$ {#eq:T1_assumption}
+
+Because $0 \le \eta \le 1$, 
+and $\{s_t(\xi)\}_{t \ge 0}$ are uniformly bounded away from zero and infinity,
+we can deduce that
+$$
+\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{\Big(1 - x_n \frac{\eta s_n (1+s_n)}{(1+\eta s_n)(1+x_n s_n)} \Big)}}} = 0 ,
+$$
+so that
+$$
+\lim_{t \to \infty}{\frac{1}{t} \Big(\log{x_{t}(\xi)} - 
+\log{x_{0}(\xi)}\Big)} = \mu.
+$$
+
+However, the hypothesis states that $\mu  > 0$, implying that $\lim_{t \to \infty}{x_{t}(\xi)} = \infty$ which is incompatible with the assumption @eq:T1_assumption. Therefore we must have
+$$
+P(\lim_{t \to \infty}{x_{t}} = 0) = 0. \; \blacksquare
+$$
+
+Thus, for $x^*=0$ to be _stochastically locally stable_, it is necessary that $\mathbb{E}[\log{(1+\eta s_t)}] \le 0$. Furthermore, we can prove that the strict inequality is sufficient.
+
+#### Theorem 2
+
+_Suppose $\mathbb{E}[\log{(1+\eta s_t)}] < 0$,
+then $x^*=0$ is _stochastically locally stable_._
+
+##### Proof
+
+Let $\mu = \mathbb{E}[\log{(1+\eta s_t)}]$, so that $\mu<0$. 
+Because $\{s_t\}_{t \ge 0}$ are i.i.d. random variables, the SLLN applies and almost surely
+$$
+\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\eta s_n)}}} = \mu.
+$$
+
+Appealing to the _Severini–Egoroff theorem_,
+for any $\epsilon > 0$, there exists $T$ such that (remember that $\mu$ is negative):
+$$
+P\Big(\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1 + \eta s_n)}} < \frac{\mu}{2} 
+\; \forall t \ge T \Big) \ge 1 - \epsilon.
+$$
+
+Because $0 \le \eta \le 1$ and $\{s_t(\xi)\}_{t \ge 0}$ are uniformly bounded away from zero and infinity, we can find $\delta'>0$ such that:
+$$
+x_t < \delta' \Rightarrow 
+\Big| \log{\Big(1 - x_t\frac{\eta s_t (1+s_t)}{(1+\eta s_t)(1+x_t s_t)} \Big)} \Big| < -\frac{\mu}{4}.
+$$
+
+Also, 
+$$
+x_{t+1} = x_t \frac{x_t (1-\eta) s_t + \eta (1+s_t) + 1 - \eta}{1 + s_t x_t} < C \cdot x_t,
+$$
+where $C \in \mathbb{R}$ is independent of $t$; it follows that there exists $0 < \delta < \delta'$ such that:
+$$
+x_0 < \delta \Rightarrow x_t < \delta', \; \forall t=0, 1, 2, ..., T-1.
+$$
+
+Let $\xi$ be a realization of the evolutionary process such that
+$$
+\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1 + \eta s_n(\xi))}} < \frac{\mu}{2} \; \forall t \ge T
+$$ 
+and assume $x_0 < \delta$.
+
+Then:
+\begin{multline*}
+\frac{1}{T} \Big(\log{x_T(\xi)} - \log{x_0(\xi)}\Big) =
+\frac{1}{T} \sum_{t=0}^{T-1}{\log{\Big(1 + \eta s_t(\xi)\Big)}} + \\
++ \frac{1}{T} \sum_{t=0}^{T-1} \log{\Big(1 - x_t(\xi)\frac{\eta s_t(\xi) (1+s_t(\xi))}{(1+\eta s_t(\xi))(1+x_t(\xi) s_t(\xi))} \Big)} < \\
+\frac{\mu}{2}-\frac{\mu}{4} = 
+\frac{\mu}{4} < 0,
+\end{multline*}
+and therefore $x_T(\xi) < x_0(\xi) < \delta'$. 
+
+Invoking induction we get that for $t \ge T$, 
+$$
+\log{\frac{x_t(\xi)}{x_0}} \le \frac{\mu}{4} \cdot t \Rightarrow \\
+x_t(\xi) \le x_0 \cdot \exp{\Big(\frac{\mu t}{4}\Big)}.
+$$
+
+As $\mu < 0$, this implies $\lim_{t \to \infty}{x_t(\xi)}=0$.
+
+Therefore, we have shown that for any $\epsilon > 0$ there exists $\delta>0$
+such that if $x_0 < \delta$, then $P(\lim_{t \to \infty}{x_t} = 0) \ge 1-\epsilon$,
+which proves that $x^*=0$ is _stochastically locally stable_. $\blacksquare$
+
+These theorems can be summarized as follows:
+
+- if $\mathbb{E}[\log{(1+\eta s_t)}] < 0$ then fixation of $x^*=0$ is _stochastically locally stable_.
+- if $\mathbb{E}[\log{(1+\eta s_t)}] > 0$ then fixation of $x^*=0$ almost never occurs.
+- if the fitness of phenotype _B_ is also a random variable, such that the fitness values of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitness values by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
+- the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
 
 # Supporting figures {label="S"}
 
