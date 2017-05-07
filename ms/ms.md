@@ -226,19 +226,22 @@ $$
 \frac{\partial }{\partial H} \lambda(\eta, H) = 
 \frac{-s^2 x (1-x)}{1 + s + s^2 (1-\eta) x^*(1-x^*)} < 0,
 $$
-and because $\lambda(\eta, \eta)= 1$, we can deduce that if $H<\eta$ then $\lambda(\eta, H) > 1$ and _M_ can invade _m_; and vice verse, if $H>\eta$ then $\lambda(\eta, H) < 1$ and _m_ cannot be invaded by _M_. 
-It follows that in the _A1B1_ regime, the only phenotypic inheritance rate that can lead to evolutionary genetic stability [@Lessard1990] is $\eta=0$ (@Fig:EGS_A1B1).
+and because $\lambda(\eta, \eta)= 1$, we can deduce that if $H<\eta$ then $\lambda(\eta, H) > 1$ and _M_ can invade _m_; and vice verse, if $H>\eta$ then $\lambda(\eta, H) < 1$ and _m_ cannot be invaded by _M_ (@Fig:A1B1_EGS_eta_0 B). 
+It follows that in the _A1B1_ regime, the only phenotypic inheritance rate that can lead to evolutionary genetic stability [@Lessard1990] is $\eta=0$.
 
-Note that the stable population mean fitness after each _AB_ cycle as a function of $\eta$ is (@Fig:EGS_A1B1):
+Note that the stable population mean fitness after each _AB_ cycle as a function of $\eta$ is (@Fig:A1B1_EGS_eta_0 A):
 $$
 \bar{\omega}^*(\eta)=1 + \frac{W(1-\eta)-w(3-\eta)+\sqrt{(1-\eta)^2s^2+4(1+s)}}{2(2-\eta)},
 $$ {#eq:A1B1_mean_fitness}
 
 With $\eta=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
 whereas with $\eta=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$; 
-in general, $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$ (@Fig:EGS_A1B1).
+in general, $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is therefore maximized at $\eta=0$ (@Fig:A1B1_EGS_eta_0). Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower inheritance rates shows that these invading modifiers are successful in sequentially reducing the population phenotypic inheritance rate towards zero, but only after the populations phenotype distribution is established around 0.5 (@Fig:A1B1_modifier_invasions A).
 
-![Evolutionary stability of $\eta=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the phenotypic inheritance rate $\eta$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, H)$ (equation ref) inducing rate $H$ and invading to a population fixed at $\eta=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:EGS_A1B1}
+![Evolutionary stability of $\eta=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the phenotypic inheritance rate $\eta$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, H)$ (equation ref) inducing rate $H$ and invading to a population fixed at $\eta=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
+
+![Consecutive fixation of modifiers that decrease the phenotypic inheritance rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean phenotypic inheritance rate over time. Parameters: Phenotypic rate of initial resident modifier allele, 0.1; Fitness values, _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
+
 
 ### _A2B1_ regime
 
