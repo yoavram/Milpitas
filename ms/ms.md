@@ -192,7 +192,7 @@ x^* =
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
-Note that with $\eta=0 \Rightarrow x^* = 1/2$ and with $\eta=1 \Rightarrow x^* = \frac{\sqrt{1+s} - 1}{s}$. 
+Note that with $\eta=0 \Rightarrow x^* = 1/2$ and with $\eta=1 \Rightarrow x^* = \frac{-w + \sqrt{Ww}}{(W-w)$. 
 
 @Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
@@ -242,7 +242,6 @@ in general, $\bar{\omega}^*(\eta)$ is a decreasing function of $\eta$, and is th
 
 ![Consecutive fixation of modifiers that decrease the phenotypic inheritance rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean phenotypic inheritance rate over time. Parameters: Phenotypic rate of initial resident modifier allele, 0.1; Fitness values, _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
-
 ### _A2B1_ regime
 
 In the _A2B1_ regime (every two generations in environment _A_ are followed by a single generation in environment _B_), an analytic approximation is not possible, as solving $x'''-x=0$ requires solving a polynomial of degree 6. However, iterating the relevant recurrence equation:
@@ -290,17 +289,17 @@ In the following, we examine the conditions for a protected polymorphism. In gen
 1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\eta){frac{W-w}{w}}}{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}$.
 1. $x=0$ is a steady equilibrium if $\frac{l}{k} = 1 + (1-\eta)\frac{W-w}{w}$.
 
-#### $W = w$
+#### Neutral evolution: $W = w$
 
 In this case, fitness in both environments is equivalent, there is no selection, and therefore evolution is neutral.
 Indeed, we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
 
-#### $\eta = 0$
+#### No phenotype feedback on inheritance: $\eta = 0$
 
 In this case, there is no feedback between phenotype and inheritance, and only drift generates genetic variance, and evolution is neutral.
 Indeed, we get $f_A(x) = f_B(x) = \equiv 1$.
 
-#### $\eta = 1$
+#### Complete phenotype inheritance: $\eta = 1$
 
 In this case, development is not stochastic, and after one generation the model becomes a standard two-type genetic model. Only genetic drift generates genetic variance, but natural selection does play a role.
 Indeed, we get $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
@@ -312,8 +311,10 @@ $$
 > \end{cases}
 $$
 
-#### Proposition for $k=l$
-If $k=l, W > w > 0, 1 > \eta > 0$, then $f_A^k(0) f_B^l(0) > 1$.
+#### 
+
+#### Result 1: $k=l$
+_If $k=l, W > w > 0, 1 > \eta > 0$, then $f_A^k(0) f_B^l(0) > 1$._
 
 #### Proof
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
@@ -333,10 +334,10 @@ f_A(0) f_B(0) = \\
 which, under the proposition conditions, is _> 1_.
 $\blacksquare$
 
-#### Proposition for $l>k=1$
-If $l > 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$.
+#### Result 2: $l>k=1$
+_If $l > 1 + (1-\eta)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$._
 
-#### Proof
+##### Proof
 
 Set $n = l - 1$. Then,
 
@@ -367,11 +368,11 @@ f_A(0) f_B^{n+1}(0) = \\
 \frac{1+\eta(1-\eta)\frac{(W-w)^2}{Ww}}{1 - n \eta \frac{w-W}{W}} < 1 \\\blacksquare
 \end{multline*}
 
-#### Proposition for general case: $l > k \ge 1$
+#### Result 3: $l > k \ge 1$
 
-If $l > k \Big( 1 + (1 - \eta) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$.
+_If $l > k \Big( 1 + (1 - \eta) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$._
 
-#### Proof
+##### Proof
 
 First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\eta)\frac{W-w}{w}$.
 
@@ -393,11 +394,11 @@ $$
 and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
-#### Proposition
+#### Result 4: $l > k \ge 1$
 
 If $l < k \Big( 1 + \frac{(1-\eta) \frac{W-w}{w}}{1 + \eta (1-\eta) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$.
 
-#### Proof
+##### Proof
 
 Similar to previous proposition, but using a different Bernoulli inequality:
 
@@ -406,9 +407,13 @@ $$\begin{aligned}
 \blacksquare
 \end{aligned}$$
 
-## Random environments
+#### Summary of results
 
-Consider a random environmental regime in which the fitness of phenotypes _A_ and _B_ at generation $t$ are $1+s_t$ and $1$, respectively, where the random variables $s_t \; (t=0, 1, 2, ...)$ are independent and identically distributed (i.i.d) and there are positive constants _C_ and _D_ such that $P(C \le s_t \le D) = 1$.
+TODO
+
+## Stochastic environments
+
+Consider a stochastic environment in which the fitness of phenotypes _A_ and _B_ at generation $t$ are $1+s_t$ and $1$, respectively, where the random variables $s_t \; (t=0, 1, 2, ...)$ are independent and identically distributed (i.i.d) and there are positive constants _C_ and _D_ such that $P(C \le s_t \le D) = 1$.
 
 The recurrence for this model can be rewritten as (based on @eq:recurrence0):
 $$
