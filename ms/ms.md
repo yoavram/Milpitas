@@ -98,7 +98,7 @@ and _y_ is that probability for a random individual with allele _M_:
 | fitness    | $\omega_A$ | $\omega_B$    | $\omega_A$ | $\omega_B$    |
 | rate | $\eta$   | $\eta$      | _H_   | _H_      |
 
-and therefore the population recursion is (based on @eq:recurrence0):
+and therefore the population recurrence is (based on @eq:recurrence0):
 
 $$\begin{aligned}
 x' = x \frac{x (1-\eta) (\omega_A - \omega_B) + \eta \omega_A + (1-\eta)\omega_B}{\bar{\omega}_{m}} \\
@@ -116,27 +116,16 @@ q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 
 We start with a constant environment $\epsilon_t=A \; \forall t$, such that $\omega_A = W > w = \omega_B$. 
 
-### Proposition for $\eta=0$
+### Special cases
 
-If $\eta = 0$ then any $x \in [0,1]$ solves $x'=x$.
+- Neutral evolution: If $W = w$ then any $x \in [0,1]$ solves $x'=x$.
+- No phenotype feedback on inheritance: If $\eta = 0$ then any $x \in [0,1]$ solves $x'=x$.
 
-### Proof
-
-Set $x'=x, \eta=0$ in @Eq:recurrence0 $\blacksquare$
-
-### Proposition for $W=w$
-
-If $W = w$ then any $x \in [0,1]$ solves $x'=x$.
-
-### Proof
-
-Set $W = w > 0, x' = x \ne 0$ in @Eq:recurrence0 $\blacksquare$
-
-### Proposition for general case
+### General case
 
 If $\eta > 0$ and $\omega_A > \omega_B$, then $x = 1$ is the only solution for $x'=x$ and the recurrence converges to $x = 1$ for any initial $x>0$.
 
-### Proof
+#### Proof
 
 Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\eta)(\omega_A - \omega_B)x + \eta \omega_A + (1-\eta)\omega_B$ and $g(x) = (\omega_A - \omega_B)x + \omega_B$.
 
@@ -145,8 +134,7 @@ However, _f_ and _g_ are both linear in _x_ and therefore can only intersect at 
 Indeed, _f_ and _g_ intersect at $x=1$: $f(1)=g(1)=\omega_A$, which means that $x=1$ solves $x'=x$. 
 Since $f(0) = \omega_B + \eta(\omega_A + \omega_B) > \omega_B = g(0)$, we can deduce that $\forall x<1, \; f(x) > g(x) \Rightarrow x' > x$.
 
-Therefore, $x \to x'$ is strictly monotone transformation in $x \in (0,1)$ (@Fig:recurrence_example), and the recurrence converges to 1 for any initial value $0 < x< 1$
-$\blacksquare$
+Therefore, $x \to x'$ is strictly monotone transformation in $x \in (0,1)$ (@Fig:recurrence_example), and the recurrence converges to 1 for any initial value $0 < x< 1$. $\blacksquare$
 
 ## Periodic environmental regime
 
@@ -158,7 +146,7 @@ Consider periodic environmental regimes in which both environments occur exactly
 
 ### _A1B1_ regime
 
-When the environment changes every generation, we can write the following recursion, which sets $\omega_A=W, \omega_B=w$ in [@Eq:recurrence0] to determine $x'$ and and then sets $\omega_A=w, \omega_B=W$ to determine $x''$:
+When the environment changes every generation, we can write the following recurrence, which sets $\omega_A=W, \omega_B=w$ in [@Eq:recurrence0] to determine $x'$ and and then sets $\omega_A=w, \omega_B=W$ to determine $x''$:
 
 $$\begin{aligned}
 x' = x \frac{x (1-\eta) (W - w) + \eta W + (1-\eta)w}{x (W-w) + w} \\
@@ -192,7 +180,7 @@ x^* =
 \frac{W(1-\eta) - w(3-\eta) + \sqrt{(1-\eta)^2 (W-w)^2 + 4Ww}}{2 (2-\eta) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
-Note that with $\eta=0 \Rightarrow x^* = 1/2$ and with $\eta=1 \Rightarrow x^* = \frac{-w + \sqrt{Ww}}{(W-w)$. 
+Note that $\eta=0 \Rightarrow x^* = 1/2$ and $\eta=1 \Rightarrow x^* = \frac{-w + \sqrt{Ww}}{(W-w)}$. 
 
 @Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with $x$ from iteration of @Eq:recurrenceA1B1 (blue) and with the population mean $\pi$ ($\bar{\pi}$) in Wright-Fisher simulations (orange) for several combinations of $\eta, W, w$. All iterations started with $\bar{\pi}=0.5$; in the WF simulations, population size _N_ is 100,000, the initial population is drawn from $N(0.5, 0.05)$, and the results are based on 50 simulations per parameter set. Note that the x-axis shows every other generation (end of each period). The analytic approximation is good when selection is extreme ($w/W=0$), but over-estimates $\bar{\pi}$ when selection in not extreme ($w/W=0.1$). In both cases the initial population distribution did not affect the results (as long as it wasn't trivial, _i.e._ $\pi=0$, see @Fig:env_A1B1_π0).
 
@@ -422,7 +410,7 @@ $$ {#eq:recurrence_random_env}
 
 The following analysis follows @Karlin1975 (see also @Carja2013).
 
-### _Stochastic local stability_
+### Stochastic local stability
 
 #### Definition
 
@@ -558,6 +546,9 @@ These theorems can be summarized as follows:
 - if $\mathbb{E}[\log{(1+\eta s_t)}] > 0$ then fixation of $x^*=0$ almost never occurs.
 - if the fitness of phenotype _B_ is also a random variable, such that the fitness values of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitness values by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
 - the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
+- @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\eta=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \eta s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0.
+
+![Stochastic local stability. The figure shows $x_{t=10^6}$ the probability for phenotype _A_ after $10^6$ generations, calculated using the recurrence model (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ is $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\eta s_t)}]=0$; according to Theorems 1 and 2 we expect that only below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\eta=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
 
 # Supporting figures {label="S"}
 
