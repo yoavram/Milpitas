@@ -86,8 +86,10 @@ def simulation(N, n, η, ρ, ω0, ω1, π0, ϵ=None, light=False):
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
         π_ = π[t, idx]
-        π_ = (1 - ρ) * (φ == 0).mean() + ρ * (φ[idx] == 0) # confromity
-        π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
+        if ρ >= 0:
+        	π_ = (1 - ρ) * (φ == 0).mean() + ρ * (φ[idx] == 0) # confromity
+        if η >= 0:	
+        	π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
         π[t_, :] = π_
