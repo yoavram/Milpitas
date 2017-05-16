@@ -19,11 +19,11 @@ import numpy as np
 import pandas as pd
 from ultrachronic import repeat
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 env_pattern = re.compile("A(?P<k>\d+)B(?P<l>\d+)")
 
 
-def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None, light=False):
+def simulation(N, n, η, ρ, ω0, ω1, π0, ϵ=None, light=False):
     """Run a single simulation.
     
     Parameters
@@ -34,8 +34,8 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None, light=False):
         number of generations
     η : float
         learning rate, 0 <= η <= 1
-    μ : float
-        mutation rate, 0 <= μ <= 1
+    ρ : float
+        conformity effect, 0 <= ρ <= 1
     ω0, ω1 : float
         two fitness values for the two phenotyes in the two environments, ω > 0
     π0 : function
@@ -86,7 +86,7 @@ def simulation(N, n, η, μ, ω0, ω1, π0, ϵ=None, light=False):
         idx = np.random.choice(N, N, True, ω_t)
         # offspring phenotype probability
         π_ = π[t, idx]
-        π_ = (1 - μ) * π_ + μ * np.random.randint(0, 2, π_.shape) # mutation
+        π_ = (1 - ρ) * (φ == 0).mean() + ρ * (φ[idx] == 0) # confromity
         π_ = (1 - η) * π_ + η * (φ[idx] == 0) # learning
         assert (π_ <= 1).all(), π_[π_ > 1]
         assert (π_ >= 0).all(), π_[π_ < 0]
