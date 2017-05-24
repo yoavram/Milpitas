@@ -51,7 +51,7 @@ x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B
 $$ {#eq:recurrence0}
 
 | Parameter | Description |
-|-----------|-------------|
+|----------|----------------------------------------|
 | N | constant population size |
 | $\phi$ | phenotype,  $\phi_i \in \{A,B\}$ |
 | $\epsilon_t$ | the environment at generation _t_, $\epsilon_t \in \{A, B\}$|
@@ -62,6 +62,8 @@ $$ {#eq:recurrence0}
 | $x_t$| the frequency of phenotype _A_ at time _t_|
 | $\rho$|  parental effect, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
 
+: Model parameters. {#tbl:model_parameters_table}
+
 ## Modifier model
 
 Consider two modifier alleles _m_ and _M_ that induce rates $\rho$ and $\Rho$,
@@ -70,9 +72,11 @@ and _y_ is that probability for a random individual with allele _M_:
 
 |      | mA  | mB     | MA  | MB     |
 |------|-----|--------|-----|--------|
-| freq.    | $p \cdot x$  | $p(1-x)$ | $q \cdot y$  | $q(1-y)$ |
+| frequency    | $p \cdot x$  | $p(1-x)$ | $q \cdot y$  | $q(1-y)$ |
 | fitness    | $\omega_A$ | $\omega_B$    | $\omega_A$ | $\omega_B$    |
-| rate | $\rho$   | $\rho$      | $\Rho$   | $\Rho$      |
+| parental effect rate | $\rho$   | $\rho$      | $\Rho$   | $\Rho$      |
+
+: Modifier model. {#tbl:modifier_model_table}
 
 and therefore the population recurrence is (based on @eq:recurrence0):
 
