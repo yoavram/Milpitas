@@ -3,6 +3,7 @@ version=`git rev-parse --short HEAD`
 md=ms/ms.md
 pdf=ms/ms.pdf
 docx=ms/ms.docx
+latex=ms/ms.latex
 template=./ms/template.latex
 
 main_bib=/Users/yoavram/Documents/library.bib
@@ -32,6 +33,9 @@ $(docx): $(md) $(ms_bib) $(diagram_pdf)
 $(pdf): $(md) $(ms_bib) $(diagram_pdf) $(template)
 	pandoc $< -o $@ $(pandoc_opts)
 	@open $(pdf)
+
+$(latex): $(md) $(ms_bib) $(diagram_pdf)
+	pandoc $< -o $@ $(pandoc_opts)
 
 $(diagram_pdf): $(diagram_dot)
 	dot $< -Tpdf -Kdot -o$@
