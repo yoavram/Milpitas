@@ -16,7 +16,7 @@ chapDelim: ""
 
 We model evolution of a constant finite size population with non-overlapping generations using a Wright-Fisher model [@Otto2007, ch. 13.4]  with natural selection, inheritance, and random genetic drift.
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype at time _t_ is $\epsilon_t$. The fitness of the phenotype $\phi$ at time _t_ is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype at time _t_ is $\epsilon_t$. The fitness of an individual with phenotype $\phi$ at time _t_ is:
 
 $$
 \omega_{\phi} = \begin{cases}
@@ -33,16 +33,18 @@ P(\phi' = A) = \begin{cases}
 \end{cases},
 $$ {#eq:inheritance_rule}
 
-where $\rho$ and $1-\rho$ are the parental and group effects. 
-That is, with probability $\rho$ the offspring will inherit its phenotype from its parent phenotype, and with probability $1-\rho$ the offspring will inherit its phenotype from a random individual in the parent population.
+where $\rho$ and $1-\rho$ are the parental and group effect rates. 
+That is, with probability $\rho$ the offspring will inherit its phenotype from its parent phenotype, and with probability $1-\rho$ the offspring will inherit its phenotype from a random individual in the parent population. In other words, offspring have a probability of $1-\rho$ to switch to phenotype copied randomly from the parental population.
 
 As usual in a Wright-Fisher model, we assume that parents produce a very large number of gametes from which the next generation is uniformly sampled, such that random genetic drift can be modeled using binomial sampling.
 Note that when $\rho=1$, our model degenerates to a standard Wright-Fisher model with selection and random genetic drift [@Otto2007, ch. 13.4].
 
-This deterministic recurrence equation that describes the expected frequency of phenotype _A_ in the next generation given the frequency _x_ in the current generation is (@Fig:recurrence_example):
+The following recurrence equation describes $x'$ the expected frequency of phenotype _A_ in the next generation given _x_ the frequency of phenotype _A_ in the current generation (@Fig:recurrence_example):
+
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\rho)x + \rho) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\rho)x,
 $$ {#eq:recurrence}
+
 where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on $\epsilon_t$, and the mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
 
 @Eq:recurrence can be reorganized to:
@@ -66,7 +68,7 @@ $$ {#eq:recurrence0}
 
 ## Modifier model
 
-Consider two modifier alleles _m_ and _M_ that induce rates $\rho$ and $\Rho$,
+Consider two modifier alleles _m_ and _M_ that induce parental effect rates $\rho$ and $\Rho$,
 and denote their frequencies by _p_ and _q_ ($p+q=1$). _x_ is the probability that a random individual with modifier allele _m_ is _A_,
 and _y_ is that probability for a random individual with allele _M_:
 
@@ -302,11 +304,11 @@ x^* =
 
 Note that $\rho=0 \Rightarrow x^* = 1/2$ and $\rho=1 \Rightarrow x^* = \frac{-w + \sqrt{Ww}}{(W-w)}$. 
 
-@Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with deterministic iterations of @Eq:recurrenceA1B1 (blue) and the average of stochastic Wright-Fisher simulations (orange) for several combinations of $\rho, W, w$. 
-All iterations started with $x=0.5$; in the WF simulations, population size _N_ is 100,000, and the results are based on 50 simulations per parameter set. 
+@Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with deterministic iterations of @Eq:recurrenceA1B1 (blue) and the average of stochastic Wright-Fisher simulations (orange) for several combinations of $\rho$, _W_, and _w_. 
+Iterations and simulations started with $x=0.5$; in the WF simulations, the population size is _N=100,000_, and the results are based on 100 simulations per parameter set. 
 Note that the x-axis shows every other generation (end of each period).
 
-![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), deterministic iteration (blue; @eq:recurrenceA1B1), and solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N_=100,000, initial population $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial population $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 #### Evolutionary genetic stability of $\rho=0$
 
@@ -318,13 +320,13 @@ If another modifier allele _M_ appears in low frequency $q \ll 1$ such that init
 To answer this question, we will examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the preferred phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the preferred phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
 Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, 
 and we can write $\lambda$ as a function of the two rates $\rho$ and $\Rho$ using @eq:recurrence_modifiers:
-\begin{multline*}\label{modifiers_lambda}
+\begin{multline}\label{eq:modifiers_lambda}
 \lambda(\rho, \Rho) = \frac{q''}{q} = \frac{q''}{q'} \cdot \frac{q'}{q} = \\
 \frac{y' + (1-y') (1+s)}{x' + (1-x') (1+s)} \cdot 
     \frac{y (1+s) + (1-y)}{x (1+s) + (1-x)} = \\
 \frac{1 + s - s y'}{1 + s - s x'} \cdot \frac{1 + s y}{1 + s x} = \\
 \frac{1 + s + s^2 (1-\Rho) x^* (1-x^*)}{1 + s + s^2 (1-\rho) x^* (1-x^*)},
-\end{multline*}
+\end{multline}
 where both the _m_ and the _M_ populations are initially at the equilibrium value ($x=y=x^*$),
 and we use @eq:recurrence_modifiers to calculate $x', y'$.
 
@@ -353,7 +355,7 @@ Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while intr
 
 ![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the parental effect rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, \Rho)$ (@eq:modifiers_lambda) inducing rate $\Rho$ and invading to a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
 
-![Consecutive fixation of modifiers that decrease the parental effect rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean parental effect rate over time. Parameters: Parental effect rate of initial resident modifier allele, $\rho_0 =0.1$; Fitness values, _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
+![Consecutive fixation of modifiers that decrease the parental effect rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean parental effect rate over time. Parental effect rate of initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
 ### _A2B1_ regime
 
@@ -365,7 +367,7 @@ x''' = x'' \frac{x'' (1-\rho) (w-W) + \rho w + (1-\rho)W}{x'' (w-W) + W}
 \end{aligned}$$ {#eq:recurrenceA2B1}
 provides similar results: the equilibrium value fits the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-estimates the equilibrium otherwise (@Fig:env_A2B1). **TODO**
 
-![Frequency of phenotype _A_ in environment regime _A2B1_. Comparison of Wright-Fisher simulations (orange; average of >65 simulations) and recurrence equation iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N_=100,000, initial population $\pi_i \sim Uniform(0,1)$.](figures/env_A2B1.pdf){#fig:env_A2B1}
+![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 99% confidence interval) and a deterministic iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
 #### Summary of results
 
@@ -513,7 +515,7 @@ These theorems can be summarized as follows:
 - the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
 - @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0.
 
-![Stochastic local stability. The figure shows $x_{t=10^6}$ the probability for phenotype _A_ after $10^6$ generations, calculated using the recurrence model (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ is $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to Theorems 1 and 2 we expect that only below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
+![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ is $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
 
 # Supporting figures {label="S"}
 
@@ -521,7 +523,5 @@ These theorems can be summarized as follows:
 - @Fig:env_A1B1_π0
 
 ![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
-
-![Frequency of phenotype _A_ in environment regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of >100 simulations), recurrence equation iteration (blue; @eq:recurrenceA1B1), and the equilibrium value (dashed green; @eq:recurrenceA1B1_solution_x_star).  Initial phenotype frequency: (A) $x=0.01$; (B) $x=0.5$; (C) $x=0.99$; (D) ??. Parameters: _W_=1, $\rho$=0.1, _N_=100,000.](figures/env_A1B1_π0.pdf){#fig:env_A1B1_π0}
 
 # References {-}
