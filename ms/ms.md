@@ -16,12 +16,12 @@ chapDelim: ""
 
 # Model {-}
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $\Epsilon \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $\epsilon \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
 
 $$
 \omega_{\phi} = \begin{cases}
-W, & \phi = \Epsilon \\
-w, & \phi \ne \Epsilon
+W, & \phi = \epsilon \\
+w, & \phi \ne \epsilon
 \end{cases},
 $$ {#eq:fitness_rule}
 
@@ -57,10 +57,10 @@ $$ {#eq:recurrence0}
 |----------|----------------------------------------|
 | N | constant population size |
 | $\phi$ | phenotype,  $\phi_i \in \{A,B\}$ |
-| $\Epsilon$ | the  phenotype favored in the current environment, $\Epsilon \in \{A, B\}$|
-| $W$ | individual fitness when phenotype and environment match, $\phi = \Epsilon$ |
-| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne \Epsilon$ |
-| $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = \Epsilon} + w \cdot 1_{\phi \ne \Epsilon}$ |
+| $\epsilon$ | the  phenotype favored in the current environment, $\epsilon \in \{A, B\}$|
+| $W$ | individual fitness when phenotype and environment match, $\phi = \epsilon$ |
+| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne \epsilon$ |
+| $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = \epsilon} + w \cdot 1_{\phi \ne \epsilon}$ |
 | $\bar{\omega}$ | population mean fitness |
 | $x$| the frequency of phenotype _A_|
 | $\rho$| parental effect rate, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
@@ -83,7 +83,7 @@ Note that when $\rho=1$, our model simplifies to a standard Wright-Fisher model 
 
 ## Modifier model
 
-Consider two modifier alleles _m_ and _M_ that induce parental effect rates $\rho$ and $\Rho$,
+Consider two modifier alleles _m_ and _M_ that induce parental effect rates $\rho$ and $P$,
 and denote their frequencies by _p_ and _q_ ($p+q=1$). _x_ is the probability that a random individual with modifier allele _m_ is _A_,
 and _y_ is that probability for a random individual with allele _M_:
 
@@ -91,7 +91,7 @@ and _y_ is that probability for a random individual with allele _M_:
 |------|-----|--------|-----|--------|
 | frequency    | $p \cdot x$  | $p(1-x)$ | $q \cdot y$  | $q(1-y)$ |
 | fitness    | $\omega_A$ | $\omega_B$    | $\omega_A$ | $\omega_B$    |
-| parental effect rate | $\rho$   | $\rho$      | $\Rho$   | $\Rho$      |
+| parental effect rate | $\rho$   | $\rho$      | $P$   | $P$      |
 
 : Modifier model. {#tbl:modifier_model_table}
 
@@ -99,7 +99,7 @@ and therefore the population recurrence is (based on @eq:recurrence0):
 
 $$\begin{aligned}
 x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{\bar{\omega}_{m}} \\
-y' = y \frac{y (1-\Rho) (\omega_A - \omega_B) + \Rho \omega_A + (1-\Rho)\omega_B}{\bar{\omega}_{M}} \\
+y' = y \frac{y (1-P) (\omega_A - \omega_B) + P \omega_A + (1-P)\omega_B}{\bar{\omega}_{M}} \\
 p' = p \frac{x \omega_A + (1-x) \omega_B}{\bar{\omega}} \\
 q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 \bar{\omega} = p \bar{\omega}_{m}  + q \bar{\omega}_{M} \\
@@ -183,7 +183,7 @@ Second, with no parental effect ($\rho = 0$),
 only drift changes the phenotype frequency, and evolution is neutral.
 Indeed, we get $f_A(x) = f_B(x) \equiv 1$.
 
-Third, with full parental effect ($\rho = 1$), the model becomes a standard two-type Wright-Fisher model. 
+Third, with full parental effect ($\rho = 1$), the model becomes a standard two-type selection model. 
 We get $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
 $$
 \begin{cases}
@@ -215,7 +215,7 @@ which, under the proposition conditions, is _> 1_.
 $\blacksquare$
 
 **Result.**
-_If $k=1$ and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable _
+_If $k=1$ and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable._
 
 **Proof.**
 Set $n = l - 1$. Then,
@@ -229,6 +229,7 @@ n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
 \end{multline}
 
 Now, $w < W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we get $-1 \le \rho \frac{w-W}{W} \le 0$. These conditions allow us to use the following Bernoulli inequality (proof with induction):
+
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
 $$ {#eq:bernoulli1}
@@ -256,9 +257,9 @@ First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightar
 
 Now, using the previous proposition,
 $$
-f_A^k(0) f_B^l(0) = \\
-f_A^k(0) f_B^{(n+1)k}(0) = \\
-(f_A(0) f_B^{n+1}(0))^k < 1
+f_{A}^{k}(0) f_{B}^{l}(0) = \\
+f_{A}^{k}(0) f_{B}^{(n+1)k}(0) = \\
+(f_{A}(0) f_B^{n+1}(0))^{k} < 1
 $$
 because $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
 
@@ -268,7 +269,6 @@ f_A^k(0) f_B^l(0) < \\
 f_A^k(0) f_B^{(n+1)k}(0) = \\
 (f_A(0) f_B^{n+1}(0))^k < 1
 $$
-
 and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
@@ -336,28 +336,28 @@ If another modifier allele _M_ appears in low frequency $q \ll 1$ such that init
 
 To answer this question, we will examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the preferred phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the preferred phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
 Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, 
-and we can write $\lambda$ as a function of the two rates $\rho$ and $\Rho$ using @eq:recurrence_modifiers:
+and we can write $\lambda$ as a function of the two rates $\rho$ and $P$ using @eq:recurrence_modifiers:
 \begin{multline}\label{eq:modifiers_lambda}
-\lambda(\rho, \Rho) = \frac{q''}{q} = \frac{q''}{q'} \cdot \frac{q'}{q} = \\
+\lambda(\rho, P) = \frac{q''}{q} = \frac{q''}{q'} \cdot \frac{q'}{q} = \\
 \frac{y' + (1-y') (1+s)}{x' + (1-x') (1+s)} \cdot 
     \frac{y (1+s) + (1-y)}{x (1+s) + (1-x)} = \\
 \frac{1 + s - s y'}{1 + s - s x'} \cdot \frac{1 + s y}{1 + s x} = \\
-\frac{1 + s + s^2 (1-\Rho) x^* (1-x^*)}{1 + s + s^2 (1-\rho) x^* (1-x^*)},
+\frac{1 + s + s^2 (1-P) x^* (1-x^*)}{1 + s + s^2 (1-\rho) x^* (1-x^*)},
 \end{multline}
 where both the _m_ and the _M_ populations are initially at the equilibrium value ($x=y=x^*$),
 and we use @eq:recurrence_modifiers to calculate $x', y'$.
 
-For $1 > \Rho > \rho = 0$, we have $x^* = x^{**} = \frac{1}{2}$, which leads to
-$\lambda(0,\Rho) = 1 - \Rho(\frac{s}{2+s})^2 < 1$.
+For $1 > P > \rho = 0$, we have $x^* = x^{**} = \frac{1}{2}$, which leads to
+$\lambda(0,P) = 1 - P(\frac{s}{2+s})^2 < 1$.
 
-For $\rho = 1 > \Rho > 0$, we have $x^* = \frac{\sqrt{1+s}-1}{s}, x^{**}=x^* \sqrt{1+s}$, which leads to $\lambda(1, \Rho) = 1 + (1-\Rho)\frac{(\sqrt{1+s}-1)^2}{\sqrt{1+s}} > 1$.
+For $\rho = 1 > P > 0$, we have $x^* = \frac{\sqrt{1+s}-1}{s}, x^{**}=x^* \sqrt{1+s}$, which leads to $\lambda(1, P) = 1 + (1-P)\frac{(\sqrt{1+s}-1)^2}{\sqrt{1+s}} > 1$.
 
 More generally,
 $$
-\frac{\partial }{\partial \Rho} \lambda(\rho, \Rho) = 
+\frac{\partial }{\partial P} \lambda(\rho, P) = 
 \frac{-s^2 x (1-x)}{1 + s + s^2 (1-\rho) x^*(1-x^*)} < 0,
 $$
-and because $\lambda(\rho, \rho)= 1$, we can deduce that if $\Rho<\rho$ then $\lambda(\rho, \Rho) > 1$ and _M_ can invade _m_; and vice verse, if $\Rho>\rho$ then $\lambda(\rho, \Rho) < 1$ and _m_ cannot be invaded by _M_ (@Fig:A1B1_EGS_eta_0 B). 
+and because $\lambda(\rho, \rho)= 1$, we can deduce that if $P<\rho$ then $\lambda(\rho, P) > 1$ and _M_ can invade _m_; and vice verse, if $P>\rho$ then $\lambda(\rho, P) < 1$ and _m_ cannot be invaded by _M_ (@Fig:A1B1_EGS_eta_0 B). 
 It follows that in the _A1B1_ regime, the only parental effect that can lead to evolutionary genetic stability [@Lessard1990] is $\rho=0$ - no parental effect and complete group conformity.
 
 Note that the stable population mean fitness after each _AB_ cycle as a function of $\rho$ is (@Fig:A1B1_EGS_eta_0 A):
@@ -370,7 +370,7 @@ whereas with $\rho=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0
 in general, $\bar{\omega}^*(\rho)$ is a decreasing function of $\rho$, and is therefore maximized at $\rho=0$ (@Fig:A1B1_EGS_eta_0). 
 Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower inheritance rates shows that these invading modifiers are successful in sequentially reducing the parental effect towards zero, but only after the populations is established around $x=0.5$ (@Fig:A1B1_modifier_invasions A).
 
-![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the parental effect rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, \Rho)$ (@eq:modifiers_lambda) inducing rate $\Rho$ and invading to a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
+![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the parental effect rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, P)$ (@eq:modifiers_lambda) inducing rate $P$ and invading to a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
 
 ![Consecutive fixation of modifiers that decrease the parental effect rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean parental effect rate over time. Parental effect rate of initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
@@ -490,8 +490,11 @@ $$
 Also, 
 $$
 x_{t+1} = x_t \frac{x_t (1-\rho) s_t + \rho (1+s_t) + 1 - \rho}{1 + s_t x_t} < C \cdot x_t,
+
 $$
+
 where $C \in \mathbb{R}$ is independent of $t$; it follows that there exists $0 < \delta < \delta'$ such that:
+
 $$
 x_0 < \delta \Rightarrow x_t < \delta', \; \forall t=0, 1, 2, ..., T-1.
 $$
