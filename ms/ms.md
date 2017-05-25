@@ -16,26 +16,16 @@ chapDelim: ""
 
 # Model {-}
 
-## Wright-Fisher model
-
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype in the current environment is $\Epsilon$, which can be a random variable. The fitness of an individual with phenotype $\phi$ in the current environment is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $\Epsilon \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
 
 $$
 \omega_{\phi} = \begin{cases}
 W, & \phi = \Epsilon \\
 w, & \phi \ne \Epsilon
 \end{cases},
-$$
+$$ {#eq:fitness_rule}
 
 and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$, where _x_ is the frequency of phenotype _A_.
-
-The fitness determines the relative expected number of offspring an individual will have. The actual number of offspring also depends on random genetic drift, modeled using binomial sampling. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is:
-
-$$
-{N \choose k}
-\Big(x \frac{\omega_A}{\bar{\omega}}\Big)^k 
-\Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
-$$
 
 An offspring will inherit its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$. In other words, phenotypes are transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ to switch to a random phenotype from the parental population.
 Thus, given the parent phenotype is $\phi$ (assuming uni-parental inheritance) and the frequency of phenotype _A_ in the parental population is _x_, the probability that the phenotype $\phi'$ of an offspring is _A_ is:
@@ -47,8 +37,6 @@ P(\phi' = A) = \begin{cases}
 $$ {#eq:inheritance_rule}
 
 where $\rho$ and $1-\rho$ are the parental and group effect rates. 
-
-Note that when $\rho=1$, our model simplifies to a standard Wright-Fisher model with selection and random genetic drift [@Otto2007, ch. 13.4].
 
 ## Deterministic model
 
@@ -62,6 +50,8 @@ $$ {#eq:recurrence}
 $$
 x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{x (\omega_A - \omega_B) + \omega_B}.
 $$ {#eq:recurrence0}
+
+\pagebreak
 
 | Parameter | Description |
 |----------|----------------------------------------|
@@ -78,6 +68,18 @@ $$ {#eq:recurrence0}
 : Model parameters. {#tbl:model_parameters_table}
 
 ![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
+
+## Stochastic model
+
+To include the effect of random genetic drift, we add a binomial sampling after each generation, as common in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is:
+
+$$
+{N \choose k}
+\Big(x \frac{\omega_A}{\bar{\omega}}\Big)^k 
+\Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
+$$ {#eq:genetic_drift_rule}
+
+Note that when $\rho=1$, our model simplifies to a standard Wright-Fisher model with selection and random genetic drift.
 
 ## Modifier model
 
@@ -116,7 +118,7 @@ First, in the case of neutral evolution ($W = w$) then any $x \in [0,1]$ is an (
 Second, if there is no parental effect $\rho=0$ and selection cannot affect the population because inheritance is independent from reproduction; in this case, again, any $x \in [0,1]$ is an (unstable) equilibrium.
 
 **Result: constant environment.**
-In general, if $1 \ge \rho > 0$ and $\omega_A > \omega_B$, then $x^** = 1$ is the equilibrium and all the individuals will eventually have phenotype _A_ for any initial $x>0$.
+In general, if $1 \ge \rho > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the equilibrium and all the individuals will eventually have phenotype _A_ for any initial $x>0$.
 
 **Proof.**
 Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\rho)(\omega_A - \omega_B)x + \rho \omega_A + (1-\rho)\omega_B$ and $g(x) = (\omega_A - \omega_B)x + \omega_B$.
@@ -170,7 +172,8 @@ This, starting very close to zero ($x_0 \sim 0$), the multiplicative change over
 If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (due to $l \ge k$), then we have a protected polymorphism somewhere ($0 < x(t) < 1$ for any generation _t_). In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is stable and the protected polymorphism disappears.
 
 In the following, we examine the conditions for a protected polymorphism. In general, we find that:
-1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+
+1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
 1. $x=0$ is a steady equilibrium if $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
 
 We start with some trivial cases. 
@@ -178,7 +181,7 @@ First, with neutral evolution ($W = w$), we find that $f_A(x) = f_B(x) \equiv 1$
 
 Second, with no parental effect ($\rho = 0$),
 only drift changes the phenotype frequency, and evolution is neutral.
-Indeed, we get $f_A(x) = f_B(x) = \equiv 1$.
+Indeed, we get $f_A(x) = f_B(x) \equiv 1$.
 
 Third, with full parental effect ($\rho = 1$), the model becomes a standard two-type Wright-Fisher model. 
 We get $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
@@ -191,7 +194,7 @@ $$
 $$
 
 **Result.**
-_If $k=l, W > w > 0, 1 > \rho > 0$, then $f_A^k(0) f_B^l(0) > 1$._
+_If $k=l, W > w > 0, 1 > \rho > 0$, then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
@@ -212,7 +215,7 @@ which, under the proposition conditions, is _> 1_.
 $\blacksquare$
 
 **Result.**
-_If $k=1$ and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$._
+_If $k=1$ and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable _
 
 **Proof.**
 Set $n = l - 1$. Then,
@@ -220,11 +223,12 @@ Set $n = l - 1$. Then,
 \begin{multline}\label{eq:l_g_k_eq_1_A}
 n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
  n \rho \frac{W-w}{W}  > \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-1 - n \rho \frac{w-W}{W} > 1 + \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+1 + n \rho \frac{W-w}{W} > 1 + \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
+1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 + n \rho \frac{W-w}{W}} \\
 1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}} \\
 \end{multline}
 
-Now, $W > w \Rightarrow 1 \ge \frac{W-w}{W} \ge 0$, and together with $1 \ge \rho \ge 0$ we get $0 \ge \rho \frac{w-W}{W} \ge -1$. These conditions allow us to use the following Bernoulli inequality (proof with induction):
+Now, $w < W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we get $-1 \le \rho \frac{w-W}{W} \le 0$. These conditions allow us to use the following Bernoulli inequality (proof with induction):
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
 $$ {#eq:bernoulli1}
@@ -245,7 +249,7 @@ f_A(0) f_B^{n+1}(0) = \\
 \end{multline*}
 
 **Result.**
-_If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$._
+_If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable._
 
 **Proof.**
 First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\rho)\frac{W-w}{w}$.
@@ -269,7 +273,7 @@ and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
 **Result.**
-_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$._
+_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
 Similar to previous proposition, but using a different Bernoulli inequality:
