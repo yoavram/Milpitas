@@ -13,7 +13,7 @@ csl=ms/evolution.csl
 diagram_dot = src/model_diagram.dot
 diagram_pdf = figures/model_diagram.pdf
 
-pandoc_opts=-r markdown+simple_tables+table_captions+yaml_metadata_block -s -S --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --toc --template=$(template) --variable=version:$(version) --variable geometry:a4paper
+pandoc_opts=-r markdown+simple_tables+table_captions+yaml_metadata_block -s -S --filter pandoc-crossref --filter pandoc-citeproc --bibliography=$(ms_bib) --csl $(csl) --toc --template=$(template) --variable=version:$(version) --variable geometry:a4paper --latex-engine=xelatex 
 
 list:
 	@sh -c "$(MAKE) -p no_targets__ | awk -F':' '/^[a-zA-Z0-9][^\$$#\/\\t=]*:([^=]|$$)/ {split(\$$1,A,/ /);for(i in A)print A[i]}' | grep -v '__\$$' | grep -v 'make\[1\]' | grep -v 'Makefile' | sort"
@@ -30,7 +30,7 @@ $(docx): $(md) $(ms_bib) $(diagram_pdf)
 	@open $(docx)
 
 $(pdf): $(md) $(ms_bib) $(diagram_pdf) $(template)
-	pandoc $< -o $@ --latex-engine=xelatex $(pandoc_opts)
+	pandoc $< -o $@ $(pandoc_opts)
 	@open $(pdf)
 
 $(diagram_pdf): $(diagram_dot)
