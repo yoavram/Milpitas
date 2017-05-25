@@ -16,12 +16,12 @@ chapDelim: ""
 
 # Model {-}
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $\epsilon \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $E \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
 
 $$
 \omega_{\phi} = \begin{cases}
-W, & \phi = \epsilon \\
-w, & \phi \ne \epsilon
+W, & \phi = E \\
+w, & \phi \ne E
 \end{cases},
 $$ {#eq:fitness_rule}
 
@@ -57,10 +57,10 @@ $$ {#eq:recurrence0}
 |----------|----------------------------------------|
 | N | constant population size |
 | $\phi$ | phenotype,  $\phi_i \in \{A,B\}$ |
-| $\epsilon$ | the  phenotype favored in the current environment, $\epsilon \in \{A, B\}$|
-| $W$ | individual fitness when phenotype and environment match, $\phi = \epsilon$ |
-| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne \epsilon$ |
-| $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = \epsilon} + w \cdot 1_{\phi \ne \epsilon}$ |
+| $E$ | the  phenotype favored in the current environment, $E \in \{A, B\}$|
+| $W$ | individual fitness when phenotype and environment match, $\phi = E$ |
+| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne E$ |
+| $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = E} + w \cdot 1_{\phi \ne E}$ |
 | $\bar{\omega}$ | population mean fitness |
 | $x$| the frequency of phenotype _A_|
 | $\rho$| parental effect rate, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
@@ -490,7 +490,6 @@ $$
 Also, 
 $$
 x_{t+1} = x_t \frac{x_t (1-\rho) s_t + \rho (1+s_t) + 1 - \rho}{1 + s_t x_t} < C \cdot x_t,
-
 $$
 
 where $C \in \mathbb{R}$ is independent of $t$; it follows that there exists $0 < \delta < \delta'$ such that:
