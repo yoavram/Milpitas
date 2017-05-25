@@ -12,20 +12,33 @@ chaptersDepth: 1
 chapDelim: ""
 ---
 
+\newpage
+
 # Model {-}
 
-We model evolution of a constant finite size population with non-overlapping generations using a Wright-Fisher model [@Otto2007, ch. 13.4]  with natural selection, inheritance, and random genetic drift.
+## Wright-Fisher model
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype in the current environment is $\Epsilon$. The fitness of an individual with phenotype $\phi$ in the current environment is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype in the current environment is $\Epsilon$, which can be a random variable. The fitness of an individual with phenotype $\phi$ in the current environment is:
 
 $$
 \omega_{\phi} = \begin{cases}
 W, & \phi = \Epsilon \\
 w, & \phi \ne \Epsilon
-\end{cases}.
+\end{cases},
 $$
 
-The probability that the offspring phenotype $\phi'$ is _A_ depends on the parent phenotype $\phi$ (assuming uni-parental inheritance) and on the frequency of the phenotypes in the population (_x_ for _A_ and _1-x_ for _B_):
+and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$, where _x_ is the frequency of phenotype _A_.
+
+The fitness determines the relative expected number of offspring an individual will have. The actual number of offspring also depends on random genetic drift, modeled using binomial sampling. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is:
+
+$$
+{N \choose k}
+\Big(x \frac{\omega_A}{\bar{\omega}}\Big)^k 
+\Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
+$$
+
+An offspring will inherit its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$. In other words, phenotypes are transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ to switch to a random phenotype from the parental population.
+Thus, given the parent phenotype is $\phi$ (assuming uni-parental inheritance) and the frequency of phenotype _A_ in the parental population is _x_, the probability that the phenotype $\phi'$ of an offspring is _A_ is:
 $$
 P(\phi' = A) = \begin{cases}
 (1-\rho) x + \rho, & \phi = A \\
@@ -34,18 +47,16 @@ P(\phi' = A) = \begin{cases}
 $$ {#eq:inheritance_rule}
 
 where $\rho$ and $1-\rho$ are the parental and group effect rates. 
-That is, with probability $\rho$ the offspring will inherit its phenotype from its parent phenotype, and with probability $1-\rho$ the offspring will inherit its phenotype from a random individual in the parent population. In other words, offspring have a probability of $1-\rho$ to switch to phenotype copied randomly from the parental population.
 
-As usual in a Wright-Fisher model, we assume that parents produce a very large number of gametes from which the next generation is uniformly sampled, such that random genetic drift can be modeled using binomial sampling.
-Note that when $\rho=1$, our model degenerates to a standard Wright-Fisher model with selection and random genetic drift [@Otto2007, ch. 13.4].
+Note that when $\rho=1$, our model simplifies to a standard Wright-Fisher model with selection and random genetic drift [@Otto2007, ch. 13.4].
 
-The following recurrence equation describes $x'$ the expected frequency of phenotype _A_ in the next generation given _x_ the frequency of phenotype _A_ in the current generation (@Fig:recurrence_example):
+## Deterministic model
+
+The following recurrence equation describes $x'$, the expected frequency of phenotype _A_ in the next generation, given that the frequency of phenotype _A_ in the current generation is _x_ (@Fig:recurrence_example):
 
 $$
-x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\rho)x + \rho) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\rho)x,
+x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\rho)x + \rho) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\rho)x.
 $$ {#eq:recurrence}
-
-where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on favored phenotype $\Epsilon$, and the mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
 
 @Eq:recurrence can be reorganized to:
 $$
@@ -98,10 +109,10 @@ q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 
 ## Constant environment
 
-We start with a constant environment favoring phenotype _A_ ($\Epsilon = A$), such that $\omega_A = W > w = \omega_B$. We are looking for $x^*$ the equilibrium frequency of phenotype _A_ such that $x'=x$ (@eq:recurrence).
+We start with a constant environment favoring phenotype _A_, such that $\omega_A = W > w = \omega_B$. We are looking for $x^*$ the equilibrium frequency of phenotype _A_ such that $x'=x$ (@eq:recurrence).
 
 We start with a some trivial cases.
-First, in case of neutral evolution ($W = w$) then any $x \in [0,1]$ is an (unstable) equilibrium.
+First, in the case of neutral evolution ($W = w$) then any $x \in [0,1]$ is an (unstable) equilibrium.
 Second, if there is no parental effect $\rho=0$ and selection cannot affect the population because inheritance is independent from reproduction; in this case, again, any $x \in [0,1]$ is an (unstable) equilibrium.
 
 **Result: constant environment.**
