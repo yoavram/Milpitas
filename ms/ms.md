@@ -16,12 +16,12 @@ chapDelim: ""
 
 We model evolution of a constant finite size population with non-overlapping generations using a Wright-Fisher model [@Otto2007, ch. 13.4]  with natural selection, inheritance, and random genetic drift.
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype at time _t_ is $\epsilon_t$. The fitness of an individual with phenotype $\phi$ at time _t_ is:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment in which the preferred phenotype in the current environment is $\Epsilon$. The fitness of an individual with phenotype $\phi$ in the current environment is:
 
 $$
 \omega_{\phi} = \begin{cases}
-W, & \phi = \epsilon_t \\
-w, & \phi \ne \epsilon_t
+W, & \phi = \Epsilon \\
+w, & \phi \ne \Epsilon
 \end{cases}.
 $$
 
@@ -45,7 +45,7 @@ $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\rho)x + \rho) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\rho)x,
 $$ {#eq:recurrence}
 
-where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on $\epsilon_t$, and the mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
+where $\omega_A$ and $\omega_B$ are the fitness values of phenotypes _A_ and _B_ in the parental generation, depending on favored phenotype $\Epsilon$, and the mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
 
 @Eq:recurrence can be reorganized to:
 $$
@@ -56,15 +56,17 @@ $$ {#eq:recurrence0}
 |----------|----------------------------------------|
 | N | constant population size |
 | $\phi$ | phenotype,  $\phi_i \in \{A,B\}$ |
-| $\epsilon_t$ | the environment at generation _t_, $\epsilon_t \in \{A, B\}$|
-| $W$ | individual fitness when phenotype and environment match, $\phi = \epsilon_t$ |
-| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne \epsilon_t$ |
-| $\omega_{\phi}$ | fitness of phenotype $\phi$ at time _t_, $\omega_{\phi}=W \cdot 1_{\phi = \epsilon_t} + w \cdot 1_{\phi \ne \epsilon_t}$ |
+| $\Epsilon$ | the  phenotype favored in the current environment, $\Epsilon \in \{A, B\}$|
+| $W$ | individual fitness when phenotype and environment match, $\phi = \Epsilon$ |
+| $w$ | individual fitness when phenotype and environment do not match, $\phi \ne \Epsilon$ |
+| $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = \Epsilon} + w \cdot 1_{\phi \ne \Epsilon}$ |
 | $\bar{\omega}$ | population mean fitness |
-| $x_t$| the frequency of phenotype _A_ at time _t_|
-| $\rho$|  parental effect, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
+| $x$| the frequency of phenotype _A_|
+| $\rho$| parental effect rate, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
 
 : Model parameters. {#tbl:model_parameters_table}
+
+![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
 ## Modifier model
 
@@ -96,7 +98,7 @@ q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 
 ## Constant environment
 
-We start with a constant environment $\epsilon_t=A \; \forall t$, such that $\omega_A = W > w = \omega_B$. We are looking for $x^*$ the equilibrium frequency of phenotype _A_ such that $x'=x$ (@eq:recurrence).
+We start with a constant environment favoring phenotype _A_ ($\Epsilon = A$), such that $\omega_A = W > w = \omega_B$. We are looking for $x^*$ the equilibrium frequency of phenotype _A_ such that $x'=x$ (@eq:recurrence).
 
 We start with a some trivial cases.
 First, in case of neutral evolution ($W = w$) then any $x \in [0,1]$ is an (unstable) equilibrium.
@@ -516,12 +518,5 @@ These theorems can be summarized as follows:
 - @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0.
 
 ![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ is $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
-
-# Supporting figures {label="S"}
-
-- @Fig:recurrence_example
-- @Fig:env_A1B1_π0
-
-![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
 # References {-}
