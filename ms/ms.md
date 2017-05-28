@@ -233,9 +233,7 @@ n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
 1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}} \\
 \end{multline}
 
-**TODO** dont' switch sign?
-
-Now, if $w < W \$, then $0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we have $-1 \le \rho \frac{w-W}{W} \le 0$. 
+Now, if $w < W$, then $0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we have $-1 \le \rho \frac{w-W}{W} \le 0$. 
 These conditions allow us to use the following Bernoulli inequality (proof by induction):
 
 $$
@@ -441,7 +439,7 @@ $$
 \frac{1}{t} (\log{x_{t}} - \log{x_{0}}) = 
 \frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\rho s_n)}} + 
 \frac{1}{t} \sum_{n=0}^{t-1}{\log{\Big(1 - x_n \frac{\rho s_n (1+s_n)}{(1+\rho s_n)(1+x_n s_n)} \Big)}}
-$$
+$$ {#eq:summation_yields}
 
 Let $\mu = \mathbb{E}[\log{(1+\rho s_t)}]$.
 Because $\{s_t\}_{t \ge 0}$ are i.i.d. random variables, the strong law of large numbers (SLLN) applies and almost surely
@@ -460,18 +458,18 @@ we can deduce that
 $$
 \lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{\Big(1 - x_n \frac{\rho s_n (1+s_n)}{(1+\rho s_n)(1+x_n s_n)} \Big)}}} = 0 ,
 $$
-so that
+so that we can take the limit of @eq:summation_yields to get
 $$
 \lim_{t \to \infty}{\frac{1}{t} \Big(\log{x_{t}(\xi)} - 
 \log{x_{0}(\xi)}\Big)} = \mu.
 $$
 
-However, the hypothesis states that $\mu  > 0$, implying that $\lim_{t \to \infty}{x_{t}(\xi)} = \infty$ which is incompatible with the assumption @eq:T1_assumption. Therefore we must have
+However, the hypothesis states that $\mu  > 0$, implying that $\lim_{t \to \infty}{x_{t}(\xi)} = \infty$ (as $x_t \sim x_0 e^{\mu t}$ for large _t_) which is incompatible with the assumption (@eq:T1_assumption). Therefore we must have
 $$
 P(\lim_{t \to \infty}{x_{t}} = 0) = 0. \; \blacksquare
 $$
 
-**Q: DOES THIS (=0) CONTRADICT ALMOST CERTAINLY AT (18)? MF**
+**Q: Why not just $P(\lim_{t \to \infty}{x_{t}} = 0) < 1$ as contradiction to @eq:T1_assumption? How do we get $P(...) = 0$?**
 
 Thus, for $x^*=0$ to be _stochastically locally stable_, it is necessary that $\mathbb{E}[\log{(1+\rho s_t)}] \le 0$. Furthermore, we can prove that the strict inequality is sufficient.
 
