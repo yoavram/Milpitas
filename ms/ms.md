@@ -16,8 +16,7 @@ chapDelim: ""
 
 # Model {-}
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $E \in \{A, B\}$, which can be a random variable. The fitness of an individual with phenotype $\phi \in \{A, B\}$ in the current environment is:
-
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $E \in \{A, B\}$. In environment $E=A$ the fitness of phenotypes _A_ and _B_ are _W_ and _w_, respectively; in environment $E=B$ the fitness of phenotypes _A_ and _B_ are reversed:
 $$
 \omega_{\phi} = \begin{cases}
 W, & \phi = E \\
@@ -27,7 +26,7 @@ $$ {#eq:fitness_rule}
 
 and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$, where _x_ is the frequency of phenotype _A_.
 
-An offspring will inherit its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$. In other words, phenotypes are transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ to switch to a random phenotype from the parental population.
+An offspring inherits its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$. In other words, phenotypes are transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ of copying a random phenotype from the parental population.
 Thus, given the parent phenotype is $\phi$ (assuming uni-parental inheritance) and the frequency of phenotype _A_ in the parental population is _x_, the probability that the phenotype $\phi'$ of an offspring is _A_ is:
 $$
 P(\phi' = A) = \begin{cases}
@@ -36,17 +35,20 @@ P(\phi' = A) = \begin{cases}
 \end{cases},
 $$ {#eq:inheritance_rule}
 
-where $\rho$ and $1-\rho$ are the parental and group effect rates. 
+where $\rho$ and $1-\rho$ are the parental and group effect rates.
+The formulation in @eq:inheritance_rule is analogous to a
+combination of _vertical_ and _oblique transmission_ as defined by @Cavalli-Sforza1981. 
+
 
 ## Deterministic model
 
-The following recurrence equation describes $x'$, the expected frequency of phenotype _A_ in the next generation, given that the frequency of phenotype _A_ in the current generation is _x_ (@Fig:recurrence_example):
+The following recursion describes $x'$, the expected frequency of phenotype _A_ in the next generation, given that the frequency of phenotype _A_ in the current generation is _x_ (@Fig:recurrence_example):
 
 $$
 x' = x \cdot \frac{\omega_A}{\bar{\omega}} \cdot ((1-\rho)x + \rho) + (1-x) \cdot \frac{\omega_B}{\bar{\omega}} \cdot (1-\rho)x.
 $$ {#eq:recurrence}
 
-@Eq:recurrence can be reorganized to:
+@Eq:recurrence can be reorganized:
 $$
 x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{x (\omega_A - \omega_B) + \omega_B}.
 $$ {#eq:recurrence0}
@@ -67,11 +69,11 @@ $$ {#eq:recurrence0}
 
 : Model parameters. {#tbl:model_parameters_table}
 
-![Comparison of the recurrence transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
+![Comparison of the transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
 ## Stochastic model
 
-To include the effect of random genetic drift, we add a binomial sampling after each generation, as common in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is:
+To include the effect of random drift, we carry out a binomial sampling after each generation, as in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is
 
 $$
 {N \choose k}
@@ -79,13 +81,16 @@ $$
 \Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
 $$ {#eq:genetic_drift_rule}
 
-Note that when $\rho=1$, our model simplifies to a standard Wright-Fisher model with selection and random genetic drift.
+Note that when $\rho=1$, this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift.
 
 ## Modifier model
 
-Consider two modifier alleles _m_ and _M_ that induce parental effect rates $\rho$ and $P$,
+Consider two modifier alleles _m_ and _M_ that produce parental effect rates $\rho$ and $P$,
 and denote their frequencies by _p_ and _q_ ($p+q=1$). _x_ is the probability that a random individual with modifier allele _m_ is _A_,
-and _y_ is that probability for a random individual with allele _M_:
+and _y_ is that probability for a random individual with allele _M_.
+Table 2 shows the pheno-haplotype [REF] frequencies assuming that the 
+phenotypes \(A/B\) and parental effect rate control locus \(M/m\) are 
+independent.
 
 |      | mA  | mB     | MA  | MB     |
 |------|-----|--------|-----|--------|
@@ -95,7 +100,7 @@ and _y_ is that probability for a random individual with allele _M_:
 
 : Modifier model. {#tbl:modifier_model_table}
 
-and therefore the population recurrence is (based on @eq:recurrence0):
+The population recurrence is (based on @eq:recurrence0):
 
 $$\begin{aligned}
 x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{\bar{\omega}_{m}} \\
@@ -111,14 +116,12 @@ q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
 
 ## Constant environment
 
-We start with a constant environment favoring phenotype _A_, such that $\omega_A = W > w = \omega_B$. We are looking for $x^*$ the equilibrium frequency of phenotype _A_ such that $x'=x$ (@eq:recurrence).
-
-We start with a some trivial cases.
-First, in the case of neutral evolution ($W = w$) then any $x \in [0,1]$ is an (unstable) equilibrium.
-Second, if there is no parental effect $\rho=0$ and selection cannot affect the population because inheritance is independent from reproduction; in this case, again, any $x \in [0,1]$ is an (unstable) equilibrium.
+First consider a constant environment favoring phenotype _A_, such that $\omega_A = W > w = \omega_B$. We seek $x^*$, the equilibrium frequency of phenotype _A_, such that $x'=x$ in (@eq:recurrence), and begin with some trivial cases.
+First, in the neutral case ($W = w$), any $x \in [0,1]$ is an (unstable) equilibrium.
+Second, if there is no parental effect $\rho=0$ and selection cannot affect the population because inheritance is independent of reproduction. In this case, again, any $x \in [0,1]$ is an (unstable) equilibrium.
 
 **Result: constant environment.**
-In general, if $1 \ge \rho > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the equilibrium and all the individuals will eventually have phenotype _A_ for any initial $x>0$.
+If $1 \ge \rho > 0$ and $\omega_A > \omega_B$, then $x^* = 1$ is the equilibrium and all the individuals will eventually have phenotype _A_ for any initial $x>0$.
 
 **Proof.**
 Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\rho)(\omega_A - \omega_B)x + \rho \omega_A + (1-\rho)\omega_B$ and $g(x) = (\omega_A - \omega_B)x + \omega_B$.
@@ -126,35 +129,37 @@ Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\rho
 Clearly, $x'=x$ if and only if $f(x)=g(x)$ or $x=0$. 
 However, _f_ and _g_ are both linear in _x_ and therefore can only intersect at one point.
 Indeed, _f_ and _g_ intersect at $x=1$: $f(1)=g(1)=\omega_A$, which means that $x=1$ solves $x'=x$. 
-Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$, we can deduce that $\forall x<1, \; f(x) > g(x) \Rightarrow x' > x$.
+Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$, we can deduce that if $x<1$ then $f(x) > g(x)$ and hence $x' > x$.
 
-Therefore, $x \to x'$ is strictly monotone transformation in $x \in (0,1)$ (@Fig:recurrence_example), and the recurrence converges to 1 for any initial value $0 < x< 1$. $\blacksquare$
+Therefore, $x \to x'$ is a strictly monotone transformation for $x \in (0,1)$ (@Fig:recurrence_example), and the recursion converges to 1 for any initial value $0 < x< 1$. $\blacksquare$
 
 ## Periodic environmental regime
 
-Consider periodic environmental regimes in which both environments occur exactly the same number of generations in each "period". Simple examples are _A1B1=ABABABAB..._, in which the environment switches every generation every generation from _A_ to _B_ and vice versa, or _A2B1=AABAABAAB..._ in which the every two _A_ are followed by a single _B_. In general, _AkBl_ denotes an environmental regime in which the period is of length _k+l_ and composed of exactly _k_ generations of environment _A_ followed by _l_ generations on environment _B_ (however, our general result applies for any permutation of these _k+l_ environments).
+Consider periodic environmental regimes in which both environments occur  for exactly the same number of generations during each "period".
+Simple examples are _A1B1=ABABABAB..._, in which the environment switches every generation from fitnesses _W_ and _w_ for phenotypes _A_ to _B_ to fitnesses _w_ and _W_, or _A2B1=AABAABAAB..._ where every two environments favoring phenotype _A_ are followed by a single environment favoring phenotype _B_.
+In general, _AkBl_ denotes an environmental regime in which the period is of length _k+l_ and is composed of exactly _k_ generations of an environment favoring phenotype _A_, followed by _l_ generations in an environment favoring phenotype _B_. However, our general result applies for any permutation of these _k+l_ environments.
 
 ### _AkBl_ regime
 
-What can we say about the more general case of _k_ generations in environment _A_ and _l_ generations in _B_?
-We investigate conditions for the the existence of a _protected polymorphism_ [@Prout1968], in which neither phenotype can become extinct. 
+What can be said about the more general case of _k_ generations in environment _A_ and _l_ generations in _B_?
+We investigate conditions for the the existence of a _protected polymorphism_ [@Prout1968], in which neither phenotype can //become extinct//disappear//. 
 Environments _A_ and _B_ select for $x=1$ and $x=0$, respectively, 
 and these are absorbing states: if all individuals are _A_, for example, then all offspring will be _A_, too. 
 Mathematically, we examine the stability of $x=0$ and $x=1$; 
-if both are unstable, then a protected polymorphism occurs. 
-Intuitively, this will happen if neither environment occurs frequently enough to fix its preferred phenotype. 
+if both are unstable, then there is a protected polymorphism occurs. 
+Intuitively, this will happen if neither environment occurs frequently enough to fix the phenotype that if favored in that environment.
 
-We rewrite @Eq:recurrence0 as $x'=x \cdot f_A(x)$ in environment _A_ and $x'=x \cdot f_B(x)$ in environment _B_, where:
+Rewrite @Eq:recurrence0 as $x'=x \cdot f_A(x)$ in environment _A_ and $x'=x \cdot f_B(x)$ in environment _B_, where:
 $$\begin{aligned}
 f_A(x) = \frac{x (1-\rho)(W - w) + \rho W + (1-\rho)w}{x (W - w) + w} \\
 f_B(x) = \frac{x (1-\rho)(w - W) + \rho w + (1-\rho)W}{x (w - W) + W}
 \end{aligned}$$
 
-We assume $l \ge k$ and check whether $x=0$ is stable, because (i) if $x=0$ is not stable when $l \ge k$ then $x=1$ cannot be stable either, as selection is stronger, on the whole, towards 0; and (ii) checking the other case (stability of $x=1$ when $k \ge l$) is symmetric, and can be done in the same way by writing a recurrence equation for the frequency _y_ of phenotype _B_ and examining the stability of $y=0$. 
+To be specific, assume $l \ge k$ and check whether $x=0$ is stable, because (i) if $x=0$ is not stable when $l \ge k$ then $x=1$ cannot be stable either, as selection is, on the whole, stronger towards 0; and (ii) checking the other case (stability of $x=1$ when $k \ge l$) is symmetric, and can be done in the same way by writing a recurrence equation for the frequency _y_ of phenotype _B_ and checking the stability of $y=0$. 
 
 To check whether $x=0$ is stable, we start with a value very close to 0 and check whether after a period of _k+l_ generations the population is closer to or farther from 0 compared to where it started. This determines the local stability of $x=0$.
 
-For $x_0 = x(t=0) \sim 0$, we can use a linear approximation of the form $f_A(x_0) = f_A(0) + o(x_0)$ and $f_B(x_0) = f_B(0) + o(x_0)$, where:
+For $x_0 = x(t=0) \sim 0$, we use a linear approximation of the form $f_A(x_0) = f_A(0) + o(x_0)$ and $f_B(x_0) = f_B(0) + o(x_0)$, where:
 $$\begin{aligned}
 f_A(0) =  1+\rho(\frac{W-w}{w}) \\
 f_B(0) =  1+\rho(\frac{w-W}{W})
@@ -167,34 +172,34 @@ x_0 f_A^k(0) f_B^l(0) \Rightarrow \\
 \frac{x_{k+l}}{x_0} \approx f_A^k(0) f_B^l(0).
 \end{aligned}$$
 
-This, starting very close to zero ($x_0 \sim 0$), the multiplicative change over the _k+l_ generations can be approximated by $f_A^k(0) f_B^l(0)$.
+Thus, starting close enough to zero ($x_0 \sim 0$), the multiplicative change over the _k+l_ generations can be approximated by $f_A^k(0) f_B^l(0)$.
 
-If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (due to $l \ge k$), then we have a protected polymorphism somewhere ($0 < x(t) < 1$ for any generation _t_). In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is stable and the protected polymorphism disappears.
+If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (since $l \ge k$), there is a protected polymorphism ($0 < x(t) < 1$ for any generation _t_). 
+In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is locally stable.
 
 In the following, we examine the conditions for a protected polymorphism. In general, we find that:
 
 1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
-1. $x=0$ is a steady equilibrium if $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
+1. $x=0$ is a stable equilibrium if $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
 
 We start with some trivial cases. 
-First, with neutral evolution ($W = w$), we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
+First, in the neutral case ($W = w$), we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
 
-Second, with no parental effect ($\rho = 0$),
-only drift changes the phenotype frequency, and evolution is neutral.
+Second, with no parental effect ($\rho = 0$), the phenotype frequency does not change.
 Indeed, we get $f_A(x) = f_B(x) \equiv 1$.
 
-Third, with full parental effect ($\rho = 1$), the model becomes a standard two-type selection model. 
-We get $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
+Third, with full parental effect ($\rho = 1$), the model becomes a standard two-allele model with $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. 
+Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
 $$
 \begin{cases}
 < 1 &, k < l \\
 = 1 &, k = l \\
 > 1 &, k > l
-> \end{cases}
+\end{cases}
 $$
 
 **Result.**
-_If $k=l, W > w > 0, 1 > \rho > 0$, then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is locally unstable and there is a protected polymorphism._
+_If $k=l, W > w > 0, 1 > \rho > 0$, then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is locally unstable. In this case there is a protected polymorphism._
 
 **Proof.**
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
@@ -208,14 +213,14 @@ f_A(0) f_B(0) = \\
 (1-\rho)^2 +\rho^2 +\rho(1-\rho)(\frac{W}{w}+\frac{w}{W}) = \\
 1 - 2\rho(1-\rho) +\rho(1-\rho)(\frac{W^2+w^2}{Ww}) = \\
 1 + \rho (1-\rho)\frac{W^2 - 2 W w + w^2}{Ww} = \\
-1 + \rho (1-\rho)\frac{(W - w)^2}{W w}
+1 + \rho (1-\rho)\frac{(W - w)^2}{W w} > 1
 \end{multline*}
 
-which, under the proposition conditions, is _> 1_.
+if $1 > \rho > 0, W > w$.
 $\blacksquare$
 
 **Result.**
-_If $k=1$ and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable._
+_If $k=1$, $W > w$, and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$, and $x^*=0$ is locally stable._
 
 **Proof.**
 Set $n = l - 1$. Then,
@@ -228,7 +233,10 @@ n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
 1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}} \\
 \end{multline}
 
-Now, $w < W \Rightarrow 0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we get $-1 \le \rho \frac{w-W}{W} \le 0$. These conditions allow us to use the following Bernoulli inequality (proof with induction):
+**TODO** dont' switch sign?
+
+Now, if $w < W \$, then $0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we have $-1 \le \rho \frac{w-W}{W} \le 0$. 
+These conditions allow us to use the following Bernoulli inequality (proof by induction):
 
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
@@ -250,10 +258,10 @@ f_A(0) f_B^{n+1}(0) = \\
 \end{multline*}
 
 **Result.**
-_If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$ and $x^*=0$ is locally stable._
+_If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$, and $x^*=0$ is locally stable._
 
 **Proof.**
-First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k} \Rightarrow n > (1-\rho)\frac{W-w}{w}$.
+First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k}$ so that $n > (1-\rho)\frac{W-w}{w}$.
 
 Now, using the previous proposition,
 $$
@@ -273,13 +281,13 @@ and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
 **Result.**
-_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is locally unstable and there is a protected polymorphism._
+_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
-Similar to previous proposition, but using a different Bernoulli inequality:
+Similarly to the previous proposition, but using a different Bernoulli inequality:
 
 $$\begin{aligned}
-(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R} \smallsetminus (0,1). \\
+(1+x)^n \ge 1+nx, \;\;\; \text{for all} x > -1, \text{and} \in \mathbb{R} \smallsetminus (0,1). \\
 \blacksquare
 \end{aligned}$$
 
@@ -292,12 +300,14 @@ x' = x \frac{x (1-\rho) (W - w) + \rho W + (1-\rho)w}{x (W-w) + w} \\
 x'' = x' \frac{x' (1-\rho) (w - W) + \rho w + (1-\rho)W}{x' (w-W) + W}
 \end{aligned}$$ {#eq:recurrenceA1B1} 
 
-We are looking for solutions to $x''=x$, which involves solving a quartic polynomial. Two solutions are $x=0,1$ (assign to [@Eq:recurrenceA1B1] to check), but there are two other potential solutions which are roots of a quadratic equation $G(x) = 0$ where $G(x) = Ax^2 + Bx + C$.
+We seek solutions to $x''=x$, which involves solving a quartic polynomial. 
+Two solutions are $x=0,1$, but there nay be two other potential solutions, which are roots of a quadratic equation $G(x) = 0$ where $G(x) = Ax^2 + Bx + C$ with
 
-We found the roots of $G(x)$ using _SymPy_ [@SymPyDevelopmentTeam2014]. We can write:
 $$
 A = 1, \; B=- \frac{W (1-\rho) - w (3-\rho)}{(2-\rho)(W - w)}, \; C=- \frac{w}{(2-\rho)(W - w)}.
 $$ {#eq:recurrenceA1B1_solution}
+
+We found the roots of $G(x)$ using _SymPy_ [@SymPyDevelopmentTeam2014].
 
 Since $W > w \ge 0, 1 \ge \rho \ge 0$,
 $$
@@ -319,22 +329,22 @@ x^* =
 \frac{W(1-\rho) - w(3-\rho) + \sqrt{(1-\rho)^2 (W-w)^2 + 4Ww}}{2 (2-\rho) (W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
-Note that $\rho=0 \Rightarrow x^* = 1/2$ and $\rho=1 \Rightarrow x^* = \frac{-w + \sqrt{Ww}}{(W-w)}$. 
+Note that if $\rho=0$ then $x^* = 1/2$, and if $\rho=1$ then $x^* = \frac{-w + \sqrt{Ww}}{(W-w)}$. 
 
 @Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with deterministic iterations of @Eq:recurrenceA1B1 (blue) and the average of stochastic Wright-Fisher simulations (orange) for several combinations of $\rho$, _W_, and _w_. 
 Iterations and simulations started with $x=0.5$; in the WF simulations, the population size is _N=100,000_, and the results are based on 100 simulations per parameter set. 
 Note that the x-axis shows every other generation (end of each period).
 
-![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial population $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 #### Evolutionary genetic stability of $\rho=0$
 
-We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers). 
+We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
 Let's assume that _m_ is fixed such that $p=1, q=0$ and that the population is at an equilibrium $x=x^*$ (@eq:recurrenceA1B1_solution_x_star).
 
 If another modifier allele _M_ appears in low frequency $q \ll 1$ such that initially $y=x^*$, can _M_ invade the population and increase in frequency, or is the equilibrium $p=1, x=x^*$ stable?
 
-To answer this question, we will examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the preferred phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the preferred phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
+To answer this question, we examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the preferred phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the preferred phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
 Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, 
 and we can write $\lambda$ as a function of the two rates $\rho$ and $P$ using @eq:recurrence_modifiers:
 \begin{multline}\label{eq:modifiers_lambda}
@@ -344,7 +354,7 @@ and we can write $\lambda$ as a function of the two rates $\rho$ and $P$ using @
 \frac{1 + s - s y'}{1 + s - s x'} \cdot \frac{1 + s y}{1 + s x} = \\
 \frac{1 + s + s^2 (1-P) x^* (1-x^*)}{1 + s + s^2 (1-\rho) x^* (1-x^*)},
 \end{multline}
-where both the _m_ and the _M_ populations are initially at the equilibrium value ($x=y=x^*$),
+where both the _m_ and the _M_ populations are initially at the equilibrium value for environmental regime A1B1 ($x=y=x^*$) as found in @Eq:recurrenceA1B1_solution_x_star,
 and we use @eq:recurrence_modifiers to calculate $x', y'$.
 
 For $1 > P > \rho = 0$, we have $x^* = x^{**} = \frac{1}{2}$, which leads to
@@ -358,7 +368,7 @@ $$
 \frac{-s^2 x (1-x)}{1 + s + s^2 (1-\rho) x^*(1-x^*)} < 0,
 $$
 and because $\lambda(\rho, \rho)= 1$, we can deduce that if $P<\rho$ then $\lambda(\rho, P) > 1$ and _M_ can invade _m_; and vice verse, if $P>\rho$ then $\lambda(\rho, P) < 1$ and _m_ cannot be invaded by _M_ (@Fig:A1B1_EGS_eta_0 B). 
-It follows that in the _A1B1_ regime, the only parental effect that can lead to evolutionary genetic stability [@Lessard1990] is $\rho=0$ - no parental effect and complete group conformity.
+It follows that in the _A1B1_ regime, the only parental effect that can lead to evolutionary genetic stability [@Lessard1990] is $\rho=0$; that is, no parental effect and complete group conformity.
 
 Note that the stable population mean fitness after each _AB_ cycle as a function of $\rho$ is (@Fig:A1B1_EGS_eta_0 A):
 $$
@@ -368,21 +378,21 @@ $$ {#eq:A1B1_mean_fitness}
 With $\rho=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
 whereas with $\rho=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$; 
 in general, $\bar{\omega}^*(\rho)$ is a decreasing function of $\rho$, and is therefore maximized at $\rho=0$ (@Fig:A1B1_EGS_eta_0). 
-Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower inheritance rates shows that these invading modifiers are successful in sequentially reducing the parental effect towards zero, but only after the populations is established around $x=0.5$ (@Fig:A1B1_modifier_invasions A).
+Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower inheritance rates shows that these invading modifiers sequentially reduce the parental effect towards zero, but only when successive modifier alleles are introduced near $x=0.5$ (@Fig:A1B1_modifier_invasions A).
 
-![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the parental effect rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, P)$ (@eq:modifiers_lambda) inducing rate $P$ and invading to a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
+![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the parental effect rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, P)$ (@eq:modifiers_lambda) with rate $P$ invading a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
 
 ![Consecutive fixation of modifiers that decrease the parental effect rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). Every time a modifier allele fixes (frequency>99.9%), a new modifier allele is introduces with a rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean parental effect rate over time. Parental effect rate of initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
 ### _A2B1_ regime
 
-In the _A2B1_ regime (every two generations in environment _A_ are followed by a single generation in environment _B_), an analytic solution is not possible, as solving $x'''-x=0$ requires solving a polynomial of degree 6. However, iterating the relevant recurrence equation:
+In the _A2B1_ regime (every two generations which phenotype _A_ is favored are followed by a single generation in environment in which phenotype _B_ is favored), an analytic solution is not possible, as solving $x'''-x=0$ requires solving a polynomial of degree 6. However, iterating the relevant recurrence equation:
 $$\begin{aligned}
 x' = x \frac{x (1-\rho) (W-w) + \rho W + (1-\rho)w}{x (W-w) + w} \\
 x'' = x' \frac{x' (1-\rho) (W-w) + \rho W + (1-\rho)w}{x' (W-w) + w} \\
 x''' = x'' \frac{x'' (1-\rho) (w-W) + \rho w + (1-\rho)W}{x'' (w-W) + W}
 \end{aligned}$$ {#eq:recurrenceA2B1}
-provides similar results: the equilibrium value fits the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-estimates the equilibrium otherwise (@Fig:env_A2B1). **TODO**
+provides similar results: the equilibrium value is close to the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-estimates the equilibrium otherwise (@Fig:env_A2B1). **TODO**
 
 ![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 99% confidence interval) and a deterministic iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
@@ -394,12 +404,12 @@ TODO
 
 Consider a stochastic environment in which the fitness of phenotypes _A_ and _B_ at generation $t$ are $1+s_t$ and $1$, respectively, where the random variables $s_t \; (t=0, 1, 2, ...)$ are independent and identically distributed (i.i.d) and there are positive constants _C_ and _D_ such that $P(C \le s_t \le D) = 1$.
 
-The recurrence for this model can be rewritten as (based on @eq:recurrence0):
+The recursion for this model can be rewritten as (based on @eq:recurrence0):
 $$
 x_{t+1} = x_t \frac{1 + \rho s_t + x_t (1-\rho) s_t}{1 + s_t x_t}.
 $$ {#eq:recurrence_random_env}
 
-The following analysis follows @Karlin1975 (see also @Carja2013).
+Our analysis follows @Karlin1975 (see also @Carja2013).
 
 **Definition: stochastic local stability.**
 An equilibrium state $x^*$ is said to be _stochastically locally stable_ if for any $\epsilon>0$ there exists $\delta>0$ such that
@@ -414,7 +424,7 @@ _Suppose $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, then $x^*=0$ is not _stochastical
 and in fact $P(\lim_{t \to \infty}{x_t}=0) = 0$._
 
 **Proof.**
-Rewrite the recurrence (@eq:recurrence_random_env):
+Rewrite the recursion (@eq:recurrence_random_env) as
 $$
 \frac{x_{t+1}}{x_{t}} = (1 + \rho s_t) \Big(1 - x_t \frac{\rho s_t (1+s_t)}{(1+\rho s_t)(1+x_t s_t)} \Big)
 $$
@@ -461,6 +471,8 @@ $$
 P(\lim_{t \to \infty}{x_{t}} = 0) = 0. \; \blacksquare
 $$
 
+**Q: DOES THIS (=0) CONTRADICT ALMOST CERTAINLY AT (18)? MF**
+
 Thus, for $x^*=0$ to be _stochastically locally stable_, it is necessary that $\mathbb{E}[\log{(1+\rho s_t)}] \le 0$. Furthermore, we can prove that the strict inequality is sufficient.
 
 **Result.**
@@ -468,7 +480,7 @@ _Suppose $\mathbb{E}[\log{(1+\rho s_t)}] < 0$,
 then $x^*=0$ is _stochastically locally stable_._
 
 **Proof.**
-Let $\mu = \mathbb{E}[\log{(1+\rho s_t)}]$, so that $\mu<0$. 
+Let $\mu = \mathbb{E}[\log{(1+\rho s_t)}] < 0$. 
 Because $\{s_t\}_{t \ge 0}$ are i.i.d. random variables, the SLLN applies and almost surely
 $$
 \lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\rho s_n)}}} = \mu.
@@ -478,7 +490,7 @@ Appealing to the _Severini–Egoroff theorem_,
 for any $\epsilon > 0$, there exists $T$ such that (remember that $\mu$ is negative):
 $$
 P\Big(\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1 + \rho s_n)}} < \frac{\mu}{2} 
-\; \forall t \ge T \Big) \ge 1 - \epsilon.
+\; \text{for all} t \ge T \Big) \ge 1 - \epsilon.
 $$
 
 Because $0 \le \rho \le 1$ and $\{s_t(\xi)\}_{t \ge 0}$ are uniformly bounded away from zero and infinity, we can find $\delta'>0$ such that:
@@ -495,12 +507,12 @@ $$
 where $C \in \mathbb{R}$ is independent of $t$; it follows that there exists $0 < \delta < \delta'$ such that:
 
 $$
-x_0 < \delta \Rightarrow x_t < \delta', \; \forall t=0, 1, 2, ..., T-1.
+x_0 < \delta \Rightarrow x_t < \delta', \; t=0, 1, 2, ..., T-1.
 $$
 
 Let $\xi$ be a realization of the evolutionary process such that
 $$
-\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1 + \rho s_n(\xi))}} < \frac{\mu}{2} \; \forall t \ge T
+\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1 + \rho s_n(\xi))}} < \frac{\mu}{2} \; \text{for all} t \ge T
 $$ 
 and assume $x_0 < \delta$.
 
@@ -534,6 +546,6 @@ These theorems can be summarized as follows:
 - the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
 - @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0.
 
-![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ is $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
+![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ are $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
 
 # References {-}
