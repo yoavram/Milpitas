@@ -10,6 +10,9 @@ abstract: |
 chapters: True
 chaptersDepth: 1
 chapDelim: ""
+header-includes:
+    - \usepackage{lineno}
+    - \linenumbers
 ---
 
 \newpage
