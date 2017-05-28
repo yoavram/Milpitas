@@ -450,7 +450,7 @@ $$
 \lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\rho s_n)}}} = \mu.
 $$
 
-Consider $\xi$ such that $\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\rho s_n(\xi))}}} = \mu, C \le s_t(\xi) \le D$ and assume that almost certainly $x^* = 0$, i.e.:
+Consider $\xi$ such that $\lim_{t \to \infty}{\frac{1}{t} \sum_{n=0}^{t-1}{\log{(1+\rho s_n(\xi))}}} = \mu, C \le s_t(\xi) \le D$ (_i.e._ such that the SLLN applies) and assume that:
 $$
 \lim_{t \to \infty}{x_t(\xi)} = 0.
 $$ {#eq:T1_assumption}
@@ -471,8 +471,6 @@ However, the hypothesis states that $\mu  > 0$, implying that $\lim_{t \to \inft
 $$
 P(\lim_{t \to \infty}{x_{t}} = 0) = 0. \; \blacksquare
 $$
-
-**Q: Why not just $P(\lim_{t \to \infty}{x_{t}} = 0) < 1$ as contradiction to @eq:T1_assumption? How do we get $P(...) = 0$?**
 
 Thus, for $x^*=0$ to be _stochastically locally stable_, it is necessary that $\mathbb{E}[\log{(1+\rho s_t)}] \le 0$. Furthermore, we can prove that the strict inequality is sufficient.
 
