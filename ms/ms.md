@@ -1,5 +1,5 @@
 ---
-title: Evolution in fluctuating environments with parental and group effects
+title: Evolution with vertical and oblique transmission in fluctuating environments
 author:
 - Yoav Ram^[Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com]
 - Uri Liberman^[School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il]
@@ -19,7 +19,8 @@ header-includes:
 
 # Model {-}
 
-Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment. The preferred phenotype in the current environment is $E \in \{A, B\}$. In environment $E=A$ the fitness of phenotypes _A_ and _B_ are _W_ and _w_, respectively; in environment $E=B$ the fitness of phenotypes _A_ and _B_ are reversed:
+Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment.
+The favored phenotype in the current environment is $E \in \{A, B\}$. In environment $E=A$ the fitness of phenotypes _A_ and _B_ are _W_ and _w_, respectively; in environment $E=B$ the fitness of phenotypes _A_ and _B_ are reversed:
 $$
 \omega_{\phi} = \begin{cases}
 W, & \phi = E \\
@@ -29,8 +30,9 @@ $$ {#eq:fitness_rule}
 
 and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$, where _x_ is the frequency of phenotype _A_.
 
-An offspring inherits its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$. In other words, phenotypes are transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ of copying a random phenotype from the parental population.
-Thus, given the parent phenotype is $\phi$ (assuming uni-parental inheritance) and the frequency of phenotype _A_ in the parental population is _x_, the probability that the phenotype $\phi'$ of an offspring is _A_ is:
+An offspring inherits its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$.
+In other words, phenotypes are vertically transmitted from parent to offspring, but the offspring has a probability of $1-\rho$ of copying a random phenotype from the parental population.
+Thus, given the parent phenotype is $\phi$ (assuming uni-parental inheritance, which is common [@Zefferman2016]) and the frequency of phenotype _A_ in the parental population is _x_, the probability that the phenotype $\phi'$ of an offspring is _A_ is:
 $$
 P(\phi' = A) = \begin{cases}
 (1-\rho) x + \rho, & \phi = A \\
@@ -38,9 +40,7 @@ P(\phi' = A) = \begin{cases}
 \end{cases},
 $$ {#eq:inheritance_rule}
 
-where $\rho$ and $1-\rho$ are the parental and group effect rates.
-The formulation in @eq:inheritance_rule is analogous to a
-combination of _vertical_ and _oblique transmission_ as defined by @Cavalli-Sforza1981. 
+where $\rho$ and $1-\rho$ are the vertical and oblique transmission rates.
 
 Averaging @eq:inheritance_rule over the population, we get
 
@@ -86,7 +86,7 @@ $$ {#eq:recurrence0}
 | $\omega_{\phi}$ | fitness of phenotype $\phi$ in the current environment, $\omega_{\phi}=W \cdot 1_{\phi = E} + w \cdot 1_{\phi \ne E}$ |
 | $\bar{\omega}$ | population mean fitness |
 | $x$| the frequency of phenotype _A_|
-| $\rho$| parental effect rate, $0 \le \rho \le 1$, such that $1-\rho$ is the group conformity effect|
+| $\rho$| vertical transmission rate, $0 \le \rho \le 1$, such that $1-\rho$ is the oblique transmission rate|
 
 : Model parameters. {#tbl:model_parameters_table}
 
