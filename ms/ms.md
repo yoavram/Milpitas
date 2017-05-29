@@ -42,6 +42,24 @@ where $\rho$ and $1-\rho$ are the parental and group effect rates.
 The formulation in @eq:inheritance_rule is analogous to a
 combination of _vertical_ and _oblique transmission_ as defined by @Cavalli-Sforza1981. 
 
+Averaging @eq:inheritance_rule over the population, we get
+
+\begin{multline*}
+\mathbb{E}[P(\phi' = A)] = \\
+x((1-\rho) x + \rho) + (1-x)(1-\rho)x = \\
+x,
+\end{multline*}
+
+which does not depend on $\rho$ and demonstrates that this inheritance mode is unbiased.
+However, the variance @eq:inheritance_rule is
+
+\begin{multline*}
+\mathbb{V}[P(\phi' = A)] = \\
+\mathbb{E}[P(\phi' = A)^2] - \mathbb{E}^2[P(\phi' = A)] = \\
+\rho^2 x (1-x),
+\end{multline*}
+
+so that the variance increases with the rate of vertical transmission $\rho$, from no variance with only oblique transmission ($\rho=0$) to a Bernoulli distribution variance value of $x(1-x)$ with only vertical transmission ($\rho=1$).
 
 ## Deterministic model
 
