@@ -44,20 +44,20 @@ where $\rho$ and $1-\rho$ are the vertical and oblique transmission rates.
 
 Averaging @eq:inheritance_rule over the population, we get
 
-\begin{multline*}
+$$
 \mathbb{E}[P(\phi' = A)] = \\
 x((1-\rho) x + \rho) + (1-x)(1-\rho)x = \\
 x,
-\end{multline*}
+$$
 
 which does not depend on $\rho$ and demonstrates that this inheritance mode is unbiased.
-However, the variance @eq:inheritance_rule is
+However, the population variance in @eq:inheritance_rule is
 
-\begin{multline*}
+$$
 \mathbb{V}[P(\phi' = A)] = \\
 \mathbb{E}[P(\phi' = A)^2] - \mathbb{E}^2[P(\phi' = A)] = \\
 \rho^2 x (1-x),
-\end{multline*}
+$$
 
 so that the variance increases with the rate of vertical transmission $\rho$, from no variance with only oblique transmission ($\rho=0$) to a Bernoulli distribution variance value of $x(1-x)$ with only vertical transmission ($\rho=1$).
 
@@ -364,7 +364,7 @@ Note that the x-axis shows every other generation (end of each period).
 
 ![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
-#### Evolutionary genetic stability of $\rho=0$
+#### Evolutionary genetic stability of oblique transmission$
 
 We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
 Let's assume that _m_ is fixed such that $p=1, q=0$ and that the population is at an equilibrium $x=x^*$ (@eq:recurrenceA1B1_solution_x_star).
@@ -426,12 +426,12 @@ provides similar results: the equilibrium value is close to the Wright-Fisher si
 
 ![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 99% confidence interval) and a deterministic iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
-#### Summary of results
+#### Summary for periodic environmental regimes
 
-1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
-1. $x=0$ is a stable equilibrium if $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$
-1. An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ regime (@Eq:recurrenceA1B1_solution_x_star).
-1. In the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission $\rho=0$
+1. Phenotypes _A_ and _B_ coexist in a protected polymorphism if the ratio between generations favoring _B_ and those favoring _A_ is $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+1. Phenotype _B_ fixation ($x=0$) is stable if the ratio between generations favoring _B_ and those favoring _A_ is $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
+1. An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ regime is given by (@Eq:recurrenceA1B1_solution_x_star).
+1. In the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission ($\rho=0$).
 
 ## Stochastic environments
 
@@ -569,16 +569,13 @@ Therefore, we have shown that for any $\epsilon > 0$ there exists $\delta>0$
 such that if $x_0 < \delta$, then $P(\lim_{t \to \infty}{x_t} = 0) \ge 1-\epsilon$,
 which proves that $x^*=0$ is _stochastically locally stable_. $\blacksquare$
 
-These theorems can be summarized as follows:
+#### Summary for stochastic environments
 
-- if $\mathbb{E}[\log{(1+\rho s_t)}] < 0$ then fixation of $x^*=0$ is _stochastically locally stable_. **TODO how does $\rho$ affect this?**
-- if $\mathbb{E}[\log{(1+\rho s_t)}] > 0$ then fixation of $x^*=0$ almost never occurs.
-- if the fitness of phenotype _B_ is also a random variable, such that the fitness values of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitness values by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
+- if $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
+- if the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
 - the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
-- @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0.
+- @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0. **TODO: consider changing _s_ or _p_ to $\rho$**.
 
 ![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ are $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
-
-**TODO similar figure for a range of $\rho$ values**
 
 # References {-}
