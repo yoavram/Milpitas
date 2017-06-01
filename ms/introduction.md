@@ -1,3 +1,20 @@
+---
+title: Evolution with vertical and oblique transmission in fluctuating environments
+author:
+- Yoav Ram^[Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com]
+- Uri Liberman^[School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il]
+- Marcus W. Feldman^[Department of Biology, Stanford University, Stanford, CA 94305-5020, mfeldman@stanford.edu; Corresponding author]
+year: 2017
+abstract: |
+    TODO
+chapters: True
+chaptersDepth: 1
+chapDelim: ""
+header-includes:
+    - \usepackage{lineno}
+    - \linenumbers
+---
+
 # Introduction
 
 Since the formation of the _modern synthesis_ in the 1940s, evolutionary biology has mainly focused on genetic inheritance for the transmission of traits between generations [@Laland2014].
@@ -12,10 +29,14 @@ The first examples that come to mind are from non-genetic inheritance systems th
 In contrast, in tribal Iranian populations, vertical transmission of weaving techniques has a larger effect then oblique transmission [@Tehrani2009, more examples therein]. 
 Social learning is also common in birds and mammals, and evidence suggests a role for oblique transmission in inheritance of foraging strategies in dolphins [@Mann2007].
 
-Oblique transmission also occurs in  genetic systems beyond the context of cultural evolution. In bacteria, phenotypes might be determined by heritable mobile genetic elements such as phages [@Zinder1952], plasmids [@Lederberg1946], integrons [@Mazel2006], and transposons [@Salyers2004] (**TODO: CRISPR?**).
+**TODO: niche construction as a form of oblique transmission?**
+
+Another interesting form of oblique transmission is symbiont infection. The microbiome is usually vertically transmitted [@Rosenberg2016], but since pathogens are commonly transmitted between unrelated individuals, leading to infection and severe phenotype change  - disease - it's likely that offspring can be infected with phenotype-determining symboints from non-parent individuals [@Theis2016].
+
+Oblique transmission also occurs through genetic mechanisms. In bacteria, phenotypes might be determined by heritable mobile genetic elements such as phages [@Zinder1952], plasmids [@Lederberg1946], integrons [@Mazel2006], and transposons [@Salyers2004] (**TODO: CRISPR?**).
 Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, _i.e._ transformation [@Milkman1990]. In these cases, phenotype inheritance will combine vertical transmission from the parent cell, and oblique transmission from other cells, even if these oblique transmission mechanisms did not originally evolve for that purpose [@Redfield1993a].
 
-Here, we model the dynamics of a phenotype that is inherited by a combination of vertical and oblique transmission. We study properties of the phenotype steady state frequency in constant and fluctuating environments, and find scenarios in which oblique transmission is likely to evolve.
+Here, we model the dynamics of a phenotype that is inherited by a combination of vertical and oblique transmission. We study properties of the phenotype steady state frequency in constant and fluctuating environments, and find conditions in which oblique transmission is likely to evolve.
 
 # Discussion (_under construction_)
 
