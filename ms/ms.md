@@ -10,6 +10,7 @@ abstract: |
 chapters: True
 chaptersDepth: 1
 chapDelim: ""
+link-citations: true
 header-includes:
     - \usepackage{lineno}
     - \linenumbers
