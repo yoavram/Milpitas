@@ -1,7 +1,14 @@
+import re
+
 from bibtexparser import load as load_bib
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 import click
+
+
+species_pattern = re.compile(
+	r'({\\textless}i{\\textgreater}\w.*?{\\textless}/i{\\textgreater})'
+)
 
 @click.command()
 @click.argument('keys_filename', type=click.Path(exists=True, file_okay=True, dir_okay=False, readable=True))
@@ -21,9 +28,19 @@ def main(keys_filename, bibtex_filename, output_filename, verbose):
 
 	out_bib = BibDatabase()
 	for key in citation_keys:
-		e = main_bib.entries_dict[key]
+		e = main_bib.entries_dict[key]		
+		title = e['title']
+		groups = species_pattern.findall(title)
+		for grp in groups:
+			s = grp.replace(
+				'{\\textless}i{\\textgreater}', ''
+			).replace(
+				'{\\textless}/i{\\textgreater}', ''
+			)
+			s = '\\textit{\\uppercase{' + s[0] + '}' + s[1:] + '}'
+			title = title.replace(grp, s)
+		e['title'] = title		
 		out_bib.entries.append(e)
-	
 	if verbose:
 		print("Writing {} entries to {}".format(len(out_bib.entries), output_filename))
 	writer = BibTexWriter()
