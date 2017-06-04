@@ -18,6 +18,53 @@ header-includes:
 
 \newpage
 
+# Introduction {-}
+
+Since the emergence of the *modern synthesis* in the 1940s, evolutionary
+biology has been structured around genetic inheritance as the mode of
+transmission of traits between generations [@Laland2014].
+Indeed, most evolutionary biology textbooks begin by describing evolution
+through natural selection as a process in which *"genetic changes that
+improve the fitness of individuals will tend to increase in frequency
+over time"* [@Bergstrom2012].
+
+However, it is apparent that in many animals, and especially in humans,
+many traits are transmitted through imitation, teaching and learning,
+and other forms of communication that comprise *cultural evolution*
+[@Cavalli-Sforza1973; @Cavalli-Sforza1981; @Boyd1985; @Avital2000; @Whiten2017; @Laland2017].
+Other phenotype-modifying transmission vehicles have received increasing
+attention over the past two decades [@Jablonka2014], including
+epigenetics [@Verhoeven2016] and symbionts [@Zilber-Rosenberg2008].
+These transmission mechanisms vary in their persistence, speed, timing, and direction when compared to the kind of vertical transmission between parent and offspring that is restricted to genetic inheritance.
+
+Of special interest is *oblique transmission*, in which offspring
+inherit traits from adults that are not their parents [@Cavalli-Sforza1981; @Bergstrom2012, ch. 19.4], for example, by social learning (_e.g._, imitation and teaching [@Kline2013]).
+For example, in a small Amazon society, in which young individuals
+frequently interact with older individuals, transmission of botanical
+knowledge and skills from the parental cohort was more significant than
+transmission from parents [@Reyes-Garcia2009].
+In contrast, in tribal Iranian populations, transmission of weaving techniques from parents has a larger effect then oblique transmission [@Tehrani2009, more examples therein].
+Social learning is also common in birds and mammals [@Creanza2016], and evidence suggests a role for oblique transmission in inheritance of foraging strategies in dolphins [@Mann2007; @Whitehead2014; @Creanza2016].
+
+**TODO: niche construction as a form of oblique transmission?**
+
+Infection with symbionts may also be regarded as a form of oblique
+transmission.
+The microbiome is commonly vertically transmitted [@Rosenberg2016], but pathogens may also be transmitted between unrelated individuals, and can lead to phenotype change in the host.
+Transmission of symbionts from non-parental individuals of the parents’ generation may then be regarded as oblique [@Theis2016].
+
+Oblique transmission also occurs through mechanisms involving DNA.
+In bacteria, phenotypes might be determined by heritable mobile genetic
+elements such as phages [@Zinder1952], plasmids [@Lederberg1946], integrons [@Mazel2006], and transposons [@Salyers2004] (**TODO: CRISPR?**).
+Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, *i.e.* transformation [@Milkman1990].
+In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell, and oblique transmission from other cells, even if the latter did not originally evolve for that purpose [@Redfield1993].
+
+Here, we model the dynamics of a phenotype that is inherited by a
+combination of vertical and oblique transmission. We study properties of
+the steady state phenotypic frequencies of variants in constant and
+fluctuating environments, and find conditions under which oblique
+transmission is likely to evolve.
+
 # Model {-}
 
 Consider a population of _N_ individuals exhibiting one of two phenotypes $\phi=A,B$ evolving in a fluctuating environment.
