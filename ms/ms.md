@@ -21,15 +21,14 @@ header-includes:
 # Introduction {-}
 
 Since the emergence of the *modern synthesis* in the 1940s, evolutionary
-biology has been structured around genetic inheritance as the mode of
-transmission of traits between generations [@Laland2014].
+biology has been structured around genetic inheritance as the transmission mode of traits between generations [@Laland2014].
 Indeed, most evolutionary biology textbooks begin by describing evolution
 through natural selection as a process in which *"genetic changes that
 improve the fitness of individuals will tend to increase in frequency
 over time"* [@Bergstrom2012].
 
 However, it is apparent that in many animals, and especially in humans,
-many traits are transmitted through imitation, teaching and learning,
+many traits are transmitted through imitation, teaching, learning,
 and other forms of communication that comprise *cultural evolution*
 [@Cavalli-Sforza1973; @Cavalli-Sforza1981; @Boyd1985; @Avital2000; @Whiten2017; @Laland2017].
 Other phenotype-modifying transmission vehicles have received increasing
@@ -412,7 +411,7 @@ Note that the x-axis shows every other generation (end of each period).
 
 ![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
-#### Evolutionary genetic stability of oblique transmission$
+#### Evolutionary genetic stability of oblique transmission
 
 We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
 Let's assume that _m_ is fixed such that $p=1, q=0$ and that the population is at an equilibrium $x=x^*$ (@eq:recurrenceA1B1_solution_x_star).
@@ -449,7 +448,7 @@ It follows that in the _A1B1_ regime, the only transmission mode that can lead t
 
 Note that the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_EGS_eta_0 A):
 $$
-\bar{\omega}^*(\rho)=1 + \frac{W(1-\rho)-w(3-\rho)+\sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
+\bar{\omega}^*(\rho)=1 + \frac{(1+s)(1-\rho) - (3-\rho)+\sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
 $$ {#eq:A1B1_mean_fitness}
 
 With $\rho=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
