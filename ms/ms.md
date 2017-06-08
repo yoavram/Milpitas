@@ -417,7 +417,7 @@ Extending @eq:recurrenceA1B1 to include two modifiers, we get the following tran
 $$\begin{aligned}
 T_1 =  \frac{1}{\bar{\omega}^*} \begin{pmatrix}
 W((1-P)x^*+P) & w(1-P)x^* \\
-W(1-P)(1-x^*) & w((1-P)x^*)+P)
+W(1-P)(1-x^*) & w((1-P)(1-x^*) + P)
 \end{pmatrix}
 \\
 T_2 = \frac{1}{\bar{\omega}^{**}} \begin{pmatrix}
@@ -426,7 +426,7 @@ w(1-P)(1-x^{**}) & W((1-P)(1-x^{**})+P)
 \end{pmatrix} = \\
 \frac{1}{\bar{\omega}^{*}} \begin{pmatrix}
 w((1-P)(1-x^*)+P) & W(1-P)(1-x^*) \\
-w(1-P)x^*) & W((1-P)x^*+P)
+w(1-P)x^* & W((1-P)x^*+P)
 \end{pmatrix}
 \\
 T = T_2 \cdot T_1
@@ -434,13 +434,15 @@ T = T_2 \cdot T_1
 
 where $x^{**}=T_1 \cdot x^* = 1-x^*$ and $\bar{\omega}^{**}=x^{**}\omega_A + (1-x^{**})\omega_B$ and therefore $\bar{\omega}^* = \bar{\omega}^{**}$.
 
-The characteristic polynomial of $T$ is $C(\lambda)=det(T-\lamba I)=a_2 \lambda^2 + a_1 \lambda + a_0$, and since $T$ is positive, $C(\lambda)$ has two real roots.
+The characteristic polynomial of $T$ is $C(\lambda)=det(T-\lambda I)=a_2 \lambda^2 + a_1 \lambda + a_0$, and since $T$ is positive, $C(\lambda)$ has two real roots.
 If the largest root is below 1, then _m_ will be stable to invasion by _M_.
 However, if the largest root is above 1, then _m_ is unstable and _M_ can invade _m_.
 $a_2 = 1$ and therefore $C(\lambda)$ is convex.
 $T$ is positive, so $C'(0) < 0$, and therefore at least one root is positive.
 Therefore, if $C(1)<0$ then the largest eigenvalue is > 1 and if $C(1)>0$ and $C'(1)>0$ then the largest eigenvalue is < 1 [@Liberman2011].
 
+Now, $a_1=-(1-P)^2 -\frac{2 W w P}{\bar{\omega^*}^2}$.
+Therefore, $C'(1)=1-(1-P)^2 -\frac{2 W w P}{\bar{\omega^*}^2} = 2P(1-\frac{P}{2}-\frac{Ww}{\bar{\omega^*}^2})$.
 
 ### Obsolete
 
