@@ -155,16 +155,12 @@ Note that when transmission is completely vertical ($\rho=1$), this model simpli
 
 ## Modifier model
 
-Consider two modifier alleles _m_ and _M_ that produce vertical transmission rates $\rho$ and $P$,
-and denote their frequencies by _p_ and _q_ ($p+q=1$). 
-_x_ is the probability that a random individual with modifier allele _m_ is _A_, and _y_ is that probability for a random individual with allele _M_.
-Table 2 shows the pheno-haplotype [REF] frequencies assuming that the 
-phenotypes _A/B_ and vertical transmission rate control locus _M/m_ are 
-independent.
+Consider two modifier alleles _m_ and _M_ that produce vertical transmission rates $\rho$ and $P$.
+The frequencies of the four pheno-genotype, _mA_, _mB_, _MA_, and _MB_ are $x_1$, $x_2$, $x_3$, and $x_4$, respectively (@tbl:modifier_model_table) and their fitness values are determines by the phenotypes (_A_ and _B_) and the environment, same as above.
 
-|      | mA  | mB     | MA  | MB     |
+| pheno-genotype     | mA  | mB     | MA  | MB     |
 |------|-----|--------|-----|--------|
-| frequency    | $p \cdot x$  | $p(1-x)$ | $q \cdot y$  | $q(1-y)$ |
+| frequency    | $x_1$  | $x_2$ | $x_3$  | $x_4$ |
 | fitness    | $\omega_A$ | $\omega_B$    | $\omega_A$ | $\omega_B$    |
 | vertical transmission rate | $\rho$   | $\rho$      | $P$   | $P$      |
 
@@ -173,13 +169,11 @@ independent.
 The population recurrence is (based on @eq:recurrence0):
 
 $$\begin{aligned}
-x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{\bar{\omega}_{m}} \\
-y' = y \frac{y (1-P) (\omega_A - \omega_B) + P \omega_A + (1-P)\omega_B}{\bar{\omega}_{M}} \\
-p' = p \frac{x \omega_A + (1-x) \omega_B}{\bar{\omega}} \\
-q' = q \frac{y \omega_A + (1-y) \omega_B}{\bar{\omega}} \\
-\bar{\omega} = p \bar{\omega}_{m}  + q \bar{\omega}_{M} \\
-\bar{\omega}_{m} = x \omega_A + (1-x) \omega_B \\
-\bar{\omega}_{M} = y \omega_A + (1-y) \omega_B
+\bar{\omega} x_1' = x_1 \omega_A ((1-\rho)(x_1 + x_3)+\rho) + x_2 \omega_B(1-\rho)(x_1 + x_3) \\
+\bar{\omega} x_2' = x_1 \omega_A (1-\rho)(x_2 + x_4) + x_2 \omega_B ((1-\rho)(x_2 + x_4) + \rho) \\
+\bar{\omega} x_3' = x_3 \omega_A ((1-P)(x_1 + x_3) + P) + x_4 \omega_B (1-P)(x_1 + x_3) \\
+\bar{\omega} x_4' = x_3 \omega_A (1-P)(x_2 + x_4) + x_4 \omega_B ((1-P)(x_2 + x_4) + P) \\
+\bar{\omega} = \omega_A (x_1 + x_3) + \omega_B (x_2 + x_4)
 \end{aligned}$$ {#eq:recurrence_modifiers}
 
 # Results {-}
@@ -414,9 +408,41 @@ Note that the x-axis shows every other generation (end of each period).
 #### Evolutionary genetic stability of oblique transmission
 
 We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
-Let's assume that _m_ is fixed such that $p=1, q=0$ and that the population is at an equilibrium $x=x^*$ (@eq:recurrenceA1B1_solution_x_star).
+Let's assume that _m_ is fixed and that the population is at an equilibrium such that $\vec{x}=(x_1,x_2,x_3,x_4)=(x^*, 1-x^*,0,0)$ (see @eq:recurrenceA1B1_solution_x_star for the value of $x^*$).
 
-If another modifier allele _M_ appears in low frequency $q \ll 1$ such that initially $y=x^*$, can _M_ invade the population and increase in frequency, or is the equilibrium $p=1, x=x^*$ stable?
+If another modifier allele _M_ appears in low frequency $x_3=\epsilon_3<\epsilon, x_4=\epsilon_4<\epsilon, \epsilon \ll 1$, can _M_ invade the population and increase in frequency, or is the equilibrium $(x^*, 1-x^*,0,0)$ stable?
+
+Extending @eq:recurrenceA1B1 to include two modifiers, we get the following transformation $T$ which approximates the change in $\vec{x}$ after two generations with error of the order of $O(\epsilon)$:
+
+$$\begin{aligned}
+T_1 =  \frac{1}{\bar{\omega}^*} \begin{pmatrix}
+W((1-P)x^*+P) & w(1-P)x^* \\
+W(1-P)(1-x^*) & w((1-P)x^*)+P)
+\end{pmatrix}
+\\
+T_2 = \frac{1}{\bar{\omega}^{**}} \begin{pmatrix}
+w((1-P)x^{**}+P) & W(1-P)x^{**} \\
+w(1-P)(1-x^{**}) & W((1-P)(1-x^{**})+P)
+\end{pmatrix} = \\
+\frac{1}{\bar{\omega}^{*}} \begin{pmatrix}
+w((1-P)(1-x^*)+P) & W(1-P)(1-x^*) \\
+w(1-P)x^*) & W((1-P)x^*+P)
+\end{pmatrix}
+\\
+T = T_2 \cdot T_1
+\end{aligned}$$
+
+where $x^{**}=T_1 \cdot x^* = 1-x^*$ and $\bar{\omega}^{**}=x^{**}\omega_A + (1-x^{**})\omega_B$ and therefore $\bar{\omega}^* = \bar{\omega}^{**}$.
+
+The characteristic polynomial of $T$ is $C(\lambda)=det(T-\lamba I)=a_2 \lambda^2 + a_1 \lambda + a_0$, and since $T$ is positive, $C(\lambda)$ has two real roots.
+If the largest root is below 1, then _m_ will be stable to invasion by _M_.
+However, if the largest root is above 1, then _m_ is unstable and _M_ can invade _m_.
+$a_2 = 1$ and therefore $C(\lambda)$ is convex.
+$T$ is positive, so $C'(0) < 0$, and therefore at least one root is positive.
+Therefore, if $C(1)<0$ then the largest eigenvalue is > 1 and if $C(1)>0$ and $C'(1)>0$ then the largest eigenvalue is < 1 [@Liberman2011].
+
+
+### Obsolete
 
 To answer this question, we examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the favored phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the favored phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
 Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, 
@@ -448,7 +474,7 @@ It follows that in the _A1B1_ regime, the only transmission mode that can lead t
 
 Note that the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_EGS_eta_0 A):
 $$
-\bar{\omega}^*(\rho)=1 + \frac{(1+s)(1-\rho) - (3-\rho)+\sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
+\bar{\omega}^*(\rho)=\frac{(1-\rho)(2+s) + \sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
 $$ {#eq:A1B1_mean_fitness}
 
 With $\rho=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
