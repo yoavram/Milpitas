@@ -486,20 +486,20 @@ $$
 \frac{\partial }{\partial P} \lambda(\rho, P) = 
 \frac{-s^2 x (1-x)}{1 + s + s^2 (1-\rho) x^*(1-x^*)} < 0,
 $$
-and because $\lambda(\rho, \rho)= 1$, we can deduce that if the invading modifier _M_ increases the oblique transmission rate $P<\rho$ then $\lambda(\rho, P) > 1$ and _M_ can invade _m_; and vice verse, if the invading modifier _M_ increases the vertical transmission rate $P>\rho$ then $\lambda(\rho, P) < 1$ and _m_ cannot be invaded by _M_ (@Fig:A1B1_EGS_eta_0 B). 
+and because $\lambda(\rho, \rho)= 1$, we can deduce that if the invading modifier _M_ increases the oblique transmission rate $P<\rho$ then $\lambda(\rho, P) > 1$ and _M_ can invade _m_; and vice verse, if the invading modifier _M_ increases the vertical transmission rate $P>\rho$ then $\lambda(\rho, P) < 1$ and _m_ cannot be invaded by _M_.
 It follows that in the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission $\rho=0$.
 
-Note that the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_EGS_eta_0 A):
+Note that the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_mean_fitness):
 $$
 \bar{\omega}^*(\rho)=\frac{(1-\rho)(2+s) + \sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
 $$ {#eq:A1B1_mean_fitness}
 
 With $\rho=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
 whereas with $\rho=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$; 
-in general, $\bar{\omega}^*(\rho)$ is a decreasing function of $\rho$, and is therefore maximized at $\rho=0$ (@Fig:A1B1_EGS_eta_0). 
+in general, $\bar{\omega}^*(\rho)$ is a decreasing function of $\rho$, and is therefore maximized at $\rho=0$ (@Fig:A1B1_mean_fitness). 
 Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower vertical transmission rates and higher and higher oblique transmission rates shows that these invading modifiers sequentially reduce the vertical transmission rate towards zero, but only when successive modifier alleles are introduced near $x=0.5$ (@Fig:A1B1_modifier_invasions A).
 
-![Evolutionary stability of $\rho=0$ in environmental regime _A1B1_. **(A)** Stable population mean fitness (@eq:A1B1_mean_fitness) as a function of the vertical transmission rate $\rho$ and the selection coefficient _s_ of the favorable phenotype. **(B)** The relative change in frequency of a modifier allele  $\lambda(0, P)$ (@eq:modifiers_lambda) with rate $P>0$ invading a population fixed at $\rho=0$ after a full environmental cycle.](figures/A1B1_EGS_eta_0.pdf){#fig:A1B1_EGS_eta_0}
+![The stable population mean fitness in environmental regime _A1B1_, as a function of the vertical transmission rate $\rho$ and the selection coefficient _s_ of the favorable phenotype (@eq:A1B1_mean_fitness).](figures/A1B1_mean_fitness.pdf){#fig:A1B1_mean_fitness}
 
 ![Consecutive fixation of modifiers that decrease the vertical transmission rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
