@@ -198,7 +198,7 @@ Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$, we can de
 
 Therefore, $x \to x'$ is a strictly monotone transformation for $x \in (0,1)$ (@Fig:recurrence_example), and the recursion converges to 1 for any initial value $0 < x< 1$. $\blacksquare$
 
-## Periodic environmental regime
+## Periodically changing environments
 
 Consider periodic environmental regimes in which both phenotypes are favored  for exactly the same number of generations during each "period".
 Simple examples are _A1B1=ABABABAB..._, in which the environment switches every generation from fitnesses _W_ and _w_ for phenotypes _A_ to _B_ to fitnesses _w_ and _W_,
@@ -523,7 +523,7 @@ provides similar results: the equilibrium value is close to the Wright-Fisher si
 1. An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ regime is given by (@Eq:recurrenceA1B1_solution_x_star).
 1. In the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission ($\rho=0$).
 
-## Stochastic environments
+## Randomly changing selection
 
 Consider a stochastic environment in which the fitness of phenotypes _A_ and _B_ at generation $t$ are stochasti $1+s_t$ and $1$, respectively, where the random variables $s_t \; (t=0, 1, 2, ...)$ are independent and identically distributed (i.i.d) and there are positive constants _C_ and _D_ such that $P(C \le s_t \le D) = 1$.
 
@@ -659,7 +659,7 @@ Therefore, we have shown that for any $\epsilon > 0$ there exists $\delta>0$
 such that if $x_0 < \delta$, then $P(\lim_{t \to \infty}{x_t} = 0) \ge 1-\epsilon$,
 which proves that $x^*=0$ is _stochastically locally stable_. $\blacksquare$
 
-#### Summary for stochastic environments
+#### Summary
 
 - if $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
 - if the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
