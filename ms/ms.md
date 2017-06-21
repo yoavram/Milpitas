@@ -108,7 +108,7 @@ $$
 
 so that the variance increases with the rate of vertical transmission $\rho$, from no variance with only oblique transmission ($\rho=0$) to a Bernoulli distribution variance value of $x(1-x)$ with only vertical transmission ($\rho=1$).
 
-## Deterministic model
+## Infinite population model
 
 The following recursion describes $x'$, the expected frequency of phenotype _A_ in the next generation, given that the frequency of phenotype _A_ in the current generation is _x_ (@Fig:recurrence_example):
 
@@ -120,8 +120,6 @@ $$ {#eq:recurrence}
 $$
 x' = x \frac{x (1-\rho) (\omega_A - \omega_B) + \rho \omega_A + (1-\rho)\omega_B}{x (\omega_A - \omega_B) + \omega_B}.
 $$ {#eq:recurrence0}
-
-\pagebreak
 
 | Parameter | Description |
 |----------|----------------------------------------|
@@ -137,7 +135,7 @@ $$ {#eq:recurrence0}
 
 : Model parameters. {#tbl:model_parameters_table}
 
-![Comparison of the transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
+![Comparison of the transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.5, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
 ## Finite size population model
 
@@ -406,7 +404,7 @@ $$ {#eq:A1B1_mean_fitness}
 Iterations and simulations started with $x=0.5$; in the WF simulations, the population size is _N=100,000_, and the results are based on 100 simulations per parameter set. 
 Note that the x-axis shows every other generation (end of each period).
 
-![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of 100 simulations), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=100,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 #### Evolutionary stability of oblique transmission
 
@@ -512,7 +510,7 @@ x''' = x'' \frac{x'' (1-\rho) (w-W) + \rho w + (1-\rho)W}{x'' (w-W) + W}
 \end{aligned}$$ {#eq:recurrenceA2B1}
 provides similar results: the equilibrium value is close to the Wright-Fisher simulations for extreme selection ($w/W=0$) but over-estimates the equilibrium otherwise (@Fig:env_A2B1). **TODO**
 
-![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 99% confidence interval) and a deterministic iteration (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
+![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of finite size population simulations (orange; average of 100 simulations) and infinite population iterations (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
 #### Summary for periodic environmental regimes
 
@@ -660,6 +658,7 @@ which proves that $x^*=0$ is _stochastically locally stable_. $\blacksquare$
 #### Summary
 
 - if $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
+- with complete oblique transmission ($\rho=0$), $\mathbb{E}[\log{(1+\rho s_t)}]=0$ and we cannot determine the local stochastic stability of $x^*=0$.
 - if the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
 - the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
 - @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0. **TODO: consider changing _s_ or _p_ to $\rho$**.
