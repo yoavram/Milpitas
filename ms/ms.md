@@ -352,12 +352,11 @@ $$\begin{aligned}
 \blacksquare
 \end{aligned}$$
 
+
 In general, we find that (@Fig:lk_phase_plane):
 
 - A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
 - $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
-- Oblique transmission (low vertical transmission $\rho$) and strong selection (high fitness difference $W-w$) maintain diversity
-- With complete vertical transmission $\rho=1$ fixation of the more frequently favored phenotype is almost certain (@Fig:lk_phase_plane F).
 
 ![Ratios of environmental periods $\frac{l}{k}$ that lead to fixation of phenotype _B_ (red) or polymorphism between phenotypes _A_ and _B_ (blue). Parameters: _W_ = 1.](figures/lk_phase_plane.pdf){#fig:lk_phase_plane}
 
@@ -412,7 +411,7 @@ Note that the x-axis shows every other generation (end of each period).
 
 ![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange; average of 100 simulations), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=100,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
-#### Evolutionary stability of oblique transmission
+### Evolutionary stability of oblique transmission
 
 We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
 Let's assume that _m_ is fixed and that the population is at an equilibrium such that $\vec{x}=(x_1,x_2,x_3,x_4)=(x^*, 1-x^*,0,0)$ (see @eq:recurrenceA1B1_solution_x_star for the value of $x^*$).
@@ -518,12 +517,14 @@ provides similar results: the equilibrium value is close to the Wright-Fisher si
 
 ![Frequency of phenotype _A_ after every three generation in environmental regime _A2B1_. Comparison of finite size population simulations (orange; average of 100 simulations) and infinite population iterations (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
-#### Summary for periodic environmental regimes
+### Summary for periodically changing selection
 
 1. Phenotypes _A_ and _B_ coexist in a protected polymorphism if the ratio between generations favoring _B_ and those favoring _A_ is $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
 1. Phenotype _B_ fixation ($x=0$) is stable if the ratio between generations favoring _B_ and those favoring _A_ is $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
-1. An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ regime is given by (@Eq:recurrenceA1B1_solution_x_star).
-1. In the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission ($\rho=0$).
+1. Oblique transmission (low $\rho$ values) and strong selection (high fitness difference $W-w$) promote diversity (@Fig:lk_phase_plane).
+1. With complete vertical transmission $\rho=1$, fixation of the more frequently favored phenotype is almost certain (@Fig:lk_phase_plane F).
+1. An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ regime is given by @Eq:recurrenceA1B1_solution_x_star.
+1. In the _A1B1_ regime, modifier alleles that reduce the vertical transmission rate are favored by natural selection (@Fig:A1B1_modifier_invasions) and the only transmission mode that can lead to evolutionary stability is complete oblique transmission ($\rho=0$).
 
 ## Randomly changing selection
 
@@ -661,14 +662,6 @@ Therefore, we have shown that for any $\epsilon > 0$ there exists $\delta>0$
 such that if $x_0 < \delta$, then $P(\lim_{t \to \infty}{x_t} = 0) \ge 1-\epsilon$,
 which proves that $x^*=0$ is _stochastically locally stable_. $\blacksquare$
 
-#### Summary
-
-- if $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
-- with complete oblique transmission ($\rho=0$), $\mathbb{E}[\log{(1+\rho s_t)}]=0$ and we cannot determine the local stochastic stability of $x^*=0$.
-- if the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
-- the above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
-- @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0. **TODO: consider changing _s_ or _p_ to $\rho$**.
-
 ![Stochastic local stability. The figure shows the frequency of phenotype _A_ after $10^6$ generations in a very large population evolving in a stochastic environment (@eq:recurrence_random_env). The fitness of phenotypes _A_ and _B_ are $1+s_t$ and $1$, where $s_t$ is _s_ with probability _p_ and _-s_ with probability _1-p_. The white line marks combinations of _p_ and _s_ for which $\mathbb{E}[\log{(1+\rho s_t)}]=0$; according to our analysis, we expect that  below this line $x^*=0$ will be stochastically locally stable. Parameters: $x_0=0.1$; $\rho=0.1$](figures/stochastic_env_x_t.pdf){#fig:stochastic_env_x_t}
 
 ### Evolutionary stability of oblique transmission
@@ -678,5 +671,13 @@ Therefore, we simulated invasions of modifier alleles that produce lower and low
 The results (@Fig:stoch_modifier_invasions) suggest that, similar to the case of periodically changing selection (@Fig:A1B1_modifier_invasions), modifier alleles that reduce the vertical transmission rate can invade and the only stable transmission mode is complete oblique transmission ($\rho=0$).
 
 ![Consecutive fixation of modifiers that reduce the vertical transmission rate under randomly changing selection. The figure shows results of numerical simulations of evolution with two modifier alleles (@eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1_ and _w=0.1_ with probability 0.5 and _W=1_ and _w=0.1_ otherwise. The x-axis is in log-scale, as each sequential invasion takes an order of magnitude longer to complete.](figures/stoch_modifier_invasions.pdf){#fig:stoch_modifier_invasions}
+
+### Summary for randomly changing selection
+
+1. If $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
+1. With complete oblique transmission ($\rho=0$), $\mathbb{E}[\log{(1+\rho s_t)}]=0$ and we cannot determine the local stochastic stability of $x^*=0$.
+1. If the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
+1. The above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
+1. @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0. **TODO: consider changing _s_ or _p_ to $\rho$**.
 
 # References {-}
