@@ -139,7 +139,7 @@ $$ {#eq:recurrence0}
 
 ![Comparison of the transformation $x \to x'$ (@eq:recurrence) and the identity transformation $x \to x$ for $\rho$=0.1, _W_=1, _w_=0.1.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
-## Stochastic model
+## Finite size population model
 
 To include the effect of random drift, we carry out a binomial sampling after each generation, as in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is
 
@@ -150,8 +150,6 @@ $$
 $$ {#eq:genetic_drift_rule}
 
 Note that when transmission is completely vertical ($\rho=1$), this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift.
-
-**TODO: should the variance be scaled by $\rho^2$ as shown below @eq:inheritance_rule?**
 
 ## Modifier model
 
