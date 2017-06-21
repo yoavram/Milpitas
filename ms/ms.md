@@ -243,11 +243,7 @@ Thus, starting close enough to zero ($x_0 \sim 0$), the multiplicative change ov
 If $f_A^k(0) f_B^l(0) > 1$, then $x=0$ is not stable; since $x=1$ is not stable either (since $l \ge k$), there is a protected polymorphism ($0 < x(t) < 1$ for any generation _t_). 
 In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is locally stable.
 
-In the following, we examine the conditions for a protected polymorphism. In general, we find that:
-
-- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
-- $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
-
+In the following, we examine the conditions for a protected polymorphism. 
 We start with some trivial cases. 
 First, in the neutral case ($W = w$), we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
 
@@ -255,8 +251,9 @@ Second, with no vertical transmission $\rho = 0$, the expected phenotype frequen
 Indeed, we get $f_A(x) = f_B(x) \equiv 1$.
 
 Third, with only vertical transmission $\rho = 1$, the model becomes a standard two-allele model with $f_A^k(0) f_B^l(0) = \Big(\frac{W}{w}\Big)^{k-l}$. 
-Since $W > w$, we find that $\frac{x_{k+l}}{x_0}$ is
+Since $W > w$, we find that
 $$
+\frac{x_{k+l}}{x_0} = 
 \begin{cases}
 < 1 &, k < l \\
 = 1 &, k = l \\
@@ -354,6 +351,15 @@ $$\begin{aligned}
 (1+x)^n \ge 1+nx, \;\;\; \text{for all} x > -1, \text{and} \in \mathbb{R} \smallsetminus (0,1). \\
 \blacksquare
 \end{aligned}$$
+
+In general, we find that (@Fig:lk_phase_plane):
+
+- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+- $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
+- Oblique transmission (low vertical transmission $\rho$) and strong selection (high fitness difference $W-w$) maintain diversity
+- With complete vertical transmission $\rho=1$ fixation of the more frequently favored phenotype is almost certain (@Fig:lk_phase_plane F).
+
+![Ratios of environmental periods $\frac{l}{k}$ that lead to fixation of phenotype _B_ (red) or polymorphism between phenotypes _A_ and _B_ (blue). Parameters: _W_ = 1.](figures/lk_phase_plane.pdf){#fig:lk_phase_plane}
 
 ### _A1B1_ regime
 
