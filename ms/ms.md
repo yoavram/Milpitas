@@ -394,10 +394,15 @@ Therefore, one root of $G(x)$ is negative and one, $x^*$, is positive and less t
 $$\begin{aligned}
 x^* = 
 \frac{-B+\sqrt{B^2-4C}}{2} = & \\ &
-\frac{W(1-\rho) - w(3-\rho) + \sqrt{(1-\rho)^2 (W-w)^2 + 4Ww}}{2 (2-\rho) (W-w)}
+\frac{1}{2} - \frac{W + w - \sqrt{(1-\rho)^2(W-w)^2 + 4Ww}}{2(2-\rho)(W-w)}
 \end{aligned}$$ {#eq:recurrenceA1B1_solution_x_star}
 
-Note that if $\rho=0$ then $x^* = 1/2$, and if $\rho=1$ then $x^* = \frac{-w + \sqrt{Ww}}{(W-w)}$. 
+Note that if $\rho=0$ then $x^* = \frac{1}{2}$, and if $\rho=1$ then $x^* = \frac{\sqrt{Ww} - w}{W - w} < \frac{1}{2}$ (because $\sqrt{Ww}-w < W - \sqrt{Ww}$). 
+In addition, the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_mean_fitness):
+$$
+\bar{\omega}^* = Wx^* + w(1-x^*) =
+\frac{(W+w)(1-\rho) + \sqrt{(W-w)^2(1-p)^2+4Ww}}{2(2-\rho)},
+$$ {#eq:A1B1_mean_fitness}
 
 @Fig:env_A1B1 compares $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star) with deterministic iterations of @Eq:recurrenceA1B1 (blue) and the average of stochastic Wright-Fisher simulations (orange) for several combinations of $\rho$, _W_, and _w_. 
 Iterations and simulations started with $x=0.5$; in the WF simulations, the population size is _N=100,000_, and the results are based on 100 simulations per parameter set. 
@@ -405,7 +410,7 @@ Note that the x-axis shows every other generation (end of each period).
 
 ![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of Wright-Fisher simulations (orange line is the average of 100 simulations; shaded orange area is the 1% confidence interval), a deterministic iteration (blue; @eq:recurrenceA1B1), and equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=1,000,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
-#### Evolutionary genetic stability of oblique transmission
+#### Evolutionary stability of oblique transmission
 
 We now consider two modifier alleles in the _A1B1_ regime (@eq:recurrence_modifiers) as described in @tbl:modifier_model_table.
 Let's assume that _m_ is fixed and that the population is at an equilibrium such that $\vec{x}=(x_1,x_2,x_3,x_4)=(x^*, 1-x^*,0,0)$ (see @eq:recurrenceA1B1_solution_x_star for the value of $x^*$).
@@ -435,73 +440,68 @@ T = T_2 \cdot T_1
 where $x^{**}=T_1 \cdot x^* = 1-x^*$ and $\bar{\omega}^{**}=x^{**}\omega_A + (1-x^{**})\omega_B$ and therefore $\bar{\omega}^* = \bar{\omega}^{**}$.
 Therefore,
 
-$$
-T = \frac{1}{\bar{\omega^*}^2} \begin{pmatrix}
+\begin{multline}
+T = \frac{1}{\bar{\omega^*}^2} \cdot \\
+\begin{pmatrix}
 Ww((1-P)^2 x^* (1-x^*) + P) + (w(1-P)x^*)^2 &
 W(1-P)(P + x^*(1-P))(W(1-x^*) + wx^*) \\
 w(1-P)(1 - x^*(1-P))(W(1-x^*) + wx^*) &
 Ww((1-P)^2 x^* (1-x^*) + P) + (W(1-P)(1-x^*))^2
 \end{pmatrix}
-$$
+\end{multline}
 
 The characteristic polynomial of $T$ is $C(\lambda)=det(T-\lambda I)=a_2 \lambda^2 + a_1 \lambda + a_0$, where:
 
 $$\begin{aligned}
 a_0 = \frac{P^2 W^2 w^2}{\bar{\omega^*}^4} \\
-a_1 = - \frac{2 P W w + (1-P)^2 (\bar{\omega^*}+(W-w)(1-2x^*))^2}{\bar{\omega^*}^2} \\
+a_1 = - \frac{2 P W w + (1-P)^2 (W(1-x^*) + wx^*)^2}{\bar{\omega^*}^2} \\
 a_2 = 1
 \end{aligned}$$
 
 Since $T$ is positive, $C(\lambda)$ has two real roots.
-If the largest root is below 1, then _m_ will be stable to invasion by _M_.
-However, if the largest root is above 1, then _m_ is unstable and _M_ can invade _m_.
-$C(\lambda)$ is convex because $a_2=1$.
-$C'(0) =a_1 < 0$ therefore at least one root is positive.
-If $C(1)<0$ then the largest eigenvalue is > 1 and if $C(1)>0$ and $C'(1)>0$ then the largest eigenvalue is < 1 [@Liberman2011].
+Because $C(\lambda)$ is convex ($a_2=1$) and $C(0) = a_0 > 0, C'(0) =a_1 < 0$, both roots are positive.
+Therefore, if $C(1)>0$ and $C'(1)>0$, then the largest root - the leading eigenvalue - is less than 1, and _m_ is stable to invasion by _M_.
+However, if $C(1)<0$, then the leading eigenvalue is larger than 1, _m_ is unstable, and _M_ can invade _m_ [@Liberman2011].
 
-### Obsolete
-
-To answer this question, we examine the relative change in frequency of _M_ after a full environmental cycle (two generations), $\lambda$, where in the first generation _A_ is the favored phenotype with advantage _s_ ($\omega_A=1+s, \omega_B=1$) and in the second generation _B_ is the favored phenotype with advantage _s_ ($\omega_A=1, \omega_B=1+s$). 
-Because $p \approx 1$, the population mean fitness is dominated by _m_ ($\bar{\omega} = x \omega_A + (1-x) \omega_B)$, 
-and we can write $\lambda$ as a function of the two vertical transmission rates $\rho$ and $P$ using @eq:recurrence_modifiers:
-
-\begin{multline}\label{eq:modifiers_lambda}
-\lambda(\rho, P) = \frac{q''}{q} = \frac{q''}{q'} \cdot \frac{q'}{q} = \\
-\frac{y' + (1-y') (1+s)}{x' + (1-x') (1+s)} \cdot 
-    \frac{y (1+s) + (1-y)}{x (1+s) + (1-x)} = \\
-\frac{1 + s - s y'}{1 + s - s x'} \cdot \frac{1 + s y}{1 + s x} = \\
-\frac{1 + s + s^2 (1-P) x^* (1-x^*)}{1 + s + s^2 (1-\rho) x^* (1-x^*)},
-\end{multline}
-
-where both the _m_ and the _M_ populations are initially at the equilibrium value for environmental regime A1B1 ($x=y=x^*$) as found in @Eq:recurrenceA1B1_solution_x_star,
-and we use @eq:recurrence_modifiers to calculate $x', y'$.
-
-If the resident population has only oblique transmission, $1 > P > \rho = 0$, we have $x^* = x^{**} = \frac{1}{2}$, which leads to
-$\lambda(0,P) = 1 - P(\frac{s}{2+s})^2 < 1$, so that a modifier that decreases the oblique transmission rate cannot invade.
-
-If the resident population has only vertical transmission, $\rho = 1 > P > 0$, we have $x^* = \frac{\sqrt{1+s}-1}{s}, x^{**}=x^* \sqrt{1+s}$, which leads to $\lambda(1, P) = 1 + (1-P)\frac{(\sqrt{1+s}-1)^2}{\sqrt{1+s}} > 1$, so that a modifier that increases the oblique transmission rate can invade.
-
-More generally,
+An important quantity for the analysis of $C(1)$ is
 $$
-\frac{\partial }{\partial P} \lambda(\rho, P) = 
-\frac{-s^2 x (1-x)}{1 + s + s^2 (1-\rho) x^*(1-x^*)} < 0,
+\bar{\omega^*}^2 - Ww = \\
+(Wx^* + w(1-x^*))^2 - Ww = \\
+(W-w)^2 x^{*2} -2w(W-w) x^* -w(W-w)
 $$
-and because $\lambda(\rho, \rho)= 1$, we can deduce that if the invading modifier _M_ increases the oblique transmission rate $P<\rho$ then $\lambda(\rho, P) > 1$ and _M_ can invade _m_; and vice verse, if the invading modifier _M_ increases the vertical transmission rate $P>\rho$ then $\lambda(\rho, P) < 1$ and _m_ cannot be invaded by _M_.
-It follows that in the _A1B1_ regime, the only transmission mode that can lead to evolutionary genetic stability [@Lessard1990] is complete oblique transmission $\rho=0$.
+Let $J(x) = (W-w)^2 x^2 +2w(W-w) x -w(W-w)$.
+This is a convex polynomial with negative root $\frac{w-\sqrt{Ww}}{W-w}$ and positive root $\frac{\sqrt{Ww}-w}{W-w}$, which is the minimal value of $x^*$ given for $\rho=1$.
+Therefore, we can determine that $\frac{Ww}{\bar{\omega^*}^2}  \le 1$, with a strict inequality for $\rho < 1$.
 
-Note that the stable population mean fitness after each _AB_ cycle as a function of the vertical transmission rate $\rho$ is (@Fig:A1B1_mean_fitness):
-$$
-\bar{\omega}^*(\rho)=\frac{(1-\rho)(2+s) + \sqrt{(1-\rho)^2s^2+4(1+s)}}{2(2-\rho)},
-$$ {#eq:A1B1_mean_fitness}
+In addition, we have $x^* \le \frac{1}{2}$, then $W(1-x^*) + wx^* \ge Wx^* + w(1-x^*)$ and therefore $\frac{W(1-x^*) + wx^*}{\bar{\omega}^*} \ge 1$, with strict inequality for $\rho > 0$.
 
-With $\rho=0$ we have $\bar{\omega}^*(0)=1+\frac{s}{2}$,
-whereas with $\rho=1$ we have $\bar{\omega}^*(1) = \sqrt{1+s} = \bar{\omega}^*(0) - \frac{s^2}{8} + o(s^2)$; 
-in general, $\bar{\omega}^*(\rho)$ is a decreasing function of $\rho$, and is therefore maximized at $\rho=0$ (@Fig:A1B1_mean_fitness). 
-Indeed, iterating the recurrence equations (@eq:recurrence_modifiers) while introducing modifiers with lower and lower vertical transmission rates and higher and higher oblique transmission rates shows that these invading modifiers sequentially reduce the vertical transmission rate towards zero, but only when successive modifier alleles are introduced near $x=0.5$ (@Fig:A1B1_modifier_invasions A).
+Using these identities, we examine $C(1)$ for $P=\rho$, $P=0$, and $P=1$:
 
-![The stable population mean fitness in environmental regime _A1B1_, as a function of the vertical transmission rate $\rho$ and the selection coefficient _s_ of the favorable phenotype (@eq:A1B1_mean_fitness).](figures/A1B1_mean_fitness.pdf){#fig:A1B1_mean_fitness}
+$$\begin{aligned}
+C(1) |_{P=p} = 
+0 \\
+C(1) |_{P=0} = 
+1 - \Big(\frac{W(1-x^*) + wx^*}{\bar{\omega^*}}\Big)^2 < 0 \\
+C'(1) |_{P=0} =
+2 - \Big(\frac{W(1-x^*) + wx^*}{\bar{\omega^*}}\Big)^2 > 0 \\
+C(1) |_{P=1} = 
+\Big(1 - \frac{Ww}{\bar{\omega^*}^2}\Big)^2 > 0 \\
+C'(1) |_{P=1} = 
+2 \Big(1 - \frac{Ww}{\bar{\omega^*}^2}\Big) > 0 \\
+\end{aligned}$$
 
-![Consecutive fixation of modifiers that decrease the vertical transmission rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@Eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
+where $C'(\lambda) = \frac{dC(\lambda)}{d\lambda}$ and the last inequality is strict if $x^* \ne \frac{1}{2}$, which is the case when $\rho > 0$.
+
+We found that in an environmental regime _A1B1_, an allele _m_ producing vertical transmission rate $\rho$ is stable to the introduction of allele _M_, with associated rate $P$, if $\rho < P$, and it is unstable if $\rho > P$.
+
+Therefore, the rate of vertical transmission is expected to be reduced, similar to the _reduction principle_ for mutation, recombination, and migration rates [@Altenberg2017], and the only transmission mode that is _evolutionary stable_ is complete oblique transmission $\rho=0$.
+
+@Fig:A1B1_modifier_invasions shows the dynamics when iterating the recurrence equations (@eq:recurrence_modifiers) in environmental regime _A1B1_ while introducing modifiers with lower and lower vertical transmission rates. Indeed, the invading modifiers sequentially reduce the vertical transmission rate towards zero.
+Importantly, reducing the vertical transmission rate also increases the population mean fitness (@Fig:A1B1_mean_fitness).
+
+![Consecutive fixation of modifiers that reduce the vertical transmission rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
+
+![The stable population mean fitness $\bar{\omega}^*$ in environmental regime _A1B1_ as a function of the vertical transmission rate $\rho$ and the selection coefficient $s=W-w$, the difference between the fitness values of the favored and unfavored phenotypes (@eq:A1B1_mean_fitness).](figures/A1B1_mean_fitness.pdf){#fig:A1B1_mean_fitness}
 
 ### _A2B1_ regime
 
