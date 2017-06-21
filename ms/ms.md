@@ -245,8 +245,8 @@ In contrast, if $f_A^k(0) f_B^l(0) < 1$, then $x=0$ is locally stable.
 
 In the following, we examine the conditions for a protected polymorphism. In general, we find that:
 
-1. A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
-1. $x=0$ is a stable equilibrium if $\frac{l}{k} = 1 + (1-\rho)\frac{W-w}{w}$.
+- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+- $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
 
 We start with some trivial cases. 
 First, in the neutral case ($W = w$), we find that $f_A(x) = f_B(x) \equiv 1$, without an approximation.
