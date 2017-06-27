@@ -31,12 +31,12 @@ However, it is apparent that in many animals, and especially in humans,
 some traits are transmitted through imitation, teaching, learning,
 and other forms of communication that comprise *cultural evolution*
 [@Cavalli-Sforza1973; @Cavalli-Sforza1981; @Boyd1985; @Avital2000; @Whiten2017; @Laland2017].
-Other phenotype-modifying transmission vehicles have received increasing
+Other non-genetic phenotype-modifying transmission vehicles have received increasing
 attention over the past two decades [@Jablonka2014], including
-epigenetics [@Verhoeven2016] and symbionts [@Zilber-Rosenberg2008].
+epigenetics [@Verhoeven2016], symbionts [@Zilber-Rosenberg2008], and even prions [@Wickner2016].
 These transmission mechanisms vary in their persistence, speed, timing, and direction when compared to the kind of vertical transmission between parent and offspring that is restricted to genetic inheritance.
 
-Of special interest is *oblique transmission* [@Cavalli-Sforza1981; @Bergstrom2012, ch. 19.4], 
+Of special interest is *oblique transmission* [@Cavalli-Sforza1981, pg.54; @Bergstrom2012, ch. 19.4], 
 in which offspring inherit traits from adults that are not their parents.
 One mechanism for oblique transmission is social learning, e.g., imitation and teaching [@Kline2013].
 For example, in a small Amazon society, in which young individuals
@@ -179,6 +179,8 @@ First consider constant selection favoring phenotype _A_, such that $\omega_A = 
 
 The basic requirement for evolution via natural selection is a heritable phenotype that produces differential fitness. 
 Therefore, if selection is neutral ($W = w$) or if there is no vertical transmission $\rho=0$, then any $0 \le x \le 1$ is an (unstable) equilibrium.
+
+The following result agrees with previous models that include a combination of vertical and oblique transmission [@Cavalli-Sforza1981, pg. 251].
 
 **Result: constant environment.**
 _If $0 < \rho \le 1$ and $\omega_B < \omega_A$, then $x^* = 1$ is the equilibrium frequency of phenotype _A_  for any initial $x>0$, such that all the individuals will eventually have phenotype _A_._
@@ -680,15 +682,12 @@ The results (@Fig:stoch_modifier_invasions) suggest that, similar to the case of
 
 # Discussion {-}
 
-# Discussion (_under construction_)
-
 "It has been suggested that an inheritance system that couples weak vertical transmission with strong oblique transmission ($\rho \ll 1$) might prevent traits from being eliminated more than if vertical transmission was coupled with horizontal transmission, in which traits are transmitted between same-generation individuals" [@Cavalli-Sforza1981, pg. 315].
+//rephrase
 
-"They suggest on the basis of the results of a
-modeling exercise that vertical transmission is only effective
-when the environment is relatively stable and risk of
-mortality is such that survival to parenthood is itself an
-indicator of an individual's worth as a cultural role model. [@McElreath2008]" // rephrase
+Interesting specific forms of oblique transmission that we did not cover here are _many-to-one_, or _teacher-type transmission_, and intra-familial transmission, such as between grandparents and grandchildren. At least for the latter, we expect the qualitative results to be the same.
+
+## Comparison to models of social learning
 
 Most models of oblique transmission focused on social learning and how it differs from individual learning, usually in the presence of environmental cues [@Kline2013].
 In contrast, our model (i) does not include individual learning, (ii) assigns an equal probability for each (naturally selected) individual to be the phenotype donor in oblique transmission, rather then more specific schemes such as teachers (one-to-many) or conformity (many-to-one) [@Aoki2011], and (iii) does not include a cost for the phenotype donor - and therefore might be more suitable for modeling imitation rather than teaching.
@@ -696,17 +695,33 @@ Instead, our model focuses on the difference between vertical and oblique transm
 Therefore, our model is able to capture other inheritance modes except learning, such as horizontal gene transfer in asexual microbes.
 As such, the main factor that determines when vertical or oblique transmission is preferred is the frequency and intensity of environmental changes.
 
-Previous theoretical studies predicted vertical transmission will be favored over oblique transmission for phenotypes that determine fitness (@Aoki2011 and @McElreath2008 cited by @Kline2013). **NO ENVIRONMENTAL FLUCTUATIONS?**
-Our results suggest that in a maladapted population vertical transmission (high $\rho$ values) are favored, but after the population has reached a steady state in phenotype frequencies, oblique transmission can be favored in rapidly fluctuating environments (@Fig:A1B1_EGS_eta_0).
+@McElreath2008 suggested that vertical transmission is only effective when selection is relatively stable. 
+Indeed, @Aoki2005 have shown that social learning, a form of oblique transmission, is favored over genetic determination of behavior, i.e. vertical transmission, when the duration between changes in selection is short, in agreement with our current study.
+However, our model did not include phenotypic response to environmental cues, such as individual learning, which has been shown to be favored over oblique transmission in rapidly changing selection [@Aoki2005].
+
+@Aoki2011
 
 @Cavalli-Sforza1983
 
 @Allison1992
 
-## EGS of $\eta=0$
+## Comparison to models of phenotypic switching 
 
-@Xue2016 have shown numerically (in SI) that with extreme selection, in a rapidly changing environment, $\eta^* \to 0$, whereas if environmental changes are farther apart (>9), then $\eta^* > 0$. This was done by maximizing mean fitness, which has been shown (@Carja2014) to fit with simulation results in analyses of evolution of stable modification rates.
+There has been several models of phenotypic switching in which the phenotype is vertically transmitted, but the fidelity of this transmission is determined by a genetic modifier locus (@Leigh1970; @Lachmann1996; @Ishii1989; @Kussell2005; @King2007; @Liberman2011).
+In these models, under fluctuating environment, the evolutionary stable mutation rate is $\approx \frac{1}{n}$ if selection fluctuates every _n_ generations (but not if _n_ is random or if selection is not symmetric [@Liberman2011; @Salathe2009a]).
+Our model can represent a similar case in which transmission infidelity doesn't result in a random phenotype but rather in a phenotype drawn from the parental population.
+In this case, the optimal distribution is encoded by the population, rather than by the genetic modifier locus, and selection favors individuals that choose their phenotype every generation from the population distribution.
+This kind of oblique transmission applies to many species of bacteria that utilize quorum sensing and other cell-to-cell signaling to determine their phenotypes [@Waters2005].
 
-There has been a body of work on models in which the phenotype is genetically encoded by two alleles (_A_ and _a_) and the transition between these alleles is determined by a mutation modifier allele [see summary in @Liberman2011]. In these models, under fluctuating environment, the evolutionary stable mutation rate is ~1/n if the favored allele changes deterministicly every _n_ generations, but can be different if _n_ is random or if selection is not symmetric. In the model presented in @Xue2016, however, the phenotype switching rate is (epi)genetically encoded, and mutation is not needed for transitioning between the phenotypes. Moreover, the transition rate is modified by the phenotype (@Eq:learning_rule). If  we assume that the rate of this modification, $\eta$, is determined by a modifier locus, then the dynamics of alleles at this modifier locus are different from those of a mutation modifier locus.
+Similarly, @Xue2016 examined a model of phenotypic switching in which the transmitted trait $\pi$ is the probability to become phenotype _A_.
+The transmission infidelity in this model used a rule similar to @eq:inheritance_rule, but with a different biological interpretation - the trait is modified according to the parent phenotype:
+the probability that the offspring is _A_ is increased to $(1-\eta)\pi + \eta$ if the parent was _A_ and decreased to $(1-\eta)\pi$ otherwise.
+Their results suggest that with rapidly changing selection, the optimal transmission infidelity is 0, whereas if selection changes slower, the optimal infidelity transmission in positive.
+This analysis was done by maximizing mean fitness, which has been shown (@Carja2014) to fit with simulation results in analyses of evolution of stable modification rates.
+There is a clear similarity between these results and ours.
+In rapidly fluctuating selection there is a phenotype distribution that optimizes the population mean fitness - this strategy is commonly called _bet-hedging_ [@King2007].
+In @Xue2016, the optimal phenotype distribution is encoded by the transmitted trait, which determines the phenotype distribution of a single individual; when the optimal trait value appears in the population, selection reduces transmission infidelity [@Altenberg2017] to maintain the optimal phenotype distribution.
+In our model, the optimal phenotype distribution is encoded in the population distribution, and when this distribution reaches the equilibrium state, selection favors oblique transmission, again to maintain the optimal phenotype distribution.
+
 
 # References {-}
