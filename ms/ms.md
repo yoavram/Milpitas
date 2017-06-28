@@ -141,7 +141,7 @@ $$
 \Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
 $$ {#eq:genetic_drift_rule}
 
-Note that with complete vertical transmission ($\rho=1$), this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift.
+With complete vertical transmission ($\rho=1$), this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift. Cavalli-Sforza and Feldman [-@Cavalli-Sforza1981, ch. 3.10] used a similar model to study drift in cultural evolution. 
 
 ## Modifier model
 
@@ -727,11 +727,14 @@ In rapidly changing selection there is a phenotype distribution that optimizes t
 In @Xue2016, the optimal phenotype distribution is encoded by the trait, which is vertically transmitted with modification. When the optimal trait value appears in the population, selection reduces the tendency for modification [@Altenberg2017] to maintain the optimal phenotype distribution.
 In our model, the optimal phenotype distribution is encoded by the population phenotype distribution, and when this distribution reaches the equilibrium state, selection favors oblique transmission, again to maintain the optimal phenotype distribution.
 
+## How oblique transmission differs from vertical transmission
+
+Allison [-@Allison1992] has shown that oblique transmission increases relatedness, the probability that two individuals inherited their phenotype from a common ancestor. With complete oblique transmission, the equilibrium relatedness value is $1/(1+N \frac{\mu(2-\mu)}}{(1-\mu)^2})$, where $\mu$ is the probability for adoption of new phenotypes by innovation or migration.
+
 **TODO**
 
 - Discuss polymorphism results
 - @Cavalli-Sforza1983
-- @Allison1992
 
 "It has been suggested that an inheritance system that couples weak vertical transmission with strong oblique transmission ($\rho \ll 1$) might prevent traits from being eliminated more than if vertical transmission was coupled with horizontal transmission, in which traits are transmitted between same-generation individuals" [@Cavalli-Sforza1981, pg. 315??].
 //rephrase
