@@ -713,7 +713,7 @@ Lastly, our model does not include a cost for the phenotype donor, and therefore
 ## Comparison to models of phenotype switching 
 
 There has been several models of phenotype switching in which the phenotype is vertically transmitted, but the fidelity of this transmission is determined by a genetic modifier locus (@Leigh1970; @Lachmann1996; @Ishii1989; @Kussell2005; @King2007; @Liberman2011). 
-In these models, under fluctuating environment, the evolutionary stable switching rate is $\approx \frac{1}{n}$ if selection fluctuates every _n_ generations (but not if _n_ is random or if selection is not symmetric [@Liberman2011; @Salathe2009a]).
+In these models, under fluctuating selection, the evolutionary stable switching rate is $\approx \frac{1}{k}$ if selection fluctuates every _k_ generations, but not if _k_ is random with large variance or if selection is not symmetric [@Liberman2011; @Salathe2009a].
 
 Our model can represent a similar case in which transmission infidelity doesn't result in a random phenotype but rather in a phenotype drawn from the parental population; for example, if offspring sometimes imitate unrelated adults instead of their parents [TODO: REF?].
 In this case, the optimal phenotype distribution is encoded by the population composition, rather than by the genetic modifier locus, and selection favors individuals that draw their phenotype from the population distribution rather than copy the parental phenotype.
