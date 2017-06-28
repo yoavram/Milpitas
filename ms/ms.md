@@ -54,7 +54,7 @@ Therefore, transmission of symbionts from the parental cohort may be regarded as
 
 Oblique transmission also occurs through mechanisms involving DNA.
 In bacteria, phenotypes might be determined by heritable mobile genetic
-elements such as phages [@Zinder1952], plasmids [@Lederberg1946], integrons [@Mazel2006], and transposons [@Salyers2004] (**TODO: CRISPR?**).
+elements such as phages [@Zinder1952], plasmids [@Lederberg1946], integrons [@Mazel2006], and transposons [@Salyers2004](**TODO: CRISPR?**).
 Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, i.e. transformation [@Milkman1990].
 In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell and oblique transmission from other cells, even if the latter did not originally evolve for that purpose [@Redfield1993].
 
@@ -66,19 +66,14 @@ transmission is likely to evolve.
 
 # Model {-}
 
-Consider a population individuals exhibiting one of two phenotypes ($\phi=A$ or $B$) evolving under constant or fluctuating selection.
-The favored phenotype in the current generation is $\Phi=A$ or $B$.
-When $\Phi=A$, the fitness of phenotypes _A_ and _B_ are _W_ and _w_, respectively; when $\Phi=B$ the fitness of phenotypes _A_ and _B_ are reversed:
-$$
-\omega_{\phi} = \begin{cases}
-W, & \phi = \Phi \\
-w, & \phi \ne \Phi
-\end{cases}.
-$$ {#eq:fitness_rule}
-The frequency of phenotype _A_ is _x_ and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$.
+Consider a population of individuals with one of two phenotypes, $\phi=A$ or $B$.
+The frequency of phenotypes _A_ and _B_ are _x_ and _1-x_,
+the fitness of phenotypes _A_ and _B_ is $\omega_A$ and $\omega_B$,
+and the population mean fitness is $\bar{\omega} = x \omega_A + (1-x) \omega_B$ (@Tbl:model_parameters_table).
 
-An offspring inherits its phenotype from its parent with probability $\rho$, and from a random individual in the parental population with probability $1-\rho$.
-Therefore, given the parent phenotype is $\phi$ and assuming uni-parental inheritance [@Zefferman2016], the probability that the phenotype $\phi'$ of an offspring is _A_ is:
+An offspring inherits its phenotype vertically from its parent with probability $\rho$, and diagonally from a random individual in the parental population with probability $1-\rho$.
+Therefore, given the parent phenotype is $\phi$ and assuming uni-parental inheritance [@Zefferman2016],
+the probability that the phenotype $\phi'$ of an offspring is _A_ is:
 $$
 P(\phi' = A) = \begin{cases}
 (1-\rho) x + \rho, & \phi = A \\
@@ -175,15 +170,15 @@ $$\begin{aligned}
 
 ## Constant selection
 
-First consider constant selection favoring phenotype _A_, such that $\omega_A = W > w = \omega_B$ (@Fig:recurrence_example B). We seek $x^*$, the equilibrium frequency of phenotype _A_, such that $x'=x$ in @Eq:recurrence.
+First consider constant selection favoring phenotype _A_, such that $\omega_A \ge \omega_B$ (@Fig:recurrence_example B). We seek $x^*$, the equilibrium frequency of phenotype _A_, such that $x'=x$ in @Eq:recurrence.
 
 The basic requirement for evolution via natural selection is a heritable phenotype that produces differential fitness. 
-Therefore, if selection is neutral ($W = w$) or if there is no vertical transmission $\rho=0$, then any $0 \le x \le 1$ is an (unstable) equilibrium.
+Therefore, if selection is neutral ($\omega_A = \omega_B$) or if there is no vertical transmission $\rho=0$, then any $0 \le x \le 1$ is an (unstable) equilibrium.
 
 The following result agrees with previous models that include a combination of vertical and oblique transmission [@Cavalli-Sforza1981, pg. 251].
 
 **Result: constant environment.**
-_If $0 < \rho \le 1$ and $\omega_B < \omega_A$, then $x^* = 1$ is the equilibrium frequency of phenotype _A_  for any initial $x>0$, such that all the individuals will eventually have phenotype _A_._
+_If $0 < \rho \le 1$ and $\omega_A > \omega_B$, then $x^* = 1$ is the equilibrium frequency of phenotype _A_  for any initial $x>0$, such that all the individuals will eventually have phenotype _A_._
 
 **Proof.**
 Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\rho)(\omega_A - \omega_B)x + \rho \omega_A + (1-\rho)\omega_B$ and $g(x) = (\omega_A - \omega_B)x + \omega_B$.
@@ -191,22 +186,31 @@ Rewrite @eq:recurrence0 as $x' = x \cdot \frac{f(x)}{g(x)}$ with $f(x) = (1-\rho
 Clearly, $x'=x$ if and only if $f(x)=g(x)$ or $x=0$. 
 However, _f_ and _g_ are both linear in _x_ and therefore can only intersect at one point.
 Indeed, _f_ and _g_ intersect at $x=1$ ($f(1)=g(1)=\omega_A$), which means that $x=1$ solves $x'=x$. 
-Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$, we can deduce that $f(x) > g(x)$ for any $x<1$ and hence $x' > x$ (see @Fig:recurrence_example A). $\blacksquare$
+Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$,
+we can deduce that $f(x) > g(x)$ for any $x<1$ and hence $x' > x$ (see @Fig:recurrence_example A). $\blacksquare$
 
 How does the convergence rate depend on $\rho$?
 Note that $\frac{d (x' - x)}{d\rho} = \frac{(\omega_A-\omega_B) x (1-x) }{(\omega_A-\omega_B)x + \omega_B} > 0$, so convergence to $x=1$ is faster for larger $\rho$, and vertical transmission facilitates adaptation (@Fig:recurrence_example B).
 
 ## Periodically changing selection
 
-Consider periodic selection regimes in which both phenotypes are favored  for exactly the same number of generations during each period.
-Simple examples are _A1B1=ABABABAB..._, in which the favored genotype $\Phi$ switches every generation,
+Next, we consider periodic fluctuating selection regimes in which the favored phenotype changes after a fixed number of generations.
+Simple examples are _A1B1=ABABABAB..._, in which the favored genotype $\Phi$  switches every generation,
 or _A2B1=AABAABAAB..._ where every two generations in which selection favored phenotype _A_ are followed by a single generation in which selection favors phenotype _B_.
-In general, _AkBl_ denotes a selection regime in which the period is of length _k+l_ and is composed of exactly _k_ generations favoring phenotype _A_, followed by _l_ generations favoring phenotype _B_.
-However, our general result applies for any permutation of these _k+l_ environments.
+
+When the favored phenotype is _A_, the fitness of phenotypes _A_ and _B_ are _W_ and _w_, respectively; when the favored phenotype is _B_, the fitness of phenotypes _A_ and _B_ are reversed:
+$$
+\omega_{\phi} = \begin{cases}
+W, & \phi = \Phi \\
+w, & \phi \ne \Phi
+\end{cases}.
+$$
 
 ### _AkBl_ selection regime
 
-What can be said about the general case of _k_ generations favoring phenotype _A_ and _l_ generations favoring phenotype _B_?
+In general, _AkBl_ denotes a selection regime in which the period is of length _k+l_ and is composed of exactly _k_ generations favoring phenotype _A_, followed by _l_ generations favoring phenotype _B_.
+However, our general result applies for any permutation of these _k+l_ environments.
+
 We investigate conditions for the the existence of a _protected polymorphism_ [@Prout1968], in which neither phenotype can //become extinct//disappear//. 
 $x=1$ and $x=0$ are absorbing states:
 if all individuals are _A_, for example, then all offspring will be _A_, too. 
