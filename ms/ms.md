@@ -13,7 +13,6 @@ chapDelim: ""
 link-citations: true
 header-includes:
     - \usepackage{lineno}
-    - \linenumbers
 ---
 
 \newpage
@@ -707,6 +706,8 @@ _one-to-many_ transmission could distort the distribution from which oblique tra
 
 Third, we assumed a large population size which allowed us to use a deterministic model, although we also presented comparisons to dynamics of population of finite (@Fig:env_A1B1; @Fig:env_A2B1). @Aoki2011 explicitly modeled small population sizes (25 and 125m typical for Pleistocene hominid populations). They also used different transmission modes such as _one-to-many_ and _many-to-one_.
 
+Fourth, we have assumed that both transmission modes have perfect fidelity. However, both vertical and oblique transmission can give rise deleterious phenotypes, for example, due to mutations, epimutations, and unsuccessful learning. Assuming genetic transmission, which is strictly vertical, has higher fidelity than cultural transmission, which combines vertical and oblique transmission, @Cavalli-Sforza1983 have found that under constant selection, cultural transmission will lose to genetic tranmission.  
+
 Lastly, our model does not include a cost for the phenotype donor, and therefore might be more suitable for modeling imitation rather than teaching, at least the latter carries a significant cost.
 
 ## Comparison to models of phenotype switching 
@@ -729,12 +730,11 @@ In our model, the optimal phenotype distribution is encoded by the population ph
 
 ## How oblique transmission differs from vertical transmission
 
-Allison [-@Allison1992] has shown that oblique transmission increases relatedness, the probability that two individuals inherited their phenotype from a common ancestor. With complete oblique transmission, the equilibrium relatedness value is $1/(1+N \frac{\mu(2-\mu)}}{(1-\mu)^2})$, where $\mu$ is the probability for adoption of new phenotypes by innovation or migration.
+Allison [-@Allison1992] has shown that oblique transmission increases relatedness, the probability that two individuals inherited their phenotype from a common ancestor. With complete oblique transmission, the equilibrium relatedness value is $1/\Big(1+N \frac{\mu(2-\mu)}{(1-\mu)^2}\Big)$, where $\mu$ is the probability for adoption of new phenotypes by innovation or migration.
 
-**TODO**
+# TODO
 
 - Discuss polymorphism results
-- @Cavalli-Sforza1983
 
 "It has been suggested that an inheritance system that couples weak vertical transmission with strong oblique transmission ($\rho \ll 1$) might prevent traits from being eliminated more than if vertical transmission was coupled with horizontal transmission, in which traits are transmitted between same-generation individuals" [@Cavalli-Sforza1981, pg. 315??].
 //rephrase
