@@ -13,6 +13,7 @@ chapDelim: ""
 link-citations: true
 header-includes:
     - \usepackage{lineno}
+    - \linenumbers
 ---
 
 \newpage
@@ -728,7 +729,7 @@ In rapidly changing selection there is a phenotype distribution that optimizes t
 In @Xue2016, the optimal phenotype distribution is encoded by the trait, which is vertically transmitted with modification. When the optimal trait value appears in the population, selection reduces the tendency for modification [@Altenberg2017] to maintain the optimal phenotype distribution.
 In our model, the optimal phenotype distribution is encoded by the population phenotype distribution, and when this distribution reaches the equilibrium state, selection favors oblique transmission, again to maintain the optimal phenotype distribution.
 
-## How oblique transmission differs from vertical transmission
+## Misc.
 
 Allison [-@Allison1992] has shown that oblique transmission increases relatedness, the probability that two individuals inherited their phenotype from a common ancestor. With complete oblique transmission, the equilibrium relatedness value is $1/\Big(1+N \frac{\mu(2-\mu)}{(1-\mu)^2}\Big)$, where $\mu$ is the probability for adoption of new phenotypes by innovation or migration.
 
