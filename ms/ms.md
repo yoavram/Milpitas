@@ -1,5 +1,5 @@
 ---
-title: Evolution with vertical and oblique transmission in fluctuating environments
+title: Vertical and oblique transmission under fluctuating selection
 author:
 - Yoav Ram^[Department of Biology, Stanford University, Stanford, CA 94305-5020, yoav@yoavram.com]
 - Uri Liberman^[School of Mathematical Sciences, Tel Aviv University, Tel Aviv, Israel 69978, uril@tauex.tau.ac.il]
