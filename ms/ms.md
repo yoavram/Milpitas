@@ -170,7 +170,7 @@ $$\begin{aligned}
 
 ## Constant selection
 
-First consider constant selection favoring phenotype _A_, such that $\omega_A \ge \omega_B$ (@Fig:recurrence_example B). We seek $x^*$, the equilibrium frequency of phenotype _A_, such that $x'=x$ in @Eq:recurrence.
+First consider constant selection favoring phenotype _A_, such that $\omega_A \ge \omega_B$ (@Fig:recurrence_example B). We seek $x^*$, the equilibrium frequency of phenotype _A_, which solves $x'=x$ in @Eq:recurrence.
 
 The basic requirement for evolution via natural selection is a heritable phenotype that produces differential fitness. 
 Therefore, if selection is neutral ($\omega_A = \omega_B$) or if there is no vertical transmission $\rho=0$, then any $0 \le x \le 1$ is an (unstable) equilibrium.
@@ -190,11 +190,12 @@ Since $f(0) = \omega_B + \rho(\omega_A + \omega_B) > \omega_B = g(0)$,
 we can deduce that $f(x) > g(x)$ for any $x<1$ and hence $x' > x$ (see @Fig:recurrence_example A). $\blacksquare$
 
 How does the convergence rate depend on $\rho$?
-Note that $\frac{d (x' - x)}{d\rho} = \frac{(\omega_A-\omega_B) x (1-x) }{(\omega_A-\omega_B)x + \omega_B} > 0$, so convergence to $x=1$ is faster for larger $\rho$, and vertical transmission facilitates adaptation (@Fig:recurrence_example B).
+Note that $\frac{d (x' - x)}{d\rho} = \frac{(\omega_A-\omega_B) x (1-x) }{(\omega_A-\omega_B)x + \omega_B} > 0$, 
+so the higher the vertical transmission rate, the faster the convergence to $x=1$ (@Fig:recurrence_example B).
 
 ## Periodically changing selection
 
-Next, we consider periodic fluctuating selection regimes in which the favored phenotype changes after a fixed number of generations.
+Next, we consider selection regimes in which the favored phenotype changes after a fixed number of generations.
 Simple examples are _A1B1=ABABABAB..._, in which the favored genotype $\Phi$  switches every generation,
 or _A2B1=AABAABAAB..._ where every two generations in which selection favored phenotype _A_ are followed by a single generation in which selection favors phenotype _B_.
 
@@ -348,10 +349,11 @@ and again, the previous proposition provides the last inequality.
 $\blacksquare$
 
 **Result.**
-_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
+_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
-Similarly to the previous proposition, but using a different Bernoulli inequality:
+First, note that $\frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} = \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}}$.
+Next, proceed similarly to the previous result, but using a different Bernoulli inequality:
 
 $$\begin{aligned}
 (1+x)^n \ge 1+nx, \;\;\; \text{for all} x > -1, \text{and} \in \mathbb{R} \smallsetminus (0,1). \\
@@ -361,12 +363,13 @@ $$\begin{aligned}
 
 In general, we find that (@Fig:lk_phase_plane):
 
-- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2}$.
 - $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
+- Both of these condition decreae when $\rho$ increases.
 
 ![Ratios of selection periods $\frac{l}{k}$ that lead to fixation of phenotype _B_ (red) or polymorphism between phenotypes _A_ and _B_ (blue). _l_ and _k_ are the number of generations in which phenotypes _B_ and _A_ are favored bu selection. Parameters: _W_ = 1.](figures/lk_phase_plane.pdf){#fig:lk_phase_plane}
 
-### _A1B1_ regime
+### _A1B1_ selection regime
 
 When the favored phenotype switches every generation, we can write the following recurrence, which sets $\omega_A=W, \omega_B=w$ in [@Eq:recurrence0] to determine $x'$ and and then sets $\omega_A=w, \omega_B=W$ to determine $x''$:
 
@@ -520,11 +523,11 @@ and the dynamics are presented in @Fig:env_A2B1.
 
 ![Frequency of phenotype _A_ after every three generation in selection regime _A2B1_. Comparison of finite size population simulations (orange; average of 100 simulations) and infinite population iterations (blue; @eq:recurrenceA2B1). Parameters: _W_=1, _N=10,000_, initial population $x=0.5$.](figures/env_A2B1.pdf){#fig:env_A2B1}
 
-### Summary for periodically changing selection
+### Summary
 
-- Phenotypes _A_ and _B_ coexist in a protected polymorphism if the ratio between generations favoring _B_ and those favoring _A_ is less than $1 + \frac{(1-\rho){\frac{W-w}{w}}}{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}$.
+- Phenotypes _A_ and _B_ coexist in a protected polymorphism if the ratio between generations favoring _B_ and those favoring _A_ is less than $1 + \frac{(1-\rho)W(W-w)}{Ww+\rho(1-\rho)(W-w)^2}$.
 - Phenotype _B_ fixation ($x=0$) is stable if the ratio between generations favoring _B_ and those favoring _A_ is more than $1 + (1-\rho)\frac{W-w}{w}$.
-- Oblique transmission (low $\rho$ values) and strong selection (high fitness difference $W-w$) promote diversity (@Fig:lk_phase_plane).
+- Oblique transmission (low $\rho$ values) and strong selection (high fitness difference $W-w$) promote polymorphism (@Fig:lk_phase_plane).
 - With complete vertical transmission ($\rho=1$), fixation of the more frequently favored phenotype is almost certain (@Fig:lk_phase_plane F).
 - An explicit expression for the stable frequency of phenotype _A_ in the _A1B1_ selection regime is given by @Eq:recurrenceA1B1_solution_x_star.
 - In the _A1B1_ selection regime, modifier alleles that reduce the vertical transmission rate are favored by natural selection (@Fig:A1B1_modifier_invasions) and the only transmission mode that can lead to evolutionary stability is complete oblique transmission ($\rho=0$; see @Fig:A1B1_modifier_invasions).
@@ -676,18 +679,31 @@ The results (@Fig:stoch_modifier_invasions) suggest that, similar to the case of
 
 ![Consecutive fixation of modifiers that reduce the vertical transmission rate under randomly changing selection. The figure shows results of numerical simulations of evolution with two modifier alleles (@eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1_ and _w=0.1_ with probability 0.5 and _W=1_ and _w=0.1_ otherwise. The x-axis is in log-scale, as each sequential invasion takes an order of magnitude longer to complete.](figures/stoch_modifier_invasions.pdf){#fig:stoch_modifier_invasions}
 
-### Summary for randomly changing selection
+### Summary
 
 - If $\mathbb{E}[\log{(1+\rho s_t)}] > 0$, where $1+s_t$ and $1$ are the fitnesses of phenotypes _A_ and _B_, then fixation of phenotype _B_ ($x^*=0$) almost never occurs.
 - With complete oblique transmission ($\rho=0$), $\mathbb{E}[\log{(1+\rho s_t)}]=0$ and we cannot determine the local stochastic stability of $x^*=0$.
+- In general, the effect of the vertical transmission rate depends on the sign of $\frac{d}{d\rho}\mathbb{E}[1 + \rho s_t] = \mathbb{E}[\frac{s_t}{1+\rho s_t}]$.
 - If the fitness of phenotype _B_ is also a random variable, such that the fitnesses of phenotypes _A_ and _B_ are $\tau_t, \sigma_t$, respectively, than we can normalize the fitnesses by $\sigma_t$ and denote $s_t=\frac{\tau_t-\sigma_t}{\sigma_t}$. The above results then apply.
 - The above results will stand for any sequence $\{s_t\}_{t \ge 0}$ for which the SLLN applies, even if they are not i.i.d.
 - @Fig:stochastic_env_x_t shows $x_{t=10^6}$ with $\rho=0.01$ and initial value $x_0=10^{-3}$ for different selection coefficients _s_ and _p_ the probability of favoring phenotype _A_. The white lines represent _s_ and _p_ values for which $\mathbb{E}[\log{(1 + \rho s_t)}] = 0$; indeed, below this line $x_t$ tends to converge to 0. **TODO: consider changing _s_ or _p_ to $\rho$**.
 
 # Discussion {-}
 
-Here, we model the evolution of a phenotype with both vertical and oblique transmission (i.e., copied from parents or from unrelated individuals in the parental generation, respectively). Our results show that under fluctuating selection, oblique transmission is favored over vertical transmission after the phenotype distribution in the population has reached an eqauilibrium.
+Here, we model the evolution of a phenotype with both vertical and oblique transmission (i.e., copied from parents or from unrelated individuals in the parental generation, respectively) and study the effect of these transmission modes on the maintanance of phenotypic polymorphism, as well as the evolution of the transmission modes themselves.
 
+Regarding coexistence, our results show that:
+
+- diversity disappears in constant selection
+- more rapdily for vertical transmission (Fig 1B)
+- therefore, with high vertical transmission, even short periods of stable selection will lead to extinction of unfavored phenotype.
+- in changing selection, we found neccessary conditions for maintainance of both phenotypes as well as for fixation of one phenotype
+- the parameter range for maintainance (fixation) decreases (increases) with vertical transmission rate
+- oblique transmission and strong selection maintain polymorphism
+- in rapidly changing environment, oblique transmission increases population phenotypic variance (Fig 3) and populaiton mean fitness (Fig 5)
+- in random environment ???
+
+Second, if selection fluctuates every generation, oblique transmission is favored over vertical transmission after the phenotype distribution in the population has reached an eqauilibrium.
 @McElreath2008 have suggested that vertical transmission is only effective when selection is relatively stable, and @Aoki2005 have demonstrated numerically that oblique transmission (in the form of social learning) can be favored over vertical transmission (via genetic determination of behavior) when the duration between changes in selection is short.
 Our analytic results support these findings: the main factor that determines when vertical or oblique transmission is preferred is the frequency and intensity of changes in selection.
 
