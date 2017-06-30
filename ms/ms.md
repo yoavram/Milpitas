@@ -193,6 +193,27 @@ How does the convergence rate depend on $\rho$?
 Note that $\frac{d (x' - x)}{d\rho} = \frac{(\omega_A-\omega_B) x (1-x) }{(\omega_A-\omega_B)x + \omega_B} > 0$, 
 so the higher the vertical transmission rate, the faster the convergence to $x=1$ (@Fig:recurrence_example B).
 
+### Extreme selection
+
+A special case is that of extreme selection, in which individuals of the unfavored phenotype cannot reproduce, $\omega_A=1, \omega_B=0$.
+The recurrence equation (@eq:recurrence) simplifies to
+$$
+x' = (1-\rho)x + \rho.
+$$
+
+This recurrence has a closed form solution for $0 < \rho < 1$ (**TODO find solution for $\rho=0,1$**): $x_t$ the frequency of phenotype _A_ after _t_ generations is (proof by induction)
+$$
+x_t = 1 - (1-\rho)^t (1-x_0).
+$$ {#eq:extreme_selection_solution}
+Setting $x_t=1-x_0$ allows us to find the time $\tau$ required for phenotype _A_ become established ($x_t \approx 1$) when initialy rare ($x_0 \approx 0$):
+$$
+\tau = 
+\frac{\log{(\frac{x_0}{1-x_0})}}{\log{(1-\rho)}} \approx 
+\frac{\log{x_0}}{\log{(1-\rho)}}
+$$
+
+**TODO: figure? see notebook _extreme selection.ipynb_**
+
 ## Periodically changing selection
 
 Next, we consider selection regimes in which the favored phenotype changes after a fixed number of generations.
