@@ -195,24 +195,36 @@ so the higher the vertical transmission rate, the faster the convergence to $x=1
 
 ### Extreme selection
 
-A special case is that of extreme selection, in which individuals of the unfavored phenotype cannot reproduce, $\omega_A=1, \omega_B=0$.
-The recurrence equation (@eq:recurrence) simplifies to
+A special case is that of extreme selection, in which individuals of the unfavored phenotype cannot reproduce - $\omega_A=1$ and $\omega_B=0$ - and
+the recurrence equation (@eq:recurrence) simplifies to
 $$
 x' = (1-\rho)x + \rho.
 $$
 
-This recurrence has a closed form solution for $0 < \rho < 1$ (**TODO find solution for $\rho=0,1$**): $x_t$ the frequency of phenotype _A_ after _t_ generations is (proof by induction)
+This recurrence has a closed form solution: $x_t$ the frequency of the favored phenotype _A_ after _t_ generations is (proof by induction, similar to [@Xue2016])
 $$
-x_t = 1 - (1-\rho)^t (1-x_0).
+x_t = \begin{cases}
+1 & \rho = 1 \\
+x_0 & \rho = 0 \\
+1 - (1-\rho)^t (1-x_0) & 0 < \rho < 1
+\end{cases}
 $$ {#eq:extreme_selection_solution}
-Setting $x_t=1-x_0$ allows us to find the time $\tau$ required for phenotype _A_ become established ($x_t \approx 1$) when initialy rare ($x_0 \approx 0$):
+
+With perfect vertical transmission ($\rho=1$), fixation of the favored phenotype takes only a single generation, because only the favored phenotype reproduces and all its offspring have the same phenotype.
+On the other hand, with perfect oblique transmission ($\rho=0$), phenotype frequencies do not change over time and the favored phenotype will never fix.
+This is because oblique transmission decouples selection from inheritance: it allows the unfavored phenotype to be transmitted from the parental generation to the offspring generation despite the fact that all offspring are produced by parents with the favored phenotype.
+
+With a mix of vertical and oblique transmission, we set $x_t=1-x_0$ to find the time $\tau$ required for the favored phenotype to become fixed ($x_t \approx 1$) when initialy rare ($x_0 \approx 0$):
 $$
 \tau = 
 \frac{\log{(\frac{x_0}{1-x_0})}}{\log{(1-\rho)}} \approx 
-\frac{\log{x_0}}{\log{(1-\rho)}}
-$$
+\frac{\log{x_0}}{\log{(1-\rho)}}.
+$$ {#eq:extreme_selection_fixation_time}
 
-**TODO: figure? see notebook _extreme selection.ipynb_**
+@Fig:extreme_selection_fixation_time A shows the fixation time $\tau$ for different values of $\rho$ and $x_0$, demonstrating that higher vertical transmission leads to significant decreases in fixation time.
+Because of this reduces fixation time, modifier alleles that increase the vertical transmission rate can invade the population if the favored phenotype is initially rare, i.e. after a change in the selection regime (@Fig:extreme_selection_fixation_time B).
+
+![Constant extreme selection. **(A)** Fixation time as a function of the  vertical transmission rate for different initial frequencies phenotype _A_, based on @Eq:extreme_selection_fixation_time. **(B)** Competitions between two modifiers alleles (@eq:recurrence_modifiers). When the favored phenotype _A_ is intially rare, a modifier allele _m_ that increases the vertical transmission can invade and become established in the population. Parameters: vertical transmission rates for modifier alleles _m_ and _M_: $\rho=0.1$ and $P=0.01$; initial frequency of modifier allele _m_ and of phenotype _A_ are independently 0.01.](figures/extreme_selection_fixation_time.pdf){#fig:extreme_selection_fixation_time}
 
 ## Periodically changing selection
 
