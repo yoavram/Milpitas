@@ -204,11 +204,8 @@ Note that precludes the case of $x=0$ which should lead to a population extincti
 
 This recurrence has a closed form solution: $x_t$ the frequency of the favored phenotype _A_ after _t_ generations is (proof by induction, similar to [@Xue2016])
 $$
-x_t = \begin{cases}
-1, & \rho = 1  \\
-x_0, & \rho = 0 \\
-1 - (1-\rho)^t (1-x_0), & 0 < \rho < 1
-\end{cases}
+x_t = 
+1 - (1-\rho)^t (1-x_0)
 $$ {#eq:extreme_selection_solution}
 where $x_0$ is the initial frequency of phenotype _A_.
 
