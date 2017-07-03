@@ -200,17 +200,19 @@ the recurrence equation (@eq:recurrence) simplifies to
 $$
 x' = (1-\rho)x + \rho.
 $$
+Note that precludes the case of $x=0$ which should lead to a population extinction within a single generation.
 
 This recurrence has a closed form solution: $x_t$ the frequency of the favored phenotype _A_ after _t_ generations is (proof by induction, similar to [@Xue2016])
 $$
 x_t = \begin{cases}
-1 & \rho = 1 \\
-x_0 & \rho = 0 \\
-1 - (1-\rho)^t (1-x_0) & 0 < \rho < 1
+1, & \rho = 1  \\
+x_0, & \rho = 0 \\
+1 - (1-\rho)^t (1-x_0), & 0 < \rho < 1
 \end{cases}
 $$ {#eq:extreme_selection_solution}
+where $x_0$ is the initial frequency of phenotype _A_.
 
-With perfect vertical transmission ($\rho=1$), fixation of the favored phenotype takes only a single generation, because only the favored phenotype reproduces and all its offspring have the same phenotype.
+With perfect vertical transmission ($\rho=1$), fixation of the favored phenotype takes only a single generation, because only the favored phenotype reproduces and all offspring inherit their parent phenotype.
 On the other hand, with perfect oblique transmission ($\rho=0$), phenotype frequencies do not change over time and the favored phenotype will never fix.
 This is because oblique transmission decouples selection from inheritance: it allows the unfavored phenotype to be transmitted from the parental generation to the offspring generation despite the fact that all offspring are produced by parents with the favored phenotype.
 
@@ -222,9 +224,9 @@ $$
 $$ {#eq:extreme_selection_fixation_time}
 
 @Fig:extreme_selection_fixation_time A shows the fixation time $\tau$ for different values of $\rho$ and $x_0$, demonstrating that higher vertical transmission leads to significant decreases in fixation time.
-Because of this reduces fixation time, modifier alleles that increase the vertical transmission rate can invade the population if the favored phenotype is initially rare, i.e. after a change in the selection regime (@Fig:extreme_selection_fixation_time B).
+Because of this reduced fixation time, modifier alleles that increase the vertical transmission rate can invade the population if the favored phenotype is initially rare, i.e. after a change in the selection regime (@Fig:extreme_selection_fixation_time B).
 
-![Constant extreme selection. **(A)** Fixation time as a function of the  vertical transmission rate for different initial frequencies phenotype _A_, based on @Eq:extreme_selection_fixation_time. **(B)** Competitions between two modifiers alleles (@eq:recurrence_modifiers). When the favored phenotype _A_ is intially rare, a modifier allele _m_ that increases the vertical transmission can invade and become established in the population. Parameters: vertical transmission rates for modifier alleles _m_ and _M_: $\rho=0.1$ and $P=0.01$; initial frequency of modifier allele _m_ and of phenotype _A_ are independently 0.01.](figures/extreme_selection_fixation_time.pdf){#fig:extreme_selection_fixation_time}
+![Constant extreme selection. **(A)** Fixation time as a function of the  vertical transmission rate for different initial frequencies of phenotype _A_, based on @Eq:extreme_selection_fixation_time. **(B)** Competitions between two modifiers alleles (@eq:recurrence_modifiers). When the favored phenotype _A_ is intially rare, a modifier allele _m_ that increases the vertical transmission rate can invade the population. Parameters: vertical transmission rates: $\rho=0.1$ for _m_, $P=0.01$ for _M_; initial frequency of modifier allele _m_ and of phenotype _A_ are both independently 0.01.](figures/extreme_selection_fixation_time.pdf){#fig:extreme_selection_fixation_time}
 
 ## Periodically changing selection
 
