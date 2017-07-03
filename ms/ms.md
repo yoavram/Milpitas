@@ -206,7 +206,7 @@ This recurrence has a closed form solution: $x_t$ the frequency of the favored p
 $$
 x_t = 
 1 - (1-\rho)^t (1-x_0)
-$$ {#eq:extreme_selection_solution}
+$$
 where $x_0$ is the initial frequency of phenotype _A_.
 
 With perfect vertical transmission ($\rho=1$), fixation of the favored phenotype takes only a single generation, because only the favored phenotype reproduces and all offspring inherit their parent phenotype.
