@@ -446,7 +446,7 @@ $$ {#eq:A1B1_mean_fitness}
 
 @Fig:env_A1B1 demonstrates the good fit between $x^*$ (dashed green; @eq:recurrenceA1B1_solution_x_star), iterations of @Eq:recurrenceA1B1 (blue) and the average of finite population model simulations (orange) for several combinations of $\rho$ and _w_.
 
-![Frequency of phenotype _A_ after every two generation in environmental regime _A1B1_. Comparison of the finite population model (orange; average of 100 simulations), the infinite population model (blue; @eq:recurrenceA1B1), and the equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=100,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
+![Frequency of phenotype _A_ after every two generation in selection regime _A1B1_. Comparison of the finite population model (orange; average of 100 simulations), the infinite population model (blue; @eq:recurrenceA1B1), and the equilibrium solution (dashed green; @eq:recurrenceA1B1_solution_x_star). Parameters: _W_=1, _N=100,000_, initial value $x=0.5$.](figures/env_A1B1.pdf){#fig:env_A1B1}
 
 ### Evolutionary stability of oblique transmission
 
@@ -540,7 +540,7 @@ Importantly, reducing the vertical transmission rate also increases the populati
 
 ![Consecutive fixation of modifiers that reduce the vertical transmission rate in environmental regime _A1B1_. The figure shows results of numerical simulations of evolution with two modifier alleles (@eq:recurrence_modifiers). When a modifier allele fixes (frequency>99.9%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). **(A)** The frequency of phenotype _A_ in the population over time. **(B)** The frequency of the invading modifier allele over time. **(C)** The population mean vertical transmission rate over time. Vertical transmission rate of the initial resident modifier allele, $\rho_0 =0.1$; fitness values: _W=1, w=0.1_. The x-axis is in log-scale, as each sequential invasion takes an order of magnitude longer to complete.](figures/A1B1_modifier_invasions.pdf){#fig:A1B1_modifier_invasions}
 
-![The stable population mean fitness $\bar{\omega}^*$ in environmental regime _A1B1_ as a function of the vertical transmission rate $\rho$ and the selection coefficient $s=W-w$, the difference between the fitness values of the favored and unfavored phenotypes (@eq:A1B1_mean_fitness).](figures/A1B1_mean_fitness.pdf){#fig:A1B1_mean_fitness}
+![Stable population mean fitness (**A**, @eq:A1B1_mean_fitness)  and phenotype _A_ frequency (**B**; @eq:recurrenceA1B1_solution_x_star) in selection regime _A1B1_ as a function of the vertical transmission rate $\rho$ and the fitness ratio $W/w$ between the favored and unfavored phenotype. Parameters: _W=1_.](figures/A1B1_mean_fitness.pdf){#fig:A1B1_mean_fitness}
 
 ### _A2B1_ selection regime
 
@@ -722,20 +722,23 @@ The results (@Fig:stoch_modifier_invasions) suggest that, similar to the case of
 
 # Discussion {-}
 
-Here, we model the evolution of a phenotype with both vertical and oblique transmission (i.e., copied from parents or from unrelated individuals in the parental generation, respectively) and study the effect of these transmission modes on the maintanance of phenotypic polymorphism, as well as the evolution of the transmission modes themselves.
+Non-chromosomal inheritance mechanisms represent an alternative to standard chromosomal vertical transmission. Therefore, such mechanisms are increasingly ackwoledged as important factors for explaining adaptation and diversity [@Rivoire2014].
+Here we investigated the evolution of a trait transmitted through a combination of vertical and oblique transmission, copied either from parents or from unrelated individuals in the parental generation, respectively.
+We focus on two major evolutionary problems: the maintenance of phenotypic polymorphism and the evolution of the transmission mode itself.
 
-Regarding coexistence, our results show that:
+## Maintenance of phenotypic polymorphism
 
-- diversity disappears in constant selection
-- more rapdily for vertical transmission (Fig 1B)
-- therefore, with high vertical transmission, even short periods of stable selection will lead to extinction of unfavored phenotype.
-- in changing selection, we found neccessary conditions for maintainance of both phenotypes as well as for fixation of one phenotype
-- the parameter range for maintainance (fixation) decreases (increases) with vertical transmission rate
-- oblique transmission and strong selection maintain polymorphism
-- in rapidly changing environment, oblique transmission increases population phenotypic variance (Fig 3) and populaiton mean fitness (Fig 5)
-- in random environment ???
+We find that under stable selection, the unfavored phenotype is expected to become extinct, and vertical transmission accelerates its extinction compared to oblique transmission (@Fig:recurrence_example B).
+Therefore, if selection fluctuates slowly, such that the population mostly evolves under stable conditions, oblique transmission allows polymorphism to be maintained for faster flactuations compared to vertical transmission.
+Indeed, analysis of evolution in periodically changing selection shows that oblique transmission facilitates the mainteneance of phenotypic polymorphism whereas vertical transmission leads to fixation of the more frequently favored phenotype (@Fig:lk_phase_plane)
 
-Second, if selection fluctuates every generation, oblique transmission is favored over vertical transmission after the phenotype distribution in the population has reached an eqauilibrium.
+Moreover, we find that under rapidly changing selection oblique transmission increases the phenotypic variance (@Fig:env_A1B1) and the population mean fitness (@Fig:A1B1_mean_fitness A), indicating an advantage to oblique transmission in such selection regimes. 
+
+**TODO: compare to results from [@Cavalli-Sforza1981, pg. 131-218]**
+
+## Evolution of the transmission mode
+
+In line with the above, we find that if selection fluctuates rapdily, oblique transmission is favored over vertical transmission after the phenotype distribution in the population has reached an eqauilibrium.
 @McElreath2008 have suggested that vertical transmission is only effective when selection is relatively stable, and @Aoki2005 have demonstrated numerically that oblique transmission (in the form of social learning) can be favored over vertical transmission (via genetic determination of behavior) when the duration between changes in selection is short.
 Our analytic results support these findings: the main factor that determines when vertical or oblique transmission is preferred is the frequency and intensity of changes in selection.
 
@@ -746,7 +749,7 @@ Most models of oblique transmission focused on social learning and how it differ
 In such models, individual learning is usually costly, but can provide novel phenotypes.
 Moreover, phenotypic response to environmental cues, such as individual learning, has been shown to be favored over oblique transmission in rapidly changing selection [@Aoki2005] because it is better able to track selection changes.
 
-In contrast, our model does not include individual learning or environmental cues, but rather focuses on the difference between vertical and oblique transmission, allowing it to capture transmission mechanisms other than learning, such as microbiome transmission in animals and plants, and horizontal gene transfer in microbes.
+First, our model does not include individual learning or environmental cues, but rather focuses on the difference between vertical and oblique transmission, allowing it to capture transmission mechanisms other than learning, such as microbiome transmission in animals and plants, and horizontal gene transfer in microbes.
 
 Second, our model assigns an equal probability for each individual to be the phenotype donor in oblique transmission.
 Other interesting forms of oblique transmission that we did not cover here are _many-to-one_, or conformity_; _one-to-many_, or teacher-type transmission;  and intra-familial transmission, such as between grandparents and grandchildren [@Cavalli-Sforza1981, pg. 54; @Aoki2011].
@@ -761,7 +764,7 @@ Lastly, our model does not include a cost for the phenotype donor, and therefore
 
 ## Comparison to models of phenotype switching 
 
-There has been several models of phenotype switching in which the phenotype is vertically transmitted, but the fidelity of this transmission is determined by a genetic modifier locus (@Leigh1970; @Lachmann1996; @Ishii1989; @Kussell2005; @King2007; @Liberman2011). 
+Several models of phenotype switching assume that the phenotype is vertically transmitted, but the fidelity of this transmission is determined by a genetic modifier locus (@Leigh1970; @Lachmann1996; @Ishii1989; @Kussell2005; @King2007; @Liberman2011). 
 In these models, under fluctuating selection, the evolutionary stable switching rate is $\approx \frac{1}{k}$ if selection fluctuates every _k_ generations, but not if _k_ is random with large variance or if selection is not symmetric [@Liberman2011; @Salathe2009a].
 
 Our model can represent a similar case in which transmission infidelity doesn't result in a random phenotype but rather in a phenotype drawn from the parental population; for example, if offspring sometimes mistakenly imitate unrelated adults instead of their parents, or if a proportion of offspring are reared by foster parents.
@@ -777,15 +780,26 @@ In rapidly changing selection there is a phenotype distribution that optimizes t
 In @Xue2016, the optimal phenotype distribution is encoded by the trait, which is vertically transmitted with modification. When the optimal trait value appears in the population, selection reduces the tendency for modification [@Altenberg2017] to maintain the optimal phenotype distribution.
 In our model, the optimal phenotype distribution is encoded by the population phenotype distribution, and when this distribution reaches the equilibrium state, selection favors oblique transmission, again to maintain the optimal phenotype distribution.
 
-## Misc.
+## On evolution with oblique transmission
 
-Allison [-@Allison1992] has shown that oblique transmission increases relatedness, the probability that two individuals inherited their phenotype from a common ancestor. With complete oblique transmission, the equilibrium relatedness value is $1/\Big(1+N \frac{\mu(2-\mu)}{(1-\mu)^2}\Big)$, where $\mu$ is the probability for adoption of new phenotypes by innovation or migration.
+Before concluding, we emphasize several ideas on how we expect oblique transmission to affect evolution.
 
-# TODO
+First, oblique transmission can increase the _relatedness coefficient_ [@Allison1992] -- the probability that two individuals inherited their phenotype from a common ancestor -- which might help to explain the evolution of cooperation, as recently demonstrated for transmission of cooperative behaviour through host-manipulating microbes [@Lewin-Epstein2017].
 
-- Discuss polymorphism results
+Second, because oblique transmission decouples inheritance and reproductive success by allowing non-reproducing individuals to transmit their phenotye to the next generation, oblique transmission effectively reduces the strengh of selection.
+Such reduction can facilitate adaptive peak shifts, inflate estimates of effective population size, and lead to accumulation of deleterious mutations, amongh other effects.
 
-"It has been suggested that an inheritance system that couples weak vertical transmission with strong oblique transmission ($\rho \ll 1$) might prevent traits from being eliminated more than if vertical transmission was coupled with horizontal transmission, in which traits are transmitted between same-generation individuals" [@Cavalli-Sforza1981, pg. 315??].
-//rephrase
+Lastly, oblique transmission emerges in several inheritance mechanisms that are very different in terms of the underlying biological and cultural mehchanisms, and are therefore rarely thought of in the same terms.
+For example, @Eq:recurrence can model a human population in which offspring learn a behaviour from either their parents or random adults, but it can also model a microbial population in which the allele at a specific locus is either copied during DNA replication, or recombined from free strands of DNA taken up from the environment (likely originating from dead cells from the "parental" generation [@Redfield1993a]).
+We suggest that the emerging similarity can be exploited to transfer intuition and even concrete results about the evolutionary causes and consequences of these inheritance mechanisms.
+
+## Conclusions
+
+Here we analyse evolution with a combination of vertical and oblique transmission and focusing on the maintenance of phenotype polymorphism and the evolution of the transmission mode. 
+Our analysis applies for a wide range of biological circumstances, as oblique transmission occurs across the tree of life.
+
+\small
+_**Acknowledgements.** This research was supported in part by the Stanford Center for Computational, Evolutionary and Human Genomics._
+\normalsize
 
 # References {-}
