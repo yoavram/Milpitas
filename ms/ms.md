@@ -131,18 +131,6 @@ $$ {#eq:recurrence0}
 
 ![Dynamics of _x_ the frequency of phenotype _A_. **(A)** The change in frequency of _A_ between consecutive generations, $x \to x'$ (@eq:recurrence), for different vertical transmission rates ($\rho$). The shaded area marks $x' \le x$. **(B)** Evolution under constant selection with advantage to phenotype _A_ leads to fixation of phenotype _A_, and this fixation is faster for higher rates of vertical transmission $\rho$.  Parameters: _W_=1, _w_=0.9.](figures/recurrence_example.pdf){#fig:recurrence_example}
 
-## Finite size population model
-
-To include the effect of random drift, we carry out a binomial sampling after each generation, as in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is
-
-$$
-{N \choose k}
-\Big(x \frac{\omega_A}{\bar{\omega}}\Big)^k 
-\Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
-$$ {#eq:genetic_drift_rule}
-
-With complete vertical transmission ($\rho=1$), this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift. Cavalli-Sforza and Feldman [-@Cavalli-Sforza1981, ch. 3.10] used a similar model to study drift in cultural evolution. 
-
 ## Modifier model
 
 Consider two modifier alleles _m_ and _M_ that produce vertical transmission rates $\rho$ and $P$.
@@ -165,6 +153,18 @@ $$\begin{aligned}
 \bar{\omega} x_4' = x_3 \omega_A (1-P)(x_2 + x_4) + x_4 \omega_B ((1-P)(x_2 + x_4) + P) \\
 \bar{\omega} = \omega_A (x_1 + x_3) + \omega_B (x_2 + x_4)
 \end{aligned}$$ {#eq:recurrence_modifiers}
+
+## Finite size population model
+
+To include the effect of random drift, we carry out a binomial sampling after each generation, as in Wright-Fisher models [@Otto2007, ch. 13.4]. Therefore, given that the frequency of individuals with phenotype _A_ is _x_ in the parental generation, the probability that $k$ offspring are descendants of individuals with phenotype _A_ is
+
+$$
+{N \choose k}
+\Big(x \frac{\omega_A}{\bar{\omega}}\Big)^k 
+\Big((1-x) \frac{\omega_B}{\bar{\omega}}\Big)^{N-k}.
+$$ {#eq:genetic_drift_rule}
+
+With complete vertical transmission ($\rho=1$), this model simplifies to a standard Wright-Fisher two-allele model with selection and random genetic drift. Cavalli-Sforza and Feldman [-@Cavalli-Sforza1981, ch. 3.10] used a similar model to study drift in cultural evolution. 
 
 # Results {-}
 
