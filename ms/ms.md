@@ -213,11 +213,11 @@ With perfect vertical transmission ($\rho=1$), fixation of the favored phenotype
 On the other hand, with perfect oblique transmission ($\rho=0$), phenotype frequencies do not change over time and the favored phenotype will never fix.
 This is because oblique transmission decouples selection from inheritance: it allows the unfavored phenotype to be transmitted from the parental generation to the offspring generation despite the fact that all offspring are produced by parents with the favored phenotype.
 
-With a mix of vertical and oblique transmission, we set $x_t=1-x_0$ to find the time $\tau$ required for the favored phenotype to become fixed ($x_t \approx 1$) when initialy rare ($x_0 \approx 0$):
+With a mix of vertical and oblique transmission, we set $x_0 = \epsilon$ and $x_{\tau} = 1 - \epsilon$, for some small $\epsilon > 0$, to find the time $\tau$ required for the favored phenotype to become almost fixed when initialy rare:
 $$
 \tau = 
-\frac{\log{(\frac{x_0}{1-x_0})}}{\log{(1-\rho)}} \approx 
-\frac{\log{x_0}}{\log{(1-\rho)}}.
+\frac{\log{(\frac{\epsilon}{1-\epsilon})}}{\log{(1-\rho)}} \approx 
+\frac{\log{\epsilon}}{\log{(1-\rho)}}.
 $$ {#eq:extreme_selection_fixation_time}
 
 @Fig:extreme_selection_fixation_time A shows the fixation time $\tau$ for different values of $\rho$ and $x_0$, demonstrating that higher vertical transmission leads to significant decreases in fixation time.
@@ -311,14 +311,10 @@ To show the latter,
 \begin{multline*}
 f_A(0) f_B(0) = \\
 (1 + \rho \frac{W-w}{w}) \cdot (1 + \rho \frac{w-W}{W}) = \\
-(1 - \rho + \rho\frac{W}{w}) \cdot (1 - \rho + \rho\frac{w}{W}) = \\
-(1-\rho)^2 +\rho^2 +\rho(1-\rho)(\frac{W}{w}+\frac{w}{W}) = \\
-1 - 2\rho(1-\rho) +\rho(1-\rho)(\frac{W^2+w^2}{Ww}) = \\
-1 + \rho (1-\rho)\frac{W^2 - 2 W w + w^2}{Ww} = \\
 1 + \rho (1-\rho)\frac{(W - w)^2}{W w} > 1
 \end{multline*}
 
-if $1 > \rho > 0, W > w$.
+if $1 > \rho > 0$ and $W > w$.
 $\blacksquare$
 
 **Result.**
@@ -332,7 +328,7 @@ n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
  n \rho \frac{W-w}{W}  > \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
 1 + n \rho \frac{W-w}{W} > 1 + \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
 1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 + n \rho \frac{W-w}{W}} \\
-1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}} \\
+1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}}
 \end{multline}
 
 Now, if $w < W$, then $0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we have $-1 \le \rho \frac{w-W}{W} \le 0$. 
@@ -363,7 +359,7 @@ _If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^
 **Proof.**
 First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k}$ so that $n > (1-\rho)\frac{W-w}{w}$.
 
-Now, using the previous proposition,
+Now, using the previous result for $k=1$,
 $$
 f_{A}^{k}(0) f_{B}^{l}(0) = \\
 f_{A}^{k}(0) f_{B}^{(n+1)k}(0) = \\
@@ -371,27 +367,54 @@ f_{A}^{k}(0) f_{B}^{(n+1)k}(0) = \\
 $$
 because $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
 
-Next, relax the assumption $\frac{l-k}{k} \in \mathbb{N}$; set $n = \lceil{\frac{l-k}{k}}\rceil > \frac{l-k}{k} > (1-\rho)\frac{W-w}{w}$, then
+Next, relax the assumption $\frac{l-k}{k} \in \mathbb{N}$; set $n = \lceil \frac{l-k}{k} \rceil > \frac{l-k}{k} > (1-\rho)\frac{W-w}{w}$, then
 $$
 f_A^k(0) f_B^l(0) < \\
 f_A^k(0) f_B^{(n+1)k}(0) = \\
-(f_A(0) f_B^{n+1}(0))^k < 1
+\Big(f_A(0) f_B^{n+1}(0)\Big)^k < 1
 $$
-and again, the previous proposition provides the last inequality.
+and again, the previous result for $k=1$ provides the last inequality.
 $\blacksquare$
 
 **Result.**
 _If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
-First, note that $\frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} = \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}}$.
-Next, proceed similarly to the previous result, but using a different Bernoulli inequality:
+We start with the case of $k=1$.
+Set $n=l-1$ and note that $\frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} = \frac{(1-\rho) \frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{W w}}$.
 
+According to the condition and remembering that $w<W$,
+\begin{multline}\label{eq:k_ge_l_k_1}
+n < \frac{(1-\rho)\frac{W-w}{w}}{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}} \Leftrightarrow ֿֿֿֿֿ\\
+n \rho \frac{w-W}{W} > \frac{\rho(1-\rho)\Big(\frac{W-w}{w}\Big) \Big(\frac{w-W}{W}\Big)}{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}} \Leftrightarrow \\
+1 + n \rho \frac{w-W}{W} > 1 - \frac{\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}} = \frac{1}{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}} \Leftrightarrow \\
+\Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1 + n \rho \frac{w-W}{W}\Big) > 1
+\end{multline}
+
+We use a different Bernoulli inequality this time:
 $$\begin{aligned}
-(1+x)^n \ge 1+nx, \;\;\; \text{for all} x > -1, \text{and} \in \mathbb{R} \smallsetminus (0,1). \\
-\blacksquare
-\end{aligned}$$
+(1+x)^n \ge 1+nx, \;\;\; \text{for all}\; x > -1, \text{and} n \in \mathbb{R} \smallsetminus (0,1).
+\end{aligned}$$ {#eq:bernoulli2}
 
+Taken together, @Eq:k_ge_l_k_1 and @Eq:bernoulli2 imply that:
+\begin{multline*}
+f_A(0) f_B^{n+1}(0) = \\
+\Big(1+\rho \frac{W-w}{w}\Big) \Big(1+\rho \frac{w-W}{W}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n = \\
+\Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n \ge \\
+\Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1 + n \rho \frac{w-W}{W}\Big) > 1
+\end{multline*}
+
+For the general case $k \ge 1$, set $n=\lfloor \frac{l-k}{k} \rfloor < \frac{l-k}{k} < \frac{(1-\rho)W(W-w)}{Ww + \rho (1-\rho)(W-w)^2}$.
+Then,
+$$
+f_A^k(0) f_B^l(0) >
+f_A^k(0) f_B^{(n+1)k}(0) = 
+\Big(f_A(0) f_B^{n+1}\Big)^k > 1,
+$$
+where the case of $k=1$ provides the last inequality.
+$\blacksquare$
+
+#### Conclusion
 
 In general, we find that (@Fig:lk_phase_plane):
 
@@ -399,7 +422,7 @@ In general, we find that (@Fig:lk_phase_plane):
 - $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
 - Both of these condition decreae when $\rho$ increases.
 
-![Ratios of selection periods $\frac{l}{k}$ that lead to fixation of phenotype _B_ (red) or polymorphism between phenotypes _A_ and _B_ (blue). _l_ and _k_ are the number of generations in which phenotypes _B_ and _A_ are favored bu selection. Parameters: _W_ = 1.](figures/lk_phase_plane.pdf){#fig:lk_phase_plane}
+![Ratios of selection periods $\frac{l}{k}$ that lead to fixation of phenotype _B_ (red) or polymorphism between phenotypes _A_ and _B_ (blue). _l_ and _k_ are the number of generations in which phenotypes _B_ and _A_ are favored by selection. Parameters: _W_ = 1.](figures/lk_phase_plane.pdf){#fig:lk_phase_plane}
 
 ### _A1B1_ selection regime
 
