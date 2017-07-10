@@ -31,8 +31,7 @@ However, it is apparent that in many animals, and especially in humans,
 some traits are transmitted through imitation, teaching, learning,
 and other forms of communication that comprise *cultural evolution*
 [@Cavalli-Sforza1973; @Cavalli-Sforza1981; @Boyd1985; @Avital2000; @Whiten2017; @Laland2017].
-Other non-genetic phenotype-modifying transmission vehicles have received increasing
-attention over the past two decades [@Jablonka2014], including
+Other non-genetic phenotype-modifying transmission vehicles have received increasing attention over the past two decades [@Jablonka2014], including
 epigenetics [@Verhoeven2016], symbionts [@Zilber-Rosenberg2008], and even prions [@Wickner2016].
 These transmission mechanisms vary in their persistence, speed, timing, and direction when compared to the kind of vertical transmission between parent and offspring that is restricted to genetic inheritance.
 
@@ -59,10 +58,11 @@ Similarly, some phenotypes are determined by genes that are commonly converted b
 In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell and oblique transmission from other cells, even if the latter did not originally evolve for that purpose [@Redfield1993].
 
 Here, we model the dynamics of a phenotype that is inherited by a
-combination of vertical and oblique transmission. We study properties of
-the steady state frequencies of phenotypic variants in constant and
-fluctuating selection, and find conditions under which oblique
+combination of vertical and oblique transmission.
+We study properties of the steady state frequencies of phenotypic variants in constant and fluctuating selection, and find conditions under which oblique
 transmission is likely to evolve.
+Our model is loosely based on a recently published model of phenotype switching by @Xue2016.
+However, in their study the phenotype distribution is a vertically transmitted trait, modified by parental effects, whereas in our study the phenotype is the transmitted trait, and the phenotype distribution is represented by the population.
 
 # Model {-}
 
