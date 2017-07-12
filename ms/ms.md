@@ -309,7 +309,7 @@ First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
 To show the latter,
 
 \begin{multline*}
-f_A(0) f_B(0) = \\
+f_A(0) f_B(0) =
 (1 + \rho \frac{W-w}{w}) \cdot (1 + \rho \frac{w-W}{W}) = \\
 1 + \rho (1-\rho)\frac{(W - w)^2}{W w} > 1
 \end{multline*}
@@ -336,15 +336,15 @@ These conditions allow us to use the following Bernoulli inequality (proof by in
 
 $$
 (1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
-$$ {#eq:bernoulli1}
+$$ 
 
 From the Bernoulli inequality we have: 
 
 $$
 \Big(1+\rho \frac{w-W}{W}\Big)^n \le \frac{1}{1 - n \rho \frac{w-W}{W}}
-$$ {#eq:l_g_k_eq_1_B}
+$$ {#eq:bernoulli1}
 
-Taken together, @Eq:l_g_k_eq_1_A and @Eq:l_g_k_eq_1_B imply that:
+Taken together, @Eq:l_g_k_eq_1_A and @Eq:bernoulli1 imply that:
 
 \begin{multline*}
 f_A(0) f_B^{n+1}(0) = \\
@@ -377,7 +377,7 @@ and again, the previous result for $k=1$ provides the last inequality.
 $\blacksquare$
 
 **Result.**
-_If $k \ge 1$ and $k < l < k \Big( 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
+_If $k \ge 1$ and $k + 1 \le l < k \Big( 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
 
 **Proof.**
 We start with the case of $k=1$.
@@ -392,24 +392,30 @@ n \rho \frac{w-W}{W} > \frac{\rho(1-\rho)\Big(\frac{W-w}{w}\Big) \Big(\frac{w-W}
 \end{multline}
 
 We use a different Bernoulli inequality this time:
-$$\begin{aligned}
-(1+x)^n \ge 1+nx, \;\;\; \text{for all}\; x > -1, \text{and} n \in \mathbb{R} \smallsetminus (0,1).
-\end{aligned}$$ {#eq:bernoulli2}
+$$
+(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R} \smallsetminus (0,1),
+$$ 
+which gives us
+$$
+\Big(1 + \rho \frac{w-W}{W}\Big)^n \ge 1 + n\rho \frac{w-W}{W},
+$$ {#eq:bernoulli2}
+because $\rho \frac{w-W}{W} > -1$.
 
 Taken together, @Eq:k_ge_l_k_1 and @Eq:bernoulli2 imply that:
 \begin{multline*}
-f_A(0) f_B^{n+1}(0) = \\
+f_A(0) f_B^l(0) = \\
+f_A(0) f_B(0) f_B^n(0) = \\
 \Big(1+\rho \frac{W-w}{w}\Big) \Big(1+\rho \frac{w-W}{W}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n = \\
 \Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n \ge \\
 \Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1 + n \rho \frac{w-W}{W}\Big) > 1
 \end{multline*}
 
-For the general case $k \ge 1$, set $n=\lfloor \frac{l-k}{k} \rfloor < \frac{l-k}{k} < \frac{(1-\rho)W(W-w)}{Ww + \rho (1-\rho)(W-w)^2}$.
+For the general case $k \ge 1$, set $n = \frac{l-k}{k} < \frac{(1-\rho)W(W-w)}{Ww + \rho (1-\rho)(W-w)^2}$ (note that to use @eq:bernoulli2, $n$ doesn't have to be an integer).
 Then,
 $$
-f_A^k(0) f_B^l(0) >
-f_A^k(0) f_B^{(n+1)k}(0) = 
-\Big(f_A(0) f_B^{n+1}\Big)^k > 1,
+f_A^k(0) f_B^l(0) =
+f_A^k(0) f_B^k(0) f_B^{l-k}(0) = \\
+\Big(f_A(0) f_B(0) f_B^n(0) \Big)^k  > 1,
 $$
 where the case of $k=1$ provides the last inequality.
 $\blacksquare$
