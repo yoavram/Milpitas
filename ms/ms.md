@@ -521,48 +521,51 @@ The characteristic polynomial of $T$ is $R(\lambda)=det(T-\lambda I)=a_2 \lambda
 
 $$\begin{aligned}
 a_0 = \frac{P^2 W^2 w^2}{\bar{\omega}^{*4}} \\
-a_1 = - \frac{2 P W w + (1-P)^2 (W(1-x^*) + wx^*)^2}{\bar{\omega}^{*2}} \\
-a_2 = 1
+a_1 = - \frac{2 P W w + (1-P)^2 \breve{\omega}^2}{\bar{\omega}^{*2}} \\
+a_2 = 1 \\
+\breve{\omega}^* = (W(1-x^*) + wx^*).
 \end{aligned}$$
 
 Since $T$ is positive, $R(\lambda)$ has two real roots.
-Denote $R'(\lambda) = \frac{dR}{d\lambda}(\lambda)$.
-Because $R(\lambda)$ is convex ($a_2=1$) and $R(0) = a_0 > 0, R'(0) =a_1 < 0$, both roots are positive.
-Therefore, if $R(1)>0$ and $R'(1)>0$, then the largest root - the leading eigenvalue - is less than 1, and _m_ is stable to invasion by _M_.
+Because $R(\lambda)$ is convex ($a_2=1$) and $R(0) = a_0 > 0, \frac{dR}{d\lambda}(0) =a_1 < 0$, both roots are positive.
+Therefore, if $R(1)>0$ and $\frac{dR}{d\lambda}(1)>0$, then the largest root - the leading eigenvalue - is less than 1, and _m_ is stable to invasion by _M_.
 However, if $R(1)<0$, then the leading eigenvalue is larger than 1, _m_ is unstable, and _M_ can invade _m_ [@Liberman2011].
 
-An important quantity for the analysis of $R(1)$ is
-$$
-\bar{\omega}^{*2} - Ww = \\
-(Wx^* + w(1-x^*))^2 - Ww = \\
-(W-w)^2 x^{*2} -2w(W-w) x^* -w(W-w)
-$$
-Let $J(x) = (W-w)^2 x^2 +2w(W-w) x -w(W-w)$.
-This is a convex polynomial with negative root $\frac{w-\sqrt{Ww}}{W-w}$ and positive root $\frac{\sqrt{Ww}-w}{W-w}$, which is the minimal value of $x^*$ given for $\rho=1$.
+An important quantity for the analysis is $\bar{\omega}^{*2} - Ww$.
+Let $J(x) = \bar{\omega}^2 - Ww = (W-w)^2 x^2 +2w(W-w) x -w(W-w)$.
+This is a convex polynomial in $x$ with negative root $\frac{w-\sqrt{Ww}}{W-w}$ and positive root $\frac{\sqrt{Ww}-w}{W-w}$, which is the minimal value of $x^*$ given for $\rho=1$.
 Therefore, we can determine that $\frac{Ww}{\bar{\omega}^{*2}}  \le 1$, with a strict inequality for $\rho < 1$.
 
-In addition, we have $x^* \le \frac{1}{2}$, so $W(1-x^*) + wx^* \ge Wx^* + w(1-x^*)$ and therefore $\frac{W(1-x^*) + wx^*}{\bar{\omega}^*} \ge 1$, with strict inequality for $\rho > 0$.
+In addition, we have $x^* \le \frac{1}{2}$, so that $W(1-x^*) + wx^* \ge Wx^* + w(1-x^*)$ and therefore $\frac{\breve{\omega}^*}{\bar{\omega}^*} \ge 1$, with strict inequality for $\rho > 0$.
 
-Using these identities, we examine $R(1)$ and $R'(1)$ for $P=\rho$, $P=0$, and $P=1$:
-
+For a $\lambda=1$, let $R_1(P) = R(1)$ and $\frac{dR_1}{d\lambda}(P) = \frac{dR}{d\lambda}(1)$ be polynomials in $P$.
+We examine $R_1(P)$ and $\frac{dR_1}{d\lambda}(P)$:
 $$\begin{aligned}
-R(1) |_{P=p} = 
+R_1(\rho) = 
 0 \\
-R(1) |_{P=0} = 
-1 - \Big(\frac{W(1-x^*) + wx^*}{\bar{\omega^*}}\Big)^2 < 0 \\
-R'(1) |_{P=0} =
-2 - \Big(\frac{W(1-x^*) + wx^*}{\bar{\omega^*}}\Big)^2 > 0 \\
-R(1) |_{P=1} = 
-\Big(1 - \frac{Ww}{\bar{\omega^*}^2}\Big)^2 > 0 \\
-R'(1) |_{P=1} = 
-2 \Big(1 - \frac{Ww}{\bar{\omega^*}^2}\Big) > 0 \\
+R_1(0) = 
+1 - \Big(\frac{\breve{\omega}^*}{\bar{\omega}^*}\Big)^2 < 0 \\
+\frac{dR_1}{d\lambda}(0) =
+2 - \Big(\frac{\breve{\omega}^*}{\bar{\omega}^*}\Big)^2 > 0 \\
+R_1(1) = 
+\Big(1 - \frac{Ww}{\bar{\omega}^{*2}}\Big)^2 > 0 \\
+\frac{dR_1}{d\lambda}(1) = 
+2 \Big(1 - \frac{Ww}{\bar{\omega}^{*2}}\Big) > 0 \\
 \end{aligned}$$
-
 where the last inequality is strict if $x^* \ne \frac{1}{2}$, which is the case when $\rho > 0$.
 
-We found that in selection regime _A1B1_, an allele _m_ producing vertical transmission rate $\rho$ is stable to the introduction of allele _M_, with associated rate $P$, if $\rho < P$, and it is unstable if $\rho > P$.
+Lastly, the roots of $R_1(P) = \frac{W^2 w^2 - \bar{\omega}^{*2} \breve{\omega}^{*2}}{\bar{\omega}^{*2}} P^2 + 2 \frac{\breve{\omega}^{*2}-Ww}{\bar{\omega}^{*2}} P + \frac{\bar{\omega}^{*2} - \breve{\omega}^{*2}}{\bar{\omega}^{*2}}$ are:
+$$
+\frac{\bar{\omega}^{*2} - \bar{\omega}^* \breve{\omega}^*}{Ww - \bar{\omega}^* \breve{\omega}^*} = \rho, \qquad 
+\frac{\bar{\omega}^{*2} + \bar{\omega}^* \breve{\omega}^*}{Ww + \bar{\omega}^* \breve{\omega}^*} > 1
+$$
+So, for $0 \le P \le 1$, $R_1(P)$ has a single root at $P=\rho$.
+Together, these calculations show that when $P<\rho$, 
+the leading eigenvalue of the external stability operator is larger than 1,
+whereas when $P>\rho$, the leading eigenvalue is less than 1.
+Therefore, an allele _m_ producing vertical transmission rate $\rho$ is stable to the introduction of allele _M_, with associated rate $P$, if $\rho < P$, and it is unstable if $\rho > P$.
 
-Therefore, the rate of vertical transmission is expected to be reduced, similar to the _reduction principle_ for mutation, recombination, and migration rates [@Altenberg2017], and the only transmission mode that is _evolutionary stable_ is complete oblique transmission ($\rho=0$).
+So, we found that in selection regime _A1B1_, the rate of vertical transmission is expected to be reduced, similar to the _reduction principle_ for mutation, recombination, and migration rates [@Altenberg2017], and the only transmission mode that is _evolutionary stable_ is complete oblique transmission ($\rho=0$).
 
 @Fig:A1B1_modifier_invasions shows the dynamics when iterating the recurrence equations (@eq:recurrence_modifiers) in selection regime _A1B1_ while introducing modifiers with lower and lower vertical transmission rates. Indeed, the invading modifier alleles sequentially fix and reduce the vertical transmission rate towards zero.
 Importantly, reducing the vertical transmission rate also increases the population mean fitness (@Fig:A1B1_mean_fitness).
