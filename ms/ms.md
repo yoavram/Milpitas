@@ -307,13 +307,11 @@ _If $k=l, 0 < w < W, 0 < \rho < 1$, then $f_A^k(0) f_B^l(0) > 1$ and $x^*=0$ is 
 First, $f_A^k(0) f_B^l(0) = (f_A(0)f_B(0))^k > 1$ iff $f_A(0)f_B(0)>1$.
 
 To show the latter,
-
-\begin{multline*}
+$$
 f_A(0) f_B(0) =
-(1 + \rho \frac{W-w}{w}) \cdot (1 + \rho \frac{w-W}{W}) = \\
+(1 + \rho \frac{W-w}{w}) \cdot (1 + \rho \frac{w-W}{W}) = 
 1 + \rho (1-\rho)\frac{(W - w)^2}{W w} > 1
-\end{multline*}
-
+$$
 if $1 > \rho > 0$ and $W > w$.
 $\blacksquare$
 
@@ -321,60 +319,34 @@ $\blacksquare$
 _If $k=1$, $w < W$, and $l > 1 + (1-\rho)\frac{W-w}{w}$ then $f_A(0)f_B^l(0) < 1$, and $x^*=0$ is locally stable. In this case, phenotype _B_ will eventually fix in the population._
 
 **Proof.**
-Set $n = l - 1$. Then,
-
-\begin{multline}\label{eq:l_g_k_eq_1_A}
-n > (1-\rho)\frac{W-w}{w} \Leftrightarrow \\
- n \rho \frac{W-w}{W}  > \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-1 + n \rho \frac{W-w}{W} > 1 + \rho (1-\rho)\frac{(W-w)^2}{Ww} \Leftrightarrow \\
-1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 + n \rho \frac{W-w}{W}} \\
-1 >  \frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}}
-\end{multline}
-
-Now, if $w < W$, then $0 \le \frac{W-w}{W} \le 1$, and together with $0 \le \rho \le 1$ we have $-1 \le \rho \frac{w-W}{W} \le 0$. 
-These conditions allow us to use the following Bernoulli inequality (proof by induction):
-
+The Bernoulli inequality:
 $$
-(1+x)^n \le \frac{1}{1 - nx}, \;\;\; \forall x \in [-1,0], \forall n \in \mathbb{N}.
-$$ 
-
-From the Bernoulli inequality we have: 
-
-$$
-\Big(1+\rho \frac{w-W}{W}\Big)^n \le \frac{1}{1 - n \rho \frac{w-W}{W}}
+(1+x)^n \le \frac{1}{1-nx},
 $$ {#eq:bernoulli1}
-
-Taken together, @Eq:l_g_k_eq_1_A and @Eq:bernoulli1 imply that:
-
+for $-1 \le x \le 0$ and $n \in \mathbb{N}$ gives us the identity
+$$
+\Big(1+\rho\frac{w-W}{W}\Big)^{l-1} \le \frac{1}{1+(l-1)\rho\frac{W-w}{W}}.
+$$
+Using this we find
 \begin{multline*}
-f_A(0) f_B^{n+1}(0) = \\
-\Big(1+\rho\frac{W-w}{w}\Big)\Big(1+\rho\frac{w-W}{W}\Big)\Big(1+\rho\frac{w-W}{W}\Big)^n = \\
-\Big(1+\rho(1-\rho)\frac{(W-w)^2}{Ww}\Big)\Big(1+\rho\frac{w-W}{W}\Big)^n \le \\
-\frac{1+\rho(1-\rho)\frac{(W-w)^2}{Ww}}{1 - n \rho \frac{w-W}{W}} < 1 \\\blacksquare
+f_A(0) f_B^l(0) = f_A(0) f_B(0) f_B^{l-1}(0) = \\
+\Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1+\rho\frac{w-W}{W}\Big)^{l-1} \le \\
+\frac{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}}{1+(l-1)\rho\frac{W-w}{W}} < 1.
 \end{multline*}
+where the last step uses the condition, $l-1 > (1-\rho)\frac{W-w}{w}$.
+$\blacksquare$
 
 **Result.**
-_If $k \ge 1$ and $l > k \Big( 1 + (1 - \rho) \frac{W - w}{w} \Big)$, then $f_A^k(0)f_B^l(0) < 1$, and $x^*=0$ is locally stable. In this case, phenotype _B_ will eventually fix in the populations._
+_If $k \ge 1, l = n k, n \in \mathbb{N}, \text{and } n > 1 + (1 - \rho) \frac{W - w}{w}$, then $f_A^k(0)f_B^l(0) < 1$, and $x^*=0$ is locally stable. In this case, phenotype _B_ will eventually fix in the populations._
 
 **Proof.**
-First, assume $\frac{l-k}{k} \in \mathbb{N}$ and set $n = \frac{l-k}{k}$ so that $n > (1-\rho)\frac{W-w}{w}$.
-
-Now, using the previous result for $k=1$,
-$$
-f_{A}^{k}(0) f_{B}^{l}(0) = \\
-f_{A}^{k}(0) f_{B}^{(n+1)k}(0) = \\
-(f_{A}(0) f_B^{n+1}(0))^{k} < 1
-$$
-because $\forall y>0, k>0 \; y < 1 \Rightarrow y^k < 1$.
-
-Next, relax the assumption $\frac{l-k}{k} \in \mathbb{N}$; set $n = \lceil \frac{l-k}{k} \rceil > \frac{l-k}{k} > (1-\rho)\frac{W-w}{w}$, then
-$$
-f_A^k(0) f_B^l(0) < \\
-f_A^k(0) f_B^{(n+1)k}(0) = \\
-\Big(f_A(0) f_B^{n+1}(0)\Big)^k < 1
-$$
-and again, the previous result for $k=1$ provides the last inequality.
-$\blacksquare$
+Similar to the previous result for $k=1$, we use the Bernoulli inequality (@Eq:bernoulli1),
+\begin{multline*}
+f_A^k(0) f_B^l(0) = f_A^k(0) f_B^k(0) f_B^{nk-k}(0) = \\
+\Big[\Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big) \Big(1 + \rho \frac{w-W}{W}\Big)^{n-1}\Big]^k \le \\
+\Big[\frac{1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}}{1+(n-1)\rho\frac{W-w}{W}}\Big]^k < 1,
+\end{multline*}
+and the last step uses the condition $n-1 > (1-\rho)\frac{W-w}{w}$. $\blacksquare$
 
 **Result.**
 _If $k \ge 1$ and $k + 1 \le l < k \Big( 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2} \Big)$ then $f_A^k(0) f_B^l(0) > 1$ so that $x^*=0$ is locally unstable and there is a protected polymorphism._
@@ -391,11 +363,11 @@ n \rho \frac{w-W}{W} > \frac{\rho(1-\rho)\Big(\frac{W-w}{w}\Big) \Big(\frac{w-W}
 \Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1 + n \rho \frac{w-W}{W}\Big) > 1
 \end{multline}
 
-We use a different Bernoulli inequality this time:
+We use another Bernoulli inequality:
 $$
-(1+x)^n \ge 1+nx, \;\;\; \forall x > -1, \forall n \in \mathbb{R} \smallsetminus (0,1),
+(1+x)^r \ge 1 + rx,
 $$ 
-which gives us
+for $x>-1$ and $r \in \mathbb{R} \smallsetminus (0,1)$, which gives us
 $$
 \Big(1 + \rho \frac{w-W}{W}\Big)^n \ge 1 + n\rho \frac{w-W}{W},
 $$ {#eq:bernoulli2}
@@ -403,9 +375,8 @@ because $\rho \frac{w-W}{W} > -1$.
 
 Taken together, @Eq:k_ge_l_k_1 and @Eq:bernoulli2 imply that:
 \begin{multline*}
-f_A(0) f_B^l(0) = \\
+f_A(0) f_B^l(0) = 
 f_A(0) f_B(0) f_B^n(0) = \\
-\Big(1+\rho \frac{W-w}{w}\Big) \Big(1+\rho \frac{w-W}{W}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n = \\
 \Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big) \Big(1+\rho \frac{w-W}{W}\Big)^n \ge \\
 \Big(1 + \rho (1-\rho) \frac{(W-w)^2}{Ww}\Big)\Big(1 + n \rho \frac{w-W}{W}\Big) > 1
 \end{multline*}
@@ -424,7 +395,7 @@ $\blacksquare$
 
 In general, we find that (@Fig:lk_phase_plane):
 
-- A protected polymorphism exists if $\frac{l}{k} < 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2}$.
+- A protected polymorphism exists if _l_ is a multiple of _k_ and $\frac{l}{k} < 1 + \frac{(1-\rho) W (W - w)}{W w + \rho (1-\rho) (W - w)^2}$.
 - $x=0$ is a stable equilibrium if $\frac{l}{k} > 1 + (1-\rho)\frac{W-w}{w}$.
 - Both of these condition decreae when $\rho$ increases.
 
