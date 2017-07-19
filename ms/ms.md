@@ -494,8 +494,8 @@ $$\begin{aligned}
 a_0 = \frac{P^2 W^2 w^2}{\bar{\omega}^{*4}} \\
 a_1 = - \frac{2 P W w + (1-P)^2 \breve{\omega}^2}{\bar{\omega}^{*2}} \\
 a_2 = 1 \\
-\breve{\omega}^* = (W(1-x^*) + wx^*).
-\end{aligned}$$
+\breve{\omega}^* = W(1-x^*) + wx^*.
+\end{aligned}$$ {#eq:T_polynomial_coeffs}
 
 Since $T$ is positive, $R(\lambda)$ has two real roots.
 Because $R(\lambda)$ is convex ($a_2=1$) and $R(0) = a_0 > 0, \frac{dR}{d\lambda}(0) =a_1 < 0$, both roots are positive.
@@ -505,19 +505,23 @@ However, if $R(1)<0$, then the leading eigenvalue is larger than 1, _m_ is unsta
 An important quantity for the analysis is $\bar{\omega}^{*2} - Ww$.
 Let $J(x) = \bar{\omega}^2 - Ww = (W-w)^2 x^2 +2w(W-w) x -w(W-w)$.
 This is a convex polynomial in $x$ with negative root $\frac{w-\sqrt{Ww}}{W-w}$ and positive root $\frac{\sqrt{Ww}-w}{W-w}$, which is the minimal value of $x^*$ given for $\rho=1$.
-Therefore, we can determine that $\frac{Ww}{\bar{\omega}^{*2}}  \le 1$, with a strict inequality for $\rho < 1$.
+Therefore, we can determine that 
+$$
+\bar{\omega}^{*2} \ge Ww,
+$$ {#eq:ineq1}
+with a strict inequality for $\rho < 1$.
 
-In addition, we have $x^* \le \frac{1}{2}$, so that $W(1-x^*) + wx^* \ge Wx^* + w(1-x^*)$ and therefore $\frac{\breve{\omega}^*}{\bar{\omega}^*} \ge 1$, with strict inequality for $\rho > 0$.
+In addition, we have $x^* \le \frac{1}{2}$, so that $W(1-x^*) + wx^* \ge Wx^* + w(1-x^*)$ and therefore 
+$$
+\breve{\omega}^* \ge \bar{\omega}^*,
+$$ {#eq:ineq2}
+with strict inequality for $\rho > 0$.
 
 For a $\lambda=1$, let $R_1(P) = R(1)$ and $\frac{dR_1}{d\lambda}(P) = \frac{dR}{d\lambda}(1)$ be polynomials in $P$.
-We examine $R_1(P)$ and $\frac{dR_1}{d\lambda}(P)$:
+We examine $R_1(P)$ and $\frac{dR_1}{d\lambda}(P)$ using [@eq:ineq1;@eq:ineq2]:
 $$\begin{aligned}
-R_1(\rho) = 
-0 \\
 R_1(0) = 
 1 - \Big(\frac{\breve{\omega}^*}{\bar{\omega}^*}\Big)^2 < 0 \\
-\frac{dR_1}{d\lambda}(0) =
-2 - \Big(\frac{\breve{\omega}^*}{\bar{\omega}^*}\Big)^2 > 0 \\
 R_1(1) = 
 \Big(1 - \frac{Ww}{\bar{\omega}^{*2}}\Big)^2 > 0 \\
 \frac{dR_1}{d\lambda}(1) = 
@@ -525,12 +529,13 @@ R_1(1) =
 \end{aligned}$$
 where the last inequality is strict if $x^* \ne \frac{1}{2}$, which is the case when $\rho > 0$.
 
-Lastly, the roots of $R_1(P) = \frac{W^2 w^2 - \bar{\omega}^{*2} \breve{\omega}^{*2}}{\bar{\omega}^{*2}} P^2 + 2 \frac{\breve{\omega}^{*2}-Ww}{\bar{\omega}^{*2}} P + \frac{\bar{\omega}^{*2} - \breve{\omega}^{*2}}{\bar{\omega}^{*2}}$ are:
+Lastly, the roots of $R_1(P) = \frac{W^2 w^2 - \bar{\omega}^{*2} \breve{\omega}^{*2}}{\bar{\omega}^{*4}} P^2 + 2 \frac{\breve{\omega}^{*2}-Ww}{\bar{\omega}^{*2}} P + \frac{\bar{\omega}^{*2} - \breve{\omega}^{*2}}{\bar{\omega}^{*2}}$ are:
 $$
-\frac{\bar{\omega}^{*2} - \bar{\omega}^* \breve{\omega}^*}{Ww - \bar{\omega}^* \breve{\omega}^*} = \rho, \qquad 
-\frac{\bar{\omega}^{*2} + \bar{\omega}^* \breve{\omega}^*}{Ww + \bar{\omega}^* \breve{\omega}^*} > 1
+\frac{\bar{\omega}^* \breve{\omega}^* - \bar{\omega}^{*2}}{\bar{\omega}^* \breve{\omega}^* - Ww} = \rho, \qquad 
+\frac{\bar{\omega}^* \breve{\omega}^* + \bar{\omega}^{*2}}{\bar{\omega}^* \breve{\omega}^* + Ww} \ge 1, 
 $$
-So, for $0 \le P \le 1$, $R_1(P)$ has a single root at $P=\rho$.
+using [@eq:recurrenceA1B1_solution_x_star;@eq:A1B1_mean_fitness;@eq:T_polynomial_coeffs] for the first root and [@eq:ineq1;@eq:ineq2] for the second root.
+So, for $0 < P < 1$, $R_1(P)$ has a single root at $P=\rho$.
 Together, these calculations show that when $P<\rho$, 
 the leading eigenvalue of the external stability operator is larger than 1,
 whereas when $P>\rho$, the leading eigenvalue is less than 1.
