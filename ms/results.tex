@@ -44,7 +44,7 @@
 %\vskip-7pt
 \centerline{uril@tauex.tau.ac.il}
 \vfil
-\centerline{July 26, 2017, v.3}
+\centerline{July 27, 2017, v.1}
 
 \break
 
@@ -312,27 +312,35 @@ Therefore when $\mu>0$, $P\left(\lim_{t\to\infty}x_t=0\right)=0$, and fixation o
  \hbox{\tenrm frequency}&x_1&x_2&x_3&x_4\cr\noalign{\smallskip}
  \hbox{\tenrm fitness}&w_A&w_B&w_A&w_B\cr\noalign{\smallskip}
  \hbox{\tenrm vertical transmission rate}&\rho&\rho&P&P\cr}\eqno(53)$$
- Following the rationale leading to equation (2), the next generation pheno-genotype frequencies $x'_1$, $x'_2$, $x'_3$, and $x'_4$ are
+ Following the rationale leading to equation (2), the pheno-genotype frequencies after selection are
  $$\eqalign{
- x'_1 &= \rho {w_A \over \overline w} x_1 + (1-\rho)(x_1+x_3)\cr
- x'_2 &= \rho {w_B \over \overline w} x_1 + (1-\rho)(x_2+x_4)\cr 
- x'_3 &= P {w_A \over \overline w} x_3 + (1-P)(x_1+x_3)\cr
- x'_4 &= P {w_B \over \overline w} x_4 + (1-P)(x_2+x_4), 
+ x_1^S = {w_A \over \overline w}x_1\cr
+ x_2^S = {w_B \over \overline w}x_2\cr
+ x_3^S = {w_A \over \overline w}x_3\cr
+x_4^S = {w_B \over \overline w}x_4,
 }\eqno(54)$$
-with $\overline w$, the mean fitness, given by
-$$\overline w =w_A(x_1+x_3) +w_B(x_2+x_4).\eqno(55)$$
+with the mean fitness $\overline w$ given by $\overline w=\sum_{i=1}^{4}{x_i^S}$,
+and the frequencies of the phone-genotypes at the next generations are
+ $$\eqalign{
+ x'_1 &= \rho x_1^S + (1-\rho)(x_1^S + x_2^S)(x_1+x_3)\cr
+ x'_2 &= \rho x_2^S + (1-\rho)(x_1^S + x_2^S)(x_2+x_4)\cr 
+ x'_3 &= P x_3^S + (1-P)(x_3^S+x_4^S)(x_1+x_3)\cr
+ x'_4 &= P x_4^S + (1-P)(x_3^S+x_4^S)(x_2+x_4), 
+}\eqno(55)$$
+
+
 Starting with a stable equilibrium where only the modifier allele $m$ is present, we check its {\sl external stability} to invasion by the modifier allele $M$.
 
-Because we assume the initial existence of a stable polymorphic equilibrium that depends on $\rho$ (the rate determined by $m$), we cannot assume a {\sl constant environment}, which always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$. Specifically, following (54) with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
+Because we assume the initial existence of a stable polymorphic equilibrium that depends on $\rho$ (the rate determined by $m$), we cannot assume a {\sl constant environment}, which always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$. Specifically, following (54-55) with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
 $$\underline x''=T_2(T_1\underline x),\eqno(56)$$
-where $\underline x'=T_1\underline x$ is given by (54) with $w_A=W$, $w_B=w$, and $\underline x''=T_2\underline x'$ is given by (54) with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
+where $\underline x'=T_1\underline x$ is given by (54-55) with $w_A=W$, $w_B=w$, and $\underline x''=T_2\underline x'$ is given by (54-55) with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
 
 From the analysis of the $A1B1$ case, we know that when only the $m$ allele is present with associated rate $\rho$, with $0<\rho<1$ and $0<w<W$, a unique stable equilibrium $\underline x^* =(x_1^*,x_2^*,0,0)$ exists. $x_1^*$ is the only positive root of the quadratic equation $G(x) =Ax^2 +Bx +C=0$ with $A,B,C$ specified in (26). Solving $G(x)=0$ gives
 $$x_1^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2\cdot(2-\rho)(W-w)},\eqno(57)$$
  and it can be seen that
  $${\sqrt{Ww}-w\over W-w}<x_1^* <{1\over 2}.\eqno(58)$$
  
- The external stability of $\underline x^*$ to the introduction of the modifier allele $M$ with rate $P$ is determined by the linear approximation matrix $\cl=\cl_2\cdot\cl_1$ derived from (54) and given by
+ The external stability of $\underline x^*$ to the introduction of the modifier allele $M$ with rate $P$ is determined by the linear approximation matrix $\cl=\cl_2\cdot\cl_1$ derived from (54-55) and given by
  $$\overline w^*\cl_1 =\left[\matrix{W\bigl[(1-P)x_1^* +P\bigr] & w(1-P)x_1^*\cr\noalign{\medskip}
  W(1-P)x_2^* & w\bigl[(1-P)x_2^* +P\bigr]\cr}\right]\eqno(59)$$
  and
