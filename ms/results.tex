@@ -44,7 +44,7 @@
 %\vskip-7pt
 \centerline{uril@tauex.tau.ac.il}
 \vfil
-\centerline{July 27, 2017, v.1}
+\centerline{July 27, 2017, v.2}
 
 \break
 
@@ -71,16 +71,17 @@ $$P(\phi' =A|\phi) =\left\{\matrix{(1-\rho)x+\rho, &\hbox{\tenrm if}\ \phi=A\cr
 (1-\rho)x, & \hbox{\tenrm if}\ \phi =B\cr}\right.\eqno(1)$$
 where $x=P(\phi=A)$ in the parent's generation before selection.
  
-Therefore, the frequency of phenotype $A$ after one generation is given by the recursion equation
+Therefore, the change in frequency of phenotype $A$ after one generation due to selection ($ {w_A\over \overline w}$) and vertical ($\rho$) and oblique ($1-\rho$) transmission is given by the recursion equation
 $$
 x' = \rho  {w_A\over \overline w} x + (1-\rho) x
-.\eqno(2)$$
+,\eqno(2)$$
 which can be rewritten as 
-$$
+$$\eqalign{
 x' = 
-x \cdot \Bigl(1 - \rho + \rho {w_A \over w_A x + w_B (1-x)}\Bigr) = 
-x \cdot \Bigl(1 + \rho (1-x) {w_A-w_B \over \overline w} \Bigr)
-.\eqno(4)$$
+\bigl(1-x\bigr) {w_A\over \overline w} \bigl((1-\rho)x + \rho\bigr) + \bigl(1-x\bigr) {w_B\over \overline w} \bigl(1-\rho\bigr)x = \cr
+x \cdot \Bigl(1 - \rho + \rho {w_A \over \overline w}\Bigr) = \cr
+x \cdot \Bigl(1 + \rho \bigl(1-x\bigr) {w_A-w_B \over \overline w} \Bigr)
+.}\eqno(4)$$
  
  In what follows we explore the evolution of the recursion (4), namely the equilibria and their stability properties, in the cases of {\sl constant environments} and {\sl changing environments}.
  \bigskip
@@ -312,22 +313,15 @@ Therefore when $\mu>0$, $P\left(\lim_{t\to\infty}x_t=0\right)=0$, and fixation o
  \hbox{\tenrm frequency}&x_1&x_2&x_3&x_4\cr\noalign{\smallskip}
  \hbox{\tenrm fitness}&w_A&w_B&w_A&w_B\cr\noalign{\smallskip}
  \hbox{\tenrm vertical transmission rate}&\rho&\rho&P&P\cr}\eqno(53)$$
- Following the rationale leading to equation (2), the pheno-genotype frequencies after selection are
+ Following the rationale leading to equation (2), the pheno-genotype frequencies after one generations are described by
  $$\eqalign{
- x_1^S = {w_A \over \overline w}x_1\cr
- x_2^S = {w_B \over \overline w}x_2\cr
- x_3^S = {w_A \over \overline w}x_3\cr
-x_4^S = {w_B \over \overline w}x_4,
+ \overline w x_1' = w_A x_1\bigr[(1-\rho)(x_1+x_3)+\rho \bigl] + w_B x_2(1-\rho)(x_1+x_3)\cr
+ \overline w x_2' = w_A x_1(1-\rho)(x_2+x_4) + w_B x_2 \bigl[(1-\rho)(x_2+x_4) + \rho \bigr]\cr
+ \overline w x_3' = w_A x_2\bigr[(1-P)(x_1+x_3)+P \bigl] + w_B x_4(1-\rho)(x_1+x_3)\cr
+ \overline w x_2' = w_A x_3(1-P)(x_2+x_4) + w_B x_4 \bigl[(1-P)(x_2+x_4) + P \bigr]
 }\eqno(54)$$
-with the mean fitness $\overline w$ given by $\overline w=\sum_{i=1}^{4}{x_i^S}$,
-and the frequencies of the phone-genotypes at the next generations are
- $$\eqalign{
- x'_1 &= \rho x_1^S + (1-\rho)(x_1^S + x_2^S)(x_1+x_3)\cr
- x'_2 &= \rho x_2^S + (1-\rho)(x_1^S + x_2^S)(x_2+x_4)\cr 
- x'_3 &= P x_3^S + (1-P)(x_3^S+x_4^S)(x_1+x_3)\cr
- x'_4 &= P x_4^S + (1-P)(x_3^S+x_4^S)(x_2+x_4), 
-}\eqno(55)$$
-
+with the mean fitness $\overline w$ given by
+$$\overline w=w_A (x_1+x_3) + w_B (x_2+x_4).\eqno(55)$$
 
 Starting with a stable equilibrium where only the modifier allele $m$ is present, we check its {\sl external stability} to invasion by the modifier allele $M$.
 
