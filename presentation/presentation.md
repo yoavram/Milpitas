@@ -111,7 +111,7 @@ where $$\rho$$ is the vertical transmission rate.
 The frequency of phenotype $$A$$ in the next generation:
 
 $$
-x' = \rho \frac{w_A}{\bar{w}} + (1-\rho)x
+x' = \rho \frac{w_A}{\bar{w}}x + (1-\rho)x
 $$
 
 Mean fitness:
@@ -315,8 +315,8 @@ Can the transmission mode itself evolve due to second-order selection?
 
 We model competition between _two modifier alleles_:
 
-- $$m$$ with vertical transmission rates $$\rho$$,
-- $$M$$ with vertical transmission rates $$P$$.
+- $$m$$ with vertical transmission rate $$\rho$$,
+- $$M$$ with vertical transmission rate $$P$$.
 
 ![right](images/cloudvisual-208962.jpg)
 
