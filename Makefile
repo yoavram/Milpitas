@@ -42,3 +42,7 @@ $(diagram_pdf): $(diagram_dot)
 
 version:
 	@echo $(version)
+
+ms/figures.pdf:
+	pandoc ms/figures.md -o ms/figures.pdf --variable geometry:a4paper -s -S --filter pandoc-crossref --latex-engine=xelatex 
+	@open ms/figures.pdf
