@@ -1,0 +1,215 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{lineno}
+\linenumbers
+
+\begin{document}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/lk_phase_plane.pdf}
+\caption{Ratios of selection periods \(\frac{k}{l}\) that lead to
+fixation of phenotype \emph{A} (red) or polymorphism of phenotypes
+\emph{A} and \emph{B} (blue). \emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by selection.
+The boundary is set at $-\log{(1+\rho \frac{s}{1-s}}) / \log{(1-\rho s})$, see eq. 23.
+In all cases, \emph{W} = 1, \emph{w} = \emph{1-s}.}\label{fig:lk_phase_plane}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/env_A1B1.pdf}
+\caption{Frequency of phenotype \emph{A} after every two generations in
+selection regime \emph{A1B1}. The orange line is the finite population model
+(average of 100 simulations). The blue line is the infinite population model
+(eq. 25), and the green line is the equilibrium solution (eq. 56). Parameters: \emph{W}=1,
+\emph{N}=10,000, initial value \(x=0.5\).}\label{fig:env_A1B1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/A1B1_modifier_invasions.pdf}
+\caption{Consecutive fixation of modifiers that reduce the vertical
+transmission rate in environmental regime \emph{A1B1}. The figure shows
+results of numerical simulations of evolution with two modifier alleles
+(eq. 53). When a modifier allele fixes
+(frequency\textgreater{}99.9\%), a new modifier allele is introduced
+with a vertical transmission rate one order of magnitude lower (vertical
+dashed lines). \textbf{(A,D,G)} The frequency of phenotype \emph{A} in
+the population over time. \textbf{(B,E,H)} The frequency of the invading
+modifier allele over time. \textbf{(C,F,I)} The population mean
+fitness over time; insets zoom in to show that the mean fitness 
+decreases slightly with each invasion. Parameters: vertical transmission rate of
+the initial resident modifier allele, \(\rho_0 =0.1\); fitness values:
+\emph{W}=1, \emph{w}=0.1 (\textbf{A-C}), 0.5 (\textbf{D-F}), and 0.9
+(\textbf{G-I}). The x-axis is on a log-scale, as each sequential invasion
+takes an order of magnitude longer to
+complete.}\label{fig:A1B1_modifier_invasions}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/AkBl_equilibrium.pdf}
+\caption{Stability in a fluctuating environment.
+\textbf{(A)} Stable frequency of phenotype $A$ after every two generations and \textbf{(B)} stable mean fitness in selection regime \emph{A1B1} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
+\textbf{(C)} Stable population mean fitness in selection regime \emph{AkBl} as a
+function of the vertical transmission rate \(\rho\) and different ratios of selection periods \(k=l\). \emph{k} and \emph{l} are the number of generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by selection.
+The geometric average of the population mean fitness over $k+l$ generations is shown. 
+Here \emph{w=0.9}.
+In all cases, \emph{W=1}.
+}\label{fig:AkBl_equilibrium}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/env_A1B2.pdf}
+\caption{Frequency of phenotype \emph{A} after every three generation in
+selection regime \emph{A1B2}. Comparison of dynamics starting with
+different initial frequency of phenotype \(A\) (0.01-0.99).
+See also Fig. 1 and 6. Parameters: \emph{W}=1, \emph{N=10,000},
+initial population \(x=0.5\).}\label{fig:env_A1B2}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/A1B2_polymorphism.pdf}
+\caption{Stable frequency of phenotype \emph{A} and population mean fitness in selection regime
+\emph{A1B2} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
+In the grey area \(B\) reached fixation and the frequency of \(A\) is 0.
+\textbf{(A)} Stable frequency of phenotype $A$ at the end of each period of three generations.
+\textbf{(B)} Geometric average of the stable mean fitness over the three generations period: $(\bar{w}^* \cdot \bar{w}^{**} \cdot \bar{w}^{***})^{1/3}$.
+In all cases, \emph{W=1}.}\label{fig:A1B2_polymorphism}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/stochastic_env_x_t.pdf}
+\caption{Stochastic local stability. The figure shows the frequency of
+phenotype \emph{A} after \(10^6\) generations in a very large populationt 
+evolving in a stochastic environment (eq. 33). The
+fitness of phenotypes \emph{A} and \emph{B} are \(1+s_t\) and \(1\),
+where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with
+probability \emph{1-p}. The white line marks combinations of \emph{p}
+and \emph{s} for which \(\mathbb{E}[\log{(1+\rho s_t)}]=0\); according
+to our analysis, we expect that below this line \(x^*=0\) will be
+stochastically locally stable. Parameters: \(x_0=0.1\);
+\(\rho=0.1\).}\label{fig:stochastic_env_x_t}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[height=\dimexpr \textheight - 8\baselineskip\relax]{../figures/stoch_modifier_invasions.png}
+\caption{Consecutive fixation of modifiers that reduce the vertical
+transmission rate under randomly changing selection. The figure shows
+results of numerical simulations of evolution with two modifier alleles
+(eq. 33). The
+fitness of phenotypes \emph{A} and \emph{B} are 1 and 0.1 with probability 0.5 or 0.1 and 1 otherwise.
+When a modifier allele fixes
+(frequency\textgreater{}99.9\%), a new modifier allele is introduced
+with a vertical transmission rate one order of magnitude lower (vertical
+dashed lines). \textbf{(A)} The frequency of phenotype \emph{A} in the
+population over time. \textbf{(B)} The frequency of the invading
+modifier allele over time. \textbf{(C)} The population mean fitness over time. Parameters: vertical transmission rate of the initial
+resident modifier allele, \(\rho_0 =0.1\); fitness values: \emph{W=1}
+and \emph{w=0.1} with probability 0.5 and \emph{w=0.1} and \emph{W=1}
+otherwise. The x-axis is on a log-scale, as each sequential invasion takes
+an order of magnitude longer to
+complete.}\label{fig:stoch_modifier_invasions}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/stoch_two_iid_rvs.png}
+\caption{Effect of vertical transmission rate on phenotype polymorphism
+in randomly changing environments. Dynamics of the frequency of phenotype
+\(A\) over time starting
+at \(x_0=10^{-5}\) when the fitness of phenotypes \(A\) and \(B\) are
+identically and independently distributed random variable. As the vertical transmission rate \(\rho\) increases
+from 0.001 to 0.5 the frequency reaches a polymorphic distribution with \(E(X_t/N)\to0.5\) faster, but
+the variance also increases. \(w_A\) and \(w_B\) are both exponential
+random variables with expected value 2.}\label{fig:stoch_two_iid_rvs}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/fixation_prob_time.pdf}
+\caption{Fixation probability and time in a finite population.
+\textbf{(A)} Fixation probability \(u(x)\) of phenotype \(A\) (eq. 88), and \textbf{(B)}
+Expected time to fixation \(T(x)\) of phenotype \(A\) (eq. 90), conditioned on its
+fixation, starting with a single copy in a population of size \(N\). The
+figure compares two estimates: simulations (blue circles) and diffusion
+equation approximation (green solid line). Parameters: Selection coefficient, \(s=w_A-w_B=0.1\);
+Population size, \(N=10,000\).}\label{fixation_prob_time}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/lk_fix_prob.pdf}
+\caption{Fixation in a finite population with different ratios of selection periods \(\frac{k}{l}\). Fixation probability of phenotype $A$ when starting with a single copy in a population of size $N$: $u(1/N) = (1-\exp(-2 \rho \frac{k-l}{k+l}(W-w))/(1-\exp(-2 N \rho \frac{k-l}{k+l}(W-w))$ (see eqs. 115-116).
+\emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by
+selection. In all cases, \emph{W} = 1, \emph{w} = \emph{1-s}, Population size, \(N=10,000\).} \label{lk_fix_prob}
+\end{figure}
+
+\end{document}  
