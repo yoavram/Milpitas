@@ -89,6 +89,47 @@ selection regime \emph{A1B1}. The orange line is the finite population model
 
 \begin{figure}
 \centering
+\includegraphics{../figures/AkBl_equilibrium.pdf}
+\caption{Stability in a fluctuating environment.
+\textbf{(A)} Stable frequency of phenotype $A$ in the \emph{A1B1} selection regime and \textbf{(B)} stable mean fitness in selection regime \emph{A1B1} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
+\textbf{(C)} Stable population mean fitness in selection regime \emph{AkBl} as a
+function of the vertical transmission rate \(\rho\) and different ratios of selection periods \(k=l\). \emph{k} and \emph{l} are the number of generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by selection.
+The geometric average of the population mean fitness over $k+l$ generations is shown. 
+Here \emph{w=0.9}.
+In all cases, \emph{W=1}.
+}\label{fig:AkBl_equilibrium}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/stochastic_env_x_t.pdf}
+\caption{Stochastic local stability. The figure shows the frequency of
+phenotype \emph{A} after \(10^6\) generations in a very large populationt 
+evolving in a stochastic environment (eq. 33). The
+fitness of phenotypes \emph{A} and \emph{B} are \(1+s_t\) and \(1\),
+where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with
+probability \emph{1-p}. The white line marks combinations of \emph{p}
+and \emph{s} for which \(\mathbb{E}[\log{(1+\rho s_t)}]=0\); according
+to our analysis, we expect that below this line \(x^*=0\) will be
+stochastically locally stable. Parameters: \(x_0=0.1\);
+\(\rho=0.1\).}\label{fig:stochastic_env_x_t}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{../figures/stoch_two_iid_rvs.png}
+\caption{Effect of vertical transmission rate on phenotype polymorphism
+in randomly changing environments. Dynamics of the frequency of phenotype
+\(A\) over time starting
+at \(x_0=10^{-5}\) when the fitness of phenotypes \(A\) and \(B\) are
+identically and independently distributed random variable. As the vertical transmission rate \(\rho\) increases
+from 0.001 to 0.5 the frequency reaches a polymorphic distribution with \(E(X_t/N)\to0.5\) faster, but
+the variance also increases. \(w_A\) and \(w_B\) are both exponential
+random variables with expected value 2.}\label{fig:stoch_two_iid_rvs}
+\end{figure}
+
+\begin{figure}
+\centering
 \includegraphics{../figures/A1B1_modifier_invasions.pdf}
 \caption{Consecutive fixation of modifiers that reduce the vertical
 transmission rate in environmental regime \emph{A1B1}. The figure shows
@@ -106,55 +147,6 @@ the initial resident modifier allele, \(\rho_0 =0.1\); fitness values:
 (\textbf{G-I}). The x-axis is on a log-scale, as each sequential invasion
 takes an order of magnitude longer to
 complete.}\label{fig:A1B1_modifier_invasions}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{../figures/AkBl_equilibrium.pdf}
-\caption{Stability in a fluctuating environment.
-\textbf{(A)} Stable frequency of phenotype $A$ after every two generations and \textbf{(B)} stable mean fitness in selection regime \emph{A1B1} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
-\textbf{(C)} Stable population mean fitness in selection regime \emph{AkBl} as a
-function of the vertical transmission rate \(\rho\) and different ratios of selection periods \(k=l\). \emph{k} and \emph{l} are the number of generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by selection.
-The geometric average of the population mean fitness over $k+l$ generations is shown. 
-Here \emph{w=0.9}.
-In all cases, \emph{W=1}.
-}\label{fig:AkBl_equilibrium}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{../figures/env_A1B2.pdf}
-\caption{Frequency of phenotype \emph{A} after every three generation in
-selection regime \emph{A1B2}. Comparison of dynamics starting with
-different initial frequency of phenotype \(A\) (0.01-0.99).
-See also Fig. 1 and 6. Parameters: \emph{W}=1, \emph{N=10,000},
-initial population \(x=0.5\).}\label{fig:env_A1B2}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{../figures/A1B2_polymorphism.pdf}
-\caption{Stable frequency of phenotype \emph{A} and population mean fitness in selection regime
-\emph{A1B2} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
-In the grey area \(B\) reached fixation and the frequency of \(A\) is 0.
-\textbf{(A)} Stable frequency of phenotype $A$ at the end of each period of three generations.
-\textbf{(B)} Geometric average of the stable mean fitness over the three generations period: $(\bar{w}^* \cdot \bar{w}^{**} \cdot \bar{w}^{***})^{1/3}$.
-In all cases, \emph{W=1}.}\label{fig:A1B2_polymorphism}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{../figures/stochastic_env_x_t.pdf}
-\caption{Stochastic local stability. The figure shows the frequency of
-phenotype \emph{A} after \(10^6\) generations in a very large populationt 
-evolving in a stochastic environment (eq. 33). The
-fitness of phenotypes \emph{A} and \emph{B} are \(1+s_t\) and \(1\),
-where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with
-probability \emph{1-p}. The white line marks combinations of \emph{p}
-and \emph{s} for which \(\mathbb{E}[\log{(1+\rho s_t)}]=0\); according
-to our analysis, we expect that below this line \(x^*=0\) will be
-stochastically locally stable. Parameters: \(x_0=0.1\);
-\(\rho=0.1\).}\label{fig:stochastic_env_x_t}
 \end{figure}
 
 \begin{figure}
@@ -180,15 +172,13 @@ complete.}\label{fig:stoch_modifier_invasions}
 
 \begin{figure}
 \centering
-\includegraphics{../figures/stoch_two_iid_rvs.png}
-\caption{Effect of vertical transmission rate on phenotype polymorphism
-in randomly changing environments. Dynamics of the frequency of phenotype
-\(A\) over time starting
-at \(x_0=10^{-5}\) when the fitness of phenotypes \(A\) and \(B\) are
-identically and independently distributed random variable. As the vertical transmission rate \(\rho\) increases
-from 0.001 to 0.5 the frequency reaches a polymorphic distribution with \(E(X_t/N)\to0.5\) faster, but
-the variance also increases. \(w_A\) and \(w_B\) are both exponential
-random variables with expected value 2.}\label{fig:stoch_two_iid_rvs}
+\includegraphics{../figures/A1B2_polymorphism.pdf}
+\caption{Stable frequency of phenotype \emph{A} and population mean fitness in selection regime
+\emph{A1B2} as a function of the vertical transmission rate \(\rho\) and the fitness ratio \(W/w\) between the favored and unfavored phenotypes.
+In the grey area \(B\) reached fixation and the frequency of \(A\) is 0.
+\textbf{(A)} Stable frequency of phenotype $A$ at the end of each period of three generations.
+\textbf{(B)} Geometric average of the stable mean fitness over the three generations period: $(\bar{w}^* \cdot \bar{w}^{**} \cdot \bar{w}^{***})^{1/3}$.
+In all cases, \emph{W=1}.}\label{fig:A1B2_polymorphism}
 \end{figure}
 
 \begin{figure}
