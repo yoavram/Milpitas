@@ -102,15 +102,13 @@ In all cases, \emph{W=1}.
 \begin{figure}
 \centering
 \includegraphics{../figures/stochastic_env_x_t.pdf}
-\caption{Stochastic local stability. The figure shows the frequency of
-phenotype \emph{A} after \(10^6\) generations in a very large population 
-evolving in a stochastic environment (eq.\ 31). The
-fitness of phenotypes \emph{A} and \emph{B} are \(1+s_t\) and \(1\),
-where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with
-probability \(1-p\). The white line marks combinations of \emph{p}
-and \emph{s} for which \(E[\log{(1+\rho s_t)}]=0\); according
-to Result 6, below this line fixation of phenotype \emph{B} (\(x^*=0\)) will be
-stochastically locally stable. Parameters: initial frequency of \(A\) is \(x_0=0.1\); vertical transmission rate is \(\rho=0.1\).}\label{fig:stochastic_env_x_t}
+\caption{Stochastic local stability. 
+The figure shows the frequency of phenotype \emph{A} after \(10^6\) generations in a very large population evolving in a stochastic environment (eq.\ 31).
+The fitness of phenotypes \emph{A} and \emph{B} are \(w_A=1+s_t\) and \(w_B=1\),
+where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with probability \(1-p\).
+The gray lines mark combinations of \emph{p} and \emph{s} for which \(E[\log{(1-\rho+\rho\frac{w_A}{w_B})}]=0\) and \(E[\log{(1-\rho+\rho\frac{w_B}{w_A})}]=0\).
+According to Result 6, between these lines fixation of either phenotype will be stochastically locally unstable, and indeed we have a stationary polymorphism between the lines, with phenotype frequencies neither 0 or 1.
+Parameters: initial frequency of \(A\) is \(x_0=1/10,000\) and the vertical transmission rate is \(\rho=0.1\).}\label{fig:stochastic_env_x_t}
 \end{figure}
 
 %Figure 5
