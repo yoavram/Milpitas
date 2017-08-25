@@ -46,7 +46,7 @@
 %\vskip-7pt
 %\centerline{uril@tauex.tau.ac.il}
 \vfil
-\centerline{August 24, 2017, v.1}
+\centerline{August 25, 2017, v.2}
 
 \break
 \noindent{\bf INTRODUCTION}
@@ -56,7 +56,9 @@ Cavalli-Sforza and Feldman (1981) distinguished two forms of non-parental phenot
 
 Oblique transmission occurs via some mechanism of social learning, which may include imitation or active teaching. There has been an interesting debate over the past thirty years concerning the conditions under which social learning would have an advantage over individual learning or vertical (including genetic) transmission. This debate is usually couched in terms of the mode and tempo of environmental fluctuations that would affect fitness and hence evolution (Rogers 1988; Boyd and Richerson 1988, 1995; Feldman et al. 1996; Wakano et al. 2004: Aoki et al. 2005; Wakano and Aoki 2007; Aoki and Feldman 2014). Mathematical analyses of models of competition between individual and social learning have generally shown that social learning has an advantage when the environment does not fluctuate too frequently. On the other hand, when the environmental changes are very frequent, individual learning is favored, while innate (genetic) determination of the trait does best when periods between environmental change are long on average.
 
-In some situations, oblique transmission of biological material is possible. An example could be the transmission of microbes occasioned by the sharing or manipulation of food or other consumable resources during a social interaction. Although transmission of the microbiome in humans is likely to be mostly vertical (Rosenberg and Zilber-Rosenberg 2016), in other organisms there is multi-generational food sharing during which symbionts from the parental cohort may be transmitted obliquely to younger individuals (Theis et al.\ 2016). In such cases, fluctuations in the resource type or availability may have fitness effects that depend on features of the transmitted microbiome. This ecological perspective on community transmission is stressed by van Opstal and Bordenstein (2015), who emphasize the ``need to consider the relative roles of vertical and horizontal transmission of microbial communities.''
+In some situations, oblique transmission of biological material is possible. In bacteria, phenotypes might be determined by heritable mobile genetic elements such as phages (Zinder and Lederberg 1952), plasmids (Lederberg and Tatum 1946), integrons (Mazel 2006), and transposons (Salyers et al.\ 2004). Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, i.e., transformation (Milkman and Bridges 1990). In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell, and oblique transmission from other cells, even if the latter did not originally evolve for that purpose (Redfield 1993). 
+
+In some animals, transmission of microbes occasioned by the sharing or manipulation of food or other consumable resources during a social interaction. Although transmission of the microbiome in humans is likely to be mostly vertical (Rosenberg and Zilber-Rosenberg 2016), in other organisms there is multi-generational food sharing during which symbionts from the parental cohort may be transmitted obliquely to younger individuals (Theis et al.\ 2016). In such cases, fluctuations in the resource type or availability may have fitness effects that depend on features of the transmitted microbiome. This ecological perspective on community transmission is stressed by van Opstal and Bordenstein (2015), who emphasize the ``need to consider the relative roles of vertical and horizontal transmission of microbial communities.''
 
 Another perspective on the evolutionary consequences of fluctuating environments (and, as a result, fluctuating fitnesses) has derived from the phenomenon of phenotypic switching (Balaban et al.\ 2004; Kussell and Leibler 2005; Thattai and van Oudenaarden 2004; Salath\'e et al.\ 2009; Liberman et al.\ 2011; Gaal et al.\ 2010). In these studies, mutation caused the organism to switch phenotypes (usually treated as haploid genotypes), and the problem has usually been posed in terms of the optimal rate of mutation when the phenotypic fitnesses fluctuate over time. These models did not include social learning, and the evolution was regarded as a mode of bet-hedging against future environmental change. Optimal (that is, evolutionarily stable) mutation rates depend on many features of the fluctuations, for example,  degree of fitness symmetry, strength of selection, and variance in the period of fluctuation (Salath\'e et al.\ 2009).
 
@@ -213,11 +215,11 @@ Also, as $\alpha_2=1$ and $\alpha_0<0$, the quadratic equation $Q(x)=0$ has two 
   As $0<\rho<1$ and $0<w<W$, we have $F'_A(x)>0$ for  $0\le x\le 1$. Observe that the numerator of $F'_B(x)$ is linear in $\rho$; its value when $\rho=1$ is $wW>0$, and when $\rho=0$ it is
   $$x^2\left(w-W\right)^2 +2xW(w-W) +W^2 =\left[x(w-W) +W\right]^2 >0.\eqno(30)$$
   Hence $F'_{B}(x)>0$ for all $0\le x\le 1$, and $H'(x) =F'_B\bigl(F_A(x)\bigr)F'_A(x)$ is positive when $0\le x\le 1$. Thus $H(x)$ is a monotone increasing function of $x$ for $0\le x\le 1$.
-Thus, starting from any initial value $0<x_0 <1$ we have  $x_t\,\harr{}{t\to\infty}\,x^*$. Figure 2 illustrates examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection, while Figure 3A shows the equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in this regime.
+Thus, starting from any initial value $0<x_0 <1$ we have  $x_t\,\harr{}{t\to\infty}\,x^*$. Supplementary Figure S1 illustrates examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection, while Figure 2A shows the equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in this regime.
 
-For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We investigated this numerically, and as shown in Supplemental Figure S1, the $A1B2$ regime also appears to allow a single stable polymorphism. For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplemental Figure S2 shows that only a single stable equilibrium appears to exist.
+For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We investigated this numerically, and as shown in Supplemental Figure S2, the $A1B2$ regime also appears to allow a single stable polymorphism. For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplemental Figure S3 shows that only a single stable equilibrium appears to exist.
 \medskip
-\centerline{[FIGURES 2, 3 HERE]}  
+\centerline{[FIGURE 2 HERE]}  
  \bigskip
  
  \noindent{\bf RANDOMLY CHANGING ENVIRONMENT}
@@ -246,9 +248,9 @@ For more general cyclic fitness regimes, the polynomial that gives the equilibri
  
  Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of the $B$ fixation is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of the $A$ fixation by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the first sign  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in phenotype $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following (14),
  $$\left(1-\rho +\rho{w_A\over w_B}\right)\left(1-\rho+\rho{w_B\over w_A}\right) >1.\eqno(33)$$
- Therefore, as in the case of periodically changing environments $AkBl$, it is impossible that both fixations are simultaneously stochastically locally stable.  It is possible, however, that neither fixation is  stochastically locally stable, in which case we expect the population to converge to a polymorphic distribution. Figure 4 illustrates how the properties of $s_t$ in recursion (31) affect the frequency of phenotype $A$, and in particular the stochastic local stability of fixation in phenotype $B$. Figure 5 shows the dynamics of the frequency of $A$ in a case where $w_A$ and $w_B$ are identically distributed and independent; in this case the expectation of the stationary distribution is 1/2, and its variance increases as $\rho$ increases.
+ Therefore, as in the case of periodically changing environments $AkBl$, it is impossible that both fixations are simultaneously stochastically locally stable.  It is possible, however, that neither fixation is  stochastically locally stable, in which case we expect the population to converge to a polymorphic distribution. Figure 3 illustrates how the properties of $s_t$ in recursion (31) affect the frequency of phenotype $A$, and in particular the stochastic local stability of fixation in phenotype $B$. Figure 4 shows the dynamics of the frequency of $A$ in a case where $w_A$ and $w_B$ are identically distributed and independent; in this case the expectation of the stationary distribution is 1/2, and its variance increases as $\rho$ increases.
 \medskip
-\centerline{[FIGURES 4, 5 HERE]}  
+\centerline{[FIGURES 3, 4 HERE]}  
  \bigskip
  
  \noindent{\bf EVOLUTIONARY STABILITY OF OBLIQUE TRANSMISSION}
@@ -342,19 +344,19 @@ Thus $\overline w^*$ is decreasing in $\rho$ if $dx^*/d\rho$ is negative. Using 
 $${dx^*\over d\rho} =- {(1-\rho)(W-w)\over 2(2-\rho)Z} -{W+w-Z\over 2(2-\rho)(W-w)} = {x^*-{1\over 2}\over 2-\rho} -{(1-\rho)(W-w)\over 2(2-\rho)Z}.\eqno(51)$$
 From (39) $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes the proof.
 
- We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 6, which also illustrates the change in phenotype frequencies over time. In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 7 shows  an example of the success of modifiers that reduce $\rho$. 
+ We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 5, which also illustrates the change in phenotype frequencies over time. In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 6 shows  an example of the success of modifiers that reduce $\rho$. 
   
- Figure 3B illustrates the decrease with increasing $\rho$ of the geometric mean fitness (over time) at a polymorphic equilibrium  in the $A1B1$ regime. Figure 8 illustrates an example of the $A1B2$ selection regime: panel A shows the values of selection and $\rho$ that allow polymorphism of phenotypes $A$ and $B$, and Panel B shows that the mean fitness at this equilibrium is decreasing as $\rho$ increases. Figure 7C shows how the mean fitness fluctuates as a function of $\rho$ in the case of symmetric randomly fluctuating fitnesses.
+ Figure 2B illustrates the decrease with increasing $\rho$ of the geometric mean fitness (over time) at a polymorphic equilibrium  in the $A1B1$ regime. Figure 7 illustrates an example of the $A1B2$ selection regime: panel A shows the values of selection and $\rho$ that allow polymorphism of phenotypes $A$ and $B$, and Panel B shows that the mean fitness at this equilibrium is decreasing as $\rho$ increases. 
  
- Thus in  cycling fitness  $A1B1$ and  $A2B2$ regimes and the symmetric random fitness regime of Figure 7, there is a {\sl reduction principle} for the rate of vertical transmission (Altenberg et al.\ 2017). For the $A2B2$ selection regime, numerical analysis (not shown) confirms the reduction principle for $\rho$.
+ Thus in  cycling fitness  $A1B1$ and  $A2B2$ regimes and the symmetric random fitness regime of Figure 6, there is a {\sl reduction principle} for the rate of vertical transmission (Feldman and Liberman 1986; Altenberg et al.\ 2017). For the $A2B2$ selection regime, numerical analysis (Figure 8) confirms the reduction principle for $\rho$.
   \medskip
-\centerline{[FIGURES 6, 7,  8 HERE]}  
+\centerline{[FIGURES 5, 6,  7 HERE]}  
 
- We investigated the dynamics of modifiers of $\rho$ in $AkBk$ regimes for $k\ge 3$. The reduction principle appears to fail for all $k\ge 3$. For each value of $k\ge 3$, there is a value of $\rho$ below which modifiers that increase $\rho$ invade and above which modifiers that reduce $\rho$ invade. For $k\le8$, the evolutionarily stable value of $\rho$, $\rho^*$  increases rapidly with $k$, but then the increase  becomes much slower. Note that for $k$ large enough, during the $Ak$ part of the cycle, phenotype $A$ becomes extremely close to fixation for even moderate values of $w$ relative to $W$. At this stage, any effect of the $M/m$ difference would be very difficult to detect computationally. The variation of $\rho^*$ with $k$ for selection regimes $AkBk$ is shown in Figure 9 for $k\le50$, $W=1$ with $w=0.1$, $0.5$, and $0.9$.
+ We investigated the dynamics of modifiers of $\rho$ in $AkBk$ regimes for $k\ge 3$. The reduction principle appears to fail for all $k\ge 3$. For each value of $k\ge 3$, there is a value of $\rho$ below which modifiers that increase $\rho$ invade and above which modifiers that reduce $\rho$ invade. For $k\le8$, the evolutionarily stable value of $\rho$, $\rho^*$  increases rapidly with $k$, but then the increase  becomes much slower. Note that for $k$ large enough, during the $Ak$ part of the cycle, phenotype $A$ becomes extremely close to fixation for even moderate values of $w$ relative to $W$. At this stage, any effect of the $M/m$ difference would be very difficult to detect computationally. The variation of $\rho^*$ with $k$ for selection regimes $AkBk$ is shown in Figure 8 for $k\le50$, $W=1$ with $w=0.1$, $0.5$, and $0.9$.
  
- The value of $\rho$ that maximizes the geometric mean fitness, denoted by $\hat\rho$, also varies with $k$ in the $AkBk$ regimes. It is somewhat surprising, given the modifier findings for $k\ge 3$, that $\hat\rho$ is actually zero for $k\le11$ and, depending on the fitnesses, is larger than zero for $k>11$. This is shown in Figure 10, where for $W=1$ with $w=0.1$ and $0.5$, $\hat\rho$ is noticeably positive. For $W=1$, $w=0.9$, however, $\hat\rho=0$ maximizes the geometric mean fitness. More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Supplementary Figure S3. 
+ The value of $\rho$ that maximizes the geometric mean fitness, denoted by $\hat\rho$, also varies with $k$ in the $AkBk$ regimes. It is somewhat surprising, given the modifier findings for $k\ge 3$, that $\hat\rho$ is actually zero for $k\le11$ and, depending on the fitnesses, is larger than zero for $k>11$. This is shown in Figure 9, where for $W=1$ with $w=0.1$ and $0.5$, $\hat\rho$ is noticeably positive. For $W=1$, $w=0.9$, however, $\hat\rho=0$ maximizes the geometric mean fitness. More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Supplementary Figure S4. 
 \medskip
-\centerline{[FIGURES 9,10 HERE]}  
+\centerline{[FIGURES 8, 9 HERE]}  
  \bigskip
  
  \noindent{\bf FINITE POPULATION SIZE}
@@ -431,10 +433,10 @@ Therefore  $T(x)$ is given by
   \proclaim Result 9. When $s>0$ so that the phenotype $A$ is favored, the fixation probability $u(x)$ is monotone increasing in $\rho$.\par
  
  The proof of Result 9 is in Supplementary Materials SP3.  
-  Figure 11 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange diagram in Figure 2B, D, F.
+  Figure 10 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange diagram in Supplemental Figure S1.
   \medskip
   
-  \centerline{[FIGURE 11 HERE]}
+  \centerline{[FIGURE 10 HERE]}
  
  We can also develop a diffusion approximation for the case of a cycling environment. Suppose that selection changes in cycles of length $n$ such that within the cycle the fitness parameters are $w_A^t$, $w_B^t$ for $t=1,2,\dots,n$. Also let
  $${1\over N}s_t \simeq w_A^t -w_B^t,\qquad S_t =\sum_{i=1}^t s_i,\qquad t=1,2,\dots,n.\eqno(73)$$
@@ -453,12 +455,11 @@ Therefore  $T(x)$ is given by
  
  In the special case of the $AkBl$ cycling environment, we write $n=k+l$, and if $w_A=W$, $w_B=w$ for $k$ generations, and $w_A=w$, $w_B=W$ for $l$ generations, we have
  $$S_n=S_{k+l} =(k-l)(W-w).\eqno(76).$$
- Figure 12 illustrates how $(k-l)$, $\rho$, and $(W-w)$, which enter the formula for $u(x)$ in (75), interact to affect fixation probabilities.
+ Figure 11 illustrates how $(k-l)$, $\rho$, and $(W-w)$, which enter the formula for $u(x)$ in (75), interact to affect fixation probabilities.
 
- 
- The orange curve in the second column of Figure 2 shows that as $\rho$ increases in the finite-population $A1B1$ cycling regime, the population fluctuates more around the initial frequency of phenotype $A$. For high rates of oblique transmission (lower $\rho$), the first panel in the second column shows that polymorphism is maintained for 20,000 periods with $N=10,000$. 
+  
  \medskip
-\centerline{[FIGURE 12 HERE]}  
+\centerline{[FIGURE 11 HERE]}  
   \bigskip
  
  \noindent{\bf DISCUSSION}
@@ -478,9 +479,7 @@ In a constant environment, the higher the vertical transmission rate $\rho$, the
  
  We have shown that the rate of vertical transmission tends to decrease when it is under the control of a genetic modifier. This is true in the deterministic case with cycling environments, and also in the random selection case, when the fitnesses of $A$ and $B$ are identically distributed and independent between generations. In light of these results, together with the finite population result that fixation probability is higher, and time to fixation faster with greater $\rho$, we can conclude that increased oblique transmission in our model leads to greater phenotypic diversity; i.e., it is more likely to result in  phenotypic polymorphism. This can be seen in Figure 1, where it is also clear that the existence and stability of a polymorphism is more sensitive to $(1-\rho)$ than to the fitness difference between $A$ and $B$.
  
- The mean fitness of the population evaluated at a polymorphism of phenotypes $A$ and $B$ is shown to be an increasing function of the level of oblique transmission in the $A1B1$ (Figure 3B, Figures 6C, 6F, 6I) and $A1B2$ (Figure 8B) environments. We can compare this result with the asymptotic growth rate (AGR) of Xue and Leibler (2016), whose parameter  $\eta$ is the rate at which an individual learns from its parental lineage. For $k$ small enough, the $AkBk$ environment shows the AGR decreasing with $\eta$, but larger values of $k$ entail that the AGR has a maximum for an intermediate value of $\eta$.  [FINISH WRITEUP]
- 
-\bigskip \centerline{GET numerical results on $T(x)$ as a function of $\rho$}
+ The mean fitness of the population evaluated at a polymorphism of phenotypes $A$ and $B$ is shown to be an increasing function of the level of oblique transmission in the $A1B1$ (Figure 2B, Figures 5C, 5F, 5I) and $A1B2$ (Figure 7B) environments. We can compare this result with the asymptotic growth rate (AGR) of Xue and Leibler (2016), whose parameter  $\eta$ is the rate at which an individual learns from its parental lineage. For $k$ small enough, the $AkBk$ environment shows the AGR decreasing with $\eta$, but larger values of $k$ entail that the AGR has a maximum for an intermediate value of $\eta$.  [FINISH WRITEUP]
 
 
 
@@ -538,9 +537,17 @@ Anthropological Science} {\bf 104}: 209--231.
 
 \ref Karlin, S., and U. Liberman. 1975. Random temporal variation in selection intensities: one-locus two-allele model. {\it J. Math.\ Biol.} {\bf 2}: 1--17.
 
+\ref Lederberg, J., and E. L. Tatum. 1946. Gene recombination in {\it Escherichia coli}. {\it Nature} {\bf 158}: 558.
+
 \ref Liberman, U., J. Van Cleve, and M. W. Feldman. 2011. On the evolution of mutation in changing environments: recombination and phenotypic switching. {\it Genetics}  {\bf 187}: 837--851.
 
 \ref Lycett, S. J., and J. A. J. Gowlett. 2008. On questions surrounding the Acheulean `tradition'. {\it World Archaeol.} {\bf 40}: 295--315.
+
+\ref Mazel, D. Integrons: agents of bacterial evolution. {\it Nat.\ Rev.\ Microbiol.} {\bf 4}: 608--620.
+
+\ref Milkman, R., and M. M. Bridges. Molecular evolution of the {\it Escherichia coli} chromosome. III. Clonal frames. {\it Genetics} {\bf 126} 505--517.
+
+\ref Redfield, R. J. Evolution of natural transformation: testing the DNA repair hypothesis in {\it Bacillus subtilis} and {\it Haemophilus influenzae}. {\it Genetics} {\bf 133}: 755--761.
 
 \ref Rivoire, O., and S. Leibler. 2014. A model for the generation and transmission of variations in evolution. {\it Proc.\ Natl.\ Acad.\ Sci.\ USA} {\bf 111}: E1940--E1949.
 
@@ -549,6 +556,8 @@ Anthropological Science} {\bf 104}: 209--231.
 \ref Rosenberg, E., and I. Zilber-Rosenberg. 2016. Microbes drive evolution of animals and plants: the hologenome concept. {\it mBio} {\bf 7}: e01395-15.
 
 \ref Salath\'e, M., J. Van Cleve, and M. W. Feldman. 2009. Evolution of stochastic switching rates in asymmetric fitness landscapes. {\it Genetics} {\bf 182}: 1159--1164.
+
+\ref Salyers, A. A., G. Whittle, and N. B. Shoemaker. 2004. Conjugal and mobilizable transposons. Pp./ 125--143 {\it in} Miller, R., and M. Day (eds.) {\it Microbial Evolution}. Washington, D.C.: ASM Press.
 
 \ref Thattai, M., and A. van Oudenaarden. 2004. Stochastic gene expression in fluctuating environments. {\it Genetics} {\bf 167}: 523--530.
 
@@ -564,6 +573,8 @@ mathematical analysis. {\it Theor.\ Pop.\ Biol.} {\bf 66}: 249--258.
 \ref Whiten, A., F. Ayala, M. W. Feldman, and K. N. Laland. 2017. The extension of biology through culture. {\it Proc.\ Natl.\ Acad.\ Sci.\ USA} {\bf 114}: 7775--7781.
 
 \ref Xue, B.-K., and S. Leibler. 2016. Evolutionary learning of adaptation to varying environments through a transgenerational feedback. {\it Proc.\ Natl.\ Acad.\ Sci.\ USA} {\bf 113}: 11266--11271.
+
+\ref Zinder, N. D., and J. Lederberg. 1952.  Genetic exchange in {\it Salmonella}. {\it J. Bacteriol.} {\bf 64}: 679--699.
  \vfil
  \break
  \centerline{\bf TABLE 1}
@@ -620,7 +631,7 @@ Therefore when $\mu>0$, $P\left(\lim_{t\to\infty}x_t=0\right)=0$, and fixation o
 
  Thus by Result 5, for $x^*=0$ to be stochastically locally stable it is necessary that $E[\log(1+\rho s_t)]\le 0$. In fact, the strict inequality is sufficient.
  
- Figure 4 presents a numerical example of the dynamics of recursion (31) with a specific random selection coefficient $s_t$.
+ Figure 3 presents a numerical example of the dynamics of recursion (31) with a specific random selection coefficient $s_t$.
 \bigskip
 \bigskip
 
