@@ -13,11 +13,10 @@
 %SetFonts
 
 
-\date{\today}							% Activate to display a given date or no date
-
 \begin{document}
 
 \section*{Finite population model}
+\textbf{\today}
 
 Consider a haploid population with non-overlapping generations of constant finite size $N$.
 We focus on a trait with two phenotypes: $A$ and $B$, with fitness values $w_A$ and $w_B$.
@@ -39,7 +38,7 @@ where $x$ is the frequency of phenotype $A$ in the parent generation and $\bar{w
 
 Of the individuals with diagonally transmitted phenotypes, the number of individuals with phenotype $A$ depends only on the frequency of $A$ and random sampling, and is 
 \begin{equation}
-a_D \sim Bin(v, x).
+a_D \sim Bin(N-v, x).
 \end{equation}
 
 These $a_V$ and $a_D$ are inherently separate random events, as $a_V$ depends on events that determine the reproductive success of individuals in the parental generations, whereas $a_D$ does not.
@@ -64,32 +63,25 @@ where
 \bar{p} = \rho \frac{w_A}{\bar{w}} x + (1-\rho) x.
 \end{equation}
 
-Substituting $\frac{w_A}{\bar{w}} \to 1+\frac{s}{N}(1-x)$ (see eq.~61 in main text), we have, up to terms smaller than $1/N$,
+Substituting $\frac{w_A}{\bar{w}} \to 1+\frac{s}{N}(1-x)$ (see eq.~61 in main text), we have
 \begin{align}
-\bar{p} = 
-	x(1 + \rho \frac{s}{N}(1-x))\\
-\bar{p} (1-\bar{p} ) = 
-	x(1-x)\Big(1 + \rho\frac{s}{N}(1-2x)\Big)\\
-\frac{w_A}{\bar{w}} x - \bar{p} = 
-	(1-x)\Big(1+\frac{s}{N}(1-\rho x)\Big) \\
-\bar{p} - x = 
-x (1-x) \rho \frac{s}{N} \\
-	\Big(\frac{w_A}{\bar{w}} x - \bar{p}\Big)^2 = (1-x)^2(1 + 2\frac{s}{N}(1-\rho x)) \\
-(\bar{p} - x)^2 = 0
+Var(X_{t+1}|X_t=Nx) = 
+\frac{1}{N} x (1-x) (N^2 + N \rho s (1-2x) - \rho s^2 x (1-x)).
 \end{align}
 
-So, the variance in the frequency of $A$ in the next generation $Var\Big(\frac{X_{t+1}}{N}\Big)$ given the frequency $x$ in the current generation $t$, up to terms of order smaller than $1/N$, is
-\begin{equation}
-\frac{1}{N^2}Var(X_{t+1}|X_t=Nx) = 
-\frac{1}{N} \Big( x(1-x) - \rho (1-x)^2 \Big).
-\end{equation}
+So, the variance in the frequency of $A$ in the next generation $Var\Big(\frac{X_{t+1}}{N}\Big)$ given the frequency $x$ in the current generation $t$ is
+\begin{multline}
+Var\Big(\frac{X_{t+1}}{N} \Big| \frac{X_{t}}{N} = x\Big) = 
+\frac{1}{N^2}Var(X_{t+1}|X_t=Nx) = \\
+\frac{1}{N} x (1-x) \Big(1 + \frac{1}{N} \rho s (1-2x) - \rho \frac{s^2}{N^2} x (1-x)\Big).
+\end{multline}
 
 
-Therefore, the diffusion approximation variance term $\sigma^2(x)$, is
+Therefore, the diffusion approximation variance term $\sigma^2(x)$, up to terms of the order $1/N$, is
 \begin{equation}
-\sigma^2(x) = x(1-x) - \rho (1-x)^2
+\sigma^2(x) = x(1-x),
 \end{equation}
-which is smaller than the value given in eq.~66 of the main text if $\rho>0$ and $0<x<1$. 
+which is the same as the value given in eq.~66 of the main text if $\rho>0$ and $0<x<1$. 
 
 \section*{References}
 
