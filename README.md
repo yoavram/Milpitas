@@ -1,44 +1,63 @@
-## Setting up
+# Vertical and Oblique Transmission under Fluctuating Selection
+## Yoav Ram, Uri Liberman, and Marcus W. Feldman
 
-Download and install [Anaconda](https://www.continuum.io/downloads) or [Miniconda](http://conda.pydata.org/miniconda.html) to get Python **3.5** and the conda package manager.
+This repository contains supporting material for
 
-Run these commands to update conda, create a virtual environment and install required packages:
+>   Ram, Liberman & Feldman (2017) _Vertical and Oblique Transmission under Fluctuating Selection_, In preparation.
 
-```sh
-conda config --add channels conda-forge
-conda update conda pip -y
-conda create env -n Milpitas -f environment.yml
-```
-## Using the notebooks
+The notebook file [`figures.ipynb`](https://github.com/yoavram/Milpitas/blob/master/notebooks/figures.ipynb) includes Python source code for reproduction of the manuscript figures.
 
-The notebooks allow you to reproduce the figures and to run single simulations and plot their results.
+## Run the notebook
 
-To start the notebooks, call `jupyter notebook` inside the repository folder, and then browse over to the `notebooks` folder.
+You can interact with the notebooks on your own machine.
 
-## Running simulations
+### Install dependencies
 
-To get help for the simulation:
+The easiest way to install the dependencies is to install [Anaconda](https://www.anaconda.com/download/).
+You should use Python 3, preferably with version 3.5 or higher.
+The notebook will probably not work on Python 2.
 
-```sh
-python src/simulation.py --help
-```
-
-to run them:
+All required packages should then be available.
+However, if you get an `ImportError` due to a package not being installed, the following command will install all requirements using conda:
 
 ```sh
-python src/simulation.py --Ne 100000 --n 500 --η1 0.1 --ω0 2.0 --ω1 0.2  --π0 0.5  --env A
+conda install jupyter numpy scipy matplotlib pandas seaborn sympy numba 
 ```
 
-To simulate a competition between two modifier alleles, specify `--η2 0.2` (with `η2>η1`).
+You also need to install [rakott](https://github.com/yoavram/rakott) and [matplotlib_colorbar](https://github.com/ppinard/matplotlib-colorbar):
+```sh
+pip install https://github.com/yoavram/rakott.git
+pip install matplotlib_colorbar
+```
 
-To run simulations on SGE cluster, call
+### Get the source code repository
+
+You can download all the source code by clicking the _Clone or Download_ button and choosing _Download ZIP_. Then extract the ZIP to a folder on your machine.
+
+If you use `git` you can clone the repo using:
 
 ```sh
-qsub -t 1-1000 -v env=C cluster/simulation.sge'
+git clone https://github.com/yoavram/Milpitas.git
 ```
 
-replacing `1000` with the required number of replicate simulations, and `C` with the environment name (`A`, `B` and `C`).
+### Run the notebook
 
-Output files (`params_?.json` and `x_?.csv.gz` files will be written to the `output` folder, where `?` is replaced by a date and time of the simulation and `x` by `π`, `ϵ` and `η` for the average `π` over time, the environments, and the average `η` over time (if `η2` was specified).
+Start a Jupyter notebook server inside the repo folder:
 
-You can tar these files to an archive with `tar czf output.tgz output` and untar them with `tar xzf output.tgz`.
+```sh
+cd <path to folder>
+jupyter notebook
+```
+
+Your browser should open automatically. 
+Open the `notebooks` folder and choose the notebook file `figures.ipynb` file.
+
+## Troubleshooting
+
+Use the [Issues](https://github.com/yoavram/Milpitas/issues) page to report problems or suggest improvements or contact [Yoav Ram](mailto:yoav@yoavram.com).
+
+License
+-------
+
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+International License.
