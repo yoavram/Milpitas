@@ -46,7 +46,7 @@
 %\vskip-7pt
 %\centerline{uril@tauex.tau.ac.il}
 \vfil
-\centerline{August 25, 2017, v.2}
+\centerline{September 15, 2017, v.1}
 
 \break
 \noindent{\bf INTRODUCTION}
@@ -58,13 +58,13 @@ Oblique transmission occurs via some mechanism of social learning, which may inc
 
 In some situations, oblique transmission of biological material is possible. In bacteria, phenotypes might be determined by heritable mobile genetic elements such as phages (Zinder and Lederberg 1952), plasmids (Lederberg and Tatum 1946), integrons (Mazel 2006), and transposons (Salyers et al.\ 2004). Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, i.e., transformation (Milkman and Bridges 1990). In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell, and oblique transmission from other cells, even if the latter did not originally evolve for that purpose (Redfield 1993). 
 
-In some animals, transmission of microbes occasioned by the sharing or manipulation of food or other consumable resources during a social interaction. Although transmission of the microbiome in humans is likely to be mostly vertical (Rosenberg and Zilber-Rosenberg 2016), in other organisms there is multi-generational food sharing during which symbionts from the parental cohort may be transmitted obliquely to younger individuals (Theis et al.\ 2016). In such cases, fluctuations in the resource type or availability may have fitness effects that depend on features of the transmitted microbiome. This ecological perspective on community transmission is stressed by van Opstal and Bordenstein (2015), who emphasize the ``need to consider the relative roles of vertical and horizontal transmission of microbial communities.''
+In some animals, transmission of microbes may occur during sharing or manipulation of food or other consumable resources during a social interaction. Although transmission of the microbiome in humans is likely to be mostly vertical (Rosenberg and Zilber-Rosenberg 2016), in other organisms there is multi-generational food sharing during which symbionts from the parental cohort may be transmitted obliquely to younger individuals (Theis et al.\ 2016). In such cases, fluctuations in the resource type or availability may have fitness effects that depend on features of the transmitted microbiome. This ecological perspective on community transmission is stressed by van Opstal and Bordenstein (2015), who emphasize the ``need to consider the relative roles of vertical and horizontal transmission of microbial communities.''
 
-Another perspective on the evolutionary consequences of fluctuating environments (and, as a result, fluctuating fitnesses) has derived from the phenomenon of phenotypic switching (Balaban et al.\ 2004; Kussell and Leibler 2005; Thattai and van Oudenaarden 2004; Salath\'e et al.\ 2009; Liberman et al.\ 2011; Gaal et al.\ 2010). In these studies, mutation caused the organism to switch phenotypes (usually treated as haploid genotypes), and the problem has usually been posed in terms of the optimal rate of mutation when the phenotypic fitnesses fluctuate over time. These models did not include social learning, and the evolution was regarded as a mode of bet-hedging against future environmental change. Optimal (that is, evolutionarily stable) mutation rates depend on many features of the fluctuations, for example,  degree of fitness symmetry, strength of selection, and variance in the period of fluctuation (Salath\'e et al.\ 2009).
+Another perspective on the evolutionary consequences of fluctuating environments (and, as a result, fluctuating fitnesses) derives from the phenomenon of phenotypic switching (Balaban et al.\ 2004; Kussell and Leibler 2005; Thattai and van Oudenaarden 2004; Salath\'e et al.\ 2009; Liberman et al.\ 2011; Gaal et al.\ 2010). In these studies, mutation causes the organism to switch phenotypes (usually treated as haploid genotypes), and the problem has usually been couched in terms of the optimal rate of mutation in models where the phenotypic fitnesses fluctuate over time. These models did not include social learning, and the evolution was regarded as a mode of bet-hedging against future environmental change. Optimal (that is, evolutionarily stable) mutation rates depend on many features of the fluctuations, for example,  degree of fitness symmetry, strength of selection, and variance in the period of fluctuation (Salath\'e et al.\ 2009).
 
 In a recent analysis of evolution in fluctuating environments, Xue and Leibler (2016) allowed an organism to absorb information about the distribution of possible environments by learning the phenotypes of members of its parental lineage from previous generations. They describe this as ``positive feedback that enhances the probability of the offspring to express the same phenotype as the parent.'' In this formulation there was ``reinforcement of the parent phenotype'' in an offspring, such as might occur through epigenetic inheritance. Although their analysis was not couched in terms of oblique and vertical transmission, as defined by Cavalli-Sforza and Feldman (1981), we have been stimulated by their analysis to develop a model in which oblique transmission, at a rate dependent on the trait frequency in the parental generation, occurs in addition to classical vertical transmission. We then ask how fluctuations in fitnesses interact with the rate of oblique transmission to affect evolutionary dynamics and how the rate of oblique transmission itself might evolve. 
 
-In our formulation, both the parental phenotype and the distribution of phenotypes in the whole population contribute to an offspring's phenotype. Using conventional modifier theory (Feldman and Liberman 1986), we show that in a cyclic selection regime with cycles of periods 1 or 2, an allele reducing the rate of vertical transmission is expected to increase in frequency when rare and in so doing to increase the mean fitness of the population. However, for cycles of greater length, interesting non-monotonicities emerge, both in the uninvadable rate of vertical transmission, and the rate that maximizes the geometric time average of the population mean fitness, which we will refer to as the ``geometric mean fitness.'' We develop the models in very large populations with cyclic selection and with random fitnesses and also in the case where drift occurs via sampling from generation to generation in a finite population.
+In our formulation, both the parental phenotype and the distribution of phenotypes in the whole population contribute to an offspring's phenotype. Using conventional modifier theory (Feldman and Liberman 1986), we show that in a symmetric cyclic selection regime with cycles of periods 1 or 2, an allele reducing the rate of vertical transmission is expected to increase in frequency when rare and in so doing to increase the mean fitness of the population. However, for cycles of greater length or period asymmetry, interesting non-monotonicities emerge, both in the uninvadable rate of vertical transmission, and the rate that maximizes the geometric time average of the population mean fitness, which we will refer to as the ``geometric mean fitness.'' We develop the models in very large populations with cyclic selection and with random fitnesses and also in the case where drift occurs via sampling from generation to generation in a finite population.
 
 \vfil\break
 
@@ -163,7 +163,7 @@ Next we consider the case where the environment is not constant but rather chang
 
 \noindent{\it Conclusions}
 
-\item{1.}As $k=l$ and the above result holds also when $0<W<w$, there is total symmetry between the two fixations in $A$ and $B$, and fixation in $A$ is not stable. Thus neither phenotype can become extinct, and we have a {\sl protected polymorphism} (Prout 1968).
+\item{1.}Since $k=l$ and the above result holds also when $0<W<w$, there is total symmetry between the two fixations in $A$ and $B$, and fixation in $A$ is not stable. Thus neither phenotype can be lost, and we have a {\sl protected polymorphism} (Prout 1968).
 
 \item{2.}Observe that for general $k$, $l$, the condition for local stability of fixation in $A$ is
 $$\bigl[f_A(0)\bigr]^l \bigl[f_B(0)\bigr]^k <1, \eqno(16)$$
@@ -185,7 +185,7 @@ Inequalities (21) are consistent if and only if $\log(1/b)<\log a$, i.e., $ab>1$
 $$ab=\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right)>1.\eqno(22)$$
 
 \noindent{\it Remark}.
-It should be pointed out that the local stability properties of the two fixations depend only on the fact that in a cycle of $(k+l)$ generations $A$ was favored $k$ times and $B$ was favored $l$ times, and not their order in the cycle.
+It should be pointed out that the local stability properties of the two fixations depend only on the fact that in a cycle of $(k+l)$ generations $A$ is favored $k$ times and $B$ is favored $l$ times, and not their order in the cycle.
 
 
 When neither fixation in $A$ or $B$ is stable, we have a case of protected polymorphism, and we expect to have one or more polymorphic equilibria. Figure 1 shows the relationship between $k,l$ and $\rho$ that supports polymorphism of $A$ and $B$, or fixation, for different values of $W$ and $w$. 
@@ -217,7 +217,14 @@ Also, as $\alpha_2=1$ and $\alpha_0<0$, the quadratic equation $Q(x)=0$ has two 
   Hence $F'_{B}(x)>0$ for all $0\le x\le 1$, and $H'(x) =F'_B\bigl(F_A(x)\bigr)F'_A(x)$ is positive when $0\le x\le 1$. Thus $H(x)$ is a monotone increasing function of $x$ for $0\le x\le 1$.
 Thus, starting from any initial value $0<x_0 <1$ we have  $x_t\,\harr{}{t\to\infty}\,x^*$. Supplementary Figure S1 illustrates examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection, while Figure 2A shows the equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in this regime.
 
-For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We investigated this numerically, and as shown in Supplemental Figure S2, the $A1B2$ regime also appears to allow a single stable polymorphism. For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplemental Figure S3 shows that only a single stable equilibrium appears to exist.
+For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We have been able to show that when neither fixation in $A$ or $B$ is stable, in the $AkBk$ case this cannot occur. In fact we have the following.
+
+\proclaim Result 5. In the $AkBk$ selection regimes, if the fixations in $A$ and $B$ are locally unstable, a single stable polymorphic equilibrium exists.\par
+
+The proof of Result 5 is in Supplementary Material SP1. 
+For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplemental Figure S3 illustrates the convergence to a single stable polymorphism. 
+
+We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ there is a single stable polymorphic equilibrium when the two fixations are unstable. However, the numerical examples in Figure 1 (for $AkBl$) and in Figure 7 (for the special case $A1B2$) all exhibit a single stable polymorphic equilibrium when fixations in $A$ and $B$ are unstable. These numerical results suggest that for $W>w>0$ and $0<\rho<1$ the high order polynomial that gives the equilibria has only a single root that is a globally stable polymorphism.
 \medskip
 \centerline{[FIGURE 2 HERE]}  
  \bigskip
@@ -239,11 +246,11 @@ For more general cyclic fitness regimes, the polynomial that gives the equilibri
  
  In our case there are two constant equilibria $x^*=0$ and $x^*=1$ corresponding to fixation in $B$ and $A$, respectively. We can characterize the stochastic local stability of these fixations as follows.
  
- \proclaim Result 5. Suppose $E\left[\log (1+\rho s_t)\right]>0$. Then $x^*=0$, the fixation of phenotype $B$, is not stochastically locally stable. In fact $P\left(\lim_{t\to\infty}x_t=0\right)=0$.
+ \proclaim Result 6. Suppose $E\left[\log (1+\rho s_t)\right]>0$. Then $x^*=0$, the fixation of phenotype $B$, is not stochastically locally stable. In fact $P\left(\lim_{t\to\infty}x_t=0\right)=0$.
  
-  \proclaim Result 6. Suppose $E[\log(1+\rho s_t)]<0$. Then $x^*=0$, the fixation of phenotype $B$, is stochastically locally stable. In particular, if $E(s_t)\le 0$, $x^*=0$ is stochastically locally stable.
+  \proclaim Result 7. Suppose $E[\log(1+\rho s_t)]<0$. Then $x^*=0$, the fixation of phenotype $B$, is stochastically locally stable. In particular, if $E(s_t)\le 0$, $x^*=0$ is stochastically locally stable.
  
- The proofs of Results 5 and  6 can be found in Supplementary Materials SP1 and SP2.
+ The proofs of Results 6 and  7 can be found in Supplementary Materials SP2 and SP3.
  
  
  Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of the $B$ fixation is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of the $A$ fixation by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the first sign  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in phenotype $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following (14),
@@ -273,8 +280,9 @@ For more general cyclic fitness regimes, the polynomial that gives the equilibri
 }\eqno(35)$$
 with $\overline w$, the mean fitness, given by
 $$\overline w =w_A(x_1+x_3) +w_B(x_2+x_4).\eqno(36)$$
-Starting with a stable equilibrium where only the $m$ allele is present, we check its {\sl external stability} (e.g., Feldman and Liberman 1986; Altenberg et al.\ 2017) to invasion by allele $M$.
+Note that under these assumptions the $M/m$ locus and the $A/B$ phenotypic dichotomy do not undergo anything analogous to recombination, which might be introduced if the $A/B$ were viewed as haploid genetic variants. 
 
+Starting with a stable equilibrium where only the $m$ allele is present, we check its {\sl external stability} (e.g., Feldman and Liberman 1986; Altenberg et al.\ 2017) to invasion by allele $M$.
 Because we assume the initial existence of a stable polymorphic equilibrium that depends on $\rho$ (the rate determined by $m$), we cannot assume a {\sl constant environment}, which always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$. Specifically, following (35) with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
 $$\underline x''=T_2(T_1\underline x),\eqno(37)$$
 where $\underline x'=T_1\underline x$ is given by (35) with $w_A=W$, $w_B=w$, and $\underline x''=T_2\underline x'$ is given by (35) with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
@@ -301,7 +309,6 @@ $$\overline w^*\cl_2 = \left[\matrix{w\bigl[(1-P)x_2^* +P\bigr] & W(1-P)x_2^*\cr
  Observe that as $\underline x^* =T_2(T_1\underline x^*)$ with $x_3^*=x_4^*=0$, from (40) and (41) with $P=\rho$ we have
  $$\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right]= \cl_2\cdot\cl_1\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right] =\cl\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right].\eqno(44)$$
  Hence when $P=\rho$ one of the eigenvalues of $\cl$ is 1.
- \smallskip
  
  In general $\cl=\cl_2\cdot\cl_1$, and using (40) and (43) we get
  $$\eqalign{
@@ -313,14 +320,17 @@ $$\overline w^*\cl_2 = \left[\matrix{w\bigl[(1-P)x_2^* +P\bigr] & W(1-P)x_2^*\cr
  The external stability of $\underline x^*$ is determined by the eigenvalues of $\cl$, namely the roots of its characteristic polynomial $R(\lambda) =\det(\cl-\lambda\ci)$, with $\ci$ the $2\times 2$ identity matrix. From (45), $R(\lambda)=a_2\lambda^2 +a_1\lambda +a_0$, where
  $$a_0={P^2W^2w^2\over\left(\overline w^*\right)^4},\qquad a_1=-{2PWw +\left(1-P\right)^2\left[Wx_2^* +wx_1^*\right]^2\over \left(\overline w^*\right)^2},\qquad a_2=1.\eqno(46)$$
  
- We can prove the following result.
+
+ \smallskip
  
- \proclaim Result 7. $\cl$ has two positive eigenvalues and\hfil\break
+We can prove the following result.
+ 
+ \proclaim Result 8. $\cl$ has two positive eigenvalues and\hfil\break
   {\hglue.82truein}(i) when $P>\rho$ the two eigenvalues are less than $1$,\hfil\break
   {\hglue.79truein}(ii) when $P<\rho$ the largest eigenvalue is larger than $1$,\hfil\break
   {\hglue.76truein}(iii) when $P=\rho$, the largest eigenvalue is $1$.\par
   
-  \noindent{\it Proof}.  As $\cl$ is a positive matrix by the Perron-Frobenius theory, $\cl$ has a positive eigenvalue, and as $a_0>0$ and $a_2=1$ the product of the two eigenvalues of $\cl$ is positive. Thus in fact $\cl$ has two positive eigenvalues. Let $R(1)=R(1;P)$, then from (46)
+  \noindent{\it Proof}.  As $\cl$ is a positive matrix, by the Perron-Frobenius theory $\cl$ has a positive eigenvalue, and as $a_0>0$ and $a_2=1$ the product of the two eigenvalues of $\cl$ is positive. Thus in fact $\cl$ has two positive eigenvalues. Let $R(1)=R(1;P)$, then from (46)
   $$R(1;P) = {W^2w^2-\left(\overline w^*\widetilde w^*\right)^2\over\left(\overline w^*\right)^4}P^2 +2P{\left(\widetilde w^*\right)^2 -Ww\over \left(\overline w^*\right)^2} +{\left(\overline w^*\right)^2-\left(\widetilde w^*\right)^2\over\left(\overline w^*\right)^2},\eqno(47)$$
 where $\widetilde w^* =Wx_2^* +wx_1^*$.  
 
@@ -332,9 +342,17 @@ $$\sqrt{Ww}< \overline w^*<\widetilde w^* .\eqno(48)$$
  
  When $P>\rho$, we have $R(1)>0$ and also $R(0)=a_0>0$. As $R(\lambda)=0$ has two positive roots and as $a_2>0$, $R(\lambda)$ is convex, either the two positive roots are less than 1 or both larger than one. But the product of the two roots is $P^2W^2w^2/(\overline w^*)^2<1$ by (48); thus when $P>\rho$ the two positive eigenvalues of $\cl$ are less than 1.
 
-It is natural to also ask how the population mean fitness is affected by modification of $\rho$. We have the following result.
+ We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 5, which also illustrates the change in phenotype frequencies over time. In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 6 shows  an example of the success of modifiers that reduce $\rho$. 
+  
+ Thus in the cycling fitness regime  $A1B1$  and the symmetric random fitness regime of Figure 6, there is a {\sl reduction principle} for the rate of vertical transmission (Feldman and Liberman 1986; Altenberg et al.\ 2017). 
+  \medskip
+\centerline{[FIGURES 5, 6]}  
 
-\proclaim Result 8. If $W>w$ and $0\le\rho\le 1$, then the mean fitness at the stable equilibrium in the $A1B1$ environment is a decreasing function of $\rho$.\par
+Mathematical analysis of modifiers of $\rho$ for more general $AkBl$ regimes is difficult, and we have made a numerical investigation of the evolutionarily stable value $\rho^*$ of the rate of vertical transmission for $k,l\ne 1$. For $A1B2$, $\rho^*=0$ still appears to be the stable state. However, as we increase $k$ and $l$, the stable value of $\rho$ changes, and becomes a function of the fitness difference between $A$ and $B$. Representative results are shown in Table 1, where it is clear that, even in the $AkBk$ case, increasing $k$ results in an increase of $\rho^*$. Figure 8 illustrates the results for the $AkBk$ case for $k$ up to 50 and shows that the value of $\rho^*$ depends on $k$ but also in a complex manner on $w/W$. For the values of $k$ and $l$ in Table 1, lower values of $W/w$ give a lower value of $\rho^*$, i.e., $\rho^*$ close to zero. However, as $k$ increases in the $AkBk$ case, values of $\rho^*$ increase as $W/w$ decreases. The modification process is clearly much more complex than the evolution of modifiers of recombination, mutation, or migration.
+ 
+ It is natural to also ask how the population mean fitness is affected by modification of $\rho$. We have the following result.
+
+\proclaim Result 9. If $W>w$ and $0\le\rho\le 1$, then the mean fitness at the stable equilibrium in the $A1B1$ environment is a decreasing function of $\rho$.\par
 
 \noindent{\it Proof.} In $A1B1$ the stable frequency of phenotype $A$ is by (38)
 $$x^* ={1\over 2} -{W+w-Z\over 2(2-\rho)(W-w)},\eqno(49)$$
@@ -344,19 +362,11 @@ Thus $\overline w^*$ is decreasing in $\rho$ if $dx^*/d\rho$ is negative. Using 
 $${dx^*\over d\rho} =- {(1-\rho)(W-w)\over 2(2-\rho)Z} -{W+w-Z\over 2(2-\rho)(W-w)} = {x^*-{1\over 2}\over 2-\rho} -{(1-\rho)(W-w)\over 2(2-\rho)Z}.\eqno(51)$$
 From (39) $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes the proof.
 
- We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 5, which also illustrates the change in phenotype frequencies over time. In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 6 shows  an example of the success of modifiers that reduce $\rho$. 
-  
- Figure 2B illustrates the decrease with increasing $\rho$ of the geometric mean fitness (over time) at a polymorphic equilibrium  in the $A1B1$ regime. Figure 7 illustrates an example of the $A1B2$ selection regime: panel A shows the values of selection and $\rho$ that allow polymorphism of phenotypes $A$ and $B$, and Panel B shows that the mean fitness at this equilibrium is decreasing as $\rho$ increases. 
+  Figure 2B illustrates the decrease with increasing $\rho$ of the geometric mean fitness (over time) at a polymorphic equilibrium  in the $A1B1$ regime. Figure 7 illustrates an example of the $A1B2$ selection regime: panel A shows the values of selection and $\rho$ that allow a polymorphic equlibrium of phenotypes $A$ and $B$, and Panel B shows that the mean fitness at this equilibrium is decreasing as $\rho$ increases. 
  
- Thus in  cycling fitness  $A1B1$ and  $A2B2$ regimes and the symmetric random fitness regime of Figure 6, there is a {\sl reduction principle} for the rate of vertical transmission (Feldman and Liberman 1986; Altenberg et al.\ 2017). For the $A2B2$ selection regime, numerical analysis (Figure 8) confirms the reduction principle for $\rho$.
-  \medskip
-\centerline{[FIGURES 5, 6,  7 HERE]}  
-
- We investigated the dynamics of modifiers of $\rho$ in $AkBk$ regimes for $k\ge 3$. The reduction principle appears to fail for all $k\ge 3$. For each value of $k\ge 3$, there is a value of $\rho$ below which modifiers that increase $\rho$ invade and above which modifiers that reduce $\rho$ invade. For $k\le8$, the evolutionarily stable value of $\rho$, $\rho^*$  increases rapidly with $k$, but then the increase  becomes much slower. Note that for $k$ large enough, during the $Ak$ part of the cycle, phenotype $A$ becomes extremely close to fixation for even moderate values of $w$ relative to $W$. At this stage, any effect of the $M/m$ difference would be very difficult to detect computationally. The variation of $\rho^*$ with $k$ for selection regimes $AkBk$ is shown in Figure 8 for $k\le50$, $W=1$ with $w=0.1$, $0.5$, and $0.9$.
- 
- The value of $\rho$ that maximizes the geometric mean fitness, denoted by $\hat\rho$, also varies with $k$ in the $AkBk$ regimes. It is somewhat surprising, given the modifier findings for $k\ge 3$, that $\hat\rho$ is actually zero for $k\le11$ and, depending on the fitnesses, is larger than zero for $k>11$. This is shown in Figure 9, where for $W=1$ with $w=0.1$ and $0.5$, $\hat\rho$ is noticeably positive. For $W=1$, $w=0.9$, however, $\hat\rho=0$ maximizes the geometric mean fitness. More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Supplementary Figure S4. 
+ The value of $\rho$ that maximizes the geometric mean fitness, denoted by $\hat\rho$,  varies with $k$ and with $W/w$ in the $AkBk$ regimes.  This is shown in Figure 9, where for $W=1$ with $w=0.1$ and $0.5$, $\hat\rho$ is noticeably positive. For $W=1$, $w=0.9$, however, $\hat\rho=0$ maximizes the geometric mean fitness. More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Supplementary Figure S4. 
 \medskip
-\centerline{[FIGURES 8, 9 HERE]}  
+\centerline{[FIGURES 7, 8, 9 HERE]}  
  \bigskip
  
  \noindent{\bf FINITE POPULATION SIZE}
@@ -367,9 +377,9 @@ From (39) $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes th
  Then, according to the Wright-Fisher model (Ewens 2004), $X_{t+1}$, the number of individuals of phenotype $A$ at generation $(t+1)$, is determined by the probability
  $$P\bigl(X_{t+1} =j\mid X_t =Nx\bigr) =\left(\matrix{N\cr j\cr}\right)\left(x'\right)^j\left(1-x'\right)^{N-j},\eqno(53)$$
  for $j=0,1,2,\dots,N$.
- Thus the fluctuations in the numbers of phenotypes $A$ and $B$ in the  population of size $N$ are generated by the Wright-Fisher Markov chain process where, given that $X_t=Nx$, $X_{t+1}$ has a binomial distribution with parameters $(N,x')$.
+ Thus the fluctuations in the numbers of phenotypes $A$ and $B$ in the  population of size $N$ are generated by the Wright-Fisher Markov chain  where, given that $X_t=Nx$, $X_{t+1}$ has a binomial distribution with parameters $(N,x')$.
  
- This Markov chain process has two absorbing states, $X_t =N$ and $X_t=0$, corresponding to the two fixations in $A$ and $B$, respectively, and we are interested in the fixation probabilities and the time to fixation of these two absorbing states as functions of the initial frequency $x$ and also of $\rho$, $w_A$, and $w_B$.
+ This Markov chain  has two absorbing states, $X_t =N$ and $X_t=0$, corresponding to the two fixations in $A$ and $B$, respectively, and we are interested in the fixation probabilities and the time to fixation of these two absorbing states as functions of the initial frequency $x$ and also of $\rho$, $w_A$, and $w_B$.
  
  To these ends we use a {\sl diffusion approximation}  to the process $\{X_t\}$. Specifically, we compute the mean $\mu(x)$ and the variance $\sigma^2(x)$ of the change in {\sl one generation} in the frequency of phenotype $A$ given that at the beginning of the generation $X_t=Nx$.
  
@@ -430,9 +440,9 @@ Therefore  $T(x)$ is given by
   
   It is important to note that the fixation probability $u(x)$ is a monotone increasing function of $\rho$ when $s>0$. In fact we have the following result.
   
-  \proclaim Result 9. When $s>0$ so that the phenotype $A$ is favored, the fixation probability $u(x)$ is monotone increasing in $\rho$.\par
+  \proclaim Result 10. When $s>0$ so that the phenotype $A$ is favored, the fixation probability $u(x)$ is monotone increasing in $\rho$.\par
  
- The proof of Result 9 is in Supplementary Materials SP3.  
+ The proof of Result 10 is in Supplementary Materials SP4.  
   Figure 10 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange diagram in Supplemental Figure S1.
   \medskip
   
@@ -442,11 +452,11 @@ Therefore  $T(x)$ is given by
  $${1\over N}s_t \simeq w_A^t -w_B^t,\qquad S_t =\sum_{i=1}^t s_i,\qquad t=1,2,\dots,n.\eqno(73)$$
  Following Karlin and Levikson (1974) we have the following result.
  
- \proclaim Result 10. The mean $\mu(x)$ and variance $\sigma^2(x)$ of the change in the frequency of $A$ in one generation for the diffusion approximation in the case of a cycling environment $AkBl$, where $k+l=n$, are
+ \proclaim Result 11. The mean $\mu(x)$ and variance $\sigma^2(x)$ of the change in the frequency of $A$ in one generation for the diffusion approximation in the case of a cycling environment $AkBl$, where $k+l=n$, are
  $$\eqalign{
  \mu(x) &= \rho S_n x(1-x)\cr \sigma^2(x) &= nx(1-x).}\eqno(74)$$
  
- The proof of Result 10, based on induction on $n$, is given in Supplemental Materials SP4.
+ The proof of Result 11, based on induction on $n$, is given in Supplemental Materials SP5.
  
   
  Using the moments in eqs.\ (74), the fixation probability $u(x)$ and the expected time $T(x)$ to fixation can be computed. Comparing to (70) and (72), with $s$  replaced by $S_n/n$, we find
@@ -471,13 +481,14 @@ Our model differs markedly from that of Xue and Leibler (2016), who took the ind
 
 In a constant environment, the higher the vertical transmission rate $\rho$, the faster is the approach to fixation of the favored phenotype: $A$ if $w_A>w_B$ or $B$ if $w_B>w_A$. Here $1-\rho$, the oblique transmission rate, represents the added chance that an offspring becomes $A$ by learning from the parent's population after learning from its parents who have undergone selection (eq.\ 2). This simple phenotypic model does not allow a polymorphism to be achieved in a constant environment, but with more oblique transmission, approach to fixation is retarded.
 
- With fluctuating environments, the dynamics of the phenotype frequencies are, in general, much more complicated. In particular, with deterministically cycling symmetric fitness values (the $AkBl$ model), it is impossible for fixation in $A$ and $B$ to both be stable. If $k=l$, for example, neither fixation is stable, and from numerical iteration it appears that there is a simple stable polymorphic equilibrium (with phenotypes $A$ and $B$ present; see Result 3). In the $A1B1$ case this  polymorphism is globally stable. In the $AkBl$ case, bounds on $l/k$ that determine the instability of both fixations, and hence the protection of polymorphism are given by inequalities (20), which depend on both the fitness differences and the rate $\rho$ of vertical transmission.
+ With fluctuating environments, the dynamics of the phenotype frequencies are, in general, much more complicated. In particular, with deterministically cycling symmetric fitness values (the $AkBl$ model), it is impossible for fixation in $A$ and $B$ to both be stable. If $k=l$, for example, neither fixation is stable, and there is a single stable polymorphic equilibrium (with phenotypes $A$ and $B$ present; see Result 5). In the $A1B1$ case this  polymorphism is globally stable. In the $AkBl$ case, bounds on $l/k$ that determine the instability of both fixations, and hence the protection of polymorphism are given by inequalities (20), which depend on both the fitness differences and the rate $\rho$ of vertical transmission. We conjecture that with $k\ne l$ there is a unique stable polymorphism when both fixations are unstable.
  
  In deterministic one-locus, two-allele diploid population genetic models with cycling fitness regimes, Haldane and Jayakar (1963) first showed the relevance of the geometric mean of genotypic fitnesses (cf.\ inequalities (16) and (17)) for the maintenance (or loss) of polymorphism. However, with equal homozygote fitnesses, which alternated in strength as a two-generation cycle (cf.\ $A1B1$), Karlin and Liberman (1975) extended the Haldane-Jayakar results and found conditions under which both allelic fixations and polymorphic equilibrium could all be stable, with the evolution depending on initial allele frequencies, as well as the homozygote fitness differences between alternate generations. Our haploid model appears not to produce such dependence on the initial conditions.
  
- When the fitnesses $w_A$ and $w_B$ are treated as random variables, rather than varying cyclically, stochastic local stability is the appropriate analog to local stability in the case of cyclic fitness variation. While fixations in phenotypes $A$ and $B$ cannot both be stable in this case, both may be unstable and a polymorphic distribution may result. The variance of this distribution is greater for larger values of $\rho$. This is because the  stochastic local stability conditions involve $E\bigl\{\log[1-\rho+\rho(w_A/w_B)]\bigr\}$ and the effect of the variance of $(w_A/w_B)$ will clearly increase as $\rho$ increases. In the finite population case, a greater level of vertical transmission makes selection more effective, increasing the probability $u(x)$ of fixation and reducing the expected time to fixation.
+ When the fitnesses $w_A$ and $w_B$ are treated as random variables, rather than varying cyclically, stochastic local stability is the appropriate analog to local stability in the case of cyclic fitness variation. While fixations in phenotypes $A$ and $B$ cannot both be stochastically stable in this case, both may be unstable and a polymorphic distribution may result. The variance of this distribution is greater for larger values of $\rho$. This is because the  stochastic local stability conditions involve $E\bigl\{\log[1-\rho+\rho(w_A/w_B)]\bigr\}$ and the effect of the variance of $(w_A/w_B)$ will clearly increase as $\rho$ increases. In the finite population case, a greater level of vertical transmission makes selection more effective, increasing the probability $u(x)$ of fixation and reducing the expected time to fixation.
  
- We have shown that the rate of vertical transmission tends to decrease when it is under the control of a genetic modifier. This is true in the deterministic case with cycling environments, and also in the random selection case, when the fitnesses of $A$ and $B$ are identically distributed and independent between generations. In light of these results, together with the finite population result that fixation probability is higher, and time to fixation faster with greater $\rho$, we can conclude that increased oblique transmission in our model leads to greater phenotypic diversity; i.e., it is more likely to result in  phenotypic polymorphism. This can be seen in Figure 1, where it is also clear that the existence and stability of a polymorphism is more sensitive to $(1-\rho)$ than to the fitness difference between $A$ and $B$.
+ We have shown that in the $A1B1$ case, the rate of vertical transmission tends to decrease when it is under the control of a genetic modifier. This is also true in the random selection case, when the fitnesses of $A$ and $B$ are identically distributed and independent between generations. 
+ %In light of these results, together with the finite population result that fixation probability is higher, and time to fixation faster with greater $\rho$, we can conclude that increased oblique transmission in our model leads to greater phenotypic diversity; i.e., it is more likely to result in  phenotypic polymorphism. This can be seen in Figure 1, where it is also clear that the existence and stability of a polymorphism is more sensitive to $(1-\rho)$ than to the fitness difference between $A$ and $B$.
  
  The mean fitness of the population evaluated at a polymorphism of phenotypes $A$ and $B$ is shown to be an increasing function of the level of oblique transmission in the $A1B1$ (Figure 2B, Figures 5C, 5F, 5I) and $A1B2$ (Figure 7B) environments. We can compare this result with the asymptotic growth rate (AGR) of Xue and Leibler (2016), whose parameter  $\eta$ is the rate at which an individual learns from its parental lineage. For $k$ small enough, the $AkBk$ environment shows the AGR decreasing with $\eta$, but larger values of $k$ entail that the AGR has a maximum for an intermediate value of $\eta$.  [FINISH WRITEUP]
 
@@ -543,11 +554,11 @@ Anthropological Science} {\bf 104}: 209--231.
 
 \ref Lycett, S. J., and J. A. J. Gowlett. 2008. On questions surrounding the Acheulean `tradition'. {\it World Archaeol.} {\bf 40}: 295--315.
 
-\ref Mazel, D. Integrons: agents of bacterial evolution. {\it Nat.\ Rev.\ Microbiol.} {\bf 4}: 608--620.
+\ref Mazel, D. 2006. Integrons: agents of bacterial evolution. {\it Nat.\ Rev.\ Microbiol.} {\bf 4}: 608--620.
 
-\ref Milkman, R., and M. M. Bridges. Molecular evolution of the {\it Escherichia coli} chromosome. III. Clonal frames. {\it Genetics} {\bf 126} 505--517.
+\ref Milkman, R., and M. M. Bridges. 1990. Molecular evolution of the {\it Escherichia coli} chromosome. III. Clonal frames. {\it Genetics} {\bf 126} 505--517.
 
-\ref Redfield, R. J. Evolution of natural transformation: testing the DNA repair hypothesis in {\it Bacillus subtilis} and {\it Haemophilus influenzae}. {\it Genetics} {\bf 133}: 755--761.
+\ref Redfield, R. J. 1993. Evolution of natural transformation: testing the DNA repair hypothesis in {\it Bacillus subtilis} and {\it Haemophilus influenzae}. {\it Genetics} {\bf 133}: 755--761.
 
 \ref Rivoire, O., and S. Leibler. 2014. A model for the generation and transmission of variations in evolution. {\it Proc.\ Natl.\ Acad.\ Sci.\ USA} {\bf 111}: E1940--E1949.
 
@@ -607,130 +618,180 @@ mathematical analysis. {\it Theor.\ Pop.\ Biol.} {\bf 66}: 249--258.
  \centerline{\bf SUPPLEMENTAL MATERIALS}
  \bigskip
  
- \noindent{\bf SP1. Proof of Result 5}
+ \noindent{\bf SP1. Proof of Uniqueness in Result 5}
  \medskip
  
- \noindent{\it Proof of Result 5}. Rewrite recursion (31) as
- $${x_t+1\over x_t} =(1+\rho s_t)\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}1)$$
+ Following (10) the transformation of the frequency $x$ of phenotype $A$ is
+ $$x'=F(x) =\underbrace{F_B\circ\cdots\circ F_B}_{k\ \hbox{\sevenrm times}}\;\circ\; \underbrace{F_A\circ\cdots\circ F_A}_{k\ \hbox{\sevenrm times}}(x).\eqno(\hbox{\tenrm S}1)$$
+ Using (28) and (29) we can write
+ $$\eqalignno{
+ &F'_A(x) =\rho{wW\over \bigl[\overline w(x)\bigr]^2} +(1-\rho),\quad \overline w(x)=(W-w)x +w&(\hbox{\tenrm S}2)\cr\noalign{\smallskip}
+ &F'_B(x) =\rho{wW\over \bigl[\widetilde w(x)\bigr]^2} +(1-\rho),\quad \widetilde w(x)=(w-W)x +W.&(\hbox{\tenrm S}3)\cr
+ }$$
+Since $F'_A(x) >0$, $F'_B(x)>0$ for  $0\le x\le 1$,  all the functions $F_A$, $F_B$, $F_A\circ\cdots\circ F_A$, $F_B\circ\cdots\circ F_B$, and $F$ are monotone increasing for  $0\le x\le 1$.
+
+From Result 2, the two fixations $x=0$ and $x=1$ are not stable because $F'(0)>1$ and $F'(1)>1$. Therefore
+$$\eqalignno{
+&F(x)-x>0\ \hbox{\tenrm for}\ x>0\ \hbox{\tenrm ``near''}\ x=0,&\hbox{\tenrm (S4)}\cr
+&F(x)-x<0\ \hbox{\tenrm for}\ x<1\ \hbox{\tenrm ``near''}\ x=1.&\hbox{\tenrm (S5)}\cr}$$
+Hence, as $F(x)-x$ is a continuous function of $x$ for $0\le x\le 1$, there exists (at least one) polymorphic equilibrium $x^*$ with $0<x^*<1$ such that $F(x^*)=x^*$.
+
+If there is more than one polymorphic equilibrium, and as there is a finite number of equilibria, let $x^*$ be the ``closest'' polymorphic equilibrium to $x=0$.
+Since $F(x)>x$ for $0<x<x^*$, $F(x)<x$ for $x>x^*$ (at least ``near'' $x^*$), and $F(x)$ is a monotone increasing function in $[0,1]$,  $x^*$ must be locally stable.
+
+Let $\hat x=F(\hat x)$ with $0<\hat x<1$ be any polymorphic equilibrium, then from (S1) its evolution in the $k+k$ generations is 
+$$\vbox{\halign{
+\hfil$#$\hfil &&\hfil\ $#$\hfil\cr
+&A&&A&&\cdots&&A&&B&&B&&\cdots&&B&&A\cr
+\hat x=&\hat x_0&\to&\hat x_1&\to&\cdots&\to&x_{k-1}&\to&\hat y_0&\to&\hat y_1&\to&\cdots&\to&\hat y_{k-1}&\to&\hat x_0&=\hat x.\cr
+}}\eqno(\hbox{\tenrm S}6)$$
+Due to the symmetry between phenotypes $A$ and $B$ we have
+$$\hat y_t=1-\hat x_t,\qquad \overline w\bigl(\hat x_t\bigr) =\widetilde w\bigl(\hat y_t\bigr)\eqno(\hbox{\tenrm S}7)$$
+for all $t=0,1,2,\dots,k-1$.
+
+The polymorphic equilibrium $\hat x$ is locally stable if $F'(\hat x)<1$, or from (S1), (S2), and (S3), if
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}\cdot\prod_{t=0}^{k-1} \left\{\rho{wW\over\bigl[\widetilde w(\hat y_t)\bigr]^2} +(1-\rho)\right\}<1.\eqno(\hbox{\tenrm S}8)$$
+Applying (S7), we conclude that $\hat x$ is locally stable if
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}<1.\eqno(\hbox{\tenrm S}9)$$
+
+As $x^*$, the ``closest'' polymorhpic equilibrium to $x=0$, is stable, then (S9) implies that
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(x_t^*)\bigr]^2} +(1-\rho)\right\}\le 1,\eqno(\hbox{\tenrm S}10)$$
+ where $x_t^*$ for $t=0,1,\dots,k-1$ is defined as in (S6).
+ 
+ If $\hat x$ is any  polymorphic equilibrium other than $x^*$, then $\hat x>x^*$ or $\hat x_0>x_0^*$ by (S4). Since $F_A$ is a monotone increasing function and
+ $$\hat x_{t+1} =F_A\bigl(\hat x_t\bigr),\quad x_{t+1}^* =F_A\bigl(x_t^*\bigr)\quad t=0,1,\dots,k-1,\eqno(\hbox{\tenrm S}11)$$
+ then by induction we have $\hat x_t>x_t^*$ for all $t=0,1,2,\dots,k-1$. In addition, as $\overline w(x) =(W-w)x+w$ and $W>w$, we also have $\overline w(\hat x_t)>\overline w(x_t^*)$ for all $t=0,1,2,\dots,k-1$, and
+ $$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}<\prod_{t=0}^{k-1} \left\{\rho{wW\over\bigl[\overline w(x_t^*)\bigr]^2} +(1-\rho)\right\}\le 1.\eqno(\hbox{\tenrm S}12)$$
+Hence $\hat x$ is also locally stable.
+But it is impossible that {\sl all} polymorphic equilibria are stable unless there is only one stable polymorphic equilibrium. Therefore $x^*$ is the unique stable polymorphic equilibrium, and since $F(x)>x$ for $0<x<x^*$ with $F(x)<x$ for $x^*<x<1$, and $F(x)$ is monotone increasing in $[0,1]$, therefore $x^*$ is globally stable.
+  \bigskip
+ \bigskip
+
+\noindent{\bf SP2. Proof of Result 6}
+ \medskip
+ 
+ Rewrite recursion (31) as
+ $${x_t+1\over x_t} =(1+\rho s_t)\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}13)$$
  Then
- $$\log x_{t+1} -\log x_t =\log(1+\rho s_t) +\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}2)$$
+ $$\log x_{t+1} -\log x_t =\log(1+\rho s_t) +\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}14)$$
  Summation yields
- $${1\over t}\left[\log x_t-\log x_0\right] ={1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n) +{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n{\rho s_n(1+s_n)\over (1+\rho s_n)(1+x_ns_n)}\right].\eqno(\hbox{\tenrm S}3)$$
+ $${1\over t}\left[\log x_t-\log x_0\right] ={1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n) +{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n{\rho s_n(1+s_n)\over (1+\rho s_n)(1+x_ns_n)}\right].\eqno(\hbox{\tenrm S}15)$$
 Let $\mu=E\left[\log(1+\rho s_t)\right]$. As $\{s_t\}_{t\ge 0}$ are independent and identically distributed random variables, the {\sl strong law of large numbers} applies and
-$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu\eqno(\hbox{\tenrm S}4)$$
+$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu\eqno(\hbox{\tenrm S}16)$$
 almost surely.
 
 Let $\zeta$ be such that ${1\over t}\sum_{n=0}^{t-1}\log[1+\rho s_n(\zeta)]=\mu$ and assume that $\lim_{t\to\infty}x_t(\zeta)=0$. As the random variables $\{s_t\}_{t\ge 0}$ are uniformally bounded,
-$$x_t(\zeta){\rho s_t(\zeta)[1+s_t(\zeta)]\over [1+\rho s_t(\zeta)][1+x_t(\zeta)s_t(\zeta)]}\;\;\harr{}{t\to\infty}\;\;0\eqno(\hbox{\tenrm S}5)$$
+$$x_t(\zeta){\rho s_t(\zeta)[1+s_t(\zeta)]\over [1+\rho s_t(\zeta)][1+x_t(\zeta)s_t(\zeta)]}\;\;\harr{}{t\to\infty}\;\;0\eqno(\hbox{\tenrm S}17)$$
 and
-$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n(\zeta){\rho x_n(\zeta)[1+s_n(\zeta)]\over [1+\rho s_n(\zeta)][1+x_t(\zeta)s_n(\zeta)]}\right]=0.\eqno(\hbox{\tenrm S}6)$$
-Thus (S3) implies that
-$$\lim_{t\to\infty}{1\over t}\left[\log x_t(\zeta) -\log x_0(\zeta)\right]=\mu.\eqno(\hbox{\tenrm S}7)$$
-If $\mu =E\left[\log(1+s_t)\right]>0$, then from (S7) we deduce that $\lim_{t\to\infty}x_t(\zeta)=\infty$, a contradiction.
+$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n(\zeta){\rho x_n(\zeta)[1+s_n(\zeta)]\over [1+\rho s_n(\zeta)][1+x_t(\zeta)s_n(\zeta)]}\right]=0.\eqno(\hbox{\tenrm S}18)$$
+Thus (S15) implies that
+$$\lim_{t\to\infty}{1\over t}\left[\log x_t(\zeta) -\log x_0(\zeta)\right]=\mu.\eqno(\hbox{\tenrm S}19)$$
+If $\mu =E\left[\log(1+s_t)\right]>0$, then from (S19) we deduce that $\lim_{t\to\infty}x_t(\zeta)=\infty$, a contradiction.
 Therefore when $\mu>0$, $P\left(\lim_{t\to\infty}x_t=0\right)=0$, and fixation of $B$ ($x^*=0$) is stochastically locally unstable.
 
- Thus by Result 5, for $x^*=0$ to be stochastically locally stable it is necessary that $E[\log(1+\rho s_t)]\le 0$. In fact, the strict inequality is sufficient.
+ Thus by Result 6, for $x^*=0$ to be stochastically locally stable it is necessary that $E[\log(1+\rho s_t)]\le 0$. In fact, the strict inequality is sufficient.
  
  Figure 3 presents a numerical example of the dynamics of recursion (31) with a specific random selection coefficient $s_t$.
-\bigskip
-\bigskip
+\vfil\break
+%\bigskip
+%\bigskip
 
- \noindent{\bf SP2. Proof of Result 6}
+ \noindent{\bf SP3. Proof of Result 7}
  \medskip
 
 Let $\mu=E[\log(1+\rho s_t)]$. Then as $\{s_t\}_{t\ge 0}$ are independent and identically distributed random variables, the strong law of large number applies and almost surely
- $$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu<0.\eqno(\hbox{\tenrm S}8)$$
+ $$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu<0.\eqno(\hbox{\tenrm S}20)$$
  Appealing to the Egoroff Theorem, for any $\var>0$ there exists $T$ such that 
- $$P\left({1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)<{\mu\over 2}\ \hbox{\tenrm for all}\ t\ge T\right)\ge 1-\var.\eqno(\hbox{\tenrm S}9)$$
+ $$P\left({1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)<{\mu\over 2}\ \hbox{\tenrm for all}\ t\ge T\right)\ge 1-\var.\eqno(\hbox{\tenrm S}21)$$
  As $0\le \rho\le 1$ and the $\{s_t\}_{t\ge 0}$ are uniformly bounded, we can find a $\delta'>0$ such that
- $$x_t<\delta'\Longrightarrow\left|\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right]\right|<-{\mu\over 4}.\eqno(\hbox{\tenrm S}10)$$
+ $$x_t<\delta'\Longrightarrow\left|\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right]\right|<-{\mu\over 4}.\eqno(\hbox{\tenrm S}22)$$
  Also, as $0\le x_t\le 1$ for all $t$,
- $$x_{t+1}=x_t{1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}< Kx_t,\eqno(\hbox{\tenrm S}11)$$
+ $$x_{t+1}=x_t{1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}< Kx_t,\eqno(\hbox{\tenrm S}23)$$
  where $K$ is independent of $t$. It follows that there exists a $\delta$ with $0<\delta<\delta'$ such that
- $$x_o<\delta\Longrightarrow x_t<\delta'\ \hbox{\tenrm for all}\ t=0,1,2,\dots,T-1.\eqno(\hbox{\tenrm S}12)$$
+ $$x_o<\delta\Longrightarrow x_t<\delta'\ \hbox{\tenrm for all}\ t=0,1,2,\dots,T-1.\eqno(\hbox{\tenrm S}24)$$
  Let $\xi$ be a realization of the evolutionary process such that
- $${1\over t}\sum_{n=0}^{t-1}\log[1+\rho s_n(\xi)]<{\mu\over 2}\ \hbox{\tenrm for all}\  t\ge T\eqno(\hbox{\tenrm S}13)$$
+ $${1\over t}\sum_{n=0}^{t-1}\log[1+\rho s_n(\xi)]<{\mu\over 2}\ \hbox{\tenrm for all}\  t\ge T\eqno(\hbox{\tenrm S}25)$$
  and assume $x_0<\delta$. Then
  $$\eqalign{
  {1\over T}&[\log x_T(\xi) -\log x_0(\xi)] \cr
  &={1\over T}\sum_{n=0}^{T-1}\log[1+\rho s_n(\xi)]+{1\over T}\sum_{n=0}^{T-1}\log[1-x_n(\xi){\rho s_n(\xi)[1+s_n(\xi)]\over [1+\rho s_n(\xi)][1+x_n(\xi)s_n(\xi)]}\cr\noalign{\smallskip}
- &<{\mu\over 2}- {\mu\over 4} ={\mu\over 4}<0, }\eqno(\hbox{\tenrm S}14)$$
+ &<{\mu\over 2}- {\mu\over 4} ={\mu\over 4}<0, }\eqno(\hbox{\tenrm S}26)$$
  and therefore $x_T(\xi) <x_0(\xi) <\delta'$. Invoking induction we get that for $t\ge T$
- $${1\over t}\log{x_t(\xi)\over x_0}\le {\mu\over 4},\eqno(\hbox{\tenrm S}15)$$
+ $${1\over t}\log{x_t(\xi)\over x_0}\le {\mu\over 4},\eqno(\hbox{\tenrm S}27)$$
  or for all $t\ge T$
- $$x_t(\xi)\le x_0\exp\left({\mu\over 4}t\right).\eqno(\hbox{\tenrm S}16)$$
+ $$x_t(\xi)\le x_0\exp\left({\mu\over 4}t\right).\eqno(\hbox{\tenrm S}28)$$
  
- As $\mu<0$, this implies that $x_t(\xi)\,\harr{}{t\to\infty}\,0$. Therefore we have shown that for given $\var>0$ there is a $\delta>0$ such that if $0<x_0<\delta$, then $P\left(\lim_{t\to\infty}x_t =0\right)\ge 1-\var$, and therefore $x^*=0$, the fixation in $B$ is stochastically locally stable. The second statement of Result 5 follows from the convexity of the log function and Jensen's inequality.
-\bigskip
-\bigskip
-
- \noindent{\bf SP3. Proof of Result 9}
- \medskip
-
-Without loss of generality and for the ease of representation, we will show that for $t>0$, 
-  $$v (x;t) ={1-e^{-tx}\over 1-e^{-t}}\eqno(\hbox{\tenrm S}17)$$
-  is monotone increasing as a function of $t$. Observe that
-  $${\partial v\over\partial t} = {\left(1-e^{-t}\right)xe^{-tx} -\left(1-e^{-tx}\right)e^{-t}\over \left(1-e^{-t}\right)^2}.\eqno(\hbox{\tenrm S}18)$$
-  
-   \noindent For the monotonicity we have to show that
-  $$f(x;t) =\left(1-e^{-t}\right)xe^{-tx} -\left(1 -e^{-tx}\right)e^{-t} \ge 0\eqno(\hbox{\tenrm S}19)$$ 
-  when $t>0$ and $0\le x\le 1$. Note that $f(0;t)=0$ and $f(1;t)=0$. Also
-  $${\partial f\over\partial x} =\left(1-e^{-t}\right)\left(e^{-tx}-txe^{-tx}\right) -te^{-tx}e^{-t},\eqno(\hbox{\tenrm S}20)$$
-  or
-  $${\partial f\over\partial x} =e^{-tx}\left[\left(1-e^{-t}\right)\left(1-tx\right) -te^{-t}\right] =e^{-tx}g(x;t),\eqno(\hbox{\tenrm S}21)$$
- say, where for fixed $t$, $g(x;t)$ is a linear function of $x$, which vanishes at $x_0 =(1-e^{-t} -te^{-t})/t(1-e^{-t})$. If $t>0$, $e^t >1+t$, so $1>e^{-t}(1+t)$ and $x_0>0$. Also if $t>0$, $e^{-t}>1-t$, and so $1-e^{-t} -te^{-t} <t(1-e^{-t})$ and $x_0<1$. Since $g(0,t) =1 -e^{-t} -te^{-t} >0$ and $g(1;t) =(1-e^{-t})(1-t) -te^{-t} <0$ for $t>0$, we deduce that ${\partial f\over\partial x}(x,t)>0$ for $ 0<x<x_0$ and ${\partial f\over\partial x}(x,t)<0$ for $x_0<x<1$ for all $t>0$. These facts, combined with $f(0,t) =f(1;t) =0$, prove that $f(x;t)\ge 0$ for $0\le x\le 1$ (in fact, $f(x;t)>0$ for $0<x<1$), and inequality (S19) is satisfied as desired.
+ As $\mu<0$, this implies that $x_t(\xi)\,\harr{}{t\to\infty}\,0$. Therefore we have shown that for given $\var>0$ there is a $\delta>0$ such that if $0<x_0<\delta$, then $P\left(\lim_{t\to\infty}x_t =0\right)\ge 1-\var$, and therefore $x^*=0$, the fixation in $B$ is stochastically locally stable. The second statement of Result 6 follows from the convexity of the log function and Jensen's inequality.
 \bigskip
 \bigskip
 
  \noindent{\bf SP4. Proof of Result 10}
  \medskip
 
+Without loss of generality and for the ease of representation, we will show that for $t>0$, 
+  $$v (x;t) ={1-e^{-tx}\over 1-e^{-t}}\eqno(\hbox{\tenrm S}29)$$
+  is monotone increasing as a function of $t$. Observe that
+  $${\partial v\over\partial t} = {\left(1-e^{-t}\right)xe^{-tx} -\left(1-e^{-tx}\right)e^{-t}\over \left(1-e^{-t}\right)^2}.\eqno(\hbox{\tenrm S}30)$$
+  
+   \noindent For the monotonicity we have to show that
+  $$f(x;t) =\left(1-e^{-t}\right)xe^{-tx} -\left(1 -e^{-tx}\right)e^{-t} \ge 0\eqno(\hbox{\tenrm S}31)$$ 
+  when $t>0$ and $0\le x\le 1$. Note that $f(0;t)=0$ and $f(1;t)=0$. Also
+  $${\partial f\over\partial x} =\left(1-e^{-t}\right)\left(e^{-tx}-txe^{-tx}\right) -te^{-tx}e^{-t},\eqno(\hbox{\tenrm S}32)$$
+  or
+  $${\partial f\over\partial x} =e^{-tx}\left[\left(1-e^{-t}\right)\left(1-tx\right) -te^{-t}\right] =e^{-tx}g(x;t),\eqno(\hbox{\tenrm S}33)$$
+ say, where for fixed $t$, $g(x;t)$ is a linear function of $x$, which vanishes at $x_0 =(1-e^{-t} -te^{-t})/t(1-e^{-t})$. If $t>0$, $e^t >1+t$, so $1>e^{-t}(1+t)$ and $x_0>0$. Also if $t>0$, $e^{-t}>1-t$, and so $1-e^{-t} -te^{-t} <t(1-e^{-t})$ and $x_0<1$. Since $g(0,t) =1 -e^{-t} -te^{-t} >0$ and $g(1;t) =(1-e^{-t})(1-t) -te^{-t} <0$ for $t>0$, we deduce that ${\partial f\over\partial x}(x,t)>0$ for $ 0<x<x_0$ and ${\partial f\over\partial x}(x,t)<0$ for $x_0<x<1$ for all $t>0$. These facts, combined with $f(0,t) =f(1;t) =0$, prove that $f(x;t)\ge 0$ for $0\le x\le 1$ (in fact, $f(x;t)>0$ for $0<x<1$), and inequality (S31) is satisfied as desired.
+\bigskip
+\bigskip
+
+ \noindent{\bf SP5. Proof of Result 11}
+ \medskip
+
  The proof is based on induction on $n$, where in order to prove (74), we show that if $X_t$ is the number of individuals with phenotype $A$ at stage $t$ of the cycle, and $x$ is the initial frequency of $A$, then
- $$E\left({X_t\over N} -x\right) \simeq {1\over N}\rho S_t x(1-x),\qquad V\left({X_t\over N}\right)\simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}22)$$
- where $N$ is the size of the population. When $t=1$, (S22) coincides with the constant environment case. Assuming (S22), we go to $t+1$. Now $X_{t+1}$ given $X_t=Ny$ has a binomial distribution with parameters $(N,y')$. Hence
- $$E\left({X_{t+1}\over N} -{X_t\over N} \mid X_t=Ny\right) =y'-y.\eqno(\hbox{\tenrm S}23)$$
+ $$E\left({X_t\over N} -x\right) \simeq {1\over N}\rho S_t x(1-x),\qquad V\left({X_t\over N}\right)\simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}34)$$
+ where $N$ is the size of the population. When $t=1$, (S34) coincides with the constant environment case. Assuming (S34), we go to $t+1$. Now $X_{t+1}$ given $X_t=Ny$ has a binomial distribution with parameters $(N,y')$. Hence
+ $$E\left({X_{t+1}\over N} -{X_t\over N} \mid X_t=Ny\right) =y'-y.\eqno(\hbox{\tenrm S}35)$$
  Following (57), $y'-y\simeq (1/N)\rho s_{t+1}y(1-y)$, and so
- $$E\left({X_{t+1}\over N} -{X_t\over N}\mid X_t\right)\simeq {1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}24)$$
+ $$E\left({X_{t+1}\over N} -{X_t\over N}\mid X_t\right)\simeq {1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}36)$$
  Observe that
  $$\eqalign{
  E\left[{X_t\over N}\left(1-{X_t\over N}\right)\right] &= E\left({X_t\over N}\right) -E\left[\left({X_t\over N}\right)^2\right]\cr\noalign{\smallskip}
-    &= E\left({X_t\over N}\right) -V\left({X_t\over N}\right) -\left[E\left({X_t\over N}\right)\right]^2.\cr}\eqno(\hbox{\tenrm S}25)$$
+    &= E\left({X_t\over N}\right) -V\left({X_t\over N}\right) -\left[E\left({X_t\over N}\right)\right]^2.\cr}\eqno(\hbox{\tenrm S}37)$$
  By the induction assumption, $V(X_t/N)\simeq (1/N)tx(1-x)$, and ignoring terms of order $1/N^2$ we have
  $$E\left({X_{t+1}\over N} -{X_t\over N}\right)\simeq {1\over N}\rho s_{t+1} E\left({X_t\over N}\right)\left[1-E\left({X_t\over N}\right)\right].
-\eqno(\hbox{\tenrm S}26)$$
-Applying (S22) we have
+\eqno(\hbox{\tenrm S}38)$$
+Applying (S34) we have
 $$\eqalign{
 E\left({X_t\over N}\right)  &\simeq x+{1\over N}\rho S_tx(1-x)\cr\noalign{\smallskip}
-1-E\left({X_t\over N}\right) &\simeq 1-x-{1\over N}\rho S_tx(1-x),} \eqno(\hbox{\tenrm S}27)$$
+1-E\left({X_t\over N}\right) &\simeq 1-x-{1\over N}\rho S_tx(1-x),} \eqno(\hbox{\tenrm S}39)$$
 and ignoring terms $O(1/N^2)$, we find
-$$E\left({X_{t+1}\over N} -{X_t\over N}\right) \simeq {1\over N}\rho s_{t+1}x(1-x).\eqno(\hbox{\tenrm S}28)$$
+$$E\left({X_{t+1}\over N} -{X_t\over N}\right) \simeq {1\over N}\rho s_{t+1}x(1-x).\eqno(\hbox{\tenrm S}40)$$
 Thus
 $$\eqalign{
 E\left({X_{t+1}\over N} -x\right) &= E\left({X_{t+1}\over N} -{X_t\over N}\right) +E\left({X_t\over N} -x\right)\cr\noalign{\smallskip}
-&\simeq {1\over N}\rho s_{t+1}x(1-x) +{1\over N}\rho S_t x(1-x),}\eqno(\hbox{\tenrm S}29)$$
+&\simeq {1\over N}\rho s_{t+1}x(1-x) +{1\over N}\rho S_t x(1-x),}\eqno(\hbox{\tenrm S}41)$$
 and since $S_t +s_{t+1} =S_{t+1}$,
- $$E\left({X_{t+1}\over N} -x\right)\simeq	{1\over N}\rho S_{t+1}x(1-x)\eqno(\hbox{\tenrm S}30)$$
+ $$E\left({X_{t+1}\over N} -x\right)\simeq	{1\over N}\rho S_{t+1}x(1-x)\eqno(\hbox{\tenrm S}42)$$
  as desired.
  
 
  We now compute $V(X_{t+1}/N)$ using the induction assumption and the formula
- $$V\left({X_{t+1}\over N}\right) =E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] +V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right],\eqno(\hbox{\tenrm S}31)$$
- where by (S22)
- $$E\left({X_{t+1}\over N}\mid X_t\right)\simeq {X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\eqno(\hbox{\tenrm S}32)$$
+ $$V\left({X_{t+1}\over N}\right) =E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] +V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right],\eqno(\hbox{\tenrm S}43)$$
+ where by (S34)
+ $$E\left({X_{t+1}\over N}\mid X_t\right)\simeq {X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\eqno(\hbox{\tenrm S}44)$$
  and
- $$V\left({X_{t+1}\over N}\mid X_t\right)\simeq{1\over N}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}33)$$
+ $$V\left({X_{t+1}\over N}\mid X_t\right)\simeq{1\over N}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}45)$$
  Here we used the fact that by (63) $y'(1-y')\simeq y(1-y)$. Now
- $$E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] \simeq {1\over N}E\left[{X_t\over N}\left(1-{X_t\over N}\right)\right]\simeq {1\over N}x(1-x),\eqno(\hbox{\tenrm S}34)$$
- where we use the same computations as led from (S25) to (S28).
- $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right] =V\left[{X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right].\eqno(\hbox{\tenrm S}35)$$
+ $$E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] \simeq {1\over N}E\left[{X_t\over N}\left(1-{X_t\over N}\right)\right]\simeq {1\over N}x(1-x),\eqno(\hbox{\tenrm S}46)$$
+ where we use the same computations as led from (S37) to (S40).
+ $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right] =V\left[{X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right].\eqno(\hbox{\tenrm S}47)$$
  Since $(X_t/N)\bigl[1-(X_t/N)\bigr]$ is a random variable taking values in [0,1],  its variance is less than 1/4 and
- $$V\left[{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right] \le {1\over 4N^2}\rho^2 s_{t+1}^2.\eqno(\hbox{\tenrm S}36)$$
+ $$V\left[{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right] \le {1\over 4N^2}\rho^2 s_{t+1}^2.\eqno(\hbox{\tenrm S}48)$$
  We ignore terms $O(1/N^2)$ so that the random variable $(1/N)\rho s_{t+1}(X_t/N)\bigl[1-(X_t/N)\bigr]$ is almost constant. As a result,
- $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right]\simeq V\left({X_t\over N}\right) \simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}37)$$
- by the induction assumption. Combining (S34) and (S37) gives
- $$V\left({X_{t+1}\over N}\right)\simeq {1\over N}x(1-x) +{1\over N}tx(1-x) ={1\over N}(t+1)x(1-x)\eqno(\hbox{\tenrm S}38)$$
+ $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right]\simeq V\left({X_t\over N}\right) \simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}49)$$
+ by the induction assumption. Combining (S46) and (S49) gives
+ $$V\left({X_{t+1}\over N}\right)\simeq {1\over N}x(1-x) +{1\over N}tx(1-x) ={1\over N}(t+1)x(1-x)\eqno(\hbox{\tenrm S}50)$$
  as expected.
- 
+
  
  \end\bye
 
