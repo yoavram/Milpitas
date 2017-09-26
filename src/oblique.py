@@ -28,24 +28,24 @@ def recurrence(x, ρ, wA, wB, N=0, err=1e-14):
         x = np.random.binomial(N, x) / N
     return x
 
-@numba.jit()
-def stable_x(ρ, w, k, l, x0=0.5, n=1000000):
-    wA = cycle([1.0]*k + [w]*l)
-    wB = cycle([w]*k + [1.0]*l)
 
-    x = np.array([x0, 1-x0, 0.0, 0.0]) # no invader!
-    x_prev = -1 * np.ones_like(x)
-    t = 0 # for numba
-    for t, wA_, wB_ in zip(count(1), wA, wB):
+@numba.jit()
+def stable_x_target(x0, ρ, w, k, l):
+    wA = [1.0]*k + [w]*l
+    wB = [w]*k + [1.0]*l
+    x = np.array([x0, 1-x0, 0.0, 0.0])
+    for wA_, wB_ in zip(wA, wB):
         x = modifier_recursion(x, wA=wA_, wB=wB_, ρ=ρ, P=0)
-        if t % (k + l) == 0:
-            if t > 1000 and np.allclose(x, x_prev):
-                break
-            x_prev = x.copy()
-        if t == n:
-            print("Reached iteration limit for ρ={}, w={}, k={}, l={}".format(ρ, w, k, l))
-            break    
-    return x
+    return abs(x[0] - x0)
+
+def stable_x(ρ, w, k, l, x0=0.5):
+    res = scipy.optimize.minimize_scalar(
+        stable_x_target, x0, args=(ρ, w, k, l), 
+        bounds=[0,1], method="bounded"
+    )
+    assert res.success, res
+    return res.x
+
 
 @numba.jit()
 def simulation(ρ, w, k, l, x0=0.5, n=1000000):
@@ -69,30 +69,6 @@ def simulation(ρ, w, k, l, x0=0.5, n=1000000):
     assert (x >= 0).all(), 'ρ={}, w={}, k={}, l={}, x={}'.format(ρ, w, k, l, x)
     assert (x <= 1).all(), 'ρ={}, w={}, k={}, l={}, x={}'.format(ρ, w, k, l, x)
     return x
-
-
-@numba.jit()
-def _simulation(ρ, w, k, l, x0=0.5, n=10000):
-    wA = np.array(([1]*k + [w]*l) * n, dtype=float)
-    wB = np.array(([w]*k + [1]*l) * n, dtype=float)
-    
-    ρ = np.array(ρ, ndmin=1)
-    x = np.empty((wA.size, ρ.size))
-    x_prev = np.empty((k+l, ρ.size))
-    x[0, :] = x0
-    x_prev[:, :] = -1
-    t = 0 # for numba
-    for t in range(1, n * (k + l)):
-        x[t, :] = recurrence(x[t - 1, :], ρ=ρ, wA=wA[t], wB=wB[t])
-        if t > (k+l)*3 and t % (k + l) == 0:
-            if np.allclose(x[(t-k-l-1):t-1, :], x_prev, rtol=0, atol=1e-7):
-                break
-            x_prev = x[(t-k-l-1):t-1, :]
-    assert (x_prev >= 0).all(), 'ρ={}, w={}, k={}, l={}, x[x<0]={}'.format(ρ, w, k, l, x_prev)
-    assert (x_prev <= 1).all(), 'ρ={}, w={}, k={}, l={}, x[x>1]={}'.format(ρ, w, k, l, x_prev)
-    if t >= n * (k + l) - 1:
-        print("Reached iteration limit for ρ={}, w={}, k={}, l={}".format(ρ, w, k, l))
-    return x_prev
 
 
 def geom_avg_wbar(x, w, k, l):
@@ -200,9 +176,10 @@ def evol_stable(w, k, l=None, reps=1, PRINT=False):
         if PRINT:
             print('ρ(0)={:2g}'.format(ρ))
         if np.isnan(ρ):
-            print("No ρ allows polymorphism with w={}, k={}, l={}".format(w, k, l))
+            print("No ρ allows polymorphism with w={}, k={}, l={}".format(
+                w, k, l))
             return ρ
-        x0 = stable_x(ρ, w, k, l)[0]
+        x0 = stable_x(ρ, w, k, l)
         P = -1 # for numba
         failed_invasions = 0
         invasions = 0
@@ -218,7 +195,7 @@ def evol_stable(w, k, l=None, reps=1, PRINT=False):
             else:
                 failed_invasions = 0
                 ρ = P
-                x0 = stable_x(ρ, w, k, l, x0=x0)[0]
+                x0 = stable_x(ρ, w, k, l, x0=x0)
                 if PRINT:
                     print('ρ({})={:.2g}'.format(invasions, ρ))
                     sys.stdout.flush()
@@ -226,10 +203,10 @@ def evol_stable(w, k, l=None, reps=1, PRINT=False):
                 break            
         # if ρ is almost 0 or almost 1, try to invade with 0 or 1.
         if ρ < 1e-3:
-            x0 = stable_x(ρ, w, k, l, x0=x0)[0]
+            x0 = stable_x(ρ, w, k, l, x0=x0)
             ρ = invasion(x0, w, ρ, 0.0, k, l)
         elif ρ > 1 - 1e-3:
-            x0 = stable_x(ρ, w, k, l, x0=x0)[0]
+            x0 = stable_x(ρ, w, k, l, x0=x0)
             ρ = invasion(x0, w, ρ, 1.0, k, l)
         if PRINT:
             print('ρ: {:.2g} ({})'.format(ρ, invasions))
@@ -239,11 +216,11 @@ def evol_stable(w, k, l=None, reps=1, PRINT=False):
     ρ = results.pop()    
     while results:
         P = results.pop()
-        x0 = stable_x(ρ, w, k, l)[0]
+        x0 = stable_x(ρ, w, k, l)
         if P == ρ: continue
         if invasion(x0, w, ρ, P, k, l, inv_rate=0.5) == P:
             if PRINT:
                 print('P={:.2g} takes over ρ={:.2g}'.format(P, ρ))
             ρ = P
-            x0 = stable_x(ρ, w, k, l, x0=x0)[0]
+            x0 = stable_x(ρ, w, k, l, x0=x0)
     return ρ
