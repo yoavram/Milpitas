@@ -207,8 +207,6 @@ def draw_ρ(w, k, l, ρ=None):
         return ρ
 
 
-
-@numba.jit()
 def evol_stable(w, k, l=None, reps=1, PRINT=False):
     if l is None:
         l = k    
