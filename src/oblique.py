@@ -130,23 +130,6 @@ def modifier_recursion(x, wA, wB, ρ, P, N=0, err=1e-14):
 
 
 @numba.jit()
-def stable_x(ρ, w, k, l, x0=0.5, n=1000000):
-    x = np.array([x0, 1-x0, 0.0, 0.0]) # no invader!
-    x_prev = -1 * np.ones_like(x)
-    t = 0 # for numba
-    for t, wA, wB in zip(count(1), cycle([1.0]*k + [w]*l), cycle([w]*k + [1.0]*l)):
-        x = modifier_recursion(x, wA=wA, wB=wB, ρ=ρ, P=0)
-        if t % (k + l) == 0:
-            if t > 1000 and np.allclose(x, x_prev, rtol=0, atol=1e-5):
-                break
-            x_prev = x.copy()
-        if t == n:
-            print("Reached iteration limit for ρ={}, w={}, k={}, l={}".format(ρ, w, k, l))
-            break    
-    return x
-
-
-@numba.jit()
 def invasion(x1, w, ρ, P, k, l, n=5000, inv_rate=1e-4):
     wA = cycle([1.0] * k + [w] * l)
     wB = cycle([w] * k + [1.0] * l)
