@@ -11,4 +11,4 @@ if __name__ == '__main__':
         simulation(ρs, w, k_, k_, n=100000)
         for k_ in ks
     ])
-    np.savez_compressed('xAkBk{:.2f}.npz'.format(w), xAkBk=xAkBk)
+    np.savez_compressed('xAkBk{:.1f}.npz'.format(w), xAkBk=xAkBk)
