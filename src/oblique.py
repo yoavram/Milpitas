@@ -261,7 +261,8 @@ def evol_stable(w, k, l=None, reps=1, PRINT=False):
         x0 = stable_x(ρ, w, k, l)[0]
         if P == ρ: continue
         if invasion(x0, w, ρ, P, k, l, inv_rate=0.5) == P:
-            print('P={:.2g} takes over ρ={:.2g}')
+            if PRINT:
+                print('P={:.2g} takes over ρ={:.2g}'.format(P, ρ))
             ρ = P
             x0 = stable_x(ρ, w, k, l, x0=x0)[0]
     return ρ
