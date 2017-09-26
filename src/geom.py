@@ -8,7 +8,7 @@ if __name__ == '__main__':
     ρs[0] = 1e-10
     ks = np.arange(1, 51, 1, dtype=int)
     xAkBk = np.array([
-        simulation(ρs, w, k_, k_, n=100000)
+        stable_cycle(ρs, w, k_, k_, n=100000)
         for k_ in ks
     ])
     np.savez_compressed('xAkBk{:.1f}.npz'.format(w), xAkBk=xAkBk)

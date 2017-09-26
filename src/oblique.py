@@ -48,7 +48,7 @@ def stable_x(ρ, w, k, l, x0=0.5):
 
 
 @numba.jit()
-def simulation(ρ, w, k, l, x0=0.5, n=1000000):
+def stable_cycle(ρ, w, k, l, x0=0.5, n=1000000):
     wA = cycle([1.0]*k + [w]*l)
     wB = cycle([w]*k + [1.0]*l)
     
@@ -84,7 +84,7 @@ def geom_avg_wbar(x, w, k, l):
 
 
 def geom_wbar_target(ρ, w, k, l):
-    x = simulation(ρ, w, k, l)
+    x = stable_cycle(ρ, w, k, l)
     return -geom_avg_wbar(x, w, k ,l)[0]
 
 
