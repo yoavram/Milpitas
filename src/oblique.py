@@ -157,9 +157,9 @@ def draw_ρ(w, k, l, ρ=None):
                 P = min(max(ρ * np.random.exponential(1), 0), 1)
             elif ρ == 0:
                 P = min(max(np.random.exponential(0.1), 0), 1)
-            if np.isclose(P, 0.0):
+            if np.isclose(P, 0.0, rtol=0, atol=1e-4):
                 return 0.0
-            if np.isclose(P, 1.0):
+            if np.isclose(P, 1.0, rtol=0, atol=1e-4):
                 return 1.0
             if is_polymorphism(w, P, k, l):
                 return P
@@ -167,60 +167,68 @@ def draw_ρ(w, k, l, ρ=None):
 
 
 def evol_stable(w, k, l=None, reps=1, PRINT=False):
+    assert reps == 1, reps
     if l is None:
         l = k    
-    
-    results = []
-    for i in range(reps):
-        ρ = draw_ρ(w, k, l)
-        if PRINT:
-            print('ρ(0)={:2g}'.format(ρ))
-        if np.isnan(ρ):
-            print("No ρ allows polymorphism with w={}, k={}, l={}".format(
-                w, k, l))
-            return ρ
-        x0 = stable_x(ρ, w, k, l)
-        P = -1 # for numba
-        failed_invasions = 0
-        invasions = 0
-        while True:
-            P = draw_ρ(w, k, l, ρ=ρ)
-            if PRINT:
-                print('P({})={:.2g}'.format(failed_invasions, P), end=', ')
-                sys.stdout.flush()
-            P = invasion(x0, w, ρ, P, k, l)
-            invasions += 1
-            if P == ρ:
-                failed_invasions += 1
-            else:
-                failed_invasions = 0
-                ρ = P
-                x0 = stable_x(ρ, w, k, l, x0=x0)
-                if PRINT:
-                    print('ρ({})={:.2g}'.format(invasions, ρ))
-                    sys.stdout.flush()
-            if failed_invasions >= 50 and invasions >= 500:
-                break            
-        # if ρ is almost 0 or almost 1, try to invade with 0 or 1.
-        if ρ < 1e-3:
-            x0 = stable_x(ρ, w, k, l, x0=x0)
-            ρ = invasion(x0, w, ρ, 0.0, k, l)
-        elif ρ > 1 - 1e-3:
-            x0 = stable_x(ρ, w, k, l, x0=x0)
-            ρ = invasion(x0, w, ρ, 1.0, k, l)
-        if PRINT:
-            print('ρ: {:.2g} ({})'.format(ρ, invasions))
-        results.append(ρ)
     if PRINT:
-        print(results)
-    ρ = results.pop()    
-    while results:
-        P = results.pop()
-        x0 = stable_x(ρ, w, k, l)
-        if P == ρ: continue
-        if invasion(x0, w, ρ, P, k, l, inv_rate=0.5) == P:
-            if PRINT:
-                print('P={:.2g} takes over ρ={:.2g}'.format(P, ρ))
+        print("w={}, k={}, l={}".format(w, k, l))
+        sys.stdout.flush()
+    # results = []
+    # for i in range(reps):
+    ρ = draw_ρ(w, k, l)
+    if PRINT:
+        print('ρ(0)={:2g}'.format(ρ))
+        sys.stdout.flush()
+    if np.isnan(ρ):
+        print("No ρ allows polymorphism with w={}, k={}, l={}".format(
+            w, k, l))
+        sys.stdout.flush()
+        return ρ
+    x0 = stable_x(ρ, w, k, l)
+    P = -1 # for numba
+    failed_invasions = 0
+    invasions = 0
+    while True:
+        P = draw_ρ(w, k, l, ρ=ρ)
+        if PRINT:
+            print('P({})={:.2g}'.format(invasions, P), end=', ')
+            sys.stdout.flush()
+        P = invasion(x0, w, ρ, P, k, l)
+        invasions += 1
+        if P == ρ:
+            failed_invasions += 1
+        else:
+            failed_invasions = 0
             ρ = P
             x0 = stable_x(ρ, w, k, l, x0=x0)
+            if PRINT:
+                print('ρ({})={:.2g}'.format(invasions, ρ))
+                sys.stdout.flush()
+        if failed_invasions >= 50 and invasions >= 500:
+            break            
+    # if ρ is almost 0 or almost 1, try to invade with 0 or 1.
+    if ρ < 1e-3:
+        x0 = stable_x(ρ, w, k, l, x0=x0)
+        ρ = invasion(x0, w, ρ, 0.0, k, l)
+    elif ρ > 1 - 1e-3:
+        x0 = stable_x(ρ, w, k, l, x0=x0)
+        ρ = invasion(x0, w, ρ, 1.0, k, l)
+    if PRINT:
+        print('ρ: {:.2g} ({})'.format(ρ, invasions))
+        sys.stdout.flush()
+        # results.append(ρ)
+    # if PRINT:
+    #     print(results)
+    #     sys.stdout.flush()
+    # ρ = results.pop()    
+    # while results:
+    #     P = results.pop()
+    #     x0 = stable_x(ρ, w, k, l)
+    #     if P == ρ: continue
+    #     if invasion(x0, w, ρ, P, k, l, inv_rate=0.5) == P:
+    #         if PRINT:
+    #             print('P={:.2g} takes over ρ={:.2g}'.format(P, ρ))
+    #             sys.stdout.flush()
+    #         ρ = P
+    #         x0 = stable_x(ρ, w, k, l, x0=x0)
     return ρ
