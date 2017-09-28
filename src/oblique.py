@@ -110,19 +110,18 @@ def invasion(x1, w, ρ, P, k, l, n=5000, inv_rate=1e-4):
     wA = cycle([1.0] * k + [w] * l)
     wB = cycle([w] * k + [1.0] * l)
     
-    n -= n % (k + l)
-    assert n % (k + l) == 0
+    # n -= n % (k + l)
+    # assert n % (k + l) == 0
     x = np.array(
         [x1*(1-inv_rate), (1-x1)*(1-inv_rate), x1*inv_rate, (1-x1)*inv_rate]
     )
     assert np.isclose(x.sum(), 1), x
     
-    for t, wA_, wB_ in zip(range(n), wA, wB):
+    for t, wA_, wB_ in zip(range(n * (k + l)), wA, wB):
         x = modifier_recursion(x, wA=wA_, wB=wB_, ρ=ρ, P=P)
-    if (x[2] + x[3]) > 0.5:
-        return P
-    else:
-        return ρ
+        if (x[2] + x[3]) > 0.5:
+            return P
+    return ρ
 
 
 def is_polymorphism(w, ρ, k, l):
