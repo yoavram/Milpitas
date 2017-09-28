@@ -119,7 +119,7 @@ def invasion(x1, w, ρ, P, k, l, n=5000, inv_rate=1e-4):
     
     for t, wA_, wB_ in zip(range(n), wA, wB):
         x = modifier_recursion(x, wA=wA_, wB=wB_, ρ=ρ, P=P)
-    if (x[2] + x[3]) > inv_rate:
+    if (x[2] + x[3]) > 0.5:
         return P
     else:
         return ρ
