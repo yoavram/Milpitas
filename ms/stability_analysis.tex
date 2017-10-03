@@ -1,0 +1,137 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{amsmath}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{lineno}
+\linenumbers
+% math typesetting 
+\let\vec\mathbf
+\newcommand{\matrx}[1]{{\left[ \stackrel{}{#1}\right]}}
+
+%SetFonts
+
+%SetFonts
+
+\pagestyle{headings}
+\markright{Yoav Ram, \today\hfill}
+
+
+
+\begin{document}
+Here I describe how I analyzed the stability of a modifier allele $m$ with vertical transmission rate $\rho$ to invasion by a modifier $M$ with a vertical transmission rate $P$, as described in the main text, eqs. 34-35, in environmental regime $AkBl$.
+\\
+The analysis is similar to that used in the main text to analyze stability in $A1B1$, but it uses computation because the cases where $k>1$ or $l>1$ cannot be analyzed using closed form expressions.
+\\
+The analysis includes the following steps for a fixed $W, w, k,$ and $l$:
+\begin{enumerate}
+
+\item Find the stable frequency vector $\vec{x^*}$ without invader $M$, i.e. $x^*_3=x^*_4=0$. This is done by minimizing the expression $|x_{k+l} - x_{0}|$ where $x_{t}$ is defined in eq. 9 of the main text. The minimization is done by iterating the recurrence until it converges, i.e. until the difference is smaller than machine precision (roughly $10^-8$ when subtracting similar small numbers).
+
+\item Define $F_A(x)$ by eq. 35 of main text with $w_A=W$ and $w_B=w$ ($W>w$), and similarly $F_B(x)$ with $w_B=W$ and $w_A=w$.
+
+\item Define, similar to eq. 37 of main text,
+\begin{equation}
+\vec{F} = \underbrace{F_A \circ \ldots \circ F_A}_{k \text{ times}} \circ
+	\underbrace{F_B \circ \ldots \circ F_B}_{l \text{ times}}.
+\label{eq:F}\end{equation}
+
+\item Calculate the linear approximation $\vec{J}$ of $\vec{F}$  near $\vec{x^*}$, that is, the Jacobian matrix of $\vec{F}$ at $\vec{x^*}$:
+\begin{equation}
+\vec{J}_{ij} = \frac{\partial F_i}{\partial x_j}.
+\label{eq:jacobian}\end{equation}
+
+\item Define $\vec{L}=\vec{L_{ex}}$ as in eqs. 40-45 in the main text such that
+\begin{equation}
+\vec{J} = \begin{pmatrix}
+\vec{L_{in}} & * \\
+* & \vec{L_{ex}}
+\end{pmatrix}.
+\end{equation}
+
+\item Calculate the eigenvalues $\lambda_1 > \lambda_2$ of $\vec{L}$; by the Perron-Frobenius theorem, the leading eigenvalue $\lambda_1$ is real and positive.
+
+\item Finally, if $\lambda_1>1$ then $M$ can invade into $m$ and if $\lambda_1<1$, $m$ is stable to invasion by $M$.
+
+\end{enumerate}
+
+These steps give us a function $\lambda_1(W, w, \rho, P, k, l)$ for the eigenvalue that determines the stability of a modifier $m$ with rate $\rho$ to invasion of modifier $M$ with rate $P$ with fitness values $W, w$ in environmental regime $AkBl$ (see~\autoref{fig:AkBk_stable_modifier_w_0.1}).
+\\
+
+To find a vertical transmission rate $\rho^*$ that is stable to invasion,
+we use the following algorithm (in the spirit of gradient descent, or rather, ascent):
+\begin{algorithm} 
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\caption{Modifier gradient ascent algorithm}\label{algorithm}
+\begin{algorithmic}[1]
+\State $\rho_{0} = 0.5$
+\State $t = 0$
+\While {$\frac{|\rho_{t} - \rho_{t-1}|}{\rho_{t-1}} < \epsilon \;\text{and}\; \eta > \eta_0$}
+	\State $P_{t} \gets \rho_{t} + \eta \frac{\partial \lambda_1(\rho_{t}, \rho_{t})}{\partial P}$
+	\If {$\lambda_1(\rho_{t}, P_{t})$} 
+	\State {$\rho_{t+1} \gets P_{t}$}
+	\Else
+	\State {$\eta \gets \eta / 2$}
+	\EndIf
+	\State $t \gets t+1$
+\EndWhile
+\State $\rho^* \gets \rho_t$
+\end{algorithmic}
+\end{algorithm}
+
+where here $\lambda_1(\rho_, \rho)$ means $\lambda_1(W, w \rho, P, k, l)$ as $W, w, k$ and $l$ are all fixed, $\eta$ is a "learning rate" parameter, initialized to 0.005-0.05 (lower for larger $k$ and $l$), and $\eta_0$ and $\epsilon$ determine the stopping and convergence of the algorithm (balancing computational time and precision requirements, I use $\eta_0= \epsilon = 0.01$).
+\\
+The arrows in~\autoref{fig:AkBk_stable_modifier_w_0.1} show examples of resulting $\{\rho_{t}\}$ sequences.
+
+\paragraph{Results}
+Examining ~\autoref{fig:AkBk_stable_modifier_w_0.1}, this method seems to work well for $k=1$ and $10$, less so for $k=20$ and not at all for $k=40$.
+This is probably because when the environment is constant for a long period of time, the frequencies are close to the boundaries (i.e. 0 and 1) and the gradient just after the environment changes is very sharp.
+Therefore, the calculation of $\vec{J}$ is unstable.
+Also, because most of the time the frequencies don't change by much, the elements of $\vec{L}$ are small, leading to unstable calculation of the leading eigenvalue.
+\\
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.1}.pdf}
+  \caption{Stable oblique transmission in $A1kBk$ with selection. The figure shows $\lambda_1(W, w, \rho, P, k, l)$, the leading eigenvalue of the external stability matrix for combinations of $\rho$ and $P$, the vertical transmission rates of resident and invader modifiers, respectively.
+  The arrows show an "evolutionary" path $\rho_{0} \to \rho_{1} \to \ldots \to \rho^*$: at each step, a modifier with rate $P_t$ invades the resident modifier with rate $\rho_t$ and becomes the resident modifier $\rho_{t+1}$, until consecutive invaders have similar rates (see Algorithm~\autoref{algorithm}).
+  Here, $W=1$ and $w=0.1$}
+  \label{fig:AkBk_stable_modifier_w_0.1}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.5}.pdf}
+  \caption{Stable oblique transmission in $A1kBk$ with intermediate selection.
+  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.5$}
+  \label{fig:AkBk_stable_modifier_w_0.5}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.9}.pdf}
+  \caption{Stable oblique transmission in $A1kBk$ with intermediate selection.
+  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.9$}
+  \label{fig:AkBk_stable_modifier_w_0.9}
+\end{figure}
+
+\paragraph{Note}
+Crucially, the Jacobian $\vec{J}$ in~\autoref{eq:jacobian} can be calculated using \textit{automatic differentiation} with good precision from a function that iteratively calculates $\vec{F}$ according to~\autoref{eq:F}. Similarly, the partial derivative $\frac{\partial \lambda_1}{\partial P}$ in Algorithm~\autoref{algorithm} can be calculated from a function that calculates $\lambda_1$ using simple arithmetic operations, as the eigenvalues can be found from a quadratic formula.
+\\
+Note that \textit{automatic differentiation} does not mean \textit{symbolic} or \textit{numerical differentiation}, which can lead to inefficient or inaccurate estimation of $\vec{J}$ when $k$ is not very small. Rather, from Bartholomew-Biggs et al. (2000): 
+\begin{quotation}\textit{
+Automatic differentiation is a set of techniques for transforming a program that calculates numerical values of a function, into a program which calculates numerical values for derivatives of that function with about the same accuracy and efficiency as the function values themselves.
+}\end{quotation}
+
+\paragraph{References} ~\\
+Bartholomew-Biggs, M., S. Brown, B. Christianson, and L. Dixon. 2000. Automatic differentiation of algorithms. J. Comput. Appl. Math. 124:171–190.
+
+\end{document}  
