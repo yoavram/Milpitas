@@ -66,8 +66,10 @@ The analysis includes the following steps for a fixed $W, w, k,$ and $l$:
 These steps give us a function $\lambda_1(W, w, \rho, P, k, l)$ for the eigenvalue that determines the stability of a modifier $m$ with rate $\rho$ to invasion of modifier $M$ with rate $P$ with fitness values $W, w$ in environmental regime $AkBl$ (see~\autoref{fig:AkBk_stable_modifier_w_0.1}).
 \\
 
+\paragraph{Finding $\rho^*$}
 To find a vertical transmission rate $\rho^*$ that is stable to invasion,
-we use the following algorithm (in the spirit of gradient descent, or rather, ascent):
+I suggest Algorithm \autoref{algorithm}.
+
 \begin{algorithm} 
 % https://en.wikibooks.org/wiki/LaTeX/Algorithms
 \caption{Modifier gradient ascent algorithm}\label{algorithm}
@@ -87,9 +89,33 @@ we use the following algorithm (in the spirit of gradient descent, or rather, as
 \end{algorithmic}
 \end{algorithm}
 
-where here $\lambda_1(\rho_, \rho)$ means $\lambda_1(W, w \rho, P, k, l)$ as $W, w, k$ and $l$ are all fixed, $\eta$ is a "learning rate" parameter, initialized to 0.005-0.05 (lower for larger $k$ and $l$), and $\eta_0$ and $\epsilon$ determine the stopping and convergence of the algorithm (balancing computational time and precision requirements, I use $\eta_0= \epsilon = 0.01$).
+Here $\lambda_1(\rho_, P)=\lambda_1(W, w, \rho, P, k, l)$ as $W, w, k$ and $l$ are all fixed, $\eta$ is a "learning rate" parameter, initialized to 0.005-0.05 (lower for larger $k$ and $l$), and $\eta_0$ and $\epsilon$ determine the stopping and convergence of the algorithm (balancing computational time and precision requirements, I use $\eta_0= \epsilon = 0.01$).
 \\
 The arrows in~\autoref{fig:AkBk_stable_modifier_w_0.1} show examples of resulting $\{\rho_{t}\}$ sequences.
+However, the results are sensitive to the choice of $\eta$.
+
+\paragraph{Another approach to find $\rho^*$}
+Note that
+\begin{align}
+\lambda_1(\rho^* \pm \epsilon, \rho^*) > 1 > \lambda_1(\rho^*, \rho^*), \\
+\lambda_1(\rho^*, \rho^* \pm \epsilon) < 1 < \lambda_1(\rho^*, \rho^*)
+\end{align}
+where the first inequality assumes that a modifier with $\rho^*$ can invade resident modifiers with slightly smaller or higher rates and the second inequality is the definition of a stable rate.
+These inequalities imply that at $(\rho^*,\rho^*)$
+\begin{align}
+\lambda_1 = 1, \\
+\frac{\partial \lambda_1}{\partial \rho} = \frac{\partial \lambda_1}{\partial P} = 0, \\
+\frac{\partial^2 \lambda_1}{\partial \rho^2} > 0, \\
+\frac{\partial^2 \lambda_1}{\partial P^2} < 0. 
+\end{align}
+
+We can use the following loss function
+\begin{equation}
+\mathbb{L}(z) =  \Big(\frac{\partial\lambda_1}{\partial \rho}(z, z)\Big)^2 + 
+		\Big(\frac{\partial\lambda_1}{\partial P}(z, z)\Big)^2
+\label{eq:loss} \end{equation}
+Minimizing $\mathbb{L}(z)$ will result in a point $(z,z)$ at which the gradients of $\lambda_1(\rho, P)$ are both zero, and therefore $(z,z)$ will be a stationary point of $\lambda_1$.
+As $\lambda_1(z, z)=1$ for any $z \in (0,1)$, the point $(z,z)$ cannot be a minimum or a maximum, and therefore it must be a saddle point (\textbf{is that right?}).
 
 \paragraph{Results}
 Examining ~\autoref{fig:AkBk_stable_modifier_w_0.1}, this method seems to work well for $k=1$ and $10$, less so for $k=20$ and not at all for $k=40$.
@@ -101,9 +127,9 @@ Also, because most of the time the frequencies don't change by much, the element
 \begin{figure}[htbp]
   \centering
     \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.1}.pdf}
-  \caption{Stable oblique transmission in $A1kBk$ with selection. The figure shows $\lambda_1(W, w, \rho, P, k, l)$, the leading eigenvalue of the external stability matrix for combinations of $\rho$ and $P$, the vertical transmission rates of resident and invader modifiers, respectively.
+  \caption{Stable oblique transmission in $AkBk$ with selection. The colors show $\lambda_1(W, w, \rho, P, k, l)$, the leading eigenvalue of the external stability matrix for combinations of $\rho$ (y-axis) and $P$ (x-axis), the vertical transmission rates of resident and invader modifiers, respectively. Purple shows values lower than 1, leading to stability of $\rho$; white equals to 1; green larger than 1, leading to invasion of $P$..
   The arrows show an "evolutionary" path $\rho_{0} \to \rho_{1} \to \ldots \to \rho^*$: at each step, a modifier with rate $P_t$ invades the resident modifier with rate $\rho_t$ and becomes the resident modifier $\rho_{t+1}$, until consecutive invaders have similar rates (see Algorithm~\autoref{algorithm}).
-  Here, $W=1$ and $w=0.1$}
+  Here, $W=1$ and $w=0.1$.}
   \label{fig:AkBk_stable_modifier_w_0.1}
 \end{figure}
 
@@ -111,7 +137,7 @@ Also, because most of the time the frequencies don't change by much, the element
   \centering
     \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.5}.pdf}
   \caption{Stable oblique transmission in $A1kBk$ with intermediate selection.
-  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.5$}
+  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.5$.}
   \label{fig:AkBk_stable_modifier_w_0.5}
 \end{figure}
 
@@ -119,7 +145,7 @@ Also, because most of the time the frequencies don't change by much, the element
   \centering
     \includegraphics[width=\linewidth]{{../figures/AkBk_stable_modifier_w_0.9}.pdf}
   \caption{Stable oblique transmission in $A1kBk$ with intermediate selection.
-  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.9$}
+  Same as~\autoref{fig:AkBk_stable_modifier_w_0.1} except here, $W=1$ and $w=0.9$.}
   \label{fig:AkBk_stable_modifier_w_0.9}
 \end{figure}
 
