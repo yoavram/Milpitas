@@ -88,6 +88,18 @@ def geom_wbar_target(ρ, w, k, l):
     return -geom_avg_wbar(x, w, k ,l)[0]
 
 
+def optimal_ρ(w, k, l):    
+    max_ρ = max_ρ_with_polymorphism(w, k, l)
+    if np.isclose(max_ρ, 0):
+        return np.nan
+    res = scipy.optimize.minimize_scalar(
+        geom_wbar_target, args=(w, k, l), bounds=[0, max_ρ], method='bounded')
+    if not res.success: 
+        print('Minimization failed for w={}, k={}, l={}'.format(w, k, l))
+        return np.nan
+    return res.x
+
+
 @numba.jit()
 def modifier_recursion(x, wA, wB, ρ, P, N=0, err=1e-14):
     x1, x2, x3, x4 = x
