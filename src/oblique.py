@@ -100,42 +100,6 @@ def optimal_ρ(w, k, l):
     return res.x
 
 
-@numba.jit()
-def modifier_recursion(x, wA, wB, ρ, P, N=0, err=1e-14):
-    x1, x2, x3, x4 = x
-    x1_ = x1 * wA * ((1 - ρ) * (x1 + x3) + ρ) + x2 * wB * (1 - ρ) * (x1 + x3)
-    x2_ = x1 * wA * (1 - ρ) * (x2 + x4) + x2 * wB * ((1 - ρ) * (x2 + x4) + ρ)
-    x3_ = x3 * wA * ((1 - P) * (x1 + x3) + P) + x4 * wB * (1 - P) * (x1 + x3)
-    x4_ = x3 * wA * (1 - P) * (x2 + x4) + x4 * wB * ((1 - P) * (x2 + x4) + P)
-    x = x1_, x2_, x3_, x4_
-    x = np.array(x)
-    x /= x.sum()
-    x[(x < err) & (x != 0)] = err
-    x[(x > 1 - err) & (x != 1)] = 1 - err
-    if N > 0:
-        x = np.random.multinomial(N, x) / N
-    return x
-
-
-@numba.jit()
-def invasion(x1, w, ρ, P, k, l, n=5000, inv_rate=1e-4):
-    wA = cycle([1.0] * k + [w] * l)
-    wB = cycle([w] * k + [1.0] * l)
-    
-    # n -= n % (k + l)
-    # assert n % (k + l) == 0
-    x = np.array(
-        [x1*(1-inv_rate), (1-x1)*(1-inv_rate), x1*inv_rate, (1-x1)*inv_rate]
-    )
-    assert np.isclose(x.sum(), 1), x
-    
-    for t, wA_, wB_ in zip(range(n * (k + l)), wA, wB):
-        x = modifier_recursion(x, wA=wA_, wB=wB_, ρ=ρ, P=P)
-        if (x[2] + x[3]) > 0.5:
-            return P
-    return ρ
-
-
 def is_polymorphism(w, ρ, k, l):
     # see eq 22
     s = 1 - w
@@ -155,91 +119,15 @@ def max_ρ_with_polymorphism(w, k, l, num_pts=1001):
             return ρ_
 
 
-def draw_ρ(w, k, l, ρ=None):
-    if ρ is None:
-        for _ in range(100):
-            ρ = np.random.rand()
-            if is_polymorphism(w, ρ, k, l):
-                return ρ
-        return np.nan
-    else:
-        for _ in range(100):
-            if ρ > 0:
-                P = min(max(ρ * np.random.exponential(1), 0), 1)
-            elif ρ == 0:
-                P = min(max(np.random.exponential(0.1), 0), 1)
-            if np.isclose(P, 0.0, rtol=0, atol=1e-4):
-                return 0.0
-            if np.isclose(P, 1.0, rtol=0, atol=1e-4):
-                return 1.0
-            if is_polymorphism(w, P, k, l):
-                return P
-        return ρ
+if __name__ == '__main__':
+    ks = np.arange(1, 51, 1, dtype=int)
+    ws = np.array([0.1, 0.5, 0.9])
 
-
-def evol_stable(w, k, l=None, reps=1, PRINT=False):
-    assert reps == 1, reps
-    if l is None:
-        l = k    
-    if PRINT:
-        print("w={}, k={}, l={}".format(w, k, l))
-        sys.stdout.flush()
-    # results = []
-    # for i in range(reps):
-    ρ = draw_ρ(w, k, l)
-    if PRINT:
-        print('ρ(0)={:2g}'.format(ρ))
-        sys.stdout.flush()
-    if np.isnan(ρ):
-        print("No ρ allows polymorphism with w={}, k={}, l={}".format(
-            w, k, l))
-        sys.stdout.flush()
-        return ρ
-    x0 = stable_x(ρ, w, k, l)
-    P = -1 # for numba
-    failed_invasions = 0
-    invasions = 0
-    while True:
-        P = draw_ρ(w, k, l, ρ=ρ)
-        if PRINT:
-            print('P({})={:.2g}'.format(invasions, P), end=', ')
-            sys.stdout.flush()
-        P = invasion(x0, w, ρ, P, k, l)
-        invasions += 1
-        if P == ρ:
-            failed_invasions += 1
-        else:
-            failed_invasions = 0
-            ρ = P
-            x0 = stable_x(ρ, w, k, l, x0=x0)
-            if PRINT:
-                print('ρ({})={:.2g}'.format(invasions, ρ))
-                sys.stdout.flush()
-        if failed_invasions >= 50 and invasions >= 500:
-            break            
-    # if ρ is almost 0 or almost 1, try to invade with 0 or 1.
-    if ρ < 1e-3:
-        x0 = stable_x(ρ, w, k, l, x0=x0)
-        ρ = invasion(x0, w, ρ, 0.0, k, l)
-    elif ρ > 1 - 1e-3:
-        x0 = stable_x(ρ, w, k, l, x0=x0)
-        ρ = invasion(x0, w, ρ, 1.0, k, l)
-    if PRINT:
-        print('ρ: {:.2g} ({})'.format(ρ, invasions))
-        sys.stdout.flush()
-        # results.append(ρ)
-    # if PRINT:
-    #     print(results)
-    #     sys.stdout.flush()
-    # ρ = results.pop()    
-    # while results:
-    #     P = results.pop()
-    #     x0 = stable_x(ρ, w, k, l)
-    #     if P == ρ: continue
-    #     if invasion(x0, w, ρ, P, k, l, inv_rate=0.5) == P:
-    #         if PRINT:
-    #             print('P={:.2g} takes over ρ={:.2g}'.format(P, ρ))
-    #             sys.stdout.flush()
-    #         ρ = P
-    #         x0 = stable_x(ρ, w, k, l, x0=x0)
-    return ρ
+    ρs = np.empty((ws.size, ks.size))
+    for i, w in enumerate(ws):
+        for j, k in enumerate(ks):
+            print("w={}, k={}, l={}".format(w, k, k))
+            ρs[i, j] = optimal_ρ(w, k, k)
+            print("ρ={}".format(ρs[i, j]))
+    fname = 'optimal_ρ_{}.npz'.format(uuid().hex)
+    np.savez_compressed(fname, ks=ks, ws=ws, ρs=ρs)
