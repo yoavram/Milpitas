@@ -1,13 +1,50 @@
-import numba
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# This file is part of a repo located at
+# https://github.com/yoavram/Milpitas
+# which supports the manuscript:
+# Vertical and Oblique Transmission under Fluctuating Selection
+# by Yoav Ram, Uri Liberman, & Marcus W. Feldman.
+
+# The file includes functions used to calculate the vertical transmission rate
+# that maximized the geometric average of the population mean fitness under fluctuating selection.
+
+# Licensed under the MIT license:
+# http://www.opensource.org/licenses/MIT-license
+# Copyright (c) 2017, Yoav Ram <yoav@yoavram.com>
+import sys
+from itertools import cycle, count
+from uuid import uuid4 as uuid
+
 import numpy as np
-import pandas as pd
 import scipy.stats
 import scipy.optimize
-from itertools import cycle, count
-import sys
+import numba
+
 
 @numba.jit()
 def recurrence(x, ρ, wA, wB, N=0, err=1e-14):
+    """Calculate the frequency of phenotype A in the next generation.
+
+    Parameters
+    ----------
+    x : float or np.ndarray with dtype=float
+        current frequency of phenotype A
+    ρ : float or np.ndarray with dtype=float
+        vertical transmission rate
+    wA, wB : float
+        fitness of phenotype A and B
+    N : int
+        population size (0 means 'infinite populatio')
+    err : float
+        x will be maintained in the segment [err, 1-err] so that it doesn't hit 0 or 1
+
+    Returns
+    -------
+    x : float or np.ndarray with dtype=float
+        the frequency of phenotype A in the next generation.
+    """
     N = int(N)
     wbar = x * wA + (1 - x) * wB
     # same precision around x=0 and x=1
@@ -27,24 +64,6 @@ def recurrence(x, ρ, wA, wB, N=0, err=1e-14):
     if N > 0:
         x = np.random.binomial(N, x) / N
     return x
-
-
-@numba.jit()
-def stable_x_target(x0, ρ, w, k, l):
-    wA = [1.0]*k + [w]*l
-    wB = [w]*k + [1.0]*l
-    x = np.array([x0, 1-x0, 0.0, 0.0])
-    for wA_, wB_ in zip(wA, wB):
-        x = modifier_recursion(x, wA=wA_, wB=wB_, ρ=ρ, P=0)
-    return abs(x[0] - x0)
-
-def stable_x(ρ, w, k, l, x0=0.5):
-    res = scipy.optimize.minimize_scalar(
-        stable_x_target, x0, args=(ρ, w, k, l), 
-        bounds=[0,1], method="bounded"
-    )
-    assert res.success, res
-    return res.x
 
 
 @numba.jit()
@@ -93,11 +112,17 @@ def optimal_ρ(w, k, l):
     if np.isclose(max_ρ, 0):
         return np.nan
     res = scipy.optimize.minimize_scalar(
-        geom_wbar_target, args=(w, k, l), bounds=[0, max_ρ], method='bounded')
+        geom_wbar_target, args=(w, k, l), 
+        bounds=[0, max_ρ], method='bounded')
     if not res.success: 
         print('Minimization failed for w={}, k={}, l={}'.format(w, k, l))
         return np.nan
-    return res.x
+    # check that we didn't get stuck in local max or plateau
+    # this occurs, for example, with w=0.5, k=l=25 and w=0.1 k=l=10
+    if geom_wbar_target(1e-10, w, k, l) < res.fun:
+        return 0.0
+    else:
+        return res.x
 
 
 def is_polymorphism(w, ρ, k, l):
@@ -120,14 +145,15 @@ def max_ρ_with_polymorphism(w, k, l, num_pts=1001):
 
 
 if __name__ == '__main__':
-    ks = np.arange(1, 51, 1, dtype=int)
-    ws = np.array([0.1, 0.5, 0.9])
+    w = float(sys.argv[1])
+    ks = np.arange(1, 51, 1, dtype=int)    
 
-    ρs = np.empty((ws.size, ks.size))
-    for i, w in enumerate(ws):
-        for j, k in enumerate(ks):
-            print("w={}, k={}, l={}".format(w, k, k))
-            ρs[i, j] = optimal_ρ(w, k, k)
-            print("ρ={}".format(ρs[i, j]))
-    fname = 'optimal_ρ_{}.npz'.format(uuid().hex)
-    np.savez_compressed(fname, ks=ks, ws=ws, ρs=ρs)
+    optimal_rates = []
+    for j, k in enumerate(ks):
+        print("w={}, k={}, l={}".format(w, k, k))
+        optimal_rates.append( optimal_ρ(w, k, k) )
+        print("ρ={}".format(optimal_rates[-1]))
+    optimal_rates = np.array(optimal_rates)
+
+    fname = 'optimal_rates_w_{}_{}.npz'.format(w, uuid().hex)
+    np.savez_compressed(fname, ks=ks, optimal_rates=optimal_rates)

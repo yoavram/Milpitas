@@ -1,13 +1,28 @@
-import sys
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# This file is part of a repo located at
+# https://github.com/yoavram/Milpitas
+# which supports the manuscript:
+# Vertical and Oblique Transmission under Fluctuating Selection
+# by Yoav Ram, Uri Liberman, & Marcus W. Feldman.
+
+# The file includes functions used to calculate the vertical transmission rate
+# that is stable to invasion by other rates in a modifier model.
+
+# Licensed under the MIT license:
+# http://www.opensource.org/licenses/MIT-license
+# Copyright (c) 2017, Yoav Ram <yoav@yoavram.com>import sys
 from uuid import uuid4 as uuid
 from concurrent.futures import ProcessPoolExecutor as Executor
 from concurrent.futures import wait
 from functools import lru_cache
 import warnings
+import sys
 
 import autograd.numpy as np
 from autograd import grad, jacobian
-from scipy import optimize as opt
+import scipy.optimize
 
 
 def f1(x, wA, wB, ρ, dx=0):    
@@ -202,9 +217,9 @@ def grad_ascent(W, w, k, l, ρ0=0.5, η=1e-2,
 
 
 
-def find_stable_rate(W, w, k, l):
+def find_stable_rate(W, w, k, l, dx=1e-10):
     def λ1_(ρ, P):
-        return λ1(W, w, ρ, P, k, l)
+        return λ1(W, w, ρ, P, k, l, dx=dx)
     dλ1dρ = grad(λ1_, 0)
     dλ1dP = grad(λ1_, 1)
 
@@ -212,9 +227,13 @@ def find_stable_rate(W, w, k, l):
         return dλ1dP(ρ, ρ)
     
     if target(0.0) * target(1-1e-5) < 0:    
-        ρ, res = opt.brentq(target, 0.0, 1-1e-5, full_output=True)        
+        ρ, res = scipy.optimize.brentq(target, 0.0, 1-1e-5, full_output=True)        
         if res.converged and np.isclose(target(ρ), 0):
             return ρ
+        else:
+        	print(
+        		"Brent's method didn't converge for W={}, w={}, k={}, l={}".format(
+        		W, w, k, l))
     elif dλ1dP(0.0, 0.0) <= 0:
         return 0.0
     return 1.0
@@ -223,11 +242,13 @@ def find_stable_rate(W, w, k, l):
 if __name__ == '__main__':
     w = float(sys.argv[1])
     W = 1.0
-    ks = np.arange(1, 2, 1, dtype=int)
-    stable_rates = []
+    ks = np.arange(1, 51, 1, dtype=int)
 
+    stable_rates = []
     for k in ks:
+        print("w={}, k={}, l={}".format(w, k, k))
         stable_rates.append( find_stable_rate(W, w, k, k) )
+        print("ρ={}".format(stable_rates[-1]))
     stable_rates = np.array(stable_rates)
 
     fname = 'stable_rates_w_{}_{}.npz'.format(w, uuid().hex)
