@@ -12,7 +12,7 @@ if __name__ == '__main__':
 	ms_figures_dir = join_path(ms_dir, 'figures')
 	zip_fname = '/Users/yoavram/Dropbox/Milpitas/figures.zip'
 	tex_files = ['figures.tex', 'figures_supp.tex']
-	pattern = re.compile(r'\\includegraphics\{(.*\.\w{3})\}')
+	pattern = re.compile(r'\\includegraphics(?:\[.*\])?\{(.*\.\w{3})\}')
 
 	if os.path.exists(ms_figures_dir):
 		shutil.rmtree(ms_figures_dir)
@@ -30,6 +30,7 @@ if __name__ == '__main__':
 
 	with ZipFile(zip_fname, 'w') as z:
 		for fn in figures:
+			print(fn)
 			shutil.copy(fn, join_path(ms_figures_dir, split_path(fn)[-1]))
 			z.write(fn)
 
