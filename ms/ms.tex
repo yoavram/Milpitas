@@ -14,6 +14,7 @@
 \def\ref{\par\noindent\hangindent.35truein}
 
 \def\cl{\hbox{\tenbf L}}
+\def\cj{\hbox{\tenbf J}}
 \def\ci{\hbox{\tenbf I}}
 
 
@@ -46,7 +47,7 @@
 %\vskip-7pt
 %\centerline{uril@tauex.tau.ac.il}
 \vfil
-\centerline{September 15, 2017, v.1}
+\centerline{October 17, 2017}
 
 \break
 \noindent{\bf INTRODUCTION}
@@ -66,7 +67,7 @@ In a recent analysis of evolution in fluctuating environments, Xue and Leibler (
 
 In our formulation, both the parental phenotype and the distribution of phenotypes in the whole population contribute to an offspring's phenotype. Using conventional modifier theory (Feldman and Liberman 1986), we show that in a symmetric cyclic selection regime with cycles of periods 1 or 2, an allele reducing the rate of vertical transmission is expected to increase in frequency when rare and in so doing to increase the mean fitness of the population. However, for cycles of greater length or period asymmetry, interesting non-monotonicities emerge, both in the uninvadable rate of vertical transmission, and the rate that maximizes the geometric time average of the population mean fitness, which we will refer to as the ``geometric mean fitness.'' We develop the models in very large populations with cyclic selection and with random fitnesses and also in the case where drift occurs via sampling from generation to generation in a finite population.
 
-\vfil\break
+\bigskip\bigskip
 
 
 \noindent{\bf THE MODEL}
@@ -81,7 +82,7 @@ $$P(\phi' =A|\phi) =\left\{\matrix{(1-\rho)x+\rho &\hbox{\tenrm if}\ \phi=A\cr
  where $x=P(\phi=A)$ in the parent's generation before selection.
  
  Therefore the frequency $x'$ of  phenotype $A$ after one generation is given by the recursion equation
- $$x'= \rho{w_Ax\over \overline w} +(1-\rho)x=     {w_A\over \overline w}x\bigl[(1-\rho)x +\rho\bigr] +{w_B\over \overline w}(1-x)\bigl[(1-\rho)x\bigr],\eqno(2)$$
+ $$x'= \rho{w_A\over \overline w}x +(1-\rho)x=     {w_A\over \overline w}x\bigl[(1-\rho)x +\rho\bigr] +{w_B\over \overline w}(1-x)\bigl[(1-\rho)x\bigr],\eqno(2)$$
  where $\overline w$ is the {\sl mean fitness}, namely
  $$\overline w=w_A x+w_B(1-x).\eqno(3)$$
  Equation (2) can be rewritten as
@@ -99,22 +100,21 @@ When the environment is constant, the fitness parameters $w_A$ and $w_B$ do not 
 \proclaim Result 1. If $0<\rho\le 1$ and both $w_A$ and $w_B$ are positive with $w_A\ne w_B$, then fixation in the phenotype $A\ (B)$ is globally stable when $w_A>w_B$ $(w_A<w_B)$.\par
 
 \noindent{\it Proof}.
-If we rewrite (4) as $x'=x\cdot F(x)$, it can be seen that $F(1)=1$, and for $\rho>0$ and $0<x<1$
+If we rewrite (4) as $x'=x\cdot f(x)$, it can be seen that $f(1)=1$, and for $\rho>0$ and $0<x<1$
 $$\eqalign{
-&F(x)>1\quad\hbox{\tenrm when}\quad w_A>w_B,\cr
-&F(x)<1\quad\hbox{\tenrm when}\quad w_A<w_B.}\eqno(5)$$
+&f(x)>1\quad\hbox{\tenrm when}\quad w_A>w_B,\cr
+&f(x)<1\quad\hbox{\tenrm when}\quad w_A<w_B.}\eqno(5)$$
 Hence, as $w_A>0$ and $w_B>0$, both fixations in $A$ or in $B$  ($x^*=1$ for fixation in $A$ and $x^*=0$ for fixation in $B$) are equilibrium points of (4). Moreover, if $x_t$ is the value of $x$ at the $t$-th generation $(t=0,1,2,\dots)$, from (4)  and (5) we have for any $0<x_0<1$ and all $t=0,1,2,\dots$,
 $$\eqalign{
-&x^{t+1}>x^t\quad\hbox{\tenrm when}\quad w_A>w_B,\cr
-&x^{t+1}<x^t\quad\hbox{\tenrm when}\quad w_A<w_B.}\eqno(6)$$
-
-\noindent Thus, as $x^*=1$ or $x^*=0$ are the only equilibrium points, then
+&x_{t+1}>x_t\quad\hbox{\tenrm when}\quad w_A>w_B,\cr
+&x_{t+1}<x_t\quad\hbox{\tenrm when}\quad w_A<w_B,}\eqno(6)$$
+and since $x^*=1$ or $x^*=0$ are the only equilibrium points, we have
 $$\eqalign{
 &\lim_{t\to\infty}x_t=1,\ \ \hbox{\tenrm for all}\ 0<x_0\le 1,\ \ \hbox{\tenrm when}\ w_A>w_B,\cr
 &\lim_{t\to\infty}x_t=0,\ \ \hbox{\tenrm for all}\ 0\le x_0< 1,\ \ \hbox{\tenrm when}\ w_A<w_B.}\eqno(7)$$
-Therefore fixation of the favored phenotype is globally stable, and ultimately all individuals have the favored phenotype.
+Therefore fixation of the favored phenotype is globally stable.
 
-If $\rho=0$ or $w_A=w_B>0$, the recursion (4) reduces to $x'=x$; the phenotype frequencies do not change over time.
+If $\rho=0$ or $w_A=w_B>0$, the phenotype frequencies do not change over time.
 With {\sl extreme selection},  for example $w_A=1$ and $w_B=0$ (or $w_B=1$ and $w_A=0$), recursion (4) reduces to
 $x'=(1-\rho)x+\rho$, and therefore 
 $x_t=1-(1-\rho)^t(1-x_0)$.
@@ -125,22 +125,21 @@ Hence, for $\rho>0$,  $x_t\,\harr{}{t\to\infty}\,1$ for all initial values $0\le
 \noindent{\bf PERIODICALLY CHANGING ENVIRONMENT}
 \smallskip
 
-Next we consider the case where the environment is not constant but rather changes periodically, such that the favored phenotype changes after a fixed number of generations. Simple examples are $A1B1=ABABAB\dots$, in which the favored genotype switches every generation, or $A2B1=AABAABAAB\dots$, where every two generations in which selection favors $A$ are followed by a single generation in which selection favors $B$.
- 
- In general, $AkBl$ denotes a selection regime in which the period is of $(k+l)$ generations with $k$ generations favoring phenotype $A$ followed by $l$ generations favoring $B$.
+Suppose the environment is not constant but rather changes periodically, such that the favored phenotype changes after a fixed number of generations. Simple examples are $A1B1=ABABAB\dots$, in which the favored phenotype switches every generation, or $A2B1=AABAABAAB\dots$, where every two generations in which selection favors $A$ are followed by a single generation in which selection favors $B$.
+  In general, $AkBl$ denotes a selection regime in which the period is of $(k+l)$ generations with $k$ generations favoring phenotype $A$ followed by $l$ generations favoring $B$.
  
  Let $W$ be the fitness of the favored phenotype and $w$ be that of the other phenotype where $0<w<W$. Rewrite equation (4) as $x'=F_A(x)=xf_A(x)$ when $A$ is favored and $x'=F_B(x)=xf_B(x)$ when $B$ is favored. Then
   $$\eqalign{
   &f_A(x) = {x(1-\rho)(W-w) +\rho W +(1-\rho)w\over x(W-w) +w} = 1+\rho(1-x){W-w\over Wx +w(1-x)},\cr\noalign{\smallskip}
   &f_B(x) = {x(1-\rho)(w-W) +\rho w +(1-\rho)W\over x(w-W) +W} = 1+\rho(1-x){w-W\over wx+W(1-x)}.}\eqno(8)$$
   
-  \noindent If $x_t$ denotes the frequency of exhibiting the phenotype $A$ at generation $t$ starting with $x_0$ initially, then as we are interested in the values of $x_t$ for $t=n(k+l)$ with $n=0,1,\dots$ at the end of complete periods then in fact
+  \noindent If $x_t$ denotes the frequency of  the phenotype $A$ at generation $t$ starting with $x_0$ initially, then as we are interested in the values of $x_t$ for $t=n(k+l)$ with $n=0,1,\dots$ at the end of complete periods, we can write
   $$x_{(n+1)(k+l)}=F(x_{n(k+l)}),\quad n=0,1,2,\dots,\eqno(9)$$
   where $F$ is the composed function
   $$F=\underbrace{F_B\circ F_B \circ\cdots\circ F_B}_{l\ \hbox{\sevenrm times}} \circ\underbrace{F_A\circ F_A \circ\cdots\circ F_A}_{k\ \hbox{\sevenrm times}}.\eqno(10)$$
   Clearly, since $F_A(0) =F_B(0) =0$ and $F_A(1) =F_B(1) =1$, both fixations in $A$ or in $B$ are equilibrium points. An interesting question is when these fixations are locally stable. We concentrate on $x^*=0$, the fixation of the phenotype $B$. As $x'=F_A(x) =xf_A(x)$ for $k$ generations and $x'=F_B(x) =xf_B(x)$ for $l$ generations, the linear approximation of $F(x)$ ``near'' $x=0$ is
    $$F(x) \simeq\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^lx.\eqno(11)$$
-   Hence the local stability of $x^*=0$ is determined by the product $\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l$, and $x^*=0$  is locally stable if this product  is less than 1 and unstable if it is larger than 1.
+   Hence the local stability of $x^*=0$ is determined by the product $\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l$;  $x^*=0$  is locally stable if this product  is less than 1 and unstable if it is larger than 1.
    
    From (8) we have
    $$\eqalign{
@@ -153,42 +152,36 @@ Next we consider the case where the environment is not constant but rather chang
    \noindent {\it Proof.} The local stability of $x^*=0$, the fixation of $B$, is determined by the product
    $$\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^k=\left[\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right)\right]^k.\eqno(13)$$
    Observe that
-   $$\eqalign{
-   \left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right) &= \left(1-\rho+\rho{W\over w}\right)\left(1-\rho+\rho{w\over W}\right)\cr
-   &= \left(1-\rho\right)^2+ \rho^2 +\rho(1-\rho){W^2+w^2\over Ww}.}\eqno(14)$$
-   Thus,
-   $$\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right) =1+\rho(1-\rho){\left(W-w\right)^2\over wW}>1.\eqno(15)$$
-   Since $0<\rho<1$ and $0<w<W$,  the $B$ fixation is unstable.
+   $$\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right) = 1+\rho(1-\rho){\left(W-w\right)^2\over wW}>1.\eqno(14)$$
+   Since $0<\rho<1$ and $0<w<W$,  fixation on $B$ is unstable.
   \bigskip
 
 \noindent{\it Conclusions}
 
-\item{1.}Since $k=l$ and the above result holds also when $0<W<w$, there is total symmetry between the two fixations in $A$ and $B$, and fixation in $A$ is not stable. Thus neither phenotype can be lost, and we have a {\sl protected polymorphism} (Prout 1968).
+\item{1.}Since $k=l$ and the above result holds also when $0<W<w$, there is total symmetry between the two fixations in $A$ and $B$, and fixation in $A$ is also not stable. Thus neither phenotype can be lost, and there is a {\sl protected polymorphism} (Prout 1968).
 
 \item{2.}Observe that for general $k$, $l$, the condition for local stability of fixation in $A$ is
-$$\bigl[f_A(0)\bigr]^l \bigl[f_B(0)\bigr]^k <1, \eqno(16)$$
+$$\bigl[f_A(0)\bigr]^l \bigl[f_B(0)\bigr]^k <1, \eqno(15)$$
 and that of $B$ is
-$$\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l <1. \eqno(17)$$
+$$\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l <1. \eqno(16)$$
 Therefore, following Result 2, 
-$$\bigl[f_A(0)\bigr]^{k+l}\bigl[f_B(0)\bigr]^{k+l}>1,\eqno(18)$$
+$$\bigl[f_A(0)\bigr]^{k+l}\bigl[f_B(0)\bigr]^{k+l}>1,\eqno(17)$$
 and it is impossible that both fixations are stable. Further, since by (12)  $f_A(0)>1$ and $0<f_B(0)<1$ when $0<w<W$, by choosing $k$ and $l$ appropriately, fixation on $A$ or fixation on $B$ (but not both) can be stable. In addition, we can have both fixations unstable giving the following result.
 
 \proclaim Result 3. With $0<\rho<1$ and $0<w<W$ in the case of $AkBl$ periodically changing environments, both fixations may be unstable, producing a protected polymorphism.\par
 
-\noindent{\it Proof}. Let $a=1+\rho{W-w\over w}$ and $b=1+\rho{w-W\over W}$. Then since $0<\rho <1$ and $0<w<W$, we have $a>1$ and $0<b<1$. Following (11), fixation in $B$ is not stable if $a^kb^l>1$, and similarly  fixation in $A$ is unstable if $a^lb^k>1$. Therefore both fixations are unstable if
-$$a^kb^l>1\quad\hbox{\tenrm and}\quad a^lb^k>1,\eqno(19)$$
+\noindent{\it Proof}. Let $a=1+\rho{W-w\over w}$ and $b=1+\rho{w-W\over W}$, and our assumption entails  $a>1$ and $0<b<1$. Following (11), fixation in $B$ is not stable if $a^kb^l>1$, and similarly  fixation in $A$ is unstable if $a^lb^k>1$. Therefore both fixations are unstable if
+$$a^kb^l>1\quad\hbox{\tenrm and}\quad a^lb^k>1,\eqno(18)$$
 or equivalently if
-$$k\log a +l\log b>0\quad\hbox{\tenrm and}\quad l\log a+k\log b>0.\eqno(20)$$
-Now (20) holds if and only if
-$$k\,{\log(1/b)\over\log a} < l < k\,{\log a\over\log(1/b)}.\eqno(21)$$ 
-Inequalities (21) are consistent if and only if $\log(1/b)<\log a$, i.e., $ab>1$. But by (15),
-$$ab=\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right)>1.\eqno(22)$$
+$$k\log a +l\log b>0\quad\hbox{\tenrm and}\quad l\log a+k\log b>0.\eqno(19)$$
+Now (19) holds if and only if
+$$k\,{\log(1/b)\over\log a} < l < k\,{\log a\over\log(1/b)}.\eqno(20)$$ 
 
-\noindent{\it Remark}.
-It should be pointed out that the local stability properties of the two fixations depend only on the fact that in a cycle of $(k+l)$ generations $A$ is favored $k$ times and $B$ is favored $l$ times, and not their order in the cycle.
+Inequalities (20) are consistent if and only if $\log(1/b)<\log a$, i.e., $ab>1$, which according to (14), is true.
 
+The local stability properties of the two fixations depend only on the fact that in a cycle of $(k+l)$ generations $A$ is favored $k$ times and $B$ is favored $l$ times, and not their order in the cycle. 
 
-When neither fixation in $A$ or $B$ is stable, we have a case of protected polymorphism, and we expect to have one or more polymorphic equilibria. Figure 1 shows the relationship between $k,l$ and $\rho$ that supports polymorphism of $A$ and $B$, or fixation, for different values of $W$ and $w$. 
+When neither fixation in $A$ or $B$ is stable, there is a protected polymorphism, and we expect to have one or more polymorphic equilibria. Figure 1 shows the relationship between $k,l$ and $\rho$ that gives polymorphism of $A$ and $B$, or fixation, for different values of $s=W-w$. 
 
 \medskip
 \centerline{[FIGURE 1 HERE]}
@@ -199,32 +192,30 @@ For the simple case of $A1B1$ periodically changing environment we have the foll
 \noindent{\it Proof}. Let $x$ be the initial frequency of $A$ and $x'$ its frequency  after one cycle of the $A1B1$ selection. Then $x' =F_B\bigl(F_A(x)\bigr)$ where by (8)
 $$\eqalign{
 &F_A(x)=x{x(1-\rho)(W-w) +\rho W+(1-\rho)w\over x(W-w) +w},\cr\noalign{\smallskip}
-&F_B(y) = y{y(1-\rho)(w-W) +\rho w+(1-\rho)W\over y(w-W)+W}.}\eqno(23)$$
+&F_B(y) = y{y(1-\rho)(w-W) +\rho w+(1-\rho)W\over y(w-W)+W}.}\eqno(21)$$
 The equilibrium equation is $x=F_B\bigl(F_A(x)\bigr)$, which reduces to a fourth degree polynomial equation in $x$. Since the two fixations in $B$ and $A$ are equilibria corresponding to the two solutions $x=0$ and $x=1$, the other equilibria correspond to solutions of a quadratic equation $Q(x) =\alpha_2x^2 +\alpha_1x +\alpha_0=0$ with
-$$\alpha_2=1,\quad \alpha_1={W+w\over (2-\rho)(W-w)}-1,\quad \alpha_0={-w\over (2-\rho)(W-w)}.\eqno(24)$$
+$$\alpha_2=1,\quad \alpha_1={W+w\over (2-\rho)(W-w)}-1,\quad \alpha_0={-w\over (2-\rho)(W-w)}.\eqno(22)$$
 As $0<\rho<1$ and $0<w<W$ we have
-$$Q(0) = {-w\over (2-\rho)(W-w)}<0\eqno(25)$$
-and
-$$Q(1) ={W\over (2-\rho)(W-w)} >0.\eqno(26)$$
+$$Q(0) = {-w\over (2-\rho)(W-w)}<0\quad\hbox{\tenrm and}\quad Q(1) ={W\over (2-\rho)(W-w)} >0.\eqno(23)$$
 Also, as $\alpha_2=1$ and $\alpha_0<0$, the quadratic equation $Q(x)=0$ has two real roots, one negative and one positive $x^*$ satisfying $0<x^*<1$. The latter determines a unique polymorphism. Let $H(x) =F_B\bigl(F_A(x)\bigr)$. Then 
- $$H(0)=0,\quad H(x^*)=x^*,\quad H(1)=1.\eqno(27)$$
+ $$H(0)=0,\quad H(x^*)=x^*,\quad H(1)=1.\eqno(24)$$
  Also 
- $$F'_A(x) = {x^2(1-\rho)\left(W-w\right)^2 +2xw(1-\rho)(W-w) +w\left[\rho W +(1-\rho)w\right]\over \left[x(W-w) +w\right]^2}\eqno(28)$$
+ $$F'_A(x) = {x^2(1-\rho)\left(W-w\right)^2 +2xw(1-\rho)(W-w) +w\left[\rho W +(1-\rho)w\right]\over \left[x(W-w) +w\right]^2}\eqno(25)$$
  and
-  $$F'_B(x) = {x^2(1-\rho)\left(w-W\right)^2 +2xW(1-\rho)(w-W) +W\left[\rho w +(1-\rho)W\right]\over \left[x(w-W) +W\right]^2}.\eqno(29)$$
-  As $0<\rho<1$ and $0<w<W$, we have $F'_A(x)>0$ for  $0\le x\le 1$. Observe that the numerator of $F'_B(x)$ is linear in $\rho$; its value when $\rho=1$ is $wW>0$, and when $\rho=0$ it is
-  $$x^2\left(w-W\right)^2 +2xW(w-W) +W^2 =\left[x(w-W) +W\right]^2 >0.\eqno(30)$$
-  Hence $F'_{B}(x)>0$ for all $0\le x\le 1$, and $H'(x) =F'_B\bigl(F_A(x)\bigr)F'_A(x)$ is positive when $0\le x\le 1$. Thus $H(x)$ is a monotone increasing function of $x$ for $0\le x\le 1$.
-Thus, starting from any initial value $0<x_0 <1$ we have  $x_t\,\harr{}{t\to\infty}\,x^*$. Supplementary Figure S1 illustrates examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection, while Figure 2A shows the equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in this regime.
+  $$F'_B(x) = {x^2(1-\rho)\left(w-W\right)^2 +2xW(1-\rho)(w-W) +W\left[\rho w +(1-\rho)W\right]\over \left[x(w-W) +W\right]^2}.\eqno(26)$$
+ From our assumptions on $\rho$, $w$, and $W$, we have $F'_A(x)>0$ for  $0\le x\le 1$. Observe that the numerator of $F'_B(x)$ is linear in $\rho$; its value when $\rho=1$ is $wW>0$, and when $\rho=0$ it is
+  $$x^2\left(w-W\right)^2 +2xW(w-W) +W^2 =\left[x(w-W) +W\right]^2 >0.\eqno(27)$$
+  Hence $F'_{B}(x)>0$ for all $0\le x\le 1$, and $H'(x) =F'_B\bigl(F_A(x)\bigr)F'_A(x)$ is positive when $0\le x\le 1$. Thus $H(x)$ is monotone increasing for $0\le x\le 1$; $H(x)>x$ for $0<x<x^*$, $H(x)<x$ for $x^*<x<1$.
+Starting from any initial value $0<x_0 <1$ we have  $x_t\,\harr{}{t\to\infty}\,x^*$. Supplementary Figure S1, panels A, C, and E, illustrate examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection. 
 
 For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We have been able to show that when neither fixation in $A$ or $B$ is stable, in the $AkBk$ case this cannot occur. In fact we have the following.
 
 \proclaim Result 5. In the $AkBk$ selection regimes, if the fixations in $A$ and $B$ are locally unstable, a single stable polymorphic equilibrium exists.\par
 
-The proof of Result 5 is in Supplementary Material SP1. 
+The proof of Result 5 is in Supplementary Material SP1.  Figure 2A shows the stable equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in the $A1B1$ regime.
 For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplemental Figure S3 illustrates the convergence to a single stable polymorphism. 
 
-We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ there is a single stable polymorphic equilibrium when the two fixations are unstable. However, the numerical examples in Figure 1 (for $AkBl$) and in Figure 7 (for the special case $A1B2$) all exhibit a single stable polymorphic equilibrium when fixations in $A$ and $B$ are unstable. These numerical results suggest that for $W>w>0$ and $0<\rho<1$ the high order polynomial that gives the equilibria has only a single root that is a globally stable polymorphism.
+We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ there is a single stable polymorphic equilibrium when the two fixations are unstable. However, the numerical examples in Figure 1 (for $AkBl$) and in Figure 7 (for the special case $A1B2$) all exhibit a single stable polymorphic equilibrium when fixations in $A$ and $B$ are unstable. These numerical results suggest that for $W>w>0$ and $0<\rho<1$ the high order polynomial that gives the equilibria has only a single root corresponding to a globally stable polymorphism. Supplementary Figure S4 shows that this is the case for the $A3B10$ regime.
 \medskip
 \centerline{[FIGURE 2 HERE]}  
  \bigskip
@@ -235,13 +226,13 @@ We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ t
  We now consider the  case where the environment changes according to a stochastic process. Without loss of generality, assume that the fitness parameters at generation $t$ ($t=0,1,2,\dots$) are $1+s_t$ for phenotype $A$ and $1$ for phenotype $B$, where the random variables $s_t$ for $t=0,1,2,\dots$ are independent and identically distributed. Also we assume that there are positive constants $C$ and $D$ such that $P(-1+C<s_t <D)=1$.
  
  Corresponding to (4), with $w_A=1+s_t$, $w_B=1$ the recursion equation is
- $$x_{t+1}=x_t {1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}\quad t=0,1,2,\dots\; .\eqno(31)$$
+ $$x_{t+1}=x_t {1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}\quad t=0,1,2,\dots\; .\eqno(28)$$
  
 \noindent As $\{x_t\}$ for $t=0,1,2,\dots$ is a sequence of random variables, the notion of stability of the two fixation states needs clarification. Following Karlin and Lieberman (1974) and Karlin and Liberman (1975) we make the following definition.
  
  \noindent{\it Definition}: ``stochastic local stability''.
  A constant equilibrium state $x^*$ is said to be {\sl stochastically locally stable} if for any $\var>0$ there exists a $\delta>0$ such that $|x_0-x^*|<\delta$ implies
- $$P\left(\lim_{t\to\infty}x_t =x^*\right)\ge 1-\var.\eqno(32)$$
+ $$P\left(\lim_{t\to\infty}x_t =x^*\right)\ge 1-\var.\eqno(29)$$
  Thus stochastic local stability holds for $x^*$ provided for any initial $x_0$ sufficiently near $x^*$ the process $x_t$ converges to $x^*$ with high probability.
  
  In our case there are two constant equilibria $x^*=0$ and $x^*=1$ corresponding to fixation in $B$ and $A$, respectively. We can characterize the stochastic local stability of these fixations as follows.
@@ -253,9 +244,9 @@ We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ t
  The proofs of Results 6 and  7 can be found in Supplementary Materials SP2 and SP3.
  
  
- Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of the $B$ fixation is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of the $A$ fixation by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the first sign  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in phenotype $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following (14),
- $$\left(1-\rho +\rho{w_A\over w_B}\right)\left(1-\rho+\rho{w_B\over w_A}\right) >1.\eqno(33)$$
- Therefore, as in the case of periodically changing environments $AkBl$, it is impossible that both fixations are simultaneously stochastically locally stable.  It is possible, however, that neither fixation is  stochastically locally stable, in which case we expect the population to converge to a polymorphic distribution. Figure 3 illustrates how the properties of $s_t$ in recursion (31) affect the frequency of phenotype $A$, and in particular the stochastic local stability of fixation in phenotype $B$. Figure 4 shows the dynamics of the frequency of $A$ in a case where $w_A$ and $w_B$ are identically distributed and independent; in this case the expectation of the stationary distribution is 1/2, and its variance increases as $\rho$ increases.
+ Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of the $B$ fixation is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of the $A$ fixation by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the  sign of the first  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in phenotype $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following (14), for all realizations of $w_A$ and $w_B$,
+ $$\log\left(1-\rho +\rho{w_A\over w_B}\right) +\log\left(1-\rho +\rho{w_B\over w_A}\right)>0.\eqno(30)$$
+ Therefore, as in the case of periodically changing environments $AkBl$, it is impossible that both fixations are simultaneously stochastically locally stable.  It is possible, however, that neither fixation is  stochastically locally stable, in which case we expect the population to converge to a polymorphic distribution. Figure 3 illustrates how the properties of $s_t$ in recursion (28) affect the frequency of phenotype $A$, and in particular the stochastic local stability of fixation in phenotype $B$. Figure 4 shows the dynamics of the frequency of $A$ in a case where $w_A$ and $w_B$ are identically distributed and independent; in this case the expectation of the stationary distribution is ${1\over 2}$, and its variance increases as $\rho$ increases.
 \medskip
 \centerline{[FIGURES 3, 4 HERE]}  
  \bigskip
@@ -263,62 +254,57 @@ We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ t
  \noindent{\bf EVOLUTIONARY STABILITY OF OBLIQUE TRANSMISSION}
  \smallskip
  
- An interesting question concerns the evolution of oblique transmission itself. For example, is there an evolutionarily stable rate of oblique transmission? To answer this question we use a modifier model.
- 
- Suppose that the vertical transmission rate is controlled by a genetic locus with two possible alleles $m$ and $M$. Let the vertical transmission rates determined by $m$ and $M$ be $\rho$ and $P$, respectively. Thus there are four pheno-genotypes $mA$, $mB$, $MA$, $MB$ whose frequencies at a given generation are denoted by $x_1$, $x_2$, $x_3$, $x_4$, respectively. As the fitnesses are determined by the two phenotypes $A$ and $B$, and the modifier locus is selectively neutral, we have the following table.
+ An interesting question concerns the evolution of oblique transmission itself. For example, is there an evolutionarily stable rate of oblique transmission? To answer this question we use a modifier model, for which we suppose that the vertical transmission rate is controlled by a genetic locus with two possible alleles $m$ and $M$. Let the vertical transmission rates determined by $m$ and $M$ be $\rho$ and $P$, respectively. Thus there are four pheno-genotypes $mA$, $mB$, $MA$, $MB$ whose frequencies at a given generation are denoted by $x_1$, $x_2$, $x_3$, $x_4$, respectively. As the fitnesses are determined by the two phenotypes $A$ and $B$, and the modifier locus is selectively neutral, we have the following table.
  $$\matrix{
  \hbox{\tenrm pheno-genotype}&mA&mB&MA&MB\cr\noalign{\smallskip}
  \hbox{\tenrm frequency}&x_1&x_2&x_3&x_4\cr\noalign{\smallskip}
  \hbox{\tenrm fitness}&w_A&w_B&w_A&w_B\cr\noalign{\smallskip}
- \hbox{\tenrm vertical transmission rate}&\rho&\rho&P&P\cr}\eqno(34)$$
+ \hbox{\tenrm vertical transmission rate}&\rho&\rho&P&P\cr}\eqno(31)$$
  Following the rationale leading to equation (2), the next generation pheno-genotype frequencies $x'_1$, $x'_2$, $x'_3$, $x'_4$ are
  $$\eqalign{
  \overline wx'_1 &= w_Ax_1\bigl[(1-\rho)(x_1+x_3) +\rho\bigr] +w_Bx_2(1-\rho)(x_1+x_3)\cr
  \overline wx'_2 &= w_Ax_1(1-\rho)(x_2+x_4) +w_Bx_2\bigl[(1-\rho)(x_2+x_4)+\rho\bigr]\cr 
   \overline wx'_3 &= w_Ax_3\bigl[(1-P)(x_1+x_3) +P\bigr] +w_Bx_4(1-P)(x_1+x_3)\cr
 \overline wx'_4 &= w_Ax_3(1-P)(x_2+x_4) +w_Bx_4\bigl[(1-P)(x_2+x_4)+P\bigr], 
-}\eqno(35)$$
+}\eqno(32)$$
 with $\overline w$, the mean fitness, given by
-$$\overline w =w_A(x_1+x_3) +w_B(x_2+x_4).\eqno(36)$$
-Note that under these assumptions the $M/m$ locus and the $A/B$ phenotypic dichotomy do not undergo anything analogous to recombination, which might be introduced if the $A/B$ were viewed as haploid genetic variants. 
+$$\overline w =w_A(x_1+x_3) +w_B(x_2+x_4).\eqno(33)$$
+Note that under these assumptions the $M/m$ locus and the $A/B$ phenotypic dichotomy do not undergo anything analogous to recombination, which might be introduced if $A/B$ phenotypes were viewed as haploid genetic variants. 
 
 Starting with a stable equilibrium where only the $m$ allele is present, we check its {\sl external stability} (e.g., Feldman and Liberman 1986; Altenberg et al.\ 2017) to invasion by allele $M$.
-Because we assume the initial existence of a stable polymorphic equilibrium that depends on $\rho$ (the rate determined by $m$), we cannot assume a {\sl constant environment}, which always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$. Specifically, following (35) with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
-$$\underline x''=T_2(T_1\underline x),\eqno(37)$$
-where $\underline x'=T_1\underline x$ is given by (35) with $w_A=W$, $w_B=w$, and $\underline x''=T_2\underline x'$ is given by (35) with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
+Constant environment always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$ (but see Supplemental Material SP6 for computational analysis of the general $AkBl$ case). Specifically, from (32) with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
+$$\underline x''=T_2(T_1\underline x),\eqno(34)$$
+where $\underline x'=T_1\underline x$ is given by (32) with $w_A=W$, $w_B=w$, and $\underline x''=T_2\underline x'$ is given by (32) with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
 
-For the $A1B1$ case, when only the $m$ allele is present with associated rate $\rho$, with $0<\rho<1$ and $0<w<W$, a unique stable equilibrium $\underline x^* =(x_1^*,1-x_1^*,0,0)$ exists. $x_1^*$ is the only positive root of the quadratic equation $G(x) =\alpha_2x^2 +\alpha_1x +\alpha_0=0$ with $\alpha_2,\alpha_1,\alpha_0$ specified in (24). Solving $G(x)=0$ gives
-$$x_1^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2\cdot(2-\rho)(W-w)},\eqno(38)$$
+For the $A1B1$ case, when only the $m$ allele is present with associated rate $\rho$,  $0<\rho<1$, and $0<w<W$, a unique stable equilibrium $\underline x^* =(x_1^*,1-x_1^*,0,0)$ exists. $x_1^*$ is the only positive root of the quadratic equation $Q(x) =\alpha_2x^2 +\alpha_1x +\alpha_0=0$ with $\alpha_2,\alpha_1,\alpha_0$ specified in equation (21). Solving $Q(x)=0$ gives
+$$x_1^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2\cdot(2-\rho)(W-w)},\eqno(35)$$
  and it can be seen that
- $${\sqrt{Ww}-w\over W-w}<x_1^* <{1\over 2}.\eqno(39)$$
+ $${\sqrt{Ww}-w\over W-w}<x_1^* <{1\over 2}.\eqno(36)$$
  
- The external stability of $\underline x^*$ to the introduction of the modifier allele $M$ with rate $P$ is determined by the linear approximation matrix $\cl=\cl_2\cdot\cl_1$ near $x^*$, which is derived from (35) and given by
+ The external stability of $\underline x^*$ to the introduction of the modifier allele $M$ with rate $P$ is determined by the linear approximation matrix $\cl=\cl_2\cdot\cl_1$ near $x^*$, which is derived from (32) and given by
  $$\overline w^*\cl_1 =\left[\matrix{W\bigl[(1-P)x_1^* +P\bigr] & w(1-P)x_1^*\cr\noalign{\medskip}
- W(1-P)x_2^* & w\bigl[(1-P)x_2^* +P\bigr]\cr}\right]\eqno(40)$$
+ W(1-P)x_2^* & w\bigl[(1-P)x_2^* +P\bigr]\cr}\right]\eqno(37)$$
  and
  $$\overline w^{**}\cl_2 =\left[\matrix{w\bigl[(1-P)x_1^{**} +P\bigr] & W(1-P)x_1^{**}\cr\noalign{\medskip}
- w(1-P)x_2^{**} & W\bigl[(1-P)x_2^{**} +P\bigr]\cr}\right],\eqno(41)$$
+ w(1-P)x_2^{**} & W\bigl[(1-P)x_2^{**} +P\bigr]\cr}\right],\eqno(38)$$
 where $\underline x^{**} =T_1\underline x^*$, $x_1^{**}=x_2^*=1-x_1^*$, $x_2^{**}=x_1^*$,  and
-$$\overline w^* =Wx_1^* +wx_2^*,\qquad \overline w^{**} =wx_1^{**} +Wx_2^{**}.\eqno(42)$$
+$$\overline w^* =Wx_1^* +wx_2^*,\qquad \overline w^{**} =wx_1^{**} +Wx_2^{**}.\eqno(39)$$
 Due to the symmetry between the two phenotypes $A$ and $B$ in the $A1B1$ case, we have $x_1^{**} =x_2^*$ and $x_2^{**} =x_1^*$ so that $\overline w^{**} =\overline w^*$ and in fact
 $$\overline w^*\cl_2 = \left[\matrix{w\bigl[(1-P)x_2^* +P\bigr] & W(1-P)x_2^*\cr\noalign{\medskip}
- w(1-P)x_1^* & W\bigl[(1-P)x_1^* +P\bigr]\cr}\right].\eqno(43)$$
-  \smallskip
-  
-   \noindent{\it Remark}. 
- Observe that as $\underline x^* =T_2(T_1\underline x^*)$ with $x_3^*=x_4^*=0$, from (40) and (41) with $P=\rho$ we have
- $$\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right]= \cl_2\cdot\cl_1\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right] =\cl\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right].\eqno(44)$$
+ w(1-P)x_1^* & W\bigl[(1-P)x_1^* +P\bigr]\cr}\right].\eqno(40)$$
+ Note that as $\underline x^* =T_2(T_1\underline x^*)$ with $x_3^*=x_4^*=0$, from (37) and (38) with $P=\rho$ we have
+ $$\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right]= \cl_2\cdot\cl_1\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right] =\cl\left[\matrix{x_1^*\cr\noalign{\medskip} x_2^*\cr}\right].\eqno(41)$$
  Hence when $P=\rho$ one of the eigenvalues of $\cl$ is 1.
  
- In general $\cl=\cl_2\cdot\cl_1$, and using (40) and (43) we get
+ In general $\cl=\cl_2\cdot\cl_1$, and using (37) and (40) we have
  $$\eqalign{
  &\left(\overline w^*\right)^2\cl =\cr\noalign{\smallskip}
  &\left[\matrix{Ww\left[(1-P)^2x_1^*x_2^* +P\right] +\bigl[w(1-P)x_1^*\bigr]^2 & W(1-P)\bigl[P+x_1^*(1-P)\bigr]\bigl[Wx_2^* +wx_1^*\bigr]\cr
  \noalign{\medskip}
  w(1-P)\bigl[1-x_1^*(1-P)\bigr]\bigl[Wx_2^* +wx_1^*\bigr] & Ww\left[(1-P)^2x_1^*x_2^* +P\right] +\bigl[W(1-P)x_2^*\bigr]^2
- }\right].}\eqno(45)$$
- The external stability of $\underline x^*$ is determined by the eigenvalues of $\cl$, namely the roots of its characteristic polynomial $R(\lambda) =\det(\cl-\lambda\ci)$, with $\ci$ the $2\times 2$ identity matrix. From (45), $R(\lambda)=a_2\lambda^2 +a_1\lambda +a_0$, where
- $$a_0={P^2W^2w^2\over\left(\overline w^*\right)^4},\qquad a_1=-{2PWw +\left(1-P\right)^2\left[Wx_2^* +wx_1^*\right]^2\over \left(\overline w^*\right)^2},\qquad a_2=1.\eqno(46)$$
+ }\right].}\eqno(42)$$
+ The external stability of $\underline x^*$ is determined by the eigenvalues of $\cl$, namely the roots of its characteristic polynomial $R(\lambda) =\det(\cl-\lambda\ci)$, with $\ci$ the $2\times 2$ identity matrix. From (42), $R(\lambda)=a_2\lambda^2 +a_1\lambda +a_0$, where
+ $$a_0={P^2W^2w^2\over\left(\overline w^*\right)^4},\qquad a_1=-{2PWw +\left(1-P\right)^2\left[Wx_2^* +wx_1^*\right]^2\over \left(\overline w^*\right)^2},\qquad a_2=1.\eqno(43)$$
  
 
  \smallskip
@@ -330,146 +316,113 @@ We can prove the following result.
   {\hglue.79truein}(ii) when $P<\rho$ the largest eigenvalue is larger than $1$,\hfil\break
   {\hglue.76truein}(iii) when $P=\rho$, the largest eigenvalue is $1$.\par
   
-  \noindent{\it Proof}.  As $\cl$ is a positive matrix, by the Perron-Frobenius theory $\cl$ has a positive eigenvalue, and as $a_0>0$ and $a_2=1$ the product of the two eigenvalues of $\cl$ is positive. Thus in fact $\cl$ has two positive eigenvalues. Let $R(1)=R(1;P)$, then from (46)
-  $$R(1;P) = {W^2w^2-\left(\overline w^*\widetilde w^*\right)^2\over\left(\overline w^*\right)^4}P^2 +2P{\left(\widetilde w^*\right)^2 -Ww\over \left(\overline w^*\right)^2} +{\left(\overline w^*\right)^2-\left(\widetilde w^*\right)^2\over\left(\overline w^*\right)^2},\eqno(47)$$
+  \noindent{\it Proof}.  As $\cl$ is a positive matrix, by the Perron-Frobenius theorem $\cl$ has a positive eigenvalue, and as $a_0>0$ and $a_2=1$ the product of the two eigenvalues of $\cl$ is positive. Thus $\cl$ has two positive eigenvalues. Let $R(1)=R(1;P)$, then from (43)
+  $$R(1;P) = {W^2w^2-\left(\overline w^*\widetilde w^*\right)^2\over\left(\overline w^*\right)^4}P^2 +2P{\left(\widetilde w^*\right)^2 -Ww\over \left(\overline w^*\right)^2} +{\left(\overline w^*\right)^2-\left(\widetilde w^*\right)^2\over\left(\overline w^*\right)^2},\eqno(44)$$
 where $\widetilde w^* =Wx_2^* +wx_1^*$.  
 
-By (39) $\bigl(\sqrt{Ww}-w\bigr)/(W-w) <x_1^* <{1\over 2}$, from which it is easily seen that
-$$\sqrt{Ww}< \overline w^*<\widetilde w^* .\eqno(48)$$
+By (36) $\bigl(\sqrt{Ww}-w\bigr)/(W-w) <x_1^* <{1\over 2}$, from which it is easily seen that
+$$\sqrt{Ww}< \overline w^*<\widetilde w^* .\eqno(45)$$
 
- When $P=\rho$ one of the eigenvalues of $\cl$ is 1; hence $R(1;\rho)=0$. Another root of $R(1;P)=0$ is $\bigl[(\overline w^*)^2 +\overline w^*\widetilde w^*\bigr]/\bigl[Ww +\overline w^*\widetilde w^*\bigr]$, which by (48) is larger than 1.  As $R(1;0)=\bigl[(\overline w^*)^2 -(\widetilde w^*)^2\bigr]/(\overline w^*)^2 <0$ by (48), we deduce that when $0<P<\rho$, $R(1;P)<0$, whereas when $\rho<P<1$, $R(1;P)>0$.
+ When $P=\rho$ one of the eigenvalues of $\cl$ is 1; hence $R(1;\rho)=0$. Another root of $R(1;P)=0$ is $\bigl[(\overline w^*)^2 +\overline w^*\widetilde w^*\bigr]/\bigl[Ww +\overline w^*\widetilde w^*\bigr]$, which by (45) is larger than 1.  As $R(1;0)=\bigl[(\overline w^*)^2 -(\widetilde w^*)^2\bigr]/(\overline w^*)^2 <0$ by (45), we deduce that when $0<P<\rho$, $R(1;P)<0$, whereas when $\rho<P<1$, $R(1;P)>0$.
  Hence, when $P<\rho$, $R(1)<0$, and since $a_2=1$, $R(+\infty)>0$, we conclude that $R(\lambda)=0$ has a positive root larger than 1 and the largest positive eigenvalue of $\cl$ is larger than 1.
  
- When $P>\rho$, we have $R(1)>0$ and also $R(0)=a_0>0$. As $R(\lambda)=0$ has two positive roots and as $a_2>0$, $R(\lambda)$ is convex, either the two positive roots are less than 1 or both larger than one. But the product of the two roots is $P^2W^2w^2/(\overline w^*)^2<1$ by (48); thus when $P>\rho$ the two positive eigenvalues of $\cl$ are less than 1.
+ When $P>\rho$, we have $R(1)>0$ and also $R(0)=a_0>0$. As $R(\lambda)=0$ has two positive roots and as $a_2>0$, $R(\lambda)$ is convex, either the two positive roots are less than 1 or both larger than one. But the product of the two roots is $P^2W^2w^2/(\overline w^*)^2<1$ by (45); thus when $P>\rho$ the two positive eigenvalues of $\cl$ are less than 1.
 
- We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 5, which also illustrates the change in phenotype frequencies over time. In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 6 shows  an example of the success of modifiers that reduce $\rho$. 
+ We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission,  and there is a {\sl reduction principle} for the rate of vertical transmission (Feldman and Liberman 1986; Altenberg et al.\ 2017). The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 5, which also illustrates the change in phenotype frequencies over time. 
+ 
+ In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 6 shows  an example of the success of modifiers that reduce $\rho$. We have not, however, been able to prove that there is a reduction principle for this class of fluctuating fitnesses.
   
- Thus in the cycling fitness regime  $A1B1$  and the symmetric random fitness regime of Figure 6, there is a {\sl reduction principle} for the rate of vertical transmission (Feldman and Liberman 1986; Altenberg et al.\ 2017). 
+ 
   \medskip
 \centerline{[FIGURES 5, 6]}  
 
-Mathematical analysis of modifiers of $\rho$ for more general $AkBl$ regimes is difficult, and we have made a numerical investigation of the evolutionarily stable value $\rho^*$ of the rate of vertical transmission for $k,l\ne 1$. For $A1B2$, $\rho^*=0$ still appears to be the stable state. However, as we increase $k$ and $l$, the stable value of $\rho$ changes, and becomes a function of the fitness difference between $A$ and $B$. Representative results are shown in Table 1, where it is clear that, even in the $AkBk$ case, increasing $k$ results in an increase of $\rho^*$. Figure 8 illustrates the results for the $AkBk$ case for $k$ up to 50 and shows that the value of $\rho^*$ depends on $k$ but also in a complex manner on $w/W$. For the values of $k$ and $l$ in Table 1, lower values of $W/w$ give a lower value of $\rho^*$, i.e., $\rho^*$ close to zero. However, as $k$ increases in the $AkBk$ case, values of $\rho^*$ increase as $W/w$ decreases. The modification process is clearly much more complex than the evolution of modifiers of recombination, mutation, or migration.
- 
- It is natural to also ask how the population mean fitness is affected by modification of $\rho$. We have the following result.
+Values of $\rho^*$ for some $AkBl$ examples (see Supplemental Material SP6 for analysis details) are recorded in Table 1 for different values of $w$ relative to $W=1$. Interestingly, for the $A1B2$ regime, with $w=0.1$, the evolutionarily stable value of $\rho$ is substantially greater than zero, as it is in the $A3B10$ and $A5B30$ regimes.
+$AkBk$ results are plotted in Figure 8B. In the $A2B2$ regime, $\rho^* =0$ and there is reduction of vertical transmission for all selection values tested. However, for $AkBk$ regimes with $k>2$, we find $\rho^*\ne 0$, and depending on $w$, $\rho^*$ can be as high as 0.95. In Table 1, blank values for $\rho^*$ indicate that our method was numerically unstable  and that a precise value for $\rho^*$ could not be obtained. This is why, in Figure 8B, no $\rho^*$ points are shown for $AkBk$ with $k>19$. In Table 1, the word ``fixation'' indicates that fixation of $B$ occurs, at which point there can be no effect of modification of $\rho$; $\rho^*$ cannot be calculated in such cases.
+\bigskip\bigskip
+
+\noindent{\bf GEOMETRIC MEAN FITNESS AND RATE OF VERTICAL TRANSMISSION}
+\smallskip
+
+In fluctuating environments, the geometric mean fitness of genotypes has been shown to determine their evolutionary dynamics (Haldane and Jayakar  1963; Karlin and Lieberman 1974; Wakano et al.\ 2004). For the evolution of mutation rates that are controlled by genetic modifiers, the stable mutation rate and the mutation rate that maximizes the geometric mean fitness of the population appear to be the same when the period of environmental fluctuation is low enough (Liberman et al.\ 2011). We can ask the same question here: is the stable rate $\rho^*$ the same as the rate $\hat\rho$ that maximizes the equilibrium value of the geometric mean fitness in fluctuating environments. First consider the $A1B1$ selection regime. We have the following result.
 
 \proclaim Result 9. If $W>w$ and $0\le\rho\le 1$, then the mean fitness at the stable equilibrium in the $A1B1$ environment is a decreasing function of $\rho$.\par
 
-\noindent{\it Proof.} In $A1B1$ the stable frequency of phenotype $A$ is by (38)
-$$x^* ={1\over 2} -{W+w-Z\over 2(2-\rho)(W-w)},\eqno(49)$$
-where $Z =\sqrt{(1-\rho)^2(W-w)^2 +4Ww}>0$.   The mean fitness at the stable equilibrium  is\hfil\break $\overline w^*\cdot\overline w^{**}$, and as $\overline w^* =\overline w^{**}$  by equation (42), this allows us to reduce the problem to properties of $\overline w^*$.  Now since $W>w$,  $\overline w^*$ is an increasing linear function of $x^*$:
-$$\overline w^* =x^*W +(1-x^*)w = x^*(W-w) +w.\eqno(50)$$
-Thus $\overline w^*$ is decreasing in $\rho$ if $dx^*/d\rho$ is negative. Using (49),
-$${dx^*\over d\rho} =- {(1-\rho)(W-w)\over 2(2-\rho)Z} -{W+w-Z\over 2(2-\rho)(W-w)} = {x^*-{1\over 2}\over 2-\rho} -{(1-\rho)(W-w)\over 2(2-\rho)Z}.\eqno(51)$$
-From (39) $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes the proof.
+\noindent{\it Proof.} In $A1B1$ the stable frequency of phenotype $A$ is by (35)
+$$x^* ={1\over 2} -{W+w-Z\over 2(2-\rho)(W-w)},\eqno(46)$$
+where $Z =\sqrt{(1-\rho)^2(W-w)^2 +4Ww}>0$.   The mean fitness at the stable equilibrium  is\hfil\break $\overline w^*\cdot\overline w^{**}$, and as $\overline w^* =\overline w^{**}$  by equation (39), this allows us to reduce the problem to properties of $\overline w^*$.  Now since $W>w$,  $\overline w^*$ is an increasing linear function of $x^*$:
+$$\overline w^* =x^*W +(1-x^*)w = x^*(W-w) +w.\eqno(47)$$
+Thus $\overline w^*$ is decreasing in $\rho$ if $dx^*/d\rho$ is negative. Using (46),
+$${dx^*\over d\rho} =- {(1-\rho)(W-w)\over 2(2-\rho)Z} -{W+w-Z\over 2(2-\rho)(W-w)} = {x^*-{1\over 2}\over 2-\rho} -{(1-\rho)(W-w)\over 2(2-\rho)Z}.\eqno(48)$$
+From (36) $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes the proof.
 
-  Figure 2B illustrates the decrease with increasing $\rho$ of the geometric mean fitness (over time) at a polymorphic equilibrium  in the $A1B1$ regime. Figure 7 illustrates an example of the $A1B2$ selection regime: panel A shows the values of selection and $\rho$ that allow a polymorphic equlibrium of phenotypes $A$ and $B$, and Panel B shows that the mean fitness at this equilibrium is decreasing as $\rho$ increases. 
- 
- The value of $\rho$ that maximizes the geometric mean fitness, denoted by $\hat\rho$,  varies with $k$ and with $W/w$ in the $AkBk$ regimes.  This is shown in Figure 9, where for $W=1$ with $w=0.1$ and $0.5$, $\hat\rho$ is noticeably positive. For $W=1$, $w=0.9$, however, $\hat\rho=0$ maximizes the geometric mean fitness. More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Supplementary Figure S4. 
+  Figure 2B illustrates the decrease kf the geometric mean fitness with increasing $\rho$ at a polymorphic equilibrium in the $A1B1$ regime. The values of $\hat\rho$ and $\rho^*$ are the same in $A1B1$ and $A2B2$ regimes, namely both are zero.  Figure 7B shows the geometric mean fitness in the $A1B2$ regime, and we see that for small values of $w$, this mean fitness decreases as $\rho$ increases. At $w=0.1$, Table 1 shows that $\hat\rho$ is 0.00065, whereas $\rho^*=0.821$.  In all $AkBk$ regimes that we tested with $w=0.9$, the value of $\hat\rho$ was also zero, substantially different from the values of $\rho^*$, as shown in Figures 8A and 8B. Also in Figure 8A, we see that with $w=0.1$, $\hat\rho$ changes from zero to positive in the $AkBk$ regimes with $k \ge 12$, while with $w=0.5$, the change occurs at $k=31$.
+ In Figure 8, with $w=0.1$, $\hat\rho$ is between 0.15 and 0.24 for $12\le k\le 50$, while with $w=0.5$, $\hat\rho$ exceeds 0.2 for $31\le k\le 50$.  More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Table 1, Supplementary Figures S5 and S6, and Supplemental Material SP6.
 \medskip
-\centerline{[FIGURES 7, 8, 9 HERE]}  
+\centerline{[TABLE 1 AND FIGURES 7, 8 HERE]}  
  \bigskip
  
  \noindent{\bf FINITE POPULATION SIZE}
  \smallskip
  
  In order to include the effect of random drift due to finite population in the above deterministic model, we use the Wright-Fisher model. Let $X_t$ denote the number of individuals with phenotype $A$ in a population of fixed size $N$ at the $t$-th generation, and suppose $X_t=Nx$. Also, let $x'$ represent the frequency of the phenotype $A$ in the infinite population model in the next generation, namely (see (2)),
- $$x'={w_Ax\over\overline w}\rho +(1-\rho)x.\eqno(52)$$
+ $$x'={w_Ax\over\overline w}\rho +(1-\rho)x.\eqno(49)$$
  Then, according to the Wright-Fisher model (Ewens 2004), $X_{t+1}$, the number of individuals of phenotype $A$ at generation $(t+1)$, is determined by the probability
- $$P\bigl(X_{t+1} =j\mid X_t =Nx\bigr) =\left(\matrix{N\cr j\cr}\right)\left(x'\right)^j\left(1-x'\right)^{N-j},\eqno(53)$$
+ $$P\bigl(X_{t+1} =j\mid X_t =Nx\bigr) =\left(\matrix{N\cr j\cr}\right)\left(x'\right)^j\left(1-x'\right)^{N-j},\eqno(50)$$
  for $j=0,1,2,\dots,N$.
  Thus the fluctuations in the numbers of phenotypes $A$ and $B$ in the  population of size $N$ are generated by the Wright-Fisher Markov chain  where, given that $X_t=Nx$, $X_{t+1}$ has a binomial distribution with parameters $(N,x')$.
  
  This Markov chain  has two absorbing states, $X_t =N$ and $X_t=0$, corresponding to the two fixations in $A$ and $B$, respectively, and we are interested in the fixation probabilities and the time to fixation of these two absorbing states as functions of the initial frequency $x$ and also of $\rho$, $w_A$, and $w_B$.
+ To these ends we use a diffusion approximation  to the process $\{X_t\}$. Specifically, we compute the mean $\mu(x)$ and the variance $\sigma^2(x)$ of the change in one generation  in the frequency of phenotype $A$ given that at the beginning of the generation $X_t=Nx$.
  
- To these ends we use a {\sl diffusion approximation}  to the process $\{X_t\}$. Specifically, we compute the mean $\mu(x)$ and the variance $\sigma^2(x)$ of the change in {\sl one generation} in the frequency of phenotype $A$ given that at the beginning of the generation $X_t=Nx$.
- 
- To compute $\mu(x)$, observe that by (52)   
+ To compute $\mu(x)$, observe that by (49)   
  $$\eqalignno{
  x' -x &={w_Ax\over\overline w}\rho +(1-\rho)x -x =\rho x\left[{w_A\over \overline w}-1\right]\cr
- &= \rho x(1-x){w_A -w_B\over w_Ax +w_B(1-x)},&(54)\cr}$$
+ &= \rho x(1-x){w_A -w_B\over w_Ax +w_B(1-x)},&(51)\cr}$$
  since $\overline w =w_A x +w_B(1-x)$.
  For the diffusion approximation, it is essential that the differential selection does not have a large effect per individual in each time period  $\Delta t$ $\bigl(\Delta t\simeq{1\over N}\bigr)$. That is, we assume
- $$w_A\simeq 1+{s_1\over N},\qquad w_B\simeq 1+{s_2\over N}.\eqno(55)$$
- Therefore, up to terms of order smaller than ${1\over N}$,
- $${w_A-w_B\over w_Ax +w_B(1-x)}\simeq {{s_1-s_2\over N}\over 1+ {s_1\over N}x +{s_2\over N}(1-x)} \simeq {s_1 -s_2\over N}.\eqno(56)$$
- Let $s=s_1-s_2$, then
- $$x'-x\simeq {1\over N}\rho sx(1-x)\eqno(57)$$
+ $$w_A -w_B ={s\over N}.\eqno(52)$$
+ Then
+ $$x'-x\simeq {1\over N}\rho sx(1-x)\eqno(53)$$
  up to terms of order small than ${1\over N}$. Since one generation corresponds to $\Delta t\simeq {1\over N}$, we  conclude that
- $$\mu(x) =\rho sx(1-x);\quad 0\le x\le 1.\eqno(58)$$
- 
- We now compute $\sigma^2(x)$. From the binomial distribution of $X_{t+1}$ with parameters $N$ and $x'$, the variance of $X_{t+1} -X_t$ given $X_t =Nx$ is $Nx'(1-x')$. Following (52) we have
- $$\eqalignno{
- x'(1-x') &=x\left[{w_A\over \overline w}\rho +(1-\rho)\right](1-x)\left[{w_B\over\overline w}\rho +(1-p)\right]&(59)\cr
- &=x(1-x)\left[{w_Aw_B\over\left(\overline w\right)^2}\rho^2 +{w_A +w_B\over\overline w}\rho(1-\rho) +\left(1-\rho\right)^2\right].&(60)}$$
- Assuming again that $w_A\simeq 1+{s_1\over N}$, $w_B\simeq 1+{s_2\over N}$, up to terms of order smaller than ${1\over N}$ we have
- $${w_A\over\overline w}\simeq 1+{s_1-s_2\over N}(1-x),\qquad {w_B\over\overline w} \simeq 1 +{s_2-s_1\over N}x.\eqno(61)$$
- Consequently
- $$\eqalign{
- {w_A +w_B\over\overline w} &\simeq 2 +{s_1-s_2\over N}(1-2x)\cr\noalign{\smallskip}
- {w_A\cdot w_B\over\left(\overline w\right)^2} &\simeq 1+{s_1-s_2\over N} (1-2x).}
- \eqno(62)$$
- Thus (62) combined with (60) imply that, up to terms of order smaller than ${1\over N}$,
- $$x'(1-x') =x(1-x)\left[1+ \rho{s\over N}(1-2x)\right],\eqno(63)$$
- and the variance, $V$, of the frequency of the phenotype $A$ given that $X_t =Nx$ is
- $$\eqalign{
- V\left({X_{t+1}-X_t\over N}\mid X_t =Nx\right) &={1\over N^2}V\bigl(X_{t+1}\mid X_t=Nx\bigr)\cr \noalign{\smallskip}
- &={x'(1-x')\over N},}\eqno(64)$$
- and in one generation ($\Delta t\simeq{1\over N}$),
- $$\sigma^2(x)\cdot{1\over N} \simeq{1\over N} x(1-x)\left[1 +\rho{s\over N}(1-2x)\right],\eqno(65)$$
- which up to terms of order smaller than ${1\over N}$ gives
- $$\sigma^2(x) =x(1-x).\eqno(66)$$
- 
- We  can compute now the fixation probabilities and the expected time to fixation. Let $u(x)$ be the probability of fixation in $A$ given that the initial frequency  of $A$ is $x$, and let $T(x)$ be the expected time until the population becomes fixed if the initial frequency of $A$ is $x$. Then (following, e.g., Karlin and Levikson 1974) we have
- $$u(x) ={\int_0^xs(\eta)d\eta\over\int_0^1s(\eta)d\eta},\ \ \hbox{\tenrm where}\ \ s(\eta)=\exp\left[-\int^\eta{2\mu(\xi)\over\sigma^2(\xi)}d\xi\right],\eqno(67)$$
- and
- $$T(x)=\int_0^1G(x,\xi)d\xi,\eqno(68)$$
- where
- $$G(x,\xi)=\left\{{2u(x)\bigl[u(1) -u(\xi)\bigr]{C\over s(\xi)\sigma^2(\xi)},\quad 0\le x\le\xi\le 1 \atop
- 2\bigl[u(1) -u(x)\bigr]u(\xi){C\over s(\xi)\sigma^2(\xi)},\quad 0\le\xi\le x\le 1}\right.\eqno(69)$$
- and $C=\int_0^1s(\eta)d\eta$.
- 
- In our case, $\mu(\xi)=\rho s\xi(1-\xi)$ and $\sigma^2(\xi)=\xi(1-\xi)$. Therefore $2\mu(\xi)/
- \sigma^2(\xi) =2\rho s$, $s(\eta) =e^{-2\rho s\eta}$, and it can be easily seen that
- $$u(x) ={1-e^{-2\rho sx}\over 1-e^{-2\rho s}}.\eqno(70)$$
- Now
- $$C=\int_0^1s(\eta)d\eta =\int_0^1e^{-2\rho s\eta}d\eta  ={1-e^{-2\rho s}\over 2\rho s},\eqno(71)$$
-Therefore  $T(x)$ is given by
- $$T(x)={1-u(x)\over\rho s}\int_0^x{e^{2\rho s\xi}-1\over \xi(1-\xi)}d\xi +{u(x)\over\rho s}\int_x^1{1-e^{-2\rho s(1-\xi)}\over \xi(1-\xi)}d\xi,\eqno(72)$$
- where $u(x)$ is given in (70), and in generations, $T(x)$ is multiplied by $N$.
-  Unfortunately the integrals in (72) cannot be done in closed form unless $\rho s=0$, in which case $u(x)=x$ and $T(x)=-2x\ln x -2(1-x)\ln(1-x)$ (Karlin and Levikson 1974), and only numerical computation of $T(x)$ is possible for specified values of $x$, $\rho$, and $s$.
+ $$\mu(x) =\rho sx(1-x);\quad 0\le x\le 1.\eqno(54)$$
+ In the same way, we can compute $\sigma^2(x)$, which is $x(1-x)$. These values of $\mu(x)$ and $\sigma^2(x)$ allow us to compute $u(x)$, namely
+  $$u(x) ={1-e^{-2\rho sx}\over 1-e^{-2\rho s}}.\eqno(55)$$
+ The expected time to fixation in $A$ starting from a initial frequency of $x$ is is given by
+ $$T(x)={1-u(x)\over\rho s}\int_0^x{e^{2\rho s\xi}-1\over \xi(1-\xi)}d\xi +{u(x)\over\rho s}\int_x^1{1-e^{-2\rho s(1-\xi)}\over \xi(1-\xi)}d\xi,\eqno(56)$$
+ where $u(x)$ is given in (55), and in generations, $T(x)$ is multiplied by $N$.
+  Unfortunately the integrals in (56) cannot be done in closed form unless $\rho s=0$, in which case $u(x)=x$ and $T(x)=-2x\ln x -2(1-x)\ln(1-x)$ (Ewens 2004, p.\ 160), and only numerical computation of $T(x)$ is possible for specified values of $x$, $\rho$, and $s$.
   
   It is important to note that the fixation probability $u(x)$ is a monotone increasing function of $\rho$ when $s>0$. In fact we have the following result.
   
   \proclaim Result 10. When $s>0$ so that the phenotype $A$ is favored, the fixation probability $u(x)$ is monotone increasing in $\rho$.\par
  
- The proof of Result 10 is in Supplementary Materials SP4.  
-  Figure 10 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange diagram in Supplemental Figure S1.
+ The proof of Result 10 is in Supplementary Material SP4.  
+  Figure 9 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange diagram in Supplemental Figure S1.
   \medskip
   
-  \centerline{[FIGURE 10 HERE]}
+  \centerline{[FIGURE 9 HERE]}
  
  We can also develop a diffusion approximation for the case of a cycling environment. Suppose that selection changes in cycles of length $n$ such that within the cycle the fitness parameters are $w_A^t$, $w_B^t$ for $t=1,2,\dots,n$. Also let
- $${1\over N}s_t \simeq w_A^t -w_B^t,\qquad S_t =\sum_{i=1}^t s_i,\qquad t=1,2,\dots,n.\eqno(73)$$
+ $${1\over N}s_t \simeq w_A^t -w_B^t,\qquad S_t =\sum_{i=1}^t s_i,\qquad t=1,2,\dots,n.\eqno(57)$$
  Following Karlin and Levikson (1974) we have the following result.
  
  \proclaim Result 11. The mean $\mu(x)$ and variance $\sigma^2(x)$ of the change in the frequency of $A$ in one generation for the diffusion approximation in the case of a cycling environment $AkBl$, where $k+l=n$, are
  $$\eqalign{
- \mu(x) &= \rho S_n x(1-x)\cr \sigma^2(x) &= nx(1-x).}\eqno(74)$$
- 
+ \mu(x) &= \rho S_n x(1-x)\cr \sigma^2(x) &= nx(1-x).}\eqno(58)$$
  The proof of Result 11, based on induction on $n$, is given in Supplemental Materials SP5.
  
   
- Using the moments in eqs.\ (74), the fixation probability $u(x)$ and the expected time $T(x)$ to fixation can be computed. Comparing to (70) and (72), with $s$  replaced by $S_n/n$, we find
- $$u(x) ={1-e^{-2\rho{S_n\over n}x}\over 1-e^{-2\rho{S_n\over n}}},\eqno(75)$$
+ Using the moments in eqs.\ (58), the fixation probability $u(x)$ and the expected time $T(x)$ to fixation from an initial frequency of $x$ can be computed where $s$ is replaced by $s_n/n$. We find
+ $$u(x) ={1-e^{-2\rho{S_n\over n}x}\over 1-e^{-2\rho{S_n\over n}}},\eqno(59)$$
  and $T(x)$ can be computed similarly.
  
- In the special case of the $AkBl$ cycling environment, we write $n=k+l$, and if $w_A=W$, $w_B=w$ for $k$ generations, and $w_A=w$, $w_B=W$ for $l$ generations, we have
- $$S_n=S_{k+l} =(k-l)(W-w).\eqno(76).$$
- Figure 11 illustrates how $(k-l)$, $\rho$, and $(W-w)$, which enter the formula for $u(x)$ in (75), interact to affect fixation probabilities.
+ In the  case of the $AkBl$ cycling environment, we write $n=k+l$, and if $w_A=W$, $w_B=w$ for $k$ generations, and $w_A=w$, $w_B=W$ for $l$ generations, we have
+ $$S_n=S_{k+l} =N(k-l)(W-w).\eqno(60)$$
+ Figure 10 illustrates how $(k-l)$, $\rho$, and $(W-w)$, which enter the formula for $u(x)$ in (59), interact to affect fixation probabilities.
 
   
  \medskip
-\centerline{[FIGURE 11 HERE]}  
+\centerline{[FIGURE 10 HERE]}  
   \bigskip
  
  \noindent{\bf DISCUSSION}
@@ -589,29 +542,51 @@ mathematical analysis. {\it Theor.\ Pop.\ Biol.} {\bf 66}: 249--258.
  \vfil
  \break
  \centerline{\bf TABLE 1}
- \smallskip
- 
- $$\vbox{\halign{\hfil #&&\qquad\hfil#\hfil\cr
- &&&&evolutionarily&fitness\cr
- &&&&stable&optimal\cr
- &$k$&$l$&$w$&$\rho^*$&$\hat\rho$\cr
- 0&3&10&0.1&0.5286296&0.01010101\cr
- 1&5&30&0.1&0.24641176&0.01010101\cr
- 2&3&10&0.5&0.38577372&0.02020202\cr
- 3&5&30&0.5&0.46443287&0.01010101\cr
- 4&3&10&0.9&0.9681569&0.05050505\cr
- 5&5&30&0.9&0.64959375&0.02020202\cr
-6&12&12&0.1&0.84855774&0.24242424\cr
-7&30&30&0.5&0.96077135&0\cr
-8&1&1&0.1&0&0\cr
-9&1&2&0.1&0&0.01010101\cr
-10&2&2&0.1&0.00015691&0\cr
-11&1&1&0.5&0&0\cr
-12&1&2&0.5&0&0.22222222\cr
-13&2&2&0.5&5.68E-05&0\cr
-14&1&1&0.9&0&0\cr
-15&1&2&0.9&0&0.36363636\cr
-16&2&2&0.9&5.06E-05&0\cr}}$$
+ \centerline{Values of $\rho^*$ (stable $\rho$)$^{\hbox{\sevenrm (a)}}$ and $\hat\rho$ (``optimal'' $\rho$)$^{\hbox{\sevenrm (b)}}$}
+ %\smallskip
+ \vskip-.25truein
+ $$\vbox{\halign{#\hfil&&\qquad#\hfil\cr
+ %&&&&evolutionarily&fitness\cr
+ %&&&&stable&optimal\cr
+ \noalign{\hrule\vskip 8pt}
+ $k$&$l$&$w^\dagger$&\omit\hfill$\hat\rho$\hfill&\omit\hfill$\rho^*$\hfill\cr
+ \noalign{\vskip 8pt\hrule\vskip 8pt}
+ 1&1&0.1&0.0000000&0.0000000\cr
+ 1&1&0.5&0.0000000&0.0000000\cr
+ 1&1&0.9&0.0000000&0.0000000\cr
+ 1&2&0.1&0.00065&0.821\cr
+ 1&2&0.5&fixation&fixation\cr
+ 1&2&0.9&fixation&fixation\cr
+ 2&2&0.1&0.0000000&0.0000000\cr
+ 2&2&0.5&0.0000000&0.0000000\cr
+ 2&2&0.9&0.0000000&0.0000000\cr
+ 3&10&0.1&0.00031&0.619\cr
+ 3&10&0.5&fixation&fixation\cr
+ 3&10&0.9&fixation&fixation\cr
+ 5&30&0.1&0.00027&0.6503\cr
+ 5&30&0.5&fixation&fixation\cr
+ 5&30&0.9&fixation&fixation\cr
+ 12&12&0.1&0.24347&0.84924\cr
+ 12&12&0.5&0.0000000&0.91209\cr
+ 12&12&0.9&0.0000000&0.95686\cr
+ 20&20&0.1&0.223925\cr
+ 20&20&0.5&0.0000000&0.94643\cr
+ 20&20&0.9&0.0000000&0.98304\cr
+ 30&30&0.1&0.1932801\cr
+ 30&30&0.5&0.0000000&0.96331\cr
+ 30&30&0.9&0.0000000&0.0000000\cr
+ 50&50&0.1&0.15419\cr
+ 50&50&0.5&0.22107&0.9768\cr
+ 50&50&0.9&0.0000000&0.99581\cr
+\noalign{\vskip 8pt\hrule}
+\noalign{\medskip}
+\multispan4$^\dagger$\ \hbox{\tenrm Note:}\ $W=1$\hfill\cr
+}}$$
+\medskip
+\vbox{\hsize6.5truein
+(a): $\rho^*$ is the uninvadable value of the vertical transmission rate.
+
+(b): $\hat\rho$ is the geometric mean value of $\rho$ at the stable equilibrium of the $AkBl$ cycle.}
  \vfil\break
  
  
@@ -630,7 +605,7 @@ mathematical analysis. {\it Theor.\ Pop.\ Biol.} {\bf 66}: 249--258.
  }$$
 Since $F'_A(x) >0$, $F'_B(x)>0$ for  $0\le x\le 1$,  all the functions $F_A$, $F_B$, $F_A\circ\cdots\circ F_A$, $F_B\circ\cdots\circ F_B$, and $F$ are monotone increasing for  $0\le x\le 1$.
 
-From Result 2, the two fixations $x=0$ and $x=1$ are not stable because $F'(0)>1$ and $F'(1)>1$. Therefore
+From Result 2, the two fixations $x=0$ and $x=1$ are not stable because $F'(0)>1$ and $F'(1)>1$ (see eq.\ 15). Therefore
 $$\eqalignno{
 &F(x)-x>0\ \hbox{\tenrm for}\ x>0\ \hbox{\tenrm ``near''}\ x=0,&\hbox{\tenrm (S4)}\cr
 &F(x)-x<0\ \hbox{\tenrm for}\ x<1\ \hbox{\tenrm ``near''}\ x=1.&\hbox{\tenrm (S5)}\cr}$$
@@ -791,6 +766,70 @@ and since $S_t +s_{t+1} =S_{t+1}$,
  by the induction assumption. Combining (S46) and (S49) gives
  $$V\left({X_{t+1}\over N}\right)\simeq {1\over N}x(1-x) +{1\over N}tx(1-x) ={1\over N}(t+1)x(1-x)\eqno(\hbox{\tenrm S}50)$$
  as expected.
+\bigskip
+\bigskip
+
+ \noindent{\bf SP6. Calculation of stable vertical transmission rate in $AkBk$}
+ \medskip
+
+Here we describe the analysis of the stability of a modifier allele $m$ with vertical transmission rate $\rho$ to invasion by a modifier $M$ with a vertical transmission rate $P$, as described in eq. 32, in environmental regime $AkBl$.
+
+The analysis is similar to that used in Result 8 to analyze stability in $A1B1$, but it is numerical because the cases where $k>1$ or $l>1$ require solving polynomials of degree $>6$  in order to obtain closed form expressions.
+
+The analysis includes the following steps for fixed $W, w, k,$ and $l$.
+First, we find the stable frequency of phenotype $A$ with a single modifier $x^*$. This is done by minimizing the expression $|x_{k+l} - x_{0}|$ where $x_{t}$ is defined in eq. 9. The minimization is done by iterating the recurrence (9) until it converges, i.e. until the difference $|x_{k+l} - x_{0}|$ is smaller than available machine precision (roughly $10^{-8}$ when subtracting similar small numbers).
+Next, we set the frequency vector with two modifiers to $\underline x^*=(x^*, 1-x^*, 0, 0)$, that is, to the stable frequencies in the absence of modifier $M$.
+
+Now we define $F_A(\underline x)$ by eq. 32 with $w_A=W$ and $w_B=w$ ($W>w$), and similarly $F_B(\underline x)$ with $w_B=W$ and $w_A=w$.
+Also, we define, similar to eq. 34, $F(\underline x)$ by composition
+$$F=\underbrace{F_B\circ \cdots\circ F_B}_{l\ \hbox{\sevenrm times}} \circ\underbrace{F_A\circ \cdots\circ F_A}_{k\ \hbox{\sevenrm times}}.\eqno(\hbox{\tenrm S}51)$$
+
+To obtain a linear approximation of $F(\underline x)$ "near" $\underline x^*$, we calculate the Jacobian matrix of $F(\underline x)$ at $\underline x = \underline x^*$,
+$$
+\cj_{ij} = \cj(\underline x^*)_{ij} = {\partial F(\underline x^*)_i \over \partial x_j},
+\eqno(\hbox{\tenrm S}52)$$
+and we define the 2-by-2 external stability matrix $\cl=\cl_{ex}$ as in eqs. 37-38 such that (note that the upper-right block is $\underline 0$ because $x^*_3=x^*_4=0$)
+$$
+\cj = \left[\matrix{\cl_{in} & \underline 0\cr\noalign{\medskip}
+ * & \cl_{ex}\cr}\right].
+\eqno(\hbox{\tenrm S}53)$$
+
+We calculate the eigenvalues $\lambda_1 > \lambda_2$ of $\cl$ using the quadratic formula as the characteristic polynomial of $\cl$ has degree 2.
+By the Perron-Frobenius theorem, the leading eigenvalue $\lambda_1$ is real and positive. Denote by $\lambda_1(\rho, P)$ the resulting leading eigenvalue with resident rate $\rho$ and invader rate $P$. Note that for any $\rho \in (0,1)$ 
+$$
+\lambda_1(\rho, \rho) = 1.
+\eqno(\hbox{\tenrm S}54)$$
+The evolutionary stable rate $\rho^*$ is defined to be stable to invasion, that is, for a small enough value $\partial P>0$ we have
+$$
+\lambda_1(\rho^*,\rho^* \pm \partial P) < 1 = \lambda_1(\rho^*,\rho^*),
+\eqno(\hbox{\tenrm S}55)$$
+where the equality is given by eq. S54.
+Therefore, 
+$$
+{\partial \lambda_1 \over \partial P} \big(\rho^*,\rho^*\big) = 0. 
+\eqno(\hbox{\tenrm S}56)$$
+
+We use Brent's root-finding method (Brent, 1971) to find $\rho^*$ that satisfies eq. S56.
+If, due to numerical instability of the described numerical process, we have
+$$
+\partial {\lambda_1 \over \partial P} \big(0,0\big) \cdot {\partial \lambda_1 \over \partial P} \big(1,1) > 0,
+\eqno(\hbox{\tenrm S}57)$$
+i.e., the partial derivative sign is identical at $\rho=P=0$ and $\rho=P=1$, then we cannot use Brent's method.
+In these cases we assume that the partial derivative doesn't have a root in $(0,1)$ and we determine the stable rate $\rho^*$ by the rule
+$$
+\rho^* =\left\{\matrix{
+0 &\hbox{\tenrm if}\ {\partial \lambda_1 \over \partial P} \big(0,0\big) \le 0\cr 
+\noalign{\smallskip}
+1 & \hbox{\tenrm if}\ {\partial \lambda_1 \over \partial P} \big(0,0\big) > 0\cr}\right.\eqno(\hbox{\tenrm S}58)$$
+
+Supplementary Figure S7 shows the leading eigenvalue $\lambda_1$ of the external stability matrix $\cl$ for different choices of environmental cycles $AkBk$, resident rate $\rho$ and invader rate $P$ when $W=1$ and $w=0.5$. The arrows show a series of invading modifiers.
+
+The described numerical analysis is fine for small $k$, but for large $k$ and especially for $w=0.1$ the calculation is unstable.
+This is probably because when the environment is constant for a long period of time, most of the time the frequencies $x_i$ are close to the boundaries (i.e. 0 and 1).
+
+Crucially, the Jacobian $\cj$ in eq. S52 is calculated using {\sl automatic differentiation} from a function that iteratively calculates $F(\underline x^*)$ according to eq. S51. Similarly, the partial derivative ${\partial \lambda_1 \over \partial P}$ in eq. S56 is calculated from a function that calculates $\lambda_1$ using simple arithmetic operations.
+Note that {\sl automatic differentiation} does not mean {\sl symbolic} or {\sl numerical differentiation}, which can lead to inefficient or inaccurate estimation of $\cj$ when $k$ is not very small. Rather, from Bartholomew-Biggs et al. (2000): 
+{\sl "Automatic differentiation is a set of techniques for transforming a program that calculates numerical values of a function, into a program which calculates numerical values for derivatives of that function with about the same accuracy and efficiency as the function values themselves."}
 
  
  \end\bye
