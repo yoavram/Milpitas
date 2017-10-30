@@ -23,16 +23,20 @@ Genetic inheritance as the transmission mode of traits between generations.
 > Genetic changes that improve the fitness of individuals will tend to increase in frequency over time.
 -- Bergstrom and Dugatkin 2012, ch. 1.1
 
+Considered to be _vertical_: parent to offspring
+
 ---
 
 ## Non-genetic inheritance
 
-- _Cultural evolution_: Imitation, teaching, learning, communication, niche construction, material inheritance ($$)
+- _Cultural evolution_: Imitation, learning...
 - _Epigenetics_ 
 - _Microbiome_: symbionts, parasites, pathogens
 - _Prions_: infectious proteins such as [Het-s],[PSI+], [URE3], spongiform
 
-![right](images/nathaniel-tetteh-297656.jpg)
+_Often non-vertical_
+
+![fit right](images/four_dimensions.jpg)
 
 ---
 
@@ -131,9 +135,7 @@ $$
 
 ## Constant environment
 
-Let $$A$$ be favored by natural selection over $$B$$.
-
-_Result 1._ If $$0<\rho\le 1$$[^*] and $$0 < w_B < w_A$$, then fixation of phenotype $$A$$ is globally stable.
+_Result 1._ If $$A$$ is favored by natural selection over $$B$$ and $$\rho>0$$[^*], fixation of phenotype $$A$$ is globally stable.
 
 ![right](images/amy-humphries-227515.jpg)
 
@@ -142,24 +144,6 @@ _Result 1._ If $$0<\rho\le 1$$[^*] and $$0 < w_B < w_A$$, then fixation of pheno
 ---
 
 ![fit](figures/recurrence_example_B.pdf)
-
----
-
-## Extreme selection
-
-If only _one phenotype can survive_ ($$w_A=1, w_B=0$$) then the recursion is 
-
-$$
-x'=\rho + (1-\rho)x 
-\quad \Rightarrow \quad
-x_t = 1-(1-\rho)^t (1-x_0).
-$$
-
-The _fixation time_, i.e. frequency change from $$x_0$$ to $$1-\epsilon$$, is
-
-$$
-\tau = \frac{\log{\epsilon}}{\log{(1-\rho)}}
-$$
 
 ---
 
@@ -184,24 +168,9 @@ Consider environments $$AkBl$$ that favor $$A$$ for $$k$$ generations and $$B$$ 
 
 ## [fit] Periodic environment
 
-_Result 2._ If _$$k=l$$_ and $$0<w<W$$ with $$0 < \rho < 1$$ then fixation of $$B$$ is unstable and a _protected polymorphism_ exists.
+_Result 2._ If _$$k=l$$_ then fixation of either phenotype is unstable and a _protected polymorphism_ exists.
 
 ![right](images/scott-webb-98682.jpg)
-
----
-
-_Proof._ Rewrite the recurrence equation,
-$$
-x' = \rho x \frac{w_A}{\bar{w}} + (1-\rho) x = x\Big(1+\rho(1-x)\frac{w_A-w_B}{\bar{w}}\Big)
-$$
-The change in the frequency of $$A$$ is $$x\Big(1+\rho\frac{W-w}{w}\Big)+o(x^2)$$ when $$A$$ is favored and $$x\Big(1+\rho\frac{w-W}{W}\Big)+o(x^2)$$ when $$B$$ is favored.
-
-Therefore, the local stability of $$x^*=0$$ is determined by 
-
-$$
-\Big[\big(1+\rho\frac{W-w}{w}\big)\big(1+\rho\frac{w-W}{W}\big)\Big]^k = 
-\Big[1 + \rho(1-\rho)\frac{(W-w)^2}{Ww}\Big]^k > 1.
-$$
 
 ---
 
@@ -227,21 +196,23 @@ otherwise fixation of one phenotype is stable.
 We saw that when $$k=l$$ there is a protected polymorphism.
 We can find it for $$k=1$$.
 
-_Result 4._ In A1B1 with $$0<\rho<1$$ and $$w<W$$, there is a unique stable polymorphism given by
+_Result 4._ For A1B1 there is a unique stable polymorphism[^x]
 
 $$
 x^* = \frac{1}{2} - \frac{W+w-\sqrt{(1-\rho)^2(W-w)^2+4Ww}}{2(2-\rho)(W-w)}.
 $$
 
+[^x]: $$x^*$$ is the frequency of $$A$$ at the end of even generations
+
 ---
 
 ## A1B1
 
-If vertical transmission rate $$\rho$$ _increases_:
+If vertical transmission rate $$\rho$$ _increases_
 
 $$0\to 1$$
 
-then stable frequency $$x^*$$ _decreases_:
+then stable frequency $$x^*$$ _decreases_
 
 $$\frac{1}{2} \to \frac{\sqrt{Ww}-w}{W-w}$$
 
@@ -267,57 +238,6 @@ $$\frac{1}{2}(W+w) \to \sqrt{Ww}-w$$
 
 ![right fit](figures/A1B1_equilibrium_B.pdf)
 
----
-
-## Random environment
-
-![](images/jack-hamilton-320934.jpg)
-
----
-
-## [fit] Random environment
-
-An environment that changes randomly such that
-$$w_A$$ is a _random variable_ and $$w_B = 1$$ is constant[^$].
-
-![right](images/jack-hamilton-320934.jpg)
-
-[^$]: We only really care about the ratio $$w_A/w_B$$ so everything works if $$w_B$$ is also random.
-
----
-
-## Stochastic local stability - SLS
-
-_Definition:_ an equilibrium $$x^*$$ is _SLS_ if for any initial $$x_0$$ sufficiently near $$x^*$$, we know that $$x_t$$ is very likely to converge to $$x^*$$.
-
-That is, for any $$\epsilon>$$ there exists $$\delta>0$$ such that  $$|x_0-x^*| < \delta$$ implies that
-
-$$P\left(\lim_{t\to\infty}x_t =x^*\right)\ge 1-\epsilon$$
-
----
-
-## Random environment
-
-_Result 5._ If $$E[\log{(1+\rho (w_A-w_B))}]>0$$ then fixation of $$B$$ ($$x^* = 0$$) **is not** stochastically locally stable.
-In fact, $$P\left(\lim_{t\to\infty}x_t = 0\right) = 0$$.
-
-_Result 6._ If $$E[\log{(1+\rho (w_A-w_B))}]<0$$ then fixation of $$B$$ ($$x^* = 0$$) **is** stochastically locally stable.
-
-_Note._ $$x^*=0$$ and $$x^*=1$$ cannot both be stable.
-
----
-
-## [fit] Random environment
-
-Frequency of phenotype $$A$$ after $$10^6$$ generations.
-
-$$w_A=\begin{cases}1+s, & p\\1-s, & 1-p\end{cases}$$ and $$w_B=1$$
-
-between the lines both fixations not stochastically locally stable.
-
-![right fit](figures/stochastic_env_x_t.pdf)
-
-[.footer: Parameters: $$x_0=0.1$$, $$\rho=0.1$$.]
 ---
 
 ## Evolution of the transmission mode
@@ -405,10 +325,10 @@ $$
 
 ## Modifier model
 
-- Start with population with only allele $$m$$.
-- Equilibrium between phenotypes $$A$$ and $$B$$.
-  - Frequency of $$A$$ is $$x^*$$, as before.
-- Now, allele $$M$$ is introduced in low frequency.
+- Initial population:
+  - only with modifier allele $$m$$
+  - at equilibrium between phenotypes $$A$$ and $$B$$ ($$x^*$$)
+- Now, allele $$M$$ is introduced at a low frequency
 
 _Can $$M$$ increase in frequency and invade the population, or is $$m$$ stable to invasion?_
 
@@ -433,16 +353,6 @@ _Result 7._ A modifier allele with vertical transmission rate $$\rho$$ is:
 
 ---
 
-## [fit] Random environment
-
-- $$w_A$$ and $$w_B$$ take on $$1$$ and $$0.1$$ by a coin flip.
-- Initial resident $$\rho_0 = 0.1$$.
-- Invaders reduce rate by $$1/10$$.
-
-![fit right](figures/stoch_modifier_invasions.png)
-
----
-
 ## Reduction principle
 
 ![](images/brendan-church-182747.jpg)
@@ -453,7 +363,7 @@ _Result 7._ A modifier allele with vertical transmission rate $$\rho$$ is:
 
 ## [fit] Reduction principle for vertical transmission
 
-In the $$A1B1$$ environment cycle, evolution tends to _reduce vertical transmission_ and _increase oblique transmission_.
+In the $$A1B1$$ selection regime, evolution tends to _reduce vertical transmission_ and _increase oblique transmission_.
 
 ---
 
@@ -467,9 +377,9 @@ In the $$A1B1$$ environment cycle, evolution tends to _reduce vertical transmiss
 
 ## Periodic environment: AkBk
 
-More generally, there is no reduction of the vertical transmission rate.
+More generally, there is __no__ reduction of the vertical transmission rate.
 
-With environmental periods $$k=l>2$$ the vertical transmission rate stable to invasion is high.
+With environmental periods $$k=l>2$$ the stable vertical transmission rate is high (>0.4).
 
 ![fit right](figures/AkBk_stable_optimal_rate_B.pdf)
 
@@ -477,7 +387,19 @@ With environmental periods $$k=l>2$$ the vertical transmission rate stable to in
 
 ## Periodic environment: AkBk
 
-Moreover, the stable transmission rate doesn't maximize the geometric mean fitness[^g].
+Moreover, the stable transmission rate __does not__ maximize the geometric mean fitness[^g].
+
+![fit right](figures/AkBk_stable_optimal_rate.pdf)
+
+[^g]: Geometric average of the population mean fitness over $$2k$$ generations. 
+
+---
+
+## Periodic environment: AkBk
+
+Moreover, the stable transmission rate __does not__ maximize the geometric mean fitness[^g].
+
+_Reminder:_ these modifiers are __not__ neutral as they reduce effect of selection.
 
 ![fit right](figures/AkBk_stable_optimal_rate.pdf)
 
@@ -513,7 +435,6 @@ Microbial population, phenotype determined by specific locus that is copied by D
 
 - _Constant environment:_ polymorphism lasts longer with oblique transmission.
 - _Periodic environment:_ polymorphism is maintained in shorter periods with oblique transmission
-- _Random environment:_ ?
 
 ![right](images/tatiana-lapina-6807.jpg)
 
@@ -522,99 +443,42 @@ Microbial population, phenotype determined by specific locus that is copied by D
 
 ## Evolution of oblique transmission
 
-- _Constant environment:_ when the favored phenotype is rare, a modifier that increases _vertical_ transmission can invade.
-- _Very rapidly changing environment_: when the phenotype frequency is at equilibrium, a modifier that increases _oblique_ transmission can invade.
-- _Other changing environments_: when the phenotype frequency is at equilibrium, a modifier that increases _vertical_ transmission can invade.
-
----
-
-## Environmental cues
-
-In a _rapidly changing environments_, phenotypic response to environmental cues is favored over oblique transmission - better tracking of selection changes[^&].
-
-Example: individual learning.
-
-![right](images/oscar-sutton-251737.jpg)
-
-[^&]: Aoki et al. 2005
-
-[.build-lists: true]
----
-
-## Other forms of oblique transmission
-
-- _Conformity_, or many-to-one: good for constant, bad in rapidly changing.
-- _Teacher-type_, or one-to_many: depends on teachers are chosen.
-- _Intra-familial_, such as between grandparents and grandchildren.
-
----
-
-## Transmission fidelity
-
-Both vertical and oblique transmission likely produce errors.
-
-If fidelity of genetic inheritance > cultural transmission (mix of vertical & oblique), then genetic inheritance will win in a constant environment[^%].
-
-[^%]: Cavalli-Sforza & Feldman, 1983
+- Rapidly changing environments favor _oblique_ transmission.
+- Slow and constant environments favor _vertical_ transmission.
 
 ---
 
 ## Phenotype switching
 
-Several studies[^Q] assumed
-- periodic changing environment
-- vertical transmission of phenotype
+Several studies[^ξ] assumed
+- periodically changing environment
+- _vertical_ transmission of phenotype
 - phenotype switch by transmission fidelity
-- fidelity determined by modifier
+- fidelity determined by a genetic modifier
 
-[^Q]: Leigh 1970, Ishii et al. 1989, Jablonka 1996, Kussel & Leibler 2005, King & Masel 2007, Liberman et al. 2011
+[^ξ]: Leigh 1970, Ishii et al. 1989, Jablonka 1996, Kussel & Leibler 2005, King & Masel 2007, Liberman et al. 2011
 
 ---
 
 ## [fit] Phenotype switching
 
-- Switching rate evolves toward $$1/n$$ where $$n$$ is the period length[^D].
+- Switching rate evolves toward $$1/n$$ where $$n$$ is the period length[^μ].
 - _Environmental statistics encoded by the modifier._
 
 ![right](images/jakob-owens-209001_cropped.jpg)
 
-[^D]: Doesn't work if $$Var(n)$$ is large or if selection not symmetric.
+[^μ]: Doesn't work if $$Var(n)$$ is large or if selection not symmetric.
 
 ---
 ## Phenotype switching
 
-_With oblique transmission:_
+With _oblique_ transmission:
 
 - Phenotype switch caused by oblique transmission rather then transmission errors.
 - _Environmental statistics encoded by the stable population phenotype distribution_ if environmental changes are frequent and selection is weak. 
 
 ---
 
-## [fit] Evolution with oblique transmission
-
-Oblique transmission can increase _relatedness_[^R]
-
-Outcomes might be similar to _Microbes can help explain the evolution of host altruism_[^L]
-
-![right](images/bill-wegener-280985_cropped.jpg)
-
-[^L]: Lewin-Epstein et al. 2017
-
-[^R]: Allison 1992
-
----
-
-## [fit] Evolution with oblique transmission
-
-Effective reduction of selection due to _decoupling of reproduction & inheritance_.
-
-Outcomes might be similar to _With a little help from my friends_[^O]
-
-![right](images/nathan-anderson-122047.jpg)
-
-[^O]: Obolski et al. 2017
-
----
 # Acknowledgments
 
 Funding: Stanford Center for Evolution and Human Genomics
