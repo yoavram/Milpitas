@@ -20,10 +20,10 @@ theme:Letters from Sweden, 6
 
 Genetic inheritance as the transmission mode of traits between generations.
 
-> Genetic changes that improve the fitness of individuals will tend to increase in frequency over time.
--- Bergstrom and Dugatkin 2012, ch. 1.1
+_> Genetic changes that improve the fitness of individuals will tend to increase in frequency over time.
+-- Evolution, Bergstrom and Dugatkin 2012, ch. 1.1_
 
-Considered to be _vertical_: parent to offspring
+Considered to be __vertical__: parent to offspring
 
 ---
 
@@ -45,6 +45,7 @@ _Often non-vertical_
 - _Horizontal gene transfer_: transformation, transduction, conjugation (plasmids & transposable elements), integrons
 - _Host-parasite gene transfer_
 - _Cross-species gene transfer_
+- _Chimerism?_
 
 ---
 
@@ -61,6 +62,8 @@ Differences in
 
 ![right filtered](images/william-bout-264829.jpg)
 
+[.footer: Photo by William Bout on Unsplash]
+
 ---
 
 ## Oblique transmission
@@ -71,6 +74,8 @@ non-parental adults.
 *Oblique = Diagonal
 
 ![](images/samuel-zeller-249358.jpg)
+
+[.footer: Photo by Samuel Zeller on Unsplash]
 
 ---
 
@@ -139,8 +144,9 @@ _Result 1._ If $$A$$ is favored by natural selection over $$B$$ and $$\rho>0$$[^
 
 ![right](images/amy-humphries-227515.jpg)
 
-[^*]: With perfect oblique transmission ($$\rho=0$$) or neutral evolution ($$w_A=w_B$$) the recursion is $$x'=x$$ and there is no evolution.
+[^*]: With perfect oblique transmission ($$\rho=0$$) or neutral evolution ($$w_A=w_B$$) the recursion is $$x'=x$$ and there is no change in frequency.
 
+[.footer: Photo by Amy Humphries on Unsplash]
 ---
 
 ![fit](figures/recurrence_example_B.pdf)
@@ -172,6 +178,8 @@ _Result 2._ If _$$k=l$$_ then fixation of either phenotype is unstable and a _pr
 
 ![right](images/scott-webb-98682.jpg)
 
+[.footer: Photo by Scott Webb on Unsplash]
+
 ---
 
 ## Periodic environment
@@ -186,7 +194,7 @@ otherwise fixation of one phenotype is stable.
 
 ---
 
-![fit](figures/lk_phase_plane.pdf)
+![fit](figures/lk_phase_plane_F.pdf)
 
 ---
 
@@ -194,7 +202,7 @@ otherwise fixation of one phenotype is stable.
 ### A1B1
 
 We saw that when $$k=l$$ there is a protected polymorphism.
-We can find it for $$k=1$$.
+We can find it for $$k=l=1$$.
 
 _Result 4._ For A1B1 there is a unique stable polymorphism[^x]
 
@@ -242,9 +250,11 @@ $$\frac{1}{2}(W+w) \to \sqrt{Ww}-w$$
 
 ## Evolution of the transmission mode
 
-Can the transmission mode itself evolve due to second-order selection?
+Can the transmission mode itself evolve?
 
 ![](images/matthew-henry-134263.jpg)
+
+[.footer: Photo by Matthew Henry on Unsplash]
 
 ---
 
@@ -256,6 +266,8 @@ We model competition between _two modifier alleles_:
 - $$M$$ with vertical transmission rate $$P$$.
 
 ![right](images/cloudvisual-208962.jpg)
+
+[.footer: Photo by Cloudvisual on Unsplash]
 
 ---
 
@@ -341,6 +353,8 @@ _Result 7._ A modifier allele with vertical transmission rate $$\rho$$ is:
 - stable to invasion of allele with rate $$P$$ if $$P>\rho$$,
 - unstable if $$P<\rho$$. 
 
+The evolutionary stable rate in therefore $$\rho^*=0$$ and _oblique transmission_ is likely to evolve.
+
 ---
 
 ## [fit] Periodic environment: A1B1
@@ -407,36 +421,14 @@ _Reminder:_ these modifiers are __not__ neutral as they reduce effect of selecti
 
 ---
 
-## Model applications
-
-Human/bird/mammal population with social learning from parents ($$\rho$$) or random adults ($$1-\rho$$) due to
- - Error in parent identification
- - Adoption
- - Babysitting
- - Alloparenting & cooperative breeding
- - Cooperation
-
-![right](images/ray-hennessy-118049.jpg)
-
----
-
-## Model applications
-
-Microbial population, phenotype determined by specific locus that is copied by DNA replication ($$\rho$$) and sometimes received by external DNA ($$1-\rho$$):
-- Plasmids
-- Chromosomal integrative & conjugative elements
-- Transduction with viruses
-- Integrons
-- Transformation & competence
-
----
-
 ## Polymorphism
 
 - _Constant environment:_ polymorphism lasts longer with oblique transmission.
 - _Periodic environment:_ polymorphism is maintained in shorter periods with oblique transmission
 
 ![right](images/tatiana-lapina-6807.jpg)
+
+[.footer: Photo by Tatiana Lapina on Unsplash]
 
 [.build-lists: true]
 ---
@@ -445,6 +437,10 @@ Microbial population, phenotype determined by specific locus that is copied by D
 
 - Rapidly changing environments favor _oblique_ transmission.
 - Slow and constant environments favor _vertical_ transmission.
+
+![right](images/ray-hennessy-118049.jpg)
+
+[.footer: Photo by Ray Hennessy on Unsplash]
 
 ---
 
@@ -488,6 +484,11 @@ Funding: Stanford Center for Evolution and Human Genomics
 ---
 
 # Thank you!
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+Yoav Ram / Feldman Lab
+yoavram@stanford.edu
+@yoavram
 
 ![](images/coffee.jpg)
 
