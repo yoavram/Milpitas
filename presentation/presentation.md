@@ -16,6 +16,17 @@ theme:Letters from Sweden, 6
 [.slidenumbers: false]
 ---
 
+## Who I am
+
+- Yoav Ram (_www.yoavram.com_)
+- Postdoc at _Feldman_ lab, Stanford University
+- PhD in mathematical biology at _Hadany_ lab, Tel-Aviv University
+  - Evolution of the mutation and recombination rate
+  - Estimating fitness in microbes
+- Also: Python training for engineers & data scientists (_python.yoavram.com_)
+
+---
+
 ## The Modern Synthesis
 
 Genetic inheritance as the transmission mode of traits between generations.
