@@ -23,6 +23,7 @@
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side
 \columnsep=100pt % This is the amount of white space between the columns in the poster
 \columnseprule=3pt % This is the thickness of the black line between the columns in the poster
+%\raggedcolumns
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
 
@@ -49,12 +50,23 @@
 % The widths of these boxes can be easily edited to accommodate your content as you see fit
 
 \begin{minipage}[b]{1\linewidth}
-\veryHuge \color{NavyBlue} \textbf{Vertical and Oblique Transmission under Fluctuating Selection} \color{Black}\\ % Title
-%\veryHuge \color{NavyBlue} \textbf{\qquad\qquad\qquad\qquad under Fluctuating Selection}\\[1cm] % Subtitle
-\huge \textbf{Yoav Ram$^1,a$, Uri Liberman$^{2}$, and Marcus W. Feldman$^1$}\\ % Author(s)
-\huge $^1$Department of Biology, Stanford University\\ % University/organization
-\huge $^{2}$School of Mathematical Sciences, Tel-Aviv University\\ % University/organization
-\huge $^{a}$yoav@yoavram.com\\ % Email
+
+\center \veryHuge \color{NavyBlue} \textbf{Vertical and Oblique Transmission under Fluctuating Selection} \color{Black}\\ % Title
+
+\vspace{1cm}
+
+\huge \textbf{Yoav Ram$^{1,a}$, Uri Liberman$^{2}$, and Marcus W. Feldman$^1$}\\ % Author(s)
+
+\vspace{1cm}
+
+\huge $^1$ Department of Biology, Stanford University\\ % University/organization
+\huge $^{2}$ School of Mathematical Sciences, Tel-Aviv University\\ % University/organization
+%\huge $^{a}$yoav@yoavram.com\\ % Email
+
+\vspace{1cm}
+
+\Large $^{a}$ Postdoctoral fellow of the Stanford Center for Computational, Evolutionary and Human Genomics
+
 \end{minipage}
 %
 %\begin{minipage}[b]{0.25\linewidth}
@@ -64,11 +76,11 @@
 %Twitter: \texttt{@yoavram}\\ % Twitter handle
 %\end{minipage}
 %%
-%\begin{minipage}[b]{0.19\linewidth}
-%\includegraphics[width=20cm]{cehg_logo} % Logo or a photo of you, adjust its dimensions here
+%\begin{minipage}[b]{0.2\linewidth}
+%\includegraphics[width=0.5\linewidth]{avatar_150x225} % Logo or a photo of you, adjust its dimensions here
 %\end{minipage}
 
-\vspace{1cm} % A bit of extra whitespace between the header and poster content
+\vspace{4cm} % A bit of extra whitespace between the header and poster content
 
 %----------------------------------------------------------------------------------------
 
@@ -86,11 +98,9 @@
 %
 %\end{abstract}
 
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION
-%----------------------------------------------------------------------------------------
+% INTRODUCTION
 
-\color{Navy} % SaddleBrown color for the introduction
+\color{DarkSlateGray}
 
 \section*{Introduction}
 
@@ -98,11 +108,7 @@ Oblique transmission occurs when a trait is passed to offspring from non-parenta
 
 Examples include social learning in humans, birds, and mammals, pathogen andsymbiont transmission, and HGT in microbes.
 
-%----------------------------------------------------------------------------------------
-%	MODEL
-%----------------------------------------------------------------------------------------
-
-\color{DarkSlateGray} % DarkSlateGray color for the rest of the content
+% MODEL
 
 \section*{Model}
 
@@ -115,35 +121,35 @@ The frequency of $A$ in the next generation $x'$ is given by
 x' = \rho \frac{w_A}{\bar{w}}x + (1-\rho) x
 \end{equation}
 
-%----------------------------------------------------------------------------------------
-%	RESULTS
-%----------------------------------------------------------------------------------------
-
-\section*{Results: Constant environment}
-
-When the environment is constant, the fitness parameters $w_A$ and $w_B$ do not change between generations, and we have the following result.
-
-\paragraph*{Result 1.} \textit{If $0<\rho\le 1$ and both $w_A$ and $w_B$ are positive with $w_A\ne w_B$, then fixation in the phenotype $A\ (B)$ is globally stable when $w_A>w_B$ $(w_A<w_B)$.}
-
-\section*{Results: Periodically changing environment}
-
-Consider an environmental regime $AkBl$ which favors phenotype $A$ for $k$ generations and then phenotypes $B$ for $l$ generations.
+We consider an environmental regime $AkBl$ which favors phenotype $A$ for $k$ generations and then phenotypes $B$ for $l$ generations.
 Let $W$ be the fitness of the favored phenotype and $w$ be that of the other phenotype where $0<w<W$.
 
-\paragraph*{Result 2.}\textit{Fixation of both $A$ and $B$ is unstable if
+%\section*{Constant environment}
+%
+%When the environment is constant, the fitness parameters $w_A$ and $w_B$ do not change between generations, and we have the following result.
+%
+%\paragraph*{Result 1.} \textit{If $0<\rho\le 1$ and both $w_A$ and $w_B$ are positive with $w_A\ne w_B$, then fixation in the phenotype $A\ (B)$ is globally stable when $w_A>w_B$ $(w_A<w_B)$.}
+
+\section*{Phenotype dynamics: $AkBl$}
+
+\paragraph*{Result 1.}\textit{Fixation of both $A$ and $B$ is unstable if
 \begin{equation}
--{\log(b)\over\log a} < {l \over k} < -{\log a\over\log(b)}.
+\frac{\log a}{\log(b)} < \frac{l}{k} < \frac{\log(b)}{\log a}.
 \end{equation} 
 Specifically, if $k=l$ then there is a protected polymorphism.}
-  
+
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{lk_phase_plane_F}
 \captionof{figure}{Oblique transmission maintains polymorphism.}
 \end{center}\vspace{1cm}
 
-\paragraph*{Result 3.}\textit{In the case $A1B1$ with there exists a unique stable polymorphism:
+\columnbreak
+
+\section*{Phenotype dynamics: $A1B1$}
+
+\paragraph*{Result 2.}\textit{In the case $A1B1$ with there exists a unique stable polymorphism:
 \begin{equation}
-x^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2\cdot(2-\rho)(W-w)}.
+x^* =\frac{1}{2} -\frac{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}}{2\cdot(2-\rho)(W-w)}.
 \end{equation}
 }
 
@@ -153,24 +159,9 @@ x^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2
 }
 \end{center}\vspace{1cm}
 
-%\begin{center}\vspace{1cm}
-%\begin{tabular}{l l l l}
-%\toprule
-%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-%\midrule
-%Treatment 1 & 0.0003262 & 0.562 \\
-%Treatment 2 & 0.0015681 & 0.910 \\
-%Treatment 3 & 0.0009271 & 0.296 \\
-%\bottomrule
-%\end{tabular}
-%\captionof{table}{\color{Green} Table caption}
-%\end{center}\vspace{1cm}
-
-
 \section*{Modifier model}
 
 Consider a modifier locus with alleles $m/M$ that determines the vertical transmission rates $\rho/P$:
-
 \begin{equation}
 \begin{matrix}
  \text{ pheno-genotype}&mA&mB&MA&MB\\
@@ -178,12 +169,31 @@ Consider a modifier locus with alleles $m/M$ that determines the vertical transm
  \text{ fitness}&w_A&w_B&w_A&w_B\\
  \text{ vertical transmission rate}&\rho&\rho&P&P\\
 \end{matrix}
-\end{equation} 
+\end{equation}
 
-\section*{Results: $A1B1$ selection regime}
+The next generation pheno-genotype frequencies are
+\begin{equation}
+\begin{aligned}
+\hat{w}x'_1 &= w_A x_1\bigl[(1-\rho)(x_1+x_3) +\rho\bigr] +w_B x_2(1-\rho)(x_1+x_3)\\
+\hat{w}x'_2 &= w_A x_1(1-\rho)(x_2+x_4) +w_B x_2\bigl[(1-\rho)(x_2+x_4)+\rho\bigr]\\ 
+\hat{w}x'_3 &= w_A x_3\bigl[(1-P)(x_1+x_3) +P\bigr] +w_B x_4(1-P)(x_1+x_3)\\
+\hat{w}x'_4 &= w_A x_3(1-P)(x_2+x_4) +w_B x_4\bigl[(1-P)(x_2+x_4)+P\bigr], 
+\end{aligned}
+\end{equation}
 
-\paragraph*{Result 4.}\textit{In $A1B1$ selection regime, a modifier allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$.
+\paragraph{Evolutionary stable vertical transmission rate.}
+We start with a single modifier $m$ with rate $\rho$ at equilibrium between phenotypes $A$ and $B$, and then introduce modifier $M$ with rate $P$ at a low frequency.
+If $m$ is stable to invasion of every $M$ with any rate $P$, then we declare $\rho$ to be the stable rate $\rho^*$.
+
+\columnbreak
+
+\section*{Modifier dynamics: $A1B1$}
+
+\paragraph*{Result 3.}\textit{In $A1B1$ selection regime, a modifier allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$.
 }
+
+Similar dynamics were observed in environments which randomly flip between $A$ and $B$ every generation.
+
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{A1B1_modifier_invasions}
@@ -191,13 +201,35 @@ Consider a modifier locus with alleles $m/M$ that determines the vertical transm
 }
 \end{center}\vspace{1cm}
 
-\section*{Results: $AkBl$ selection regime}
+\columnbreak
+
+\section*{Modifier dynamics: $AkBl$}
+
+In the general case there is no reduction of the transmission rate, nor is there maximization of the population mean fitness.
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{AkBk_stable_optimal_rate}
 \captionof{figure}{The evolutionary stable vertical transmission rate $\rho^*$ and the transmission rate $\hat{\rho}$ that maximized the geometric average of the population mean fitness over $k+l$ generations are only the same for $k=l=1$ and $k=l=2$.
 }
 \end{center}\vspace{1cm}
+
+For $k \ne l$, there is a polymorphism between $A$ and $B$ for $w=0.1$ (but not $w=0.5$ or $0.9$), in which case the stable and optimal rates given in the table.
+
+\begin{center}\vspace{1cm}
+\begin{tabular}{p{2.5cm} p{2.5cm} p{4.5cm} p{4.5cm}}
+\toprule
+\textbf{$k$} & \textbf{$l$ } & \textbf{$\hat{\rho}$} & \textbf{$\rho^*$} \\
+\midrule
+1 & 2 & 0.00065 & 0.821 \\
+3 & 10 & 0.00031 & 0.619 \\
+5 & 30 & 0.00027 & 0.6503 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Values of $\rho^*$ (stable rate) and $\hat\rho$ (fitness optimal rate) in $AkBl$ selection regime.}
+\end{center}\vspace{1cm}
+
+
+% Conclusions
 
 \section*{Conclusions}
 
@@ -209,21 +241,11 @@ Consider a modifier locus with alleles $m/M$ that determines the vertical transm
 
 %\color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
 
-%----------------------------------------------------------------------------------------
-%	REFERENCES
-%----------------------------------------------------------------------------------------
+% REFERENCES
 
-\nocite{*} % Print all references regardless of whether they were cited in the poster or not
-\bibliographystyle{plain} % Plain referencing style
-\bibliography{sample} % Use the example bibliography file sample.bib
-
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-
-\section*{Acknowledgements}
-
-Partial support by the Stanford Center for Computational, Evolutionary and Human Genomics
+%\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+%\bibliographystyle{plain} % Plain referencing style
+%\bibliography{sample} % Use the example bibliography file sample.bib
 
 %----------------------------------------------------------------------------------------
 
