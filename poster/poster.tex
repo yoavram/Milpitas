@@ -24,6 +24,7 @@
 \columnsep=100pt % This is the amount of white space between the columns in the poster
 \columnseprule=3pt % This is the thickness of the black line between the columns in the poster
 %\raggedcolumns
+\usepackage{fontawesome}
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
 
@@ -55,7 +56,7 @@
 
 \vspace{1cm}
 
-\huge \textbf{Yoav Ram$^{1,a}$, Uri Liberman$^{2}$, and Marcus W. Feldman$^1$}\\ % Author(s)
+\huge \textbf{Yoav Ram$^{1}$, Uri Liberman$^{2}$, and Marcus W. Feldman$^1$}\\ % Author(s)
 
 \vspace{1cm}
 
@@ -63,9 +64,12 @@
 \huge $^{2}$ School of Mathematical Sciences, Tel-Aviv University\\ % University/organization
 %\huge $^{a}$yoav@yoavram.com\\ % Email
 
-\vspace{1cm}
+%\vspace{1cm}
 
-\Large $^{a}$ Postdoctoral fellow of the Stanford Center for Computational, Evolutionary and Human Genomics
+\Large YR is a postdoctoral fellow of the Stanford Center for Computational, Evolutionary and Human Genomics\\ 
+\faicon{envelope-o}\; yoav@yoavram.com \quad
+\faicon{phone}\; 650.440.9625 \quad
+\faicon{globe}\; www.yoavram.com
 
 \end{minipage}
 %
@@ -80,7 +84,7 @@
 %\includegraphics[width=0.5\linewidth]{avatar_150x225} % Logo or a photo of you, adjust its dimensions here
 %\end{minipage}
 
-\vspace{4cm} % A bit of extra whitespace between the header and poster content
+\vspace{2cm} % A bit of extra whitespace between the header and poster content
 
 %----------------------------------------------------------------------------------------
 
@@ -106,23 +110,24 @@
 
 Oblique transmission occurs when a trait is passed to offspring from non-parental adult of the parental generation.
 
-Examples include social learning in humans, birds, and mammals, pathogen andsymbiont transmission, and HGT in microbes.
+Examples include social learning in humans, birds, and mammals, pathogen and symbiont transmission, and HGT in microbes.
 
 % MODEL
 
 \section*{Model}
 
-We model an infinite population with two phenotype -- $A$ and $B$ -- with frequencies $x$ and $1-x$ and fitnesses $w_A$ and $w_B$.
+We model an infinite population with two phenotype, $A$ and $B$, with frequencies $x$ and $1-x$.
+An offspring inherits its phenotype from its parent with probability $\rho$ or from a random adult with probability $1-\rho$.
 
-Offspring inherit its phenotype from its parent with probability $\rho$ or from a random adult with probability $1-\rho$.
-
-The frequency of $A$ in the next generation $x'$ is given by
-\begin{equation}
-x' = \rho \frac{w_A}{\bar{w}}x + (1-\rho) x
-\end{equation}
-
-We consider an environmental regime $AkBl$ which favors phenotype $A$ for $k$ generations and then phenotypes $B$ for $l$ generations.
+We consider an environmental regime $AkBl$ which favors phenotype $A$ for $k$ generations and then phenotype $B$ for $l$ generations.
 Let $W$ be the fitness of the favored phenotype and $w$ be that of the other phenotype where $0<w<W$.
+
+The frequency of $A$ in the next generation $x'$, when $A$ is \mbox{favored} over $B$, is given by
+\begin{equation}
+x' = \rho \frac{W}{\bar{w}}x + (1-\rho) x
+\end{equation}
+where $\bar{w}=xW + (1-x)w$ is the population mean fitness. 
+
 
 %\section*{Constant environment}
 %
@@ -130,90 +135,104 @@ Let $W$ be the fitness of the favored phenotype and $w$ be that of the other phe
 %
 %\paragraph*{Result 1.} \textit{If $0<\rho\le 1$ and both $w_A$ and $w_B$ are positive with $w_A\ne w_B$, then fixation in the phenotype $A\ (B)$ is globally stable when $w_A>w_B$ $(w_A<w_B)$.}
 
-\section*{Phenotype dynamics: $AkBl$}
+\section*{Phenotype dynamics: \emph{AkBl}}
 
 \paragraph*{Result 1.}\textit{Fixation of both $A$ and $B$ is unstable if
 \begin{equation}
-\frac{\log a}{\log(b)} < \frac{l}{k} < \frac{\log(b)}{\log a}.
+\frac{\log(1+\rho \frac{W-w}{w})}{\log(1+\rho \frac{w-W}{W})} < 
+\frac{l}{k} <
+\frac{\log(1+\rho \frac{w-W}{W})}{\log(1+\rho \frac{W-w}{w})}.
 \end{equation} 
 Specifically, if $k=l$ then there is a protected polymorphism.}
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{lk_phase_plane_F}
-\captionof{figure}{Oblique transmission maintains polymorphism.}
+\captionof{figure}{\textbf{Oblique transmission maintains polymorphism.}}
 \end{center}\vspace{1cm}
 
 \columnbreak
 
-\section*{Phenotype dynamics: $A1B1$}
+\section*{Phenotype dynamics: \emph{A1B1}}
 
-\paragraph*{Result 2.}\textit{In the case $A1B1$ with there exists a unique stable polymorphism:
+\paragraph*{Result 2.}\textit{In selection regime $A1B1$ there exists a unique stable polymorphism:
 \begin{equation}
-x^* =\frac{1}{2} -\frac{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}}{2\cdot(2-\rho)(W-w)}.
+x^* =\frac{1}{2} -\frac{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}}{2\cdot(2-\rho)(W-w)},
 \end{equation}
+where $x^*$ is the stable frequency of phenotype $A$ after the end of each two-generation cycle.
 }
+
+Since $\bar{w}^*$ is a decreasing function function of $x^*$, the stable population mean fitness $\bar{w}^*$ is a decreasing function of $\rho$.
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{A1B1_equilibrium_B}
-\captionof{figure}{In $A1B1$ selection regime, the stable population mean fitness decrease as $\rho$ increases.
+\captionof{figure}{\textbf{Mean fitness in A1B1 selection regime}.
+The stable population mean fitness $\bar{w}^*$ decreases as the vertical transmission rate $\rho$ increases.
 }
 \end{center}\vspace{1cm}
 
 \section*{Modifier model}
 
-Consider a modifier locus with alleles $m/M$ that determines the vertical transmission rates $\rho/P$:
+Consider a modifier locus with alleles $m/M$ that determine the vertical transmission rates $\rho/P$:
 \begin{equation}
 \begin{matrix}
  \text{ pheno-genotype}&mA&mB&MA&MB\\
  \text{ frequency}&x_1&x_2&x_3&x_4\\
- \text{ fitness}&w_A&w_B&w_A&w_B\\
+ \text{ fitness when $A$ is favored}&W&w&W&w\\
+ \text{ fitness when $B$ is favored}&w&W&w&W\\
  \text{ vertical transmission rate}&\rho&\rho&P&P\\
 \end{matrix}
 \end{equation}
 
-The next generation pheno-genotype frequencies are
+The next generation pheno-genotype frequencies when $A$ is favored are
 \begin{equation}
 \begin{aligned}
-\hat{w}x'_1 &= w_A x_1\bigl[(1-\rho)(x_1+x_3) +\rho\bigr] +w_B x_2(1-\rho)(x_1+x_3)\\
-\hat{w}x'_2 &= w_A x_1(1-\rho)(x_2+x_4) +w_B x_2\bigl[(1-\rho)(x_2+x_4)+\rho\bigr]\\ 
-\hat{w}x'_3 &= w_A x_3\bigl[(1-P)(x_1+x_3) +P\bigr] +w_B x_4(1-P)(x_1+x_3)\\
-\hat{w}x'_4 &= w_A x_3(1-P)(x_2+x_4) +w_B x_4\bigl[(1-P)(x_2+x_4)+P\bigr], 
+\hat{w}x'_1 &= W x_1\bigl[(1-\rho)(x_1+x_3) +\rho\bigr] + w x_2(1-\rho)(x_1+x_3)\\
+\hat{w}x'_2 &= W x_1(1-\rho)(x_2+x_4) + w x_2\bigl[(1-\rho)(x_2+x_4)+\rho\bigr]\\ 
+\hat{w}x'_3 &= W x_3\bigl[(1-P)(x_1+x_3) +P\bigr] + w x_4(1-P)(x_1+x_3)\\
+\hat{w}x'_4 &= W x_3(1-P)(x_2+x_4) + w x_4\bigl[(1-P)(x_2+x_4)+P\bigr], 
 \end{aligned}
 \end{equation}
 
 \paragraph{Evolutionary stable vertical transmission rate.}
-We start with a single modifier $m$ with rate $\rho$ at equilibrium between phenotypes $A$ and $B$, and then introduce modifier $M$ with rate $P$ at a low frequency.
-If $m$ is stable to invasion of every $M$ with any rate $P$, then we declare $\rho$ to be the stable rate $\rho^*$.
+We start with modifier allele $m$ with rate $\rho$ at equilibrium between phenotypes $A$ and $B$, and then introduce modifier allele $M$ with rate $P$ at a low frequency.
+If $m$ is stable to invasion of any $M$ with any rate $P$, then we declare $\rho$ to be the stable rate $\rho^*$.
 
 \columnbreak
 
-\section*{Modifier dynamics: $A1B1$}
+\section*{Modifier dynamics: \emph{A1B1}}
 
-\paragraph*{Result 3.}\textit{In $A1B1$ selection regime, a modifier allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$.
+\paragraph*{Result 3.}\textit{In selection regime $A1B1$, a modifier allele $m$ with associated vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$.
 }
 
-Similar dynamics were observed in environments which randomly flip between $A$ and $B$ every generation.
+That is, there is a \emph{reduction principle} for the vertical transmission rate in selection regime $A1B1$.
+
+Similar dynamics were observed in environments which randomly flip between favoring $A$ and $B$ every generation.
 
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{A1B1_modifier_invasions}
-\captionof{figure}{In $A1B1$ selection regime, modifier alleles that reduce the vertical transmission rate successfully invade and fix in the population.
+\captionof{figure}{\textbf{Modifier invasion in A1B1 selection regime}.
+Modifier alleles that reduce the vertical transmission rate successfully invade and fix in the population.
+Dashed lines show invasion times. Initial resident allele with $\rho=0.1$.
 }
 \end{center}\vspace{1cm}
 
 \columnbreak
 
-\section*{Modifier dynamics: $AkBl$}
+\section*{Modifier dynamics: \emph{AkBk}}
 
 In the general case there is no reduction of the transmission rate, nor is there maximization of the population mean fitness.
 
 \begin{center}\vspace{1cm}
 \includegraphics[width=0.8\linewidth]{AkBk_stable_optimal_rate}
-\captionof{figure}{The evolutionary stable vertical transmission rate $\rho^*$ and the transmission rate $\hat{\rho}$ that maximized the geometric average of the population mean fitness over $k+l$ generations are only the same for $k=l=1$ and $k=l=2$.
+\captionof{figure}{\textbf{Stability and optimality in selection regime $AkBk$.} \textbf{(A)} The transmission rate $\hat{\rho}$ that maximizes the geometric average of the population mean fitness over $k+l$ generations, and \textbf{(B)} the evolutionary stable vertical transmission rate $\rho^*$.
+$\rho^*$ and $\hat{\rho}$ are equal to 0 and to each other only when $k=l=1$ and $k=l=2$.
 }
 \end{center}\vspace{1cm}
 
-For $k \ne l$, there is a polymorphism between $A$ and $B$ for $w=0.1$ (but not $w=0.5$ or $0.9$), in which case the stable and optimal rates given in the table.
+\section*{Modifier dynamics: \emph{AkBl}}
+
+For $k \ne l$, there is a polymorphism between $A$ and $B$ when $w=0.1$ (but not when $w=0.5$ or $0.9$), in which case the stable and optimal rates are given below.
 
 \begin{center}\vspace{1cm}
 \begin{tabular}{p{2.5cm} p{2.5cm} p{4.5cm} p{4.5cm}}
@@ -225,9 +244,10 @@ For $k \ne l$, there is a polymorphism between $A$ and $B$ for $w=0.1$ (but not 
 5 & 30 & 0.00027 & 0.6503 \\
 \bottomrule
 \end{tabular}
-\captionof{table}{Values of $\rho^*$ (stable rate) and $\hat\rho$ (fitness optimal rate) in $AkBl$ selection regime.}
-\end{center}\vspace{1cm}
-
+\captionof{table}{\textbf{Stability and optimality in selection regime AkBl.}
+Values of evolutionary stable vertical transmission rate $\rho^*$ and the transmission rate $\hat\rho$ that maximizes geometric mean fitness.}
+\label{table}
+\end{center}%\vspace{1cm}
 
 % Conclusions
 
