@@ -1,0 +1,833 @@
+\documentclass[9pt,twocolumn,twoside,lineno]{pnas-new}
+% Use the lineno option to display guide line numbers if required.
+% Note that the use of elements such as single-column equations
+% may affect the guide line number alignment. 
+
+\templatetype{pnasresearcharticle} % Choose template 
+% {pnasresearcharticle} = Template for a two-column research article
+% {pnasmathematics} = Template for a one-column mathematics article
+% {pnasinvited} = Template for a PNAS invited submission
+
+\title{Evolution of vertical and oblique transmission under fluctuating selection}
+
+% Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
+\author[a]{Yoav Ram}
+\author[b]{Uri Liberman} 
+\author[a,1]{Marcus W. Feldman}
+
+\affil[a]{Department of Biology, Stanford University, Stanford, CA 94305-5020}
+\affil[b]{School of Mathematical Sciences, Tel Aviv University}
+%\affil[c]{Affiliation Three}
+
+% Please give the surname of the lead author for the running footer
+\leadauthor{Ram} 
+
+% Please add here a significance statement to explain the relevance of your work
+\significancestatement{Evolutionary dynamics of phenotypes in populations depend on how the traits are transmitted across generations, and how the environments that cause selection on the traits fluctuate over time. We show that under periodically fluctuating selection, a gene that increases the rate of vertical transmission is disfavored when the periods are short, but approaches an intermediate stable rate for longer periods. This stable rate differs markedly from the rate that maximizes the geometric mean fitness. The evolution of learning rules thus differs qualitatively from the evolution of genetically modified rules of genetic transmission.}
+
+% Please include corresponding author, author contribution and author declaration information
+\authorcontributions{Y.R., U.L., and M.W.F. all contributed to all sections of the paper.}
+\authordeclaration{The authors declare no conflict of interest.}
+%\equalauthors{\textsuperscript{1}A.O.(Author One) and A.T. (Author Two) contributed equally to this work (remove if not applicable).}
+\correspondingauthor{\textsuperscript{1}To whom correspondence should be addressed. E-mail: mfeldman@stanford.edu}
+
+% Keywords are not mandatory, but authors are strongly encouraged to provide them. If provided, please include two to five keywords, separated by the pipe symbol, e.g:
+\keywords{periodic selection $|$ phenotypic polymorphism $|$ modifier theory $|$ fitness optimum} 
+
+\begin{abstract}
+Conditions for the evolution and maintenance of social learning, in competition with individual learning, under fluctuating selection, is a well-studied problem in the theory of cultural evolution.
+Here we study competition between vertical and oblique cultural transmission of a dichotomous phenotype under constant, periodically cycling, and randomly fluctuating selection.
+Conditions are derived for the existence of a stable polymorphism in a periodically cycling selection regime.
+Under such a selection regime, the fate of a genetic modifier of the rate of vertical transmission depends on the length of the cycle and the strength of selection.
+In general, the evolutionarily stable rate of vertical transmission differs markedly from the rate that maximizes the geometric mean fitness of the population.
+The evolution of rules of transmission has dramatically different dynamics from the more frequently studied modifiers of recombination, mutation, or migration.
+\end{abstract}
+
+\dates{This manuscript was compiled on \today}
+\doi{\url{www.pnas.org/cgi/doi/10.1073/pnas.XXXXXXXXXX}}
+
+%\newcommand{\harr#1#2}{\smash{\mathop{\hbox to .2in{\rightarrowfill}}\limits^{\scriptstyle#1}_{\scriptstyle#2}}}
+
+\newcommand{\var}{\varepsilon}
+
+%\newcommand{\ref}{\par\noindent\hangindent.35truein}
+
+\newcommand{\cl}{\mathbf{L}}
+\newcommand{\cj}{\mathbf{J}}
+\newcommand{\ci}{\mathbf{I}}
+
+\newcommand{\ab}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\an}[1]{\begin{align}#1\end{align}}
+
+%\newcommand{\ss}{\scriptstyle}
+
+\begin{document}
+
+% Optional adjustment to line up main text (after abstract) of first page with line numbers, when using both lineno and twocolumn options.
+% You should only change this length when you've finalised the article contents.
+%\verticaladjustment{-2pt}
+
+\maketitle
+\thispagestyle{firststyle}
+\ifthenelse{\boolean{shortarticle}}{\ifthenelse{\boolean{singlecolumn}}{\abscontentformatted}{\abscontent}}{}
+
+% If your first paragraph (i.e. with the \dropcap) contains a list environment (quote, quotation, theorem, definition, enumerate, itemize...), the line after the list may have some extra indentation. If this is the case, add \parshape=0 to the end of the list environment.
+\dropcap{C}avalli-Sforza and Feldman \cite{cavalli1981cultural} distinguished two forms of non-parental phenotypic transmission in the context of cultural evolution. Horizontal transmission  occurs when a trait is passed between members of the same generation and is analogous to transmission of an infectious agent. Oblique transmission to offspring is from non-parental members of the parental generation. Evolution under either of these is expected to be more rapid than under purely vertical, i.e., parent-to-offspring, transmission \cite{lycett2008questions,bergstrom2012evolution}.
+
+Oblique transmission occurs via some mechanism of social learning, which may include imitation or active teaching. There has been an interesting debate over the past thirty years concerning the conditions under which social learning would have an advantage over individual learning or vertical (including genetic) transmission. This debate is usually couched in terms of the mode and tempo of environmental fluctuations that would affect fitness and hence evolution \cite{rogers1988does,boyd1988evolutionary,boyd1995does,feldman1996individual,wakano2004evolution,aoki2005emergence,wakano2006mixed,aoki2014evolution}. 
+Mathematical analyses of models of competition between individual and social learning have generally shown that social learning has an advantage when the environment does not fluctuate too frequently. On the other hand, when the environmental changes are very frequent, individual learning is favored, while innate (genetic) determination of the trait does best when periods between environmental change are long on average.
+
+In some situations, oblique transmission of biological material is possible.
+In bacteria, phenotypes might be determined by heritable mobile genetic elements such as phages \cite{zinder1952genetic}, plasmids \cite{lederberg1946gene}, integrons \cite{mazel2006integrons}, and transposons \cite{salyers2004conjugative}.
+Similarly, some phenotypes are determined by genes that are commonly converted by uptake of foreign DNA, i.e., transformation \cite{milkman1990molecular}.
+In these cases, inheritance of a phenotype may combine vertical transmission from the parent cell, and oblique transmission from other cells, even if the mechanism for oblique transmission evolved to facilitate some other function \cite{redfield1993evolution}. 
+
+In some animals, transmission of microbes may occur during sharing or manipulation of food or other consumable resources during a social interaction. Although transmission of the microbiome in humans is likely to be mostly vertical \cite{rosenberg2016microbes}, in other organisms there is multi-generational food sharing during which symbionts from the parental cohort may be transmitted obliquely to younger individuals \cite{theis2016getting}. In such cases, fluctuations in the resource type or availability may have fitness effects that depend on features of the transmitted microbiome. This ecological perspective on community transmission is stressed by van Opstal and Bordenstein \cite{van2015rethinking} who emphasize the ``need to consider the relative roles of vertical and horizontal transmission of microbial communities.''
+
+Another perspective on the evolutionary consequences of fluctuating environments (and, as a result, fluctuating selection) derives from the phenomenon of phenotypic switching \cite{balaban2004bacterial,kussell2005phenotypic,thattai2004stochastic,salathe2009evolution,liberman2011evolution,gaal2010exact}
+In these studies, mutation causes the organism to switch phenotypes (usually treated as haploid genotypes), and the problem has usually been couched in terms of the optimal rate of mutation in models where the phenotypic fitnesses fluctuate over time. These models did not include social learning, and the evolution was regarded as a mode of bet-hedging against future environmental change. Optimal (that is, evolutionarily stable) mutation rates depend on many features of the fluctuations, for example,  degree of fitness symmetry, strength of selection, and variance in the period of fluctuation \cite{salathe2009evolution}.
+
+In a recent analysis of evolution under fluctuating selection, Xue and Leibler \cite{xue2016evolutionary} allowed an organism to absorb information about the distribution of possible environments by learning the phenotypes of members of its parental lineage from previous generations. They describe this as ``positive feedback that enhances the probability of the offspring to express the same phenotype as the parent.'' In this formulation there was ``reinforcement of the parent phenotype'' in an offspring, such as might occur through epigenetic inheritance. Although their analysis was not couched in terms of oblique and vertical transmission, as defined by Cavalli-Sforza and Feldman \cite{cavalli1981cultural}, we have been stimulated by their analysis to develop a model in which oblique transmission, at a rate dependent on the trait frequency in the parental generation, occurs in addition to classical vertical transmission. We then ask how fluctuations in selection interact with the rate of oblique transmission to affect evolutionary dynamics and how the rate of oblique transmission itself might evolve. 
+
+In our formulation, both the parental phenotype and the distribution of phenotypes in the whole population contribute to an offspring's phenotype. Using conventional modifier theory \cite{feldman1986evolutionary}, we show that in a symmetric cyclic selection regime with cycles of periods 1 or 2, an allele reducing the rate of vertical transmission is expected to increase in frequency when rare and in so doing to increase the mean fitness of the population. However, for cycles of greater length or period asymmetry, interesting non-monotonicities emerge, both in the uninvadable rate of vertical transmission, and the rate that maximizes the geometric time average of the population mean fitness, which we will refer to as the ``geometric mean fitness.'' We develop the models in very large populations with cyclic selection and with random fitnesses and also in the case where drift occurs via sampling from generation to generation in a finite population.
+
+\section{The Model}
+
+Consider an infinite population whose members are characterized by their phenotype $\phi$, which can be of two types $\phi=A$ or $\phi=B$, with associated frequencies $x$ and $(1-x)$, respectively. We follow the evolution of $x$ over discrete non-overlapping generations. In each generation individuals are subject to  selection where the fitnesses of $A$ and $B$ are $w_A$ and $w_B$, respectively.
+
+An offspring inherits its phenotype from its parent via {\sl vertical transmission} with probability $\rho$ and from a random individual in the parental population via {\sl oblique transmission} with probability $(1-\rho)$. Therefore, given that the parent phenotype is $\phi$ and assuming {\sl uni-parental inheritance} \cite{zefferman2016mothers}, the conditional probability that the phenotype $\phi'$ of the offspring is $A$ is
+\begin{equation}
+P(\phi' =A|\phi) =\left\{\begin{array}{cc}(1-\rho)x+\rho &\mbox{if}\ \phi=A\\ 
+ (1-\rho)x & \mbox{if}\ \phi =B\end{array}\right.
+ \end{equation}
+ where $x=P(\phi=A)$ in the parent's generation before selection.
+ 
+ Therefore the frequency $x'$ of  phenotype $A$ after one generation is given by the recursion equation
+ \begin{equation}
+ \an{
+ x'&=\rho{w_A\over \overline w}x +(1-\rho)x\\
+ &=     {w_A\over \overline w}x\bigl[(1-\rho)x +\rho\bigr] +{w_B\over \overline w}(1-x)\bigl[(1-\rho)x\bigr],}
+ \label{2}\end{equation}
+ where $\overline w$ is the {\sl mean fitness}, namely
+ \begin{equation}\overline w=w_A x+w_B(1-x).\end{equation}
+ \eqref{2} can be rewritten as
+ \begin{equation}
+ \an{
+ x' &=& x\left[1+\rho(1-x){w_A-w_B\over \overline w}\right]\\
+     &=&x\cdot{x(1-\rho)(w_A-w_B) +\rho w_A +(1-\rho)w_B\over x(w_A-w_B) +w_B}.}
+    \label{4} \end{equation}
+ 
+ In what follows we explore the evolution of the recursion \eqref{4}, namely the equilibria and their stability properties, in the cases of {\sl constant environments} and {\sl changing environments}.
+
+ \subsection{Constant Environment}
+
+When the environment is constant, the fitness parameters $w_A$ and $w_B$ do not change between generations, and we have the following result.
+\medskip
+
+\noindent {\bf Result 1.} {\sl If $0<\rho\le 1$ and both $w_A$ and $w_B$ are positive with $w_A\ne w_B$, then fixation in the phenotype $A\ (B)$ is globally stable when $w_A>w_B$ $(w_A<w_B)$.}\par
+\medskip
+
+\noindent{\it Proof}.
+If we rewrite \eqref{4} as $x'=x\cdot f(x)$, it can be seen that $f(1)=1$, and for $\rho>0$ and $0<x<1$
+\begin{equation}
+\begin{array}{ccc}
+f(x)>1&\hbox{\tenrm when}& w_A>w_B,\\
+f(x)<1&\hbox{\tenrm when}& w_A<w_B.\end{array}
+\label{5}\end{equation}
+Hence, as $w_A>0$ and $w_B>0$, both fixations in $A$ or in $B$  ($x^*=1$ for fixation in $A$ and $x^*=0$ for fixation in $B$) are equilibrium points of \eqref{4}. Moreover, if $x_t$ is the value of $x$ at the $t$-th generation $(t=0,1,2,\dots)$, from \eqref{4}  and \eqref{5} we have for any $0<x_0<1$ and all $t=0,1,2,\dots$,
+\begin{equation}
+\begin{array}{ccc}
+x_{t+1}>x_t&\hbox{\tenrm when}&w_A>w_B,\cr
+x_{t+1}<x_t&\hbox{\tenrm when}&w_A<w_B,\end{array}
+\end{equation}
+and since $x^*=1$ or $x^*=0$ are the only equilibrium points, we have
+\begin{equation}
+\begin{array}{ccc}
+\lim_{t\to\infty}x_t=1,&\hbox{\tenrm for all}\ 0<x_0\le 1,&\hbox{\tenrm when}\ w_A>w_B,\cr
+\lim_{t\to\infty}x_t=0,& \hbox{\tenrm for all}\ 0\le x_0< 1,&\hbox{\tenrm when}\ w_A<w_B.}\end{array}
+\end{equation}
+Therefore fixation of the favored phenotype is globally stable.
+
+If $\rho=0$ or $w_A=w_B>0$, the phenotype frequencies do not change over time.
+With {\sl extreme selection},  for example $w_A=1$ and $w_B=0$ (or $w_B=1$ and $w_A=0$),  \eqref{4} reduces to
+$x'=(1-\rho)x+\rho$, and therefore 
+$x_t=1-(1-\rho)^t(1-x_0)$.
+Hence, for $\rho>0$,  $x_t\to 1$ as $t\to\infty$ for all initial values $0\le x_0\le 1$, and  the favored phenotype fixes.
+
+\subsection{Periodically Changing Environment}
+
+ Suppose the environment is not constant but rather changes periodically, such that the favored phenotype changes after a fixed number of generations. Simple examples are $A1B1=ABABAB\dots$, in which the favored phenotype switches every generation, or $A2B1=AABAABAAB\dots$, where every two generations in which selection favors $A$ are followed by a single generation in which selection favors $B$.
+  In general, $AkBl$ denotes a selection regime in which the period is of $(k+l)$ generations with $k$ generations favoring phenotype $A$ followed by $l$ generations favoring $B$.
+ 
+Let $W$ be the fitness of the favored phenotype and $w$ be that of the other phenotype where $0<w<W$. Rewrite \eqref{4} as $x'=F_A(x)=xf_A(x)$ when $A$ is favored and $x'=F_B(x)=xf_B(x)$ when $B$ is favored. Then
+ \begin{equation}
+ \an{
+f_A(x) &= {x(1-\rho)(W-w) +\rho W +(1-\rho)w\over x(W-w) +w}\\
+&= 1+\rho(1-x){W-w\over Wx +w(1-x)},\\
+f_B(x) &= {x(1-\rho)(w-W) +\rho w +(1-\rho)W\over x(w-W) +W} \\
+&= 1+\rho(1-x){w-W\over wx+W(1-x)}.
+}\label{8}\end{equation}
+  \noindent If $x_t$ denotes the frequency of  the phenotype $A$ at generation $t$ starting with $x_0$ initially, then as we are interested in the values of $x_t$ for $t=n(k+l)$ with $n=0,1,\dots$ at the end of complete periods, we can write
+ \begin{equation}x_{(n+1)(k+l)}=F(x_{n(k+l)}),\quad n=0,1,2,\dots,\label{9}\end{equation}
+  where $F$ is the composed function
+\begin{equation}F=\underbrace{F_B\circ F_B \circ\cdots\circ F_B}_{l\ \hbox{\sevenrm times}} \circ\underbrace{F_A\circ F_A \circ\cdots\circ F_A}_{k\ \hbox{\sevenrm times}}.\label{10}\end{equation}
+  Clearly, since $F_A(0) =F_B(0) =0$ and $F_A(1) =F_B(1) =1$, both fixations in $A$ or in $B$ are equilibrium points. An interesting question is when these fixations are locally stable. We concentrate on $x^*=0$, the fixation of the phenotype $B$. As $x'=F_A(x) =xf_A(x)$ for $k$ generations and $x'=F_B(x) =xf_B(x)$ for $l$ generations, the linear approximation of $F(x)$ ``near'' $x=0$ is
+ \begin{equation}F(x) \simeq\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^lx.\label{11}\end{equation}
+   Hence the local stability of $x^*=0$ is determined by the product $\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l$;  $x^*=0$  is locally stable if this product  is less than 1 and unstable if it is larger than 1.
+   
+   From \eqref{8} we have
+   \begin{equation}
+   f_A(0) = 1+\rho{W-w\over w},\qquad
+   f_B(0) = 1+\rho{w-W\over W}.\label{12}\end{equation}
+   We start with the case $k=l$.
+   \medskip
+   
+   \noindent {\bf Result 2}. {\sl If $k=l$ and $0<w<W$ with $0<\rho<1$, fixation of $B$ is unstable.}\par
+   \medskip
+   
+   \noindent {\it Proof.} The local stability of $x^*=0$, the fixation of $B$, is determined by the product
+   \begin{equation}
+   \bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^k=\left[\left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right)\right]^k.\label{13}\end{equation}
+   Observe that
+   \begin{equation}
+   \left(1+\rho{W-w\over w}\right)\left(1+\rho{w-W\over W}\right) = 1+\rho(1-\rho){\left(W-w\right)^2\over wW}>1.\label{14}\end{equation}
+   Since $0<\rho<1$ and $0<w<W$,  fixation on $B$ is unstable.
+  \bigskip
+
+\noindent{\it Conclusions}
+\smallskip
+
+\noindent 1.\ \ Since $k=l$ and the above result also holds  when $0<W<w$, there is total symmetry between the two fixations in $A$ and $B$, and fixation in $A$ is also not stable. Thus neither phenotype can be lost, and there is a {\sl protected polymorphism} \cite{prout1968sufficient}.
+\smallskip
+
+\noindent 2.\ \ For general $k$, $l$, the condition for local stability of fixation in $A$ is
+\begin{equation}\bigl[f_A(0)\bigr]^l \bigl[f_B(0)\bigr]^k <1, \label{15}\end{equation}
+and that of $B$ is
+\begin{equation}\bigl[f_A(0)\bigr]^k \bigl[f_B(0)\bigr]^l <1. \label{16}\end{equation}
+Therefore, following Result 2, 
+\begin{equation}\bigl[f_A(0)\bigr]^{k+l}\bigl[f_B(0)\bigr]^{k+l}>1,\label{17}\end{equation}
+and it is impossible that both fixations are stable. Further, since by \eqref{12}  $f_A(0)>1$ and $0<f_B(0)<1$ when $0<w<W$, by choosing $k$ and $l$ appropriately, fixation on $A$ or fixation on $B$ (but not both) can be stable. In addition, we can have both fixations unstable giving the following result.
+\medskip
+
+\noindent {\bf Result 3}. {\sl With $0<\rho<1$ and $0<w<W$ in the case of $AkBl$ periodically changing environments, both fixations may be unstable, producing a protected polymorphism.}\par
+\medskip
+
+\noindent{\it Proof}. Let $a=1+\rho{W-w\over w}$ and $b=1+\rho{w-W\over W}$, and our assumption entails  $a>1$ and $0<b<1$. Following \eqref{11}, fixation in $B$ is not stable if $a^kb^l>1$, and similarly  fixation in $A$ is unstable if $a^lb^k>1$. Therefore both fixations are unstable if
+\begin{equation}a^kb^l>1\quad\hbox{\tenrm and}\quad a^lb^k>1,\label{18}\end{equation}
+or equivalently if
+\begin{equation}k\log a +l\log b>0\quad\hbox{\tenrm and}\quad l\log a+k\log b>0.\label{19}\end{equation}
+Now \eqref{19} holds if and only if
+\begin{equation}k\,{\log(1/b)\over\log a} < l < k\,{\log a\over\log(1/b)}.\label{20}\end{equation} 
+
+The inequalities of \eqref{20} are consistent if and only if $\log(1/b)<\log a$, i.e., $ab>1$, which according to \eqref{14}, is true.
+
+The linear approximation of $F(x)$ near $x^*=0$ (\eqref{11}) does not depend on the order in which phenotypes $A$ and $B$ are favored within a cycle of $k+l$ generations.
+Therefore, the local stability properties of the two fixations depend only on the fact that in a cycle of $(k+l)$ generations, $A$ is favored $k$ times and $B$ is favored $l$ times, and not their order in the cycle. 
+When neither fixation in $A$ or $B$ is stable, there is a protected polymorphism, and we expect to have one or more polymorphic equilibria. Supplementary Figure S1 illustrates the relationship between $k,l$ and $\rho$ that gives polymorphism of $A$ and $B$, or fixation, for different values of $s=W-w$. 
+
+For the simple case of $A1B1$ periodically changing environment we have the following.
+\medskip
+
+\noindent {\bf Result 4}. {\sl In the case $A1B1$ with $0<\rho<1$ and $0<w<W$ the two fixations are unstable and there exists a unique stable polymorphism.}\par
+\medskip
+
+\noindent{\it Proof}. Let $x$ be the initial frequency of $A$ and $x'$ its frequency  after one cycle of the $A1B1$ selection. Then $x' =F_B\bigl(F_A(x)\bigr)$ where by \eqref{8}
+\begin{equation}
+\an{
+F_A(x)&=x{x(1-\rho)(W-w) +\rho W+(1-\rho)w\over x(W-w) +w},\\
+F_B(y) &= y{y(1-\rho)(w-W) +\rho w+(1-\rho)W\over y(w-W)+W}.}
+\label{21}\end{equation}
+The equilibrium equation is $x=F_B\bigl(F_A(x)\bigr)$, which reduces to a fourth degree polynomial equation in $x$. Since the two fixations in $B$ and $A$ are equilibria corresponding to the two solutions $x=0$ and $x=1$, the other equilibria correspond to solutions of a quadratic equation $Q(x) =\alpha_2x^2 +\alpha_1x +\alpha_0=0$ with
+\begin{equation}\alpha_2=1,\  \alpha_1={W+w\over (2-\rho)(W-w)}-1,\  \alpha_0={-w\over (2-\rho)(W-w)}.\label{22}\end{equation}
+As $0<\rho<1$ and $0<w<W$ we have
+\begin{equation}
+\an{
+Q(0) &= {-w\over (2-\rho)(W-w)}<0\\
+\hbox{\tenrm and}\ \ Q(1) &={W\over (2-\rho)(W-w)} >0.}\label{23}\end{equation}
+Also, as $\alpha_2=1$ and $\alpha_0<0$, the quadratic equation $Q(x)=0$ has two real roots, one negative and one positive $x^*$ satisfying $0<x^*<1$. The latter determines a unique polymorphism. Let $H(x) =F_B\bigl(F_A(x)\bigr)$. Then 
+ \begin{equation}H(0)=0,\quad H(x^*)=x^*,\quad H(1)=1.\label{24}\end{equation}
+ Also 
+\begin{equation}\begin{array}{ccc}
+F'_A(x) &=& {x^2(1-\rho)\left(W-w\right)^2 +2xw(1-\rho)(W-w) +w\left[\rho W +(1-\rho)w\right]\over \left[x(W-w) +w\right]^2}\\
+ \end{array}\label{25}\end{equation}
+ and
+\begin{equation}\begin{array}{ccc}
+F'_B(x) &=  &{x^2(1-\rho)\left(w-W\right)^2 +2xW(1-\rho)(w-W) +W\left[\rho w +(1-\rho)W\right]\over \left[x(w-W) +W\right]^2}.\\
+\end{array}\label{26}\end{equation}
+ From our assumptions on $\rho$, $w$, and $W$, we have $F'_A(x)>0$ for  $0\le x\le 1$. Observe that the numerator of $F'_B(x)$ is linear in $\rho$; its value when $\rho=1$ is $wW>0$, and when $\rho=0$ it is
+ \begin{equation}x^2\left(w-W\right)^2 +2xW(w-W) +W^2 =\left[x(w-W) +W\right]^2 >0.\label{27}\end{equation}
+  Hence $F'_{B}(x)>0$ for all $0\le x\le 1$, and $H'(x) =F'_B\bigl(F_A(x)\bigr)F'_A(x)$ is positive when $0\le x\le 1$. Thus $H(x)$ is monotone increasing for $0\le x\le 1$; $H(x)>x$ for $0<x<x^*$, $H(x)<x$ for $x^*<x<1$.
+Starting from any initial value $0<x_0 <1$ we have  $x_t\to x^*$ as $t\to\infty$. Supplementary Figure S2, panels A, C, and E, illustrate examples of how the frequency of $A$ changes over time in the $A1B1$ regime of cycling selection. 
+
+For more general cyclic fitness regimes, the polynomial that gives the equilibria is of higher order, and it is conceivable that more than one stable polymorphism could exist for given values of $\rho$, $W$, and $w$. We have been able to show that when neither fixation in $A$ or $B$ is stable, in the $AkBk$ case this cannot occur. In fact we have the following.
+\medskip
+
+\noindent {\bf Result 5}. {\sl In the $AkBk$ selection regimes, if the fixations in $A$ and $B$ are locally unstable, a single stable polymorphic equilibrium exists.}\par
+\medskip
+
+The proof of Result 5 is in Supplementary Material SP1.  Supplementary Figure S3A shows the stable equilibrium frequencies $x^*$ as a function of $\rho$, $W$, and $w$ in the $A1B1$ regime.
+For $AkBk$ selection regimes from $k=1$ to $k=40$, Supplementary Figure S4 illustrates the convergence to a single stable polymorphism. 
+
+% Figure 1
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/A1B2_polymorphism_vert.pdf}
+\caption{Stable frequency of phenotype \emph{A} and geometric mean fitness in selection regime
+$A1B2$ as a function of the vertical transmission rate \(\rho\) and the fitness of the disfavored phenotype \(w\).
+\textbf{(A)} Stable frequency of phenotype $A$ at the end of each three generations cycle.
+\textbf{(B)} Geometric average of the stable population mean fitness over the three generations cycle: $(\bar{w}^* \cdot \bar{w}^{**} \cdot \bar{w}^{***})^{1/3}$.
+Gray contour lines join \(\rho\) and \(w\) combinations that result in the same stable value.
+In all cases, \emph{W=1}.}\label{fig:A1B2_polymorphism}
+\end{figure}
+
+We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ there is a single stable polymorphic equilibrium when the two fixations are unstable. However, the numerical examples in Supplementary Figure S1 (for $AkBl$) and in Figure 1 and Supplementary Figure S5 for the special case $A1B2$ all exhibit a single stable polymorphic equilibrium when fixations in $A$ and $B$ are unstable. These numerical results suggest that for $W>w>0$ and $0<\rho<1$ the high order polynomial that gives the equilibria has only a single root corresponding to a globally stable polymorphism. Supplementary Figure S6 shows that this is the case for the $A3B10$ regime.
+
+ 
+\subsection{Randomly Changing Environment}
+ 
+ We now consider the  case where the environment changes according to a stochastic process. Without loss of generality, assume that the fitness parameters at generation $t$ ($t=0,1,2,\dots$) are $1+s_t$ for phenotype $A$ and $1$ for phenotype $B$, where the random variables $s_t$ for $t=0,1,2,\dots$ are independent and identically distributed. Also we assume that there are positive constants $C$ and $D$ such that $P(-1+C<s_t <D)=1$.
+ 
+ Corresponding to \eqref{4}, with $w_A=1+s_t$, $w_B=1$ the recursion equation is
+ \begin{equation}
+ x_{t+1}=x_t {1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}\quad t=0,1,2,\dots\; .\label{28}\end{equation}
+ 
+\noindent As $\{x_t\}$ for $t=0,1,2,\dots$ is a sequence of random variables, the notion of stability of the two fixation states needs clarification. Following Karlin and Lieberman \cite{karlin1974random} and Karlin and Liberman \cite{karlin1975random} we make the following definition.
+ \medskip
+ 
+ \noindent{\it Definition}: ``stochastic local stability''.
+ A constant equilibrium state $x^*$ is said to be {\sl stochastically locally stable} if for any $\var>0$ there exists a $\delta>0$ such that $|x_0-x^*|<\delta$ implies
+ \begin{equation}
+ P\left(\lim_{t\to\infty}x_t =x^*\right)\ge 1-\var.\label{29}\end{equation}
+ Thus stochastic local stability holds for $x^*$ provided for any initial $x_0$ sufficiently near $x^*$ the process $x_t$ converges to $x^*$ with high probability.
+ 
+ In our case there are two constant equilibria $x^*=0$ and $x^*=1$ corresponding to fixation in $B$ and $A$, respectively. We can characterize the stochastic local stability of these fixations as follows.
+ \medskip
+ 
+ \noindent {\bf Result 6}. {\sl Suppose $E\left[\log (1+\rho s_t)\right]>0$. Then $x^*=0$, the fixation of phenotype $B$, is not stochastically locally stable. In fact $P\left(\lim_{t\to\infty}x_t=0\right)=0$.}
+ \medskip
+ 
+  \noindent {\bf Result 7}. {\sl Suppose $E[\log(1+\rho s_t)]<0$. Then $x^*=0$, the fixation of phenotype $B$, is stochastically locally stable. In particular, if $E(s_t)\le 0$, $x^*=0$ is stochastically locally stable.}
+\smallskip
+ 
+ The proofs of Results 6 and  7 can be found in Supplementary Materials SP2 and SP3.
+ 
+ 
+ Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of the $B$ fixation is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of the $A$ fixation by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the  sign of the first  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in phenotype $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following \eqref{14}, for all realizations of $w_A$ and $w_B$,
+ \begin{equation}
+ \log\left(1-\rho +\rho{w_A\over w_B}\right) +\log\left(1-\rho +\rho{w_B\over w_A}\right)>0.\label{30}\end{equation}
+ Therefore, as in the case of periodically changing environments $AkBl$, it is impossible that both fixations are simultaneously stochastically locally stable.  It is possible, however, that neither fixation is  stochastically locally stable, in which case we expect the population to converge to a polymorphic distribution. Figure 2 illustrates how the properties of $s_t$ in \eqref{28} affect the frequency of phenotype $A$, and in particular the stochastic local stability of fixation in phenotype $B$. Figure 3 shows the dynamics of the frequency of $A$ in a case where $w_A$ and $w_B$ are identically distributed and independent; in this case the expectation of the stationary distribution is ${1\over 2}$, and its variance increases as $\rho$ increases.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/stochastic_env_x_t.pdf}
+\caption{Stochastic local stability. 
+The figure shows the frequency of phenotype \emph{A} after \(10^6\) generations in a very large population evolving in a stochastic environment (eq.\ 28).
+The fitnesses of phenotypes \emph{A} and \emph{B} are \(w_A=1+s_t\) and \(w_B=1\),
+where \(s_t\) is \emph{s} with probability \emph{p} and \emph{-s} with probability \(1-p\).
+The gray lines mark combinations of \emph{p} and \emph{s} for which \(E[\log{(1-\rho+\rho\frac{w_A}{w_B})}]=0\) and \(E[\log{(1-\rho+\rho\frac{w_B}{w_A})}]=0\).
+According to Result 6, between these lines fixation of either phenotype is not stochastically locally stable, and we expect a stationary polymorphism between the lines.
+Here, initial frequency of \(A\) is \(x_0=1/10,000\) and the vertical transmission rate is \(\rho=0.1\).}\label{fig:stochastic_env_x_t}
+\end{figure} 
+
+%Figure 3
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/stoch_two_iid_rvs.pdf}
+\caption{Effect of vertical transmission rate $\rho$ on phenotype polymorphism in a randomly changing environment. Dynamics of the frequency of phenotype \(A\) over time starting at \(x_0=10^{-5}\) when the fitnesses of phenotypes \(A\) and \(B\) are identically and independently distributed random variables.
+As the vertical transmission rate \(\rho\) increases from 0.001 to 0.5, the frequency reaches a polymorphic distribution with \(E(x_t)\to0.5\) faster,
+but the variance also increases.
+The fitnesses of phenotypes \(A\) and \(B\), \(w_A\) and \(w_B\), are both exponential random variables with expected value 2.}\label{fig:stoch_two_iid_rvs}
+\end{figure}
+
+\section{Evolutionary Stability of Oblique Transmission}
+ 
+An interesting question concerns the evolution of oblique transmission itself. For example, is there an evolutionarily stable rate of oblique transmission? To answer this question we use a modifier model, for which we suppose that the vertical transmission rate is controlled by a genetic locus with two possible alleles $m$ and $M$. Let the vertical transmission rates determined by $m$ and $M$ be $\rho$ and $P$, respectively. Thus there are four pheno-genotypes $mA$, $mB$, $MA$, $MB$ whose frequencies at a given generation are denoted by $x_1$, $x_2$, $x_3$, $x_4$, respectively. As the fitnesses are determined by the two phenotypes $A$ and $B$, and the modifier locus is selectively neutral, we have the following table.
+ \begin{equation}
+ \begin{array}{ccccc}
+ \hbox{\tenrm pheno-genotype}&mA&mB&MA&MB\\
+ \hbox{\tenrm frequency}&x_1&x_2&x_3&x_4\\
+ \hbox{\tenrm fitness}&w_A&w_B&w_A&w_B\\
+ \hbox{\tenrm vertical transmission rate}&\rho&\rho&P&P
+ \end{array}\label{31}\end{equation}
+Following the rationale leading to equation [2], the next generation pheno-genotype frequencies $x'_1$, $x'_2$, $x'_3$, $x'_4$ are
+\begin{equation}
+\begin{array}{l}
+\overline wx'_1 = w_Ax_1\bigl[(1-\rho)(x_1+x_3) +\rho\bigr] +w_Bx_2(1-\rho)(x_1+x_3)\\
+ \overline wx'_2 = w_Ax_1(1-\rho)(x_2+x_4) +w_Bx_2\bigl[(1-\rho)(x_2+x_4)+\rho\bigr]\\ 
+  \overline wx'_3 = w_Ax_3\bigl[(1-P)(x_1+x_3) +P\bigr] +w_Bx_4(1-P)(x_1+x_3)\\
+\overline wx'_4 = w_Ax_3(1-P)(x_2+x_4) +w_Bx_4\bigl[(1-P)(x_2+x_4)+P\bigr], 
+\end{array}\label{32}\end{equation}
+with $\overline w$, the mean fitness, given by
+\begin{equation}
+\overline w =w_A(x_1+x_3) +w_B(x_2+x_4).
+\label{33}\end{equation}
+Note that under these assumptions the $M/m$ locus and the $A/B$ phenotypic dichotomy do not undergo anything analogous to recombination, which might be introduced if $A/B$ phenotypes were viewed as haploid genetic variants. 
+
+Starting with a stable equilibrium where only the $m$ allele is present, we check its {\sl external stability} \cite{feldman1986evolutionary,altenberg2017unified} to invasion by allele $M$.
+A constant environment always leads to fixation of the favored type, independent of $\rho$. We therefore assume changing environments, and, in particular, the simple case of the $A1B1$ cycling environment, where a unique stable polymorphism exists and depends on $\rho$ (but see Supplementary Material SP6 for computational analysis of the general $AkBl$ case). Specifically, from \eqref{32} with $w_A =W$, $w_B =w$ in the first generation and $w_A=w$, $w_B=W$ in the second generation, after two generations we have
+\begin{equation}
+\underline x''=T_2(T_1\underline x),
+\label{34}\end{equation}
+where the non-linear transformation $\underline x'=T_1\underline x$ is given by \eqref{32} with $w_A=W$, $w_B=w$, and the non-linear transformation $\underline x''=T_2\underline x'$ is given by \eqref{32} with $w_A=w$, $w_B=W$. Here $\underline x$, $\underline x'$, $\underline x''$ are the frequency vectors.
+
+For the $A1B1$ case, when only the $m$ allele is present with associated rate $\rho$,  $0<\rho<1$, and $0<w<W$, a unique stable equilibrium $\underline x^* =(x_1^*,1-x_1^*,0,0)$ exists. $x_1^*$ is the only positive root of the quadratic equation $Q(x) =\alpha_2x^2 +\alpha_1x +\alpha_0=0$ with $\alpha_2,\alpha_1,\alpha_0$ specified in \eqref{22}. Solving $Q(x)=0$ gives
+\begin{equation}
+x_1^* ={1\over 2} -{W+w-\sqrt{\left(1-\rho\right)^2\left(W-w\right)^2 +4Ww}\over 2\cdot(2-\rho)(W-w)},
+\label{35}\end{equation}
+ and it can be seen that
+ \begin{equation}
+ {\sqrt{Ww}-w\over W-w}<x_1^* <{1\over 2}.
+ \label{36}\end{equation}
+ 
+ The external stability of $\underline x^*$ to the introduction of the modifier allele $M$ with rate $P$ is determined by the linear approximation matrix $\cl=\cl_2\cdot\cl_1$ near $x^*$, which is derived from \eqref{32} and given by
+ \begin{equation}
+ \overline w^*\cl_1 =\left[\begin{array}{cc}{W\bigl[(1-P)x_1^* +P\bigr] & w(1-P)x_1^*\\
+ W(1-P)x_2^* & w\bigl[(1-P)x_2^* +P\bigr]\end{array}\right]
+ \label{37}\end{equation}
+ and
+ \begin{equation}
+ \overline w^{**}\cl_2 =\left[\begin{array}{cc}w\bigl[(1-P)x_1^{**} +P\bigr] & W(1-P)x_1^{**}\\
+ w(1-P)x_2^{**} & W\bigl[(1-P)x_2^{**} +P\bigr]\end{array}\right],
+ \label{38}\end{equation}
+where $\underline x^{**} =T_1\underline x^*$, $x_1^{**}=x_2^*=1-x_1^*$, $x_2^{**}=x_1^*$,  and
+\begin{equation}
+\overline w^* =Wx_1^* +wx_2^*,\qquad \overline w^{**} =wx_1^{**} +Wx_2^{**}.\label{39}\end{equation}
+Due to the symmetry between the two phenotypes $A$ and $B$ in the $A1B1$ case, we have $x_1^{**} =x_2^*$ and $x_2^{**} =x_1^*$ so that $\overline w^{**} =\overline w^*$ and in fact
+\begin{equation}
+\overline w^*\cl_2 = \left[\begin{array}{cc}w\bigl[(1-P)x_2^* +P\bigr] & W(1-P)x_2^*\\
+ w(1-P)x_1^* & W\bigl[(1-P)x_1^* +P\bigr]\end{array}\right].
+ \label{40}\end{equation}
+ Note that as $\underline x^* =T_2(T_1\underline x^*)$ with $x_3^*=x_4^*=0$, from \eqref{37} and \eqref{38} with $P=\rho$ we have
+ \begin{equation}\left[\begin{array}{c}x_1^*\\ x_2^*\end{array}\right]= \cl_2\cdot\cl_1\left[\begin{array}{c}x_1^*\cr x_2^*\end{array}\right] =\cl\left[\begin{array}{c}x_1^*\\ x_2^*\end{array}\right].
+ \label{41}\end{equation}
+ Hence when $P=\rho$ one of the eigenvalues of $\cl$ is 1.
+ 
+ In general $\cl=\cl_2\cdot\cl_1$, and using \eqref{37} and \eqref{40} we have
+  \begin{equation}
+  \an{
+ \left(\overline w^*\right)^2\cl_{11} &=Ww\left[(1-P)^2x_1^*x_2^* +P\right] +\bigl[w(1-P)x_1^*\bigr]^2 \\
+ \left(\overline w^*\right)^2\cl_{12} &=W(1-P)\bigl[P+x_1^*(1-P)\bigr]\bigl[Wx_2^* +wx_1^*\bigr]\\
+ \left(\overline w^*\right)^2\cl_{21} &=w(1-P)\bigl[1-x_1^*(1-P)\bigr]\bigl[Wx_2^* +wx_1^*\bigr]\\
+ \left(\overline w^*\right)^2\cl_{22} &= Ww\left[(1-P)^2x_1^*x_2^* +P\right] +\bigl[W(1-P)x_2^*\bigr]^2
+ }
+ \label{42}\end{equation}
+ The external stability of $\underline x^*$ is determined by the eigenvalues of $\cl$, namely the roots of its characteristic polynomial $R(\lambda) =\det(\cl-\lambda\ci)$, with $\ci$ the $2\times 2$ identity matrix. From \eqref{42}, $R(\lambda)=a_2\lambda^2 +a_1\lambda +a_0$, where
+ \begin{equation}
+ \an{
+ &a_0={P^2W^2w^2\over\left(\overline w^*\right)^4},\\
+ & a_1=-{2PWw +\left(1-P\right)^2\left[Wx_2^* +wx_1^*\right]^2\over \left(\overline w^*\right)^2},\quad a_2=1.}
+ \label{43}\end{equation}
+ 
+
+We then have the following result, which is proved in Supplementary Material SP4.
+ \medskip
+ 
+ \noindent{\bf Result 8}. {\sl $\cl$ has two positive eigenvalues and\hfil\break
+  {\hglue.22truein}(i) when $P>\rho$ the two eigenvalues are less than $1$,\hfil\break
+  {\hglue.19truein}(ii) when $P<\rho$ the largest eigenvalue is larger than $1$,\hfil\break
+  {\hglue.16truein}(iii) when $P=\rho$, the largest eigenvalue is $1$.}\par
+  \medskip
+
+ We conclude that in the $A1B1$ selection regime an allele $m$ producing vertical transmission rate $\rho$ is stable to the introduction of a modifier allele $M$ with associated rate $P$ if $P>\rho$, and it is unstable if $P<\rho$. Thus in this case, evolution tends to reduce vertical transmission, and hence increase the rate of oblique transmission,  and there is a {\sl reduction principle} for the rate of vertical transmission \cite{feldman1986evolutionary,altenberg2017unified}. The evolutionary dynamics of the reduction in $\rho$ under the $A1B1$ cycling regime are shown in Figure 4, which also illustrates the change in phenotype frequencies over time. 
+ 
+ %Figure 4
+\begin{figure*}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/{A1B1_modifier_invasions_w0.5}.pdf}
+\caption{Consecutive fixation of modifiers that reduce the vertical transmission rate in selection regime \emph{A1B1}.
+The figure shows results of numerical simulations of evolution with two modifier alleles (\eqref{32}).
+When a modifier allele fixes (frequency\textgreater{}99.9\%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines). \textbf{(A)} The frequency of phenotype \emph{A} in the population over time. \textbf{(B)} The frequency of the invading modifier allele over time. \textbf{(C)} The population geometric mean fitness over time; insets zoom in to show that the mean fitness increases slightly with each invasion.
+Invading alleles are introduced at frequency 0.01\%; whenever their frequency drops below 0.01\% they are re-introduced.
+Parameters: vertical transmission rate of the initial resident modifier allele, \(\rho_0 =0.1\); fitness values: $W=1$; $w=0.5$. The x-axis is on a log-scale, as each sequential invasion takes an order of magnitude longer to complete.
+See Figure S12 for $w=0.1$ and $0.9$.}
+\label{fig:A1B1_modifier_invasions}
+\end{figure*}
+
+%Figure 5
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/stoch_modifier_invasions.pdf}
+\caption{Consecutive fixation of modifiers that reduce the vertical transmission rate $\rho$ under symmetric randomly changing selection.
+The figure shows results of numerical simulations of evolution with two modifier alleles
+(\eqref{32}).
+When a modifier allele fixes (frequency\textgreater{}99.9\%),
+a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical dashed lines).
+\textbf{(A)} The frequency of phenotype \emph{A} in the population over time.
+\textbf{(B)} The frequency of the invading modifier allele over time.
+Invading alleles are introduced at frequency 0.01\%; whenever their frequency drops below 0.01\% they are re-introduced.
+Parameters: vertical transmission rate of the initial resident modifier allele is \(\rho_0 =0.1\) and the ratio of fitness values  is $w_A/w_B=10$ with probability 0.5 and $w_A/w_B=0.1$ also with probability 0.5.
+The x-axis is on a log-scale, as each sequential invasion takes an order of magnitude longer to complete.}\label{fig:stoch_modifier_invasions}
+\end{figure}
+
+ In the case of identically distributed random fitnesses $w_A$ and $w_B$, Figure 5 shows  an example of the success of modifiers that reduce $\rho$. We have not, however, been able to prove that there is a reduction principle for this class of fluctuating fitnesses.
+  
+
+
+Values of the evolutionarily stable vertical transmission rate, $\rho^*$, for some $AkBl$ examples (see Supplementary Material SP7 and  Figure S10 for analytical details) are recorded in Table 1 for different values of $w$ relative to $W=1$.
+Interestingly, for the $A1B2$ regime, with $w=0.1$, the evolutionarily stable value of $\rho$ is substantially greater than zero, as it is in the $A3B10$ and $A5B30$ regimes.
+$AkBk$ results are plotted in Figure 6B.
+In the $A2B2$ regime, $\rho^* =0$ and there is reduction of vertical transmission for all selection values tested.
+However, for $AkBk$ regimes with $k>2$, we find $\rho^*\ne 0$, and depending on $w$, $\rho^*$ can be as high as 0.95.
+In Table 1, blank values for $\rho^*$ indicate that our method was numerically unstable  and that a precise value for $\rho^*$ could not be obtained.
+This is why, in Figure 6B, no $\rho^*$ points are shown for $AkBk$ with $k>19$.
+In Table 1, the word ``fixation'' indicates that fixation of $B$ occurs, at which point there can be no effect of modification of $\rho$; $\rho^*$ cannot be calculated in such cases.
+
+\section{Geometric Mean Fitness and Rate of Vertical Transmission}
+
+Under fluctuating selection, the geometric mean fitness of genotypes has been shown to determine their evolutionary dynamics \cite{haldane1963polymorphism,karlin1974random,wakano2004evolution}. For the evolution of mutation rates that are controlled by genetic modifiers, the stable mutation rate and the mutation rate that maximizes the geometric mean fitness of the population appear to be the same when the period of environmental fluctuation is low enough \cite{liberman2011evolution}. We can ask the same question here: is the stable rate $\rho^*$ the same as the rate $\hat\rho$ that maximizes the equilibrium value of the geometric mean fitness under fluctuating selection?
+First consider the $A1B1$ selection regime. We have the following result.
+\medskip
+
+\noindent{\bf Result 9}. {\sl If $W>w$ and $0\le\rho\le 1$, then the mean fitness at the stable equilibrium in the $A1B1$ environment is a decreasing function of $\rho$.}\par
+\medskip
+
+\noindent{\it Proof.} In $A1B1$ the stable frequency of phenotype $A$ is by \eqref{35}
+\begin{equation}
+x^* ={1\over 2} -{W+w-Z\over 2(2-\rho)(W-w)},
+\label{44}\end{equation}
+where $Z =\sqrt{(1-\rho)^2(W-w)^2 +4Ww}>0$.   The mean fitness at the stable equilibrium  is $\overline w^*\cdot\overline w^{**}$, and as $\overline w^* =\overline w^{**}$  by  \eqref{39}, this allows us to reduce the problem to properties of $\overline w^*$.  Now since $W>w$,  $\overline w^*$ is an increasing linear function of $x^*$:
+\begin{equation}
+\overline w^* =x^*W +(1-x^*)w = x^*(W-w) +w.
+\label{45}\end{equation}
+Thus $\overline w^*$ is decreasing in $\rho$ if $dx^*/d\rho$ is negative. Using \eqref{44},
+\begin{equation}
+\an{
+{dx^*\over d\rho} &=- {(1-\rho)(W-w)\over 2(2-\rho)Z} -{W+w-Z\over 2(2-\rho)(W-w)}\\
+& = {x^*-{1\over 2}\over 2-\rho} -{(1-\rho)(W-w)\over 2(2-\rho)Z}.}
+\label{46}\end{equation}
+From \eqref{36} $0<x^*\le{1\over 2}$ and therefore $dx^*/d\rho <0$, which completes the proof.
+
+Figure 4 illustrates the increase over time of the geometric mean fitness with decreasing $\rho$ at a polymorphic equilibrium in the $A1B1$ regime.
+The values of $\hat\rho$ and $\rho^*$ are the same in $A1B1$ and $A2B2$ regimes, namely both are zero.
+Figure 1B shows the geometric mean fitness in the $A1B2$ regime, and we see that for small values of $w$, this mean fitness increases as $\rho$ decreases.
+At $w=0.1$, Table 1 shows that $\hat\rho$ is 0.00065, whereas $\rho^*=0.821$.
+In all $AkBk$ regimes that we tested with $w=0.9$, the value of $\hat\rho$ was also zero, substantially different from the values of $\rho^*$, as shown in Figures 6A and 6B.
+Also in Figure 6A, we see that with $w=0.1$, $\hat\rho$ changes from zero to positive in the $AkBk$ regimes with $k \ge 12$, while with $w=0.5$, the change occurs at $k=31$.
+In Figure 6, with $w=0.1$, $\hat\rho$ is between 0.15 and 0.24 for $12\le k\le 50$, while with $w=0.5$, $\hat\rho$ exceeds 0.2 for $31\le k\le 50$.
+More details on the mismatch between $\rho^*$, which cannot be invaded, and $\hat\rho$, which maximizes geometric mean fitness, are given in Table 1, Supplementary Figures S7 and S8, and Supplemental Material SP7.
+
+\begin{table}[h]
+\centering
+\caption{Values of $\rho^*$ (stable $\rho$)$^{\hbox{\sevenrm (a)}}$ and $\hat\rho$ (``optimal'' $\rho$)$^{\hbox{\sevenrm (b)}}$}
+\begin{tabular}{rrcll}
+$k$ & $l$ & $w^{\dagger}$ & $\rho^*$ & $\hat\rho$ \\
+\midrule
+ 1	&	1	&	0.1		&	0.000000	&	0.000000	\cr
+ 1	&	1	&	0.5		&	0.000000	&	0.000000	\cr
+ 1	&	1	&	0.9		&	0.000000	&	0.000000	\cr
+ 1	&	2	&	0.1		&	0.000000	&	0.00065		\cr
+ 1	&	2	&	0.5		&	fixation	&	fixation	\cr
+ 1	&	2	&	0.9		&	fixation	&	fixation	\cr
+ 2	&	2	&	0.1		&	0.000000	&	0.000000	\cr
+ 2	&	2	&	0.5		&	0.000000	&	0.000000	\cr
+ 2	&	2	&	0.9		&	0.000000	&	0.000000	\cr
+ 3	&	10	&	0.1		&	>0.4265		&	0.00031		\cr
+ 3	&	10	&	0.5		&	fixation	&	fixation	\cr
+ 3	&	10	&	0.9		&	fixation	&	fixation	\cr
+ 5	&	30	&	0.1		&	>0.1489		&	0.00027     \cr
+ 5	&	30	&	0.5		&	fixation	&	fixation	\cr
+ 5	&	30	&	0.9		&	fixation	&	fixation	\cr
+ 12	&	12	&	0.1	    &	0.84924		&	0.24347		\cr
+ 12	&	12	&	0.5		&	0.91209		&	0.000000	\cr
+ 12	&	12	&	0.9		&	0.95686		&	0.000000	\cr
+ 20	&	20	&	0.1	    &				&	0.223925	\cr
+ 20	&	20	&	0.5		&	0.94643		&	0.000000	\cr
+ 20	&	20	&	0.9		&	0.98304		&	0.000000	\cr
+ 30	&	30	&	0.1	    &				&	0.193280	\cr
+ 30	&	30	&	0.5		&	0.96331		&	0.000000	\cr
+ 30	&	30	&	0.9		&	0.99136		&	0.000000	\cr
+ 50	&	50	&	0.1	    &				&	0.15419		\cr
+ 50	&	50	&	0.5		&	0.9768		&	0.22107		\cr
+ 50	&	50	&	0.9		&	0.99581		&	0.000000	\cr
+\bottomrule
+\end{tabular}
+
+\addtabletext{\noindent $^\dagger$Note: $W=1$.\hfill\par
+\noindent (a): $\rho^*$ is the uninvadable value of the vertical transmission rate.\hfill\par
+(b): $\hat\rho$ is the geometric mean value of $\rho$ at the stable equilibrium of the $AkBl$ cycle.\hfill}
+\end{table}
+
+%Figure 6
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/AkBk_stable_optimal_rate.pdf}
+\caption{Fitness ``optimal'' and evolutionary stable vertical transmission rate in $AkBk$ selection regime. 
+\textbf{(A)} The vertical transmission rate $\hat{\rho}$ that maximized the geometric average of the population mean fitness is zero (complete oblique transmission) when selection cycles quickly between favoring phenotype $A$ and $B$, and then abruptly transitions to $\approx 0.2$, followed by a slow decrease (see Fig. S5 and S6 for details on the abrupt transition).
+\textbf{(B)} The evolutionary stable rate $\rho^*$, which cannot be invaded by modifiers with either higher or lower vertical transmission rate $P$, rapidly increases from zero when selection cycles are short ($k=1$ or $2$) to roughly 1 when selection cycles are longer.
+The dashed line shows $1-\frac{1}{k-1}$, which fit the values for $w=0.5$ (Carja et al. 2011). The values for $w=0.1$ (blue) could not be calculated for $k > 19$ due to numerical instability when selection is strong and the duration between selection fluctuations is long.
+In all cases, $W=1$. See \emph{Supplemental Material SP6} for details on how we calculated the stable rate.}\label{fig:AkBk_stable_optimal_rate}
+\end{figure}
+
+
+\section{Finite Population Size}
+ 
+ In order to include the effect of random drift due to finite population in the above deterministic model, we use the Wright-Fisher model. Let $X_t$ denote the number of individuals with phenotype $A$ in a population of fixed size $N$ at the $t$-th generation, and suppose $X_t=Nx$. Also, let $x'$ represent the frequency of the phenotype $A$ in the infinite population model in the next generation, namely (see \eqref{2}),
+ \begin{equation}
+ x' = \rho {w_A \over \overline w} x +(1-\rho)x.
+ \label{47}\end{equation}
+ Then, according to the Wright-Fisher model \cite{ewens2004mathematical}, $X_{t+1}$, the number of individuals of phenotype $A$ at generation $(t+1)$, is determined by the probability
+ \begin{equation}
+ P\bigl(X_{t+1} =j\mid X_t =Nx\bigr) =\left(\matrix{N\cr j\cr}\right)\left(x'\right)^j\left(1-x'\right)^{N-j},
+ \label{48}\end{equation}
+ for $j=0,1,2,\dots,N$.
+ Thus the fluctuations in the numbers of phenotypes $A$ and $B$ in the  population of size $N$ are generated by the Wright-Fisher Markov chain  where, given that $X_t=Nx$, $X_{t+1}$ has a binomial distribution with parameters $(N,x')$.
+ 
+ This Markov chain  has two absorbing states, $X_t =N$ and $X_t=0$, corresponding to the two fixations in $A$ and $B$, respectively, and we are interested in the fixation probabilities and the time to fixation of these two absorbing states as functions of the initial frequency $x$ and also of $\rho$, $w_A$, and $w_B$.
+ To these ends we use a diffusion approximation to the process $\{X_t\}$, which
+% Specifically, we compute the mean $\mu(x)$ and the variance $\sigma^2(x)$ of the change in one generation  in the frequency of phenotype $A$ given that at the beginning of the generation $X_t=Nx$.
+% 
+% To compute $\mu(x)$, observe that by \eqref{47}   
+% \begin{equation}
+% \an{
+% x' -x &={w_Ax\over\overline w}\rho +(1-\rho)x -x =\rho x\left[{w_A\over \overline w}-1\right]\cr
+% &= \rho x(1-x){w_A -w_B\over w_Ax +w_B(1-x)},}
+% \label{49}\end{equation}
+% since $\overline w =w_A x +w_B(1-x)$.
+% For the diffusion approximation, it is essential that the differential selection does not have a large effect per individual in each time period  $\Delta t$ $\bigl(\Delta t\simeq{1\over N}\bigr)$. That is, we assume
+% \begin{equation}
+% w_A -w_B ={s\over N}.
+% \label{50}\end{equation}
+% Then
+% \begin{equation}
+% x'-x\simeq {1\over N}\rho sx(1-x)
+% \label{51}\end{equation}
+% up to terms of order small than ${1\over N}$. Since one generation corresponds to $\Delta t\simeq {1\over N}$, we  conclude that
+% \begin{equation}
+% \mu(x) =\rho sx(1-x);\quad 0\le x\le 1.
+% \label{52}\end{equation}
+% In the same way, we can compute $\sigma^2(x)$, which is $x(1-x)$. These values of $\mu(x)$ and $\sigma^2(x)$ 
+ allows us to compute $u(x)$, the probability that phenotype $A$ goes to fixation when it's initial frequency is $x$, namely
+  \begin{equation}
+  u(x) ={1-e^{-2\rho sx}\over 1-e^{-2\rho s}}.
+ \label{53} \end{equation}
+ The expected time to fixation in $A$ starting from a initial frequency of $x$ is given by
+ \begin{equation}
+ T(x)={1-u(x)\over\rho s}\int_0^x{e^{2\rho s\xi}-1\over \xi(1-\xi)}d\xi +{u(x)\over\rho s}\int_x^1{1-e^{-2\rho s(1-\xi)}\over \xi(1-\xi)}d\xi,
+ \label{54}\end{equation}
+ where $u(x)$ is given in \eqref{53}, and in generations, $T(x)$ is multiplied by $N$ (the derivation is in Supplementary Material SPX).
+  Unfortunately the integrals in \eqref{54} cannot be done in closed form unless $\rho s=0$, in which case $u(x)=x$ and $T(x)=-2x\ln x -2(1-x)\ln(1-x)$ as Ewens points out on p.\ 160 \cite{ewens2004mathematical}, and only numerical computation of $T(x)$ is possible for specified values of $x$, $\rho$, and $s$.
+  
+  It is important to note that the fixation probability $u(x)$ is a monotone increasing function of $\rho$ when $s>0$. In fact we have the following result.
+ \medskip
+  
+\noindent{\bf Result 10}. {\sl When $s>0$ so that the phenotype $A$ is favored, the fixation probability $u(x)$ is monotone increasing in $\rho$.}\par
+ \medskip
+ 
+ The proof of Result 10 is in Supplementary Material SP5.  
+  Supplementary Figure S9 compares the fixation probability and time to fixation derived numerically from  simulating the Wright-Fisher Markov chain with the diffusion-derived values of $u(x)$ and $T(x)$. The fit is seen to be very good. Note that when $N$ is large, the Wright-Fisher model exhibits persistent fluctuation around the deterministic expectation, as shown by the orange traces in Supplemental Figure S2.
+ 
+ We can also develop a diffusion approximation for the case of a cycling environment. Suppose that selection changes in cycles of length $n$ such that within the cycle the fitness parameters are $w_A^t$, $w_B^t$ for $t=1,2,\dots,n$. Also let
+ \begin{equation}
+ {1\over N}s_t \simeq w_A^t -w_B^t,\qquad S_t =\sum_{i=1}^t s_i,\qquad t=1,2,\dots,n.
+ \label{55}\end{equation}
+ Following Karlin and Levikson \cite{karlin1974temporal} we have the following result.
+ \medskip
+ 
+ \noindent{\bf Result 11}. {\sl The mean $\mu(x)$ and variance $\sigma^2(x)$ of the change in the frequency of $A$ in one generation for the diffusion approximation in the case of a cycling environment $AkBl$, where $k+l=n$, are
+ \begin{equation}
+ \an{
+ \mu(x) &= \rho S_n x(1-x)\cr \sigma^2(x) &= nx(1-x).}
+ \label{56}\end{equation}}
+ 
+\noindent The proof of Result 11, based on induction on $n$, is given in Supplemental Materials SP6.
+ 
+  
+ Using the moments in \eqref{56}, the fixation probability $u(x)$ and the expected time $T(x)$ to fixation from an initial frequency of $x$ can be computed where $s$ is replaced by $s_n/n$. We find
+ \begin{equation}
+ u(x) ={1-e^{-2\rho{S_n\over n}x}\over 1-e^{-2\rho{S_n\over n}}},
+\label{57} \end{equation}
+ and $T(x)$ can be computed similarly.
+ 
+ In the  case of the $AkBl$ cycling environment, we write $n=k+l$, and if $w_A=W$, $w_B=w$ for $k$ generations, and $w_A=w$, $w_B=W$ for $l$ generations, we have
+ \begin{equation}
+ S_n=S_{k+l} =N(k-l)(W-w).
+ \label{58}\end{equation}
+ Figure 7 shows an example of how $(k-l)$, $\rho$, and $(W-w)$, which enter the formula for $u(x)$ in \eqref{57}, interact to affect fixation probabilities. More examples are illustrated in Supplementary Figure S11.
+
+% Figure 7
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../../figures/lk_fix_prob_C.pdf}
+\caption{Fixation in a finite population with different ratios of selection periods \(\frac{k}{l}\). Fixation probability of phenotype $A$ when starting with a single copy in a population of size $N$: $u(1/N) = (1-\exp(-2 \rho \frac{k-l}{k+l}(W-w))/(1-\exp(-2 N \rho \frac{k-l}{k+l}(W-w))$ (see \eqref{57} and \eqref{58}).
+\emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by
+selection. Here, fitness of the favored phenotype is $W = 1$, fitness of the unfavored phenotype is $w=0.5$, and the population size is \(N=10,000\). 
+See Figure S11 for additional examples.} \label{lk_fix_prob_C}
+\end{figure}
+
+ 
+ \section*{Discussion}
+
+Non-chromosomal modes of phenotypic transmission are receiving increasing attention \cite{whiten2017extension,jaenisch2003epigenetic,allis2016molecular}, especially with respect to their potential role in adaptation and maintenance of diversity \cite{rivoire2014model}. Here we have focused on a dichotomous phenotype transmitted through a combination of parental and non-parental transmission. In addition to the roles that these transmission modes play in the dynamics of phenotypic diversity in large and small populations, we have also investigated a genetic model for the evolution of the transmission mode itself.
+
+Our model differs markedly from that of Xue and Leibler \cite{xue2016evolutionary}, who took the individual phenotypic distribution (i.e., the probability that an individual develops one of a set of phenotypes) to be the inherited trait. In our model, the transmitted trait is the phenotype itself. Thus, with two phenotypic states $A$ and $B$, we track the frequency $x$ of $A$, whereas Xue and Leibler focus on the dynamics of the per-individual probability $\pi_A$ of learning the phenotype $A$. One interpretation of our model is as a mean-value approximation to the model of Xue and Leibler, where $x$, the state in our model, is the average of the population distribution of individual phenotype probabilities. 
+
+In a constant environment, the higher the vertical transmission rate $\rho$, the faster is the approach to fixation of the favored phenotype: $A$ if $w_A>w_B$ or $B$ if $w_B>w_A$. Here $1-\rho$, the oblique transmission rate, represents the added chance that an offspring becomes $A$ by learning from the parent's population after learning from its parents who have undergone selection (eq.\ 2). This simple phenotypic model does not allow a polymorphism to be achieved in a constant environment, but with more oblique transmission, approach to fixation is retarded.
+
+ With fluctuating environments, the dynamics of the phenotype frequencies are, in general, much more complicated. In particular, with deterministically cycling symmetric fitness values (the $AkBl$ model), it is impossible for fixation in $A$ and $B$ to both be stable. If $k=l$, for example, neither fixation is stable, and there is a single stable polymorphic equilibrium (with phenotypes $A$ and $B$ present; see Result 5). In the $A1B1$ case this  polymorphism is globally stable. In the $AkBl$ case, bounds on $l/k$ that determine the instability of both fixations, and hence the protection of polymorphism are given by the inequalities of \eqref{20}, which depend on both the fitness differences and the rate $\rho$ of vertical transmission. We conjecture that with $k\ne l$ there is a unique stable polymorphism when both fixations are unstable.
+This result is similar to the \emph{storage effect} \cite{chesson1981}, in which protection from selection maintains species coexistence: Consider a two species $A$ and $B$, with overlapping generations, an equal death rate $\rho$, and different growth rates $w_A$ and $w_B$; then \eqref{2} will model the change in frequency of species $A$. In our model, oblique transmission can be said to protect the unfavored phenotype from selection because it allows transmission without reproduction.
+ 
+ In deterministic one-locus, two-allele diploid population genetic models with cycling fitness regimes, Haldane and Jayakar \cite{haldane1963polymorphism} first showed the relevance of the geometric mean of genotypic fitnesses (cf.\ \eqref{16} and \eqref{17}) for the maintenance (or loss) of polymorphism. However, with equal homozygote fitnesses, which alternated in strength as a two-generation cycle (cf.\ $A1B1$), Karlin and Liberman \cite{karlin1975random} extended the Haldane-Jayakar results and found conditions under which both allelic fixations and polymorphic equilibrium could all be stable, with the evolution depending on initial allele frequencies, as well as the homozygote fitness differences between alternate generations. Our haploid model appears not to produce such dependence on the initial conditions.
+ 
+ When the fitnesses $w_A$ and $w_B$ are treated as random variables, rather than varying cyclically, stochastic local stability is the appropriate analog to local stability in the case of cyclic fitness variation. While fixations in phenotypes $A$ and $B$ cannot both be stochastically stable in this case, both may be unstable and a polymorphic distribution may result. The variance of this distribution is greater for larger values of $\rho$. This is because the  stochastic local stability conditions involve $E\bigl\{\log[1-\rho+\rho(w_A/w_B)]\bigr\}$ and the effect of the variance of $(w_A/w_B)$ will clearly increase as $\rho$ increases. In the finite population case, a greater level of vertical transmission makes selection more effective, increasing the probability $u(x)$ of fixation and reducing the expected time to fixation.
+ 
+ We have shown that in the $A1B1$ case, the rate of vertical transmission tends to decrease when it is under the control of a genetic modifier. From numerical iteration, it appears that this is also true in the random selection case, when the fitnesses of $A$ and $B$ are identically distributed and independent between generations. However, for $AkBl$ selection regimes more complicated than $A1B1$, evolution of a modifier of vertical transmission is not straightforward. While reduction of $\rho$ occurs in the $A2B2$ regime, the uninvadable value $\rho^*$ is not zero for all the fitness values explored in $AkBk$ regimes with $k>2$ (Figure 6B, Table 1). In fact, $\rho^*$ increases sharply as $k$ increases beyond $k=2$. This is an unusual scenario for genetic modifiers, although it must be noted that a modifier of $\rho$ is not neutral; it affects primary selection, while neutral  modifiers of recombination, mutation, and migration affect induced or secondary selection.
+To explain the marked difference in the value of the stable vertical transmission rate consider the probability $q$ that offspring receive phenotype $A$ when it is about to be the favored phenotype, and for simplicity, assume strong selection, such that parents are likely to be of the phenotype favored in the parental generation, a periodically changing environment $AkBl$, and a population at equilibrium.
+With vertical transmission, $q_v=\frac{k-1}{k}$.
+With oblique transmission, $q_o=x$ the frequency of the favored phenotype in the parental generation.
+For $k=l$, the frequency of $A$ cycles around 0.5 so $q_o \approx 0.5$, whereas $q_v=0, {1 \over 2}, {2 \over 3}, {3 \over 4}, \ldots$ for $k=1, 2, 3, 4, \ldots$. Therefore, for $k>2$ vertical transmission increases $q$ whereas for $k=1$ and $2$, oblique transmission increases $q$.
+ 
+ The dependence of the modifier dynamics on the strength of selection (that is $w$ when $W=1$) is complicated by the approach of the system to fixation. When the phenotype frequencies become exceedingly small, dependence of the dynamics of the modifier of $\rho$ becomes extremely difficult to detect due to numerical instability; this is especially true for larger values of $k$ in $AkBk$ regimes when $w$ is small (Table 1, Figure 6B with $k\ge 19$).
+ 
+ Figure 6A (see also Table 1) shows that the value $\hat\rho$ that maximizes the geometric mean fitness is the same as the evolutionarily stable value $\rho^*$ in the $A1B1$ and $A2B2$ selection regimes. For $AkBk$ regimes with $k>2$, our numerical analysis shows the $\hat\rho$ depends strongly on the strength of selection; i.e., the value of $w$ relative to $W=1$. For $AkBl$ regimes with $w=0.1$, the difference between $\hat\rho$ and $\rho^*$ is seen even with the $A1B2$ environment. For $AkBk$ regimes and $w=0.9$, we find $\hat\rho=0$, while $\rho^*$ is close to $0.9$. For larger values of $k$, $\hat\rho$ lies between 0.15 and 0.25, while $\rho^*$ remains above 0.8 and can reach 0.99 for very large $k$. Comparing Figure 6A with the asymptotic growth rate (AGR) of Xue and Leibler \cite{xue2016evolutionary}, whose parameter $\eta$ is the rate at which an individual learns from its parental lineage, there is a similarity for our curves for $w=0.1$ and $0.5$ with their curve in the $AkBk$ environment. They show the AGR decreasing with $\eta$ in the $AkBk$ regime for small $k$, but larger values of $k$ entail that the AGR has a maximum for an intermediate value of $\eta$.
+ 
+ Although the models of Xue and Leibler \cite{xue2016evolutionary} and that analyzed here both incorporate parental and non-parental transmission, they do so in qualitatively different ways. The model treated in the present paper is squarely in the tradition of gene-culture coevolutionary theory, together with modifier theory from population genetics. The different findings from the two classes of models are interesting and suggest that further exploration of the overlaps and discrepancies between the two approaches would be worthwhile.
+ 
+
+\acknow{This manuscript was supported in part by the Stanford Center for Computational, Evolutionary and Human Genomics, and by the Morrison Institute for Population and Resources Studies, Stanford University.}
+
+
+
+
+ 
+
+%\section*{Guide to using this template on Overleaf}
+
+%Please note that whilst this template provides a preview of the typeset manuscript for submission, to help in this preparation, it will not necessarily be the final publication layout. For more detailed information please see the \href{http://www.pnas.org/site/authors/format.xhtml}{PNAS Information for Authors}.
+
+%If you have a question while using this template on Overleaf, please use the help menu (``?'') on the top bar to search for \href{https://www.overleaf.com/help}{help and tutorials}. You can also \href{https://www.overleaf.com/contact}{contact the Overleaf support team} at any time with specific questions about your manuscript or feedback on the template.
+
+%\subsection*{Author Affiliations}
+
+%Include department, institution, and complete address, with the ZIP/postal code, for each author. Use lower case letters to match authors with institutions, as shown in the example. Authors with an ORCID ID may supply this information at submission.
+
+%\subsection*{Submitting Manuscripts}
+
+%All authors must submit their articles at \href{http://www.pnascentral.org/cgi-bin/main.plex}{PNAScentral}. If you are using Overleaf to write your article, you can use the ``Submit to PNAS'' option in the top bar of the editor window. 
+
+%\subsection*{Format}
+
+%Many authors find it useful to organize their manuscripts with the following order of sections;  Title, Author Affiliation, Keywords, Abstract, Significance Statement, Results, Discussion, Materials and methods, Acknowledgments, and References. Other orders and headings are permitted.
+
+%\subsection*{Manuscript Length}
+
+%PNAS generally uses a two-column format averaging 67 characters, including spaces, per line. The maximum length of a Direct Submission research article is six pages and a PNAS PLUS research article is ten pages including all text, spaces, and the number of characters displaced by figures, tables, and equations.  When submitting tables, figures, and/or equations in addition to text, keep the text for your manuscript under 39,000 characters (including spaces) for Direct Submissions and 72,000 characters (including spaces) for PNAS PLUS.
+
+%\subsection*{References}
+
+%References should be cited in numerical order as they appear in text; this will be done automatically via bibtex, e.g. \cite{belkin2002using} and \cite{berard1994embedding,coifman2005geometric}. All references, including for the SI, should be included in the main manuscript file. References appearing in both sections should not be duplicated.  SI references included in tables should be included with the main reference section. 
+
+%\subsection*{Data Archival}
+
+%PNAS must be able to archive the data essential to a published article. Where such archiving is not possible, deposition of data in public databases, such as GenBank, ArrayExpress, Protein Data Bank, Unidata, and others outlined in the Information for Authors, is acceptable.
+
+%\subsection*{Language-Editing Services}
+%Prior to submission, authors who believe their manuscripts would benefit from professional editing are encouraged to use a language-editing service (see list at www.pnas.org/site/authors/language-editing.xhtml). PNAS does not take responsibility for or endorse these services, and their use has no bearing on acceptance of a manuscript for publication. 
+
+%\begin{figure}%[tbhp]
+%\centering
+%\includegraphics[width=.8\linewidth]{frog}
+%\caption{Placeholder image of a frog with a long example caption to show justification setting.}
+%\label{fig:frog}
+%\end{figure}
+
+%\subsection*{Digital Figures}
+%\label{sec:figures}
+
+%Only TIFF, EPS, and high-resolution PDF for Mac or PC are allowed for figures that will appear in the main text, and images must be final size. Authors may submit U3D or PRC files for 3D images; these must be accompanied by 2D representations in TIFF, EPS, or high-resolution PDF format.  Color images must be in RGB (red, green, blue) mode. Include the font files for any text. 
+
+%Figures and Tables should be labelled and referenced in the standard way using the \verb|\label{}| and \verb|\ref{}| commands.
+
+%Figure \ref{fig:frog} shows an example of how to insert a column-wide figure. To insert a figure wider than one column, please use the \verb|\begin{figure*}...\end{figure*}| environment. Figures wider than one column should be sized to 11.4 cm or 17.8 cm wide.
+
+%\subsection*{Single column equations}
+
+%Authors may use 1- or 2-column equations in their article, according to their preference.
+
+%To allow an equation to span both columns, options are to use the \verb|\begin{figure*}...\end{figure*}| environment mentioned above for figures, or to use the \verb|\begin{widetext}...\end{widetext}| environment as shown in equation \ref{eqn:example} below.
+
+%Please note that this option may run into problems with floats and footnotes, as mentioned in the \href{http://texdoc.net/pkg/cuted}{cuted package documentation}. In the case of problems with footnotes, it may be possible to correct the situation using commands \verb|\footnotemark| and \verb|\footnotetext|.
+
+%% Do not use widetext if paper is in single column.
+%\begin{widetext}
+%\begin{align*}
+%(x+y)^3&=(x+y)(x+y)^2\\
+%       &=(x+y)(x^2+2xy+y^2) \numberthis \label{eqn:example} \\
+%       &=x^3+3x^2y+3xy^3+x^3. 
+%\end{align*}
+%\end{widetext}
+
+%\begin{table}%[tbhp]
+%\centering
+%\caption{Comparison of the fitted potential energy surfaces and ab initio benchmark electronic energy calculations}
+%\begin{tabular}{lrrr}
+%Species & CBS & CV & G3 \\
+%\midrule
+%1. Acetaldehyde & 0.0 & 0.0 & 0.0 \\
+%2. Vinyl alcohol & 9.1 & 9.6 & 13.5 \\
+%3. Hydroxyethylidene & 50.8 & 51.2 & 54.0\\
+%\bottomrule
+%\end{tabular}
+
+%\addtabletext{nomenclature for the TSs refers to the numbered species in the table.}
+%\end{table}
+
+%\subsection*{Supporting Information (SI)}
+
+%The main text of the paper must stand on its own without the SI. Refer to SI in the manuscript at an appropriate point in the text. Number supporting figures and tables starting with S1, S2, etc. Authors are limited to no more than 10 SI files, not including movie files. Authors who place detailed materials and methods in SI must provide sufficient detail in the main text methods to enable a reader to follow the logic of the procedures and results and also must reference the online methods. If a paper is fundamentally a study of a new method or technique, then the methods must be described completely in the main text. Because PNAS edits SI and composes it into a single PDF, authors must provide the following file formats only.
+
+%\subsubsection*{SI Text}
+
+%Supply Word, RTF, or LaTeX files (LaTeX files must be accompanied by a PDF with the same file name for visual reference).
+
+%\subsubsection*{SI Figures}
+
+%Provide a brief legend for each supporting figure after the supporting text. Provide figure images in TIFF, EPS, high-resolution PDF, JPEG, or GIF format; figures may not be embedded in manuscript text. When saving TIFF files, use only LZW compression; do not use JPEG compression. Do not save figure numbers, legends, or author names as part of the image. Composite figures must be pre-assembled.
+
+%\subsubsection*{3D Figures}
+
+%Supply a composable U3D or PRC file so that it may be edited and composed. Authors may submit a PDF file but please note it will be published in raw format and will not be edited or composed.
+
+%\subsubsection*{SI Tables}
+
+%Supply Word, RTF, or LaTeX files (LaTeX files must be accompanied by a PDF with the same file name for visual reference); include only one table per file. Do not use tabs or spaces to separate columns in Word tables.
+
+%\subsubsection*{SI Datasets} 
+
+%Supply Excel (.xls), RTF, or PDF files. This file type will be published in raw format and will not be edited or composed. 
+
+%\subsubsection*{SI Movies}
+
+%Supply Audio Video Interleave (avi), Quicktime (mov), Windows Media (wmv), animated GIF (gif), or MPEG files and submit a brief legend for each movie in a Word or RTF file. All movies should be submitted at the desired reproduction size and length. Movies should be no more than 10 MB in size. 
+
+%\subsubsection*{Still images}
+
+%Authors must provide a still image from each video file. Supply TIFF, EPS, high-resolution PDF, JPEG, or GIF files. 
+
+%\subsubsection*{Appendices}
+
+%PNAS prefers that authors submit individual source files to ensure readability. If this is not possible, supply a single PDF file that contains all of the SI associated with the paper. This file type will be published in raw format and will not be edited or composed.
+
+%\matmethods{Please describe your materials and methods here. This can be more than one paragraph, and may contain subsections and equations as required. Authors should include a statement in the methods section describing how readers will be able to access the data in the paper. 
+
+%\subsection*{Subsection for Method}
+%Example text for subsection.
+%}
+
+%\showmatmethods % Display the Materials and Methods section
+
+%\acknow{Please include your acknowledgments here, set in a single paragraph. Please do not include any acknowledgments in the Supporting Information, or anywhere else in the manuscript.}
+
+%\showacknow % Display the acknowledgments section
+
+% \pnasbreak splits and balances the columns before the references.
+% If you see unexpected formatting errors, try commenting out this line
+% as it can run into problems with floats and footnotes on the final page.
+%\pnasbreak
+
+% Bibliography
+\bibliography{ramrefs}
+
+\showacknow
+
+\end{document}

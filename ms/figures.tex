@@ -168,8 +168,8 @@ In all cases, \emph{W=1}.}\label{fig:A1B2_polymorphism}
 \caption{Fitness ``optimal'' and evolutionary stable vertical transmission rate in $AkBk$ selection regime. 
 \textbf{(A)} The vertical transmission rate $\hat{\rho}$ that maximized the geometric average of the population mean fitness is zero (complete oblique transmission) when selection cycles quickly between favoring phenotype $A$ and $B$, and then abruptly transitions to $\approx 0.2$, followed by a slow decrease (see Fig. S5 and S6 for details on the abrupt transition).
 \textbf{(B)} The evolutionary stable rate $\rho^*$, which cannot be invaded by modifiers with either higher or lower vertical transmission rate $P$, rapidly increases from zero when selection cycles are short ($k=1$ or $2$) to roughly 1 when selection cycles are longer.
-The stable rate was found by finding the root of $\frac{\partial \lambda_1}{\partial P}$, the derivative of the leading eigenvalue of the external stability matrix w.r.t to the rate of the invading modifier (see \emph{Supplemental Material SP6} for details). The dashed line shows $1-\frac{1}{k-1}$, which fit the values for $w=0.5$ (Carja et al. 2011). The values for $w=0.1$ (blue) could not be calculated for $k > 19$ due to numerical instability when selection is strong and the duration between selection fluctuations is long.
-In all cases, $W=1$.}\label{fig:AkBk_stable_optimal_rate}
+The dashed line shows $1-\frac{1}{k-1}$, which fit the values for $w=0.5$ (Carja et al. 2011). The values for $w=0.1$ (blue) could not be calculated for $k > 19$ due to numerical instability when selection is strong and the duration between selection fluctuations is long.
+In all cases, $W=1$. See \emph{Supplemental Material SP6} for details on how we calculated the stable rate.}\label{fig:AkBk_stable_optimal_rate}
 \end{figure}
 
 %Figure 9
@@ -193,6 +193,17 @@ population size, \(N=10,000\).}\label{fixation_prob_time}
 \emph{k} and \emph{l} are the number of
 generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by
 selection. In all cases, fitness of the favored phenotype, $W = 1$; fitness of the unfavored phenotype is $w=1-s$ and the population size is \(N=10,000\).} \label{lk_fix_prob}
+\end{figure}
+
+%Figure 10
+\begin{figure}
+\centering
+\includegraphics{../figures/lk_fix_prob_C.pdf}
+\caption{Fixation in a finite population with different ratios of selection periods \(\frac{k}{l}\). Fixation probability of phenotype $A$ when starting with a single copy in a population of size $N$: $u(1/N) = (1-\exp(-2 \rho \frac{k-l}{k+l}(W-w))/(1-\exp(-2 N \rho \frac{k-l}{k+l}(W-w))$ (see eqs. 59--60).
+\emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by
+selection. Here, fitness of the favored phenotype is $W = 1$, fitness of the unfavored phenotype is $w=0.5$, and the population size is \(N=10,000\). 
+See Figure SX for additional parameters.} \label{lk_fix_prob_C}
 \end{figure}
 
 \end{document}  

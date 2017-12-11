@@ -1,0 +1,300 @@
+\magnification=1170
+\hsize=6.5truein
+\hoffset=.05truein
+%\vsize=8.5truein
+%\voffset=.25truein
+\hfuzz=14pt
+\parskip=5pt
+\baselineskip=16pt
+
+\def\harr#1#2{\smash{\mathop{\hbox to .2in{\rightarrowfill}}\limits^{\scriptstyle#1}_{\scriptstyle#2}}}
+
+\def\var{\varepsilon}
+
+\def\ref{\par\noindent\hangindent.35truein}
+
+\def\cl{\hbox{\tenbf L}}
+\def\cj{\hbox{\tenbf J}}
+\def\ci{\hbox{\tenbf I}}
+
+ 
+ \centerline{\bf SUPPLEMENTAL MATERIALS}
+ \bigskip
+ 
+ \noindent{\bf SP1. Proof of Uniqueness in Result 5}
+ \medskip
+ 
+ Following (10) the transformation of the frequency $x$ of phenotype $A$ is
+ $$x'=F(x) =\underbrace{F_B\circ\cdots\circ F_B}_{k\ \hbox{\sevenrm times}}\;\circ\; \underbrace{F_A\circ\cdots\circ F_A}_{k\ \hbox{\sevenrm times}}(x).\eqno(\hbox{\tenrm S}1)$$
+ Using (28) and (29) we can write
+ $$\eqalignno{
+ &F'_A(x) =\rho{wW\over \bigl[\overline w(x)\bigr]^2} +(1-\rho),\quad \overline w(x)=(W-w)x +w&(\hbox{\tenrm S}2)\cr\noalign{\smallskip}
+ &F'_B(x) =\rho{wW\over \bigl[\widetilde w(x)\bigr]^2} +(1-\rho),\quad \widetilde w(x)=(w-W)x +W.&(\hbox{\tenrm S}3)\cr
+ }$$
+Since $F'_A(x) >0$, $F'_B(x)>0$ for  $0\le x\le 1$,  all the functions $F_A$, $F_B$, $F_A\circ\cdots\circ F_A$, $F_B\circ\cdots\circ F_B$, and $F$ are monotone increasing for  $0\le x\le 1$.
+
+From Result 2, the two fixations $x=0$ and $x=1$ are not stable because $F'(0)>1$ and $F'(1)>1$ (see eq.\ 15). Therefore
+$$\eqalignno{
+&F(x)-x>0\ \hbox{\tenrm for}\ x>0\ \hbox{\tenrm ``near''}\ x=0,&\hbox{\tenrm (S4)}\cr
+&F(x)-x<0\ \hbox{\tenrm for}\ x<1\ \hbox{\tenrm ``near''}\ x=1.&\hbox{\tenrm (S5)}\cr}$$
+Hence, as $F(x)-x$ is a continuous function of $x$ for $0\le x\le 1$, there exists (at least one) polymorphic equilibrium $x^*$ with $0<x^*<1$ such that $F(x^*)=x^*$.
+
+If there is more than one polymorphic equilibrium, and as there is a finite number of equilibria, let $x^*$ be the ``closest'' polymorphic equilibrium to $x=0$.
+Since $F(x)>x$ for $0<x<x^*$, $F(x)<x$ for $x>x^*$ (at least ``near'' $x^*$), and $F(x)$ is a monotone increasing function in $[0,1]$,  $x^*$ must be locally stable.
+
+Let $\hat x=F(\hat x)$ with $0<\hat x<1$ be any polymorphic equilibrium, then from (S1) its evolution in the $k+k$ generations is 
+$$\vbox{\halign{
+\hfil$#$\hfil &&\hfil\ $#$\hfil\cr
+&A&&A&&\cdots&&A&&B&&B&&\cdots&&B&&A\cr
+\hat x=&\hat x_0&\to&\hat x_1&\to&\cdots&\to&x_{k-1}&\to&\hat y_0&\to&\hat y_1&\to&\cdots&\to&\hat y_{k-1}&\to&\hat x_0&=\hat x.\cr
+}}\eqno(\hbox{\tenrm S}6)$$
+Due to the symmetry between phenotypes $A$ and $B$ we have
+$$\hat y_t=1-\hat x_t,\qquad \overline w\bigl(\hat x_t\bigr) =\widetilde w\bigl(\hat y_t\bigr)\eqno(\hbox{\tenrm S}7)$$
+for all $t=0,1,2,\dots,k-1$.
+
+The polymorphic equilibrium $\hat x$ is locally stable if $F'(\hat x)<1$, or from (S1), (S2), and (S3), if
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}\cdot\prod_{t=0}^{k-1} \left\{\rho{wW\over\bigl[\widetilde w(\hat y_t)\bigr]^2} +(1-\rho)\right\}<1.\eqno(\hbox{\tenrm S}8)$$
+Applying (S7), we conclude that $\hat x$ is locally stable if
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}<1.\eqno(\hbox{\tenrm S}9)$$
+
+As $x^*$, the ``closest'' polymorhpic equilibrium to $x=0$, is stable, then (S9) implies that
+$$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(x_t^*)\bigr]^2} +(1-\rho)\right\}\le 1,\eqno(\hbox{\tenrm S}10)$$
+ where $x_t^*$ for $t=0,1,\dots,k-1$ is defined as in (S6).
+ 
+ If $\hat x$ is any  polymorphic equilibrium other than $x^*$, then $\hat x>x^*$ or $\hat x_0>x_0^*$ by (S4). Since $F_A$ is a monotone increasing function and
+ $$\hat x_{t+1} =F_A\bigl(\hat x_t\bigr),\quad x_{t+1}^* =F_A\bigl(x_t^*\bigr)\quad t=0,1,\dots,k-1,\eqno(\hbox{\tenrm S}11)$$
+ then by induction we have $\hat x_t>x_t^*$ for all $t=0,1,2,\dots,k-1$. In addition, as $\overline w(x) =(W-w)x+w$ and $W>w$, we also have $\overline w(\hat x_t)>\overline w(x_t^*)$ for all $t=0,1,2,\dots,k-1$, and
+ $$\prod_{t=0}^{k-1}\left\{\rho{wW\over\bigl[\overline w(\hat x_t)\bigr]^2} +(1-\rho)\right\}<\prod_{t=0}^{k-1} \left\{\rho{wW\over\bigl[\overline w(x_t^*)\bigr]^2} +(1-\rho)\right\}\le 1.\eqno(\hbox{\tenrm S}12)$$
+Hence $\hat x$ is also locally stable.
+But it is impossible that {\sl all} polymorphic equilibria are stable unless there is only one stable polymorphic equilibrium. Therefore $x^*$ is the unique stable polymorphic equilibrium, and since $F(x)>x$ for $0<x<x^*$ with $F(x)<x$ for $x^*<x<1$, and $F(x)$ is monotone increasing in $[0,1]$, therefore $x^*$ is globally stable.
+  \bigskip
+ \bigskip
+
+\noindent{\bf SP2. Proof of Result 6}
+ \medskip
+ 
+ Rewrite recursion (31) as
+ $${x_t+1\over x_t} =(1+\rho s_t)\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}13)$$
+ Then
+ $$\log x_{t+1} -\log x_t =\log(1+\rho s_t) +\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right].\eqno(\hbox{\tenrm S}14)$$
+ Summation yields
+ $${1\over t}\left[\log x_t-\log x_0\right] ={1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n) +{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n{\rho s_n(1+s_n)\over (1+\rho s_n)(1+x_ns_n)}\right].\eqno(\hbox{\tenrm S}15)$$
+Let $\mu=E\left[\log(1+\rho s_t)\right]$. As $\{s_t\}_{t\ge 0}$ are independent and identically distributed random variables, the {\sl strong law of large numbers} applies and
+$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu\eqno(\hbox{\tenrm S}16)$$
+almost surely.
+
+Let $\zeta$ be such that ${1\over t}\sum_{n=0}^{t-1}\log[1+\rho s_n(\zeta)]=\mu$ and assume that $\lim_{t\to\infty}x_t(\zeta)=0$. As the random variables $\{s_t\}_{t\ge 0}$ are uniformally bounded,
+$$x_t(\zeta){\rho s_t(\zeta)[1+s_t(\zeta)]\over [1+\rho s_t(\zeta)][1+x_t(\zeta)s_t(\zeta)]}\;\;\harr{}{t\to\infty}\;\;0\eqno(\hbox{\tenrm S}17)$$
+and
+$$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log\left[1-x_n(\zeta){\rho x_n(\zeta)[1+s_n(\zeta)]\over [1+\rho s_n(\zeta)][1+x_t(\zeta)s_n(\zeta)]}\right]=0.\eqno(\hbox{\tenrm S}18)$$
+Thus (S15) implies that
+$$\lim_{t\to\infty}{1\over t}\left[\log x_t(\zeta) -\log x_0(\zeta)\right]=\mu.\eqno(\hbox{\tenrm S}19)$$
+If $\mu =E\left[\log(1+s_t)\right]>0$, then from (S19) we deduce that $\lim_{t\to\infty}x_t(\zeta)=\infty$, a contradiction.
+Therefore when $\mu>0$, $P\left(\lim_{t\to\infty}x_t=0\right)=0$, and fixation of $B$ ($x^*=0$) is stochastically locally unstable.
+
+ Thus by Result 6, for $x^*=0$ to be stochastically locally stable it is necessary that $E[\log(1+\rho s_t)]\le 0$. In fact, the strict inequality is sufficient.
+ 
+ Figure 3 presents a numerical example of the dynamics of recursion (31) with a specific random selection coefficient $s_t$.
+\vfil\break
+%\bigskip
+%\bigskip
+
+ \noindent{\bf SP3. Proof of Result 7}
+ \medskip
+
+Let $\mu=E[\log(1+\rho s_t)]$. Then as $\{s_t\}_{t\ge 0}$ are independent and identically distributed random variables, the strong law of large number applies and almost surely
+ $$\lim_{t\to\infty}{1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)=\mu<0.\eqno(\hbox{\tenrm S}20)$$
+ Appealing to the Egoroff Theorem, for any $\var>0$ there exists $T$ such that 
+ $$P\left({1\over t}\sum_{n=0}^{t-1}\log(1+\rho s_n)<{\mu\over 2}\ \hbox{\tenrm for all}\ t\ge T\right)\ge 1-\var.\eqno(\hbox{\tenrm S}21)$$
+ As $0\le \rho\le 1$ and the $\{s_t\}_{t\ge 0}$ are uniformly bounded, we can find a $\delta'>0$ such that
+ $$x_t<\delta'\Longrightarrow\left|\log\left[1-x_t{\rho s_t(1+s_t)\over (1+\rho s_t)(1+x_ts_t)}\right]\right|<-{\mu\over 4}.\eqno(\hbox{\tenrm S}22)$$
+ Also, as $0\le x_t\le 1$ for all $t$,
+ $$x_{t+1}=x_t{1+\rho s_t +x_t(1-\rho)s_t\over 1+x_ts_t}< Kx_t,\eqno(\hbox{\tenrm S}23)$$
+ where $K$ is independent of $t$. It follows that there exists a $\delta$ with $0<\delta<\delta'$ such that
+ $$x_o<\delta\Longrightarrow x_t<\delta'\ \hbox{\tenrm for all}\ t=0,1,2,\dots,T-1.\eqno(\hbox{\tenrm S}24)$$
+ Let $\xi$ be a realization of the evolutionary process such that
+ $${1\over t}\sum_{n=0}^{t-1}\log[1+\rho s_n(\xi)]<{\mu\over 2}\ \hbox{\tenrm for all}\  t\ge T\eqno(\hbox{\tenrm S}25)$$
+ and assume $x_0<\delta$. Then
+ $$\eqalign{
+ {1\over T}&[\log x_T(\xi) -\log x_0(\xi)] \cr
+ &={1\over T}\sum_{n=0}^{T-1}\log[1+\rho s_n(\xi)]+{1\over T}\sum_{n=0}^{T-1}\log[1-x_n(\xi){\rho s_n(\xi)[1+s_n(\xi)]\over [1+\rho s_n(\xi)][1+x_n(\xi)s_n(\xi)]}\cr\noalign{\smallskip}
+ &<{\mu\over 2}- {\mu\over 4} ={\mu\over 4}<0, }\eqno(\hbox{\tenrm S}26)$$
+ and therefore $x_T(\xi) <x_0(\xi) <\delta'$. Invoking induction we get that for $t\ge T$
+ $${1\over t}\log{x_t(\xi)\over x_0}\le {\mu\over 4},\eqno(\hbox{\tenrm S}27)$$
+ or for all $t\ge T$
+ $$x_t(\xi)\le x_0\exp\left({\mu\over 4}t\right).\eqno(\hbox{\tenrm S}28)$$
+ 
+ As $\mu<0$, this implies that $x_t(\xi)\,\harr{}{t\to\infty}\,0$. Therefore we have shown that for given $\var>0$ there is a $\delta>0$ such that if $0<x_0<\delta$, then $P\left(\lim_{t\to\infty}x_t =0\right)\ge 1-\var$, and therefore $x^*=0$, the fixation in $B$ is stochastically locally stable. The second statement of Result 6 follows from the convexity of the log function and Jensen's inequality.
+\bigskip
+\bigskip
+
+
+ \noindent{\bf SP4. Proof of Result 8}
+ \medskip
+
+As $\cl$ is a positive matrix, by the Perron-Frobenius theorem $\cl$ has a positive eigenvalue, and as $a_0>0$ and $a_2=1$ the product of the two eigenvalues of $\cl$ is positive. Thus $\cl$ has two positive eigenvalues. Let $R(1)=R(1;P)$, then from (43)
+  $$R(1;P) = {W^2w^2-\left(\overline w^*\widetilde w^*\right)^2\over\left(\overline w^*\right)^4}P^2 +2P{\left(\widetilde w^*\right)^2 -Ww\over \left(\overline w^*\right)^2} +{\left(\overline w^*\right)^2-\left(\widetilde w^*\right)^2\over\left(\overline w^*\right)^2},\eqno(\hbox{\tenrm S}29)$$
+where $\widetilde w^* =Wx_2^* +wx_1^*$.  
+
+By (36) $\bigl(\sqrt{Ww}-w\bigr)/(W-w) <x_1^* <{1\over 2}$, from which it is easily seen that
+$$\sqrt{Ww}< \overline w^*<\widetilde w^* .\eqno(\hbox{\tenrm S}30)$$
+
+ When $P=\rho$ one of the eigenvalues of $\cl$ is 1; hence $R(1;\rho)=0$. Another root of $R(1;P)=0$ is $\bigl[(\overline w^*)^2 +\overline w^*\widetilde w^*\bigr]/\bigl[Ww +\overline w^*\widetilde w^*\bigr]$, which by (S30) is larger than 1.  As $R(1;0)=\bigl[(\overline w^*)^2 -(\widetilde w^*)^2\bigr]/(\overline w^*)^2 <0$ by (S30), we deduce that when $0<P<\rho$, $R(1;P)<0$, whereas when $\rho<P<1$, $R(1;P)>0$.
+ Hence, when $P<\rho$, $R(1)<0$, and since $a_2=1$, $R(+\infty)>0$, we conclude that $R(\lambda)=0$ has a positive root larger than 1 and the largest positive eigenvalue of $\cl$ is larger than 1.
+ 
+ When $P>\rho$, we have $R(1)>0$ and also $R(0)=a_0>0$. As $R(\lambda)=0$ has two positive roots and as $a_2>0$, $R(\lambda)$ is convex, either the two positive roots are less than 1 or both larger than one. But the product of the two roots is $P^2W^2w^2/(\overline w^*)^2<1$ by (S30); thus when $P>\rho$ the two positive eigenvalues of $\cl$ are less than 1.
+%\bigskip
+%\bigskip
+\vfil
+\break
+
+
+ \noindent{\bf SP5. Proof of Result 10}
+ \medskip
+
+Without loss of generality and for the ease of representation, we will show that for $t>0$, 
+  $$v (x;t) ={1-e^{-tx}\over 1-e^{-t}}\eqno(\hbox{\tenrm S}31)$$
+  is monotone increasing as a function of $t$. Observe that
+  $${\partial v\over\partial t} = {\left(1-e^{-t}\right)xe^{-tx} -\left(1-e^{-tx}\right)e^{-t}\over \left(1-e^{-t}\right)^2}.\eqno(\hbox{\tenrm S}32)$$
+  
+   \noindent For the monotonicity we have to show that
+  $$f(x;t) =\left(1-e^{-t}\right)xe^{-tx} -\left(1 -e^{-tx}\right)e^{-t} \ge 0\eqno(\hbox{\tenrm S}33)$$ 
+  when $t>0$ and $0\le x\le 1$. Note that $f(0;t)=0$ and $f(1;t)=0$. Also
+  $${\partial f\over\partial x} =\left(1-e^{-t}\right)\left(e^{-tx}-txe^{-tx}\right) -te^{-tx}e^{-t},\eqno(\hbox{\tenrm S}34)$$
+  or
+  $${\partial f\over\partial x} =e^{-tx}\left[\left(1-e^{-t}\right)\left(1-tx\right) -te^{-t}\right] =e^{-tx}g(x;t),\eqno(\hbox{\tenrm S}35)$$
+ say, where for fixed $t$, $g(x;t)$ is a linear function of $x$, which vanishes at $x_0 =(1-e^{-t} -te^{-t})/t(1-e^{-t})$. If $t>0$, $e^t >1+t$, so $1>e^{-t}(1+t)$ and $x_0>0$. Also if $t>0$, $e^{-t}>1-t$, and so $1-e^{-t} -te^{-t} <t(1-e^{-t})$ and $x_0<1$. Since $g(0,t) =1 -e^{-t} -te^{-t} >0$ and $g(1;t) =(1-e^{-t})(1-t) -te^{-t} <0$ for $t>0$, we deduce that ${\partial f\over\partial x}(x,t)>0$ for $ 0<x<x_0$ and ${\partial f\over\partial x}(x,t)<0$ for $x_0<x<1$ for all $t>0$. These facts, combined with $f(0,t) =f(1;t) =0$, prove that $f(x;t)\ge 0$ for $0\le x\le 1$ (in fact, $f(x;t)>0$ for $0<x<1$), and inequality (S33) is satisfied as desired.
+\bigskip
+\bigskip
+
+ \noindent{\bf SP6. Proof of Result 11}
+ \medskip
+
+ The proof is based on induction on $n$, where in order to prove (72), we show that if $X_t$ is the number of individuals with phenotype $A$ at stage $t$ of the cycle, and $x$ is the initial frequency of $A$, then
+ $$E\left({X_t\over N} -x\right) \simeq {1\over N}\rho S_t x(1-x),\qquad V\left({X_t\over N}\right)\simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}36)$$
+ where $N$ is the size of the population. When $t=1$, (S36) coincides with the constant environment case. Assuming (S36), we go to $t+1$. Now $X_{t+1}$ given $X_t=Ny$ has a binomial distribution with parameters $(N,y')$. Hence
+ $$E\left({X_{t+1}\over N} -{X_t\over N} \mid X_t=Ny\right) =y'-y.\eqno(\hbox{\tenrm S}37)$$
+ Following Ewens (2004, chapter 5), $y'-y\simeq (1/N)\rho s_{t+1}y(1-y)$, and so
+ $$E\left({X_{t+1}\over N} -{X_t\over N}\mid X_t\right)\simeq {1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}38)$$
+ Observe that
+ $$\eqalign{
+ E\left[{X_t\over N}\left(1-{X_t\over N}\right)\right] &= E\left({X_t\over N}\right) -E\left[\left({X_t\over N}\right)^2\right]\cr\noalign{\smallskip}
+    &= E\left({X_t\over N}\right) -V\left({X_t\over N}\right) -\left[E\left({X_t\over N}\right)\right]^2.\cr}\eqno(\hbox{\tenrm S}39)$$
+ By the induction assumption, $V(X_t/N)\simeq (1/N)tx(1-x)$, and ignoring terms of order $1/N^2$ we have
+ $$E\left({X_{t+1}\over N} -{X_t\over N}\right)\simeq {1\over N}\rho s_{t+1} E\left({X_t\over N}\right)\left[1-E\left({X_t\over N}\right)\right].
+\eqno(\hbox{\tenrm S}40)$$
+Applying (S36) we have
+$$\eqalign{
+E\left({X_t\over N}\right)  &\simeq x+{1\over N}\rho S_tx(1-x)\cr\noalign{\smallskip}
+1-E\left({X_t\over N}\right) &\simeq 1-x-{1\over N}\rho S_tx(1-x),} \eqno(\hbox{\tenrm S}41)$$
+and ignoring terms $O(1/N^2)$, we find
+$$E\left({X_{t+1}\over N} -{X_t\over N}\right) \simeq {1\over N}\rho s_{t+1}x(1-x).\eqno(\hbox{\tenrm S}42)$$
+Thus
+$$\eqalign{
+E\left({X_{t+1}\over N} -x\right) &= E\left({X_{t+1}\over N} -{X_t\over N}\right) +E\left({X_t\over N} -x\right)\cr\noalign{\smallskip}
+&\simeq {1\over N}\rho s_{t+1}x(1-x) +{1\over N}\rho S_t x(1-x),}\eqno(\hbox{\tenrm S}43)$$
+and since $S_t +s_{t+1} =S_{t+1}$,
+ $$E\left({X_{t+1}\over N} -x\right)\simeq	{1\over N}\rho S_{t+1}x(1-x)\eqno(\hbox{\tenrm S}44)$$
+ as desired.
+ 
+
+ We now compute $V(X_{t+1}/N)$ using the induction assumption and the formula
+ $$V\left({X_{t+1}\over N}\right) =E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] +V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right],\eqno(\hbox{\tenrm S}45)$$
+ where by (S36)
+ $$E\left({X_{t+1}\over N}\mid X_t\right)\simeq {X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\eqno(\hbox{\tenrm S}46)$$
+ and
+ $$V\left({X_{t+1}\over N}\mid X_t\right)\simeq{1\over N}{X_t\over N}\left(1-{X_t\over N}\right).\eqno(\hbox{\tenrm S}47)$$
+ Here we used the fact that  $y'(1-y')\simeq y(1-y)$. Now
+ $$E\left[V\left({X_{t+1}\over N}\mid X_t\right)\right] \simeq {1\over N}E\left[{X_t\over N}\left(1-{X_t\over N}\right)\right]\simeq {1\over N}x(1-x),\eqno(\hbox{\tenrm S}48)$$
+ where we use the same computations as led from (S39) to (S42).
+ $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right] =V\left[{X_t\over N} +{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right].\eqno(\hbox{\tenrm S}49)$$
+ Since $(X_t/N)\bigl[1-(X_t/N)\bigr]$ is a random variable taking values in [0,1],  its variance is less than 1/4 and
+ $$V\left[{1\over N}\rho s_{t+1}{X_t\over N}\left(1-{X_t\over N}\right)\right] \le {1\over 4N^2}\rho^2 s_{t+1}^2.\eqno(\hbox{\tenrm S}50)$$
+ We ignore terms $O(1/N^2)$ so that the random variable $(1/N)\rho s_{t+1}(X_t/N)\bigl[1-(X_t/N)\bigr]$ is almost constant. As a result,
+ $$V\left[E\left({X_{t+1}\over N}\mid X_t\right)\right]\simeq V\left({X_t\over N}\right) \simeq {1\over N}tx(1-x),\eqno(\hbox{\tenrm S}51)$$
+ by the induction assumption. Combining (S48) and (S51) gives
+ $$V\left({X_{t+1}\over N}\right)\simeq {1\over N}x(1-x) +{1\over N}tx(1-x) ={1\over N}(t+1)x(1-x)\eqno(\hbox{\tenrm S}52)$$
+ as expected.
+%\bigskip
+%\bigskip
+\vfil\break
+
+
+ \noindent{\bf SP7. Calculation of stable vertical transmission rate in $AkBk$}
+ \medskip
+
+Here we describe the analysis of the stability of a modifier allele $m$ with vertical transmission rate $\rho$ to invasion by a modifier $M$ with a vertical transmission rate $P$, as described in eq.\ (32), in environmental regime $AkBl$.
+The analysis is similar to that used in Result 8 to analyze stability in $A1B1$, but it is numerical because the cases where $k>1$ or $l>1$ require solving polynomials of degree $>6$  in order to obtain closed form expressions.
+
+The analysis includes the following steps for fixed $W, w, k,$ and $l$.
+First, we find the stable frequency of phenotype $A$ with a single modifier $x^*$. This is done by minimizing the expression $|x_{k+l} - x_{0}|$ where $x_{t}$ is defined in eq.\ 9. The minimization is done by iterating the recurrence (9) until it converges, i.e. until the difference $|x_{k+l} - x_{0}|$ is smaller than available machine precision (roughly $10^{-8}$ when subtracting similar small numbers).
+Next, we set the frequency vector with two modifiers to $\underline x^*=(x^*, 1-x^*, 0, 0)$, that is, to the stable frequencies in the absence of modifier $M$.
+
+Now we define $F_A(\underline x)$ by eqs.\ (32) with $w_A=W$ and $w_B=w$ ($W>w$), and similarly $F_B(\underline x)$ with $w_B=W$ and $w_A=w$.
+Also, we define, similar to eq.\ (34), $F(\underline x)$ by composition
+$$F=\underbrace{F_B\circ \cdots\circ F_B}_{l\ \hbox{\sevenrm times}} \circ\underbrace{F_A\circ \cdots\circ F_A}_{k\ \hbox{\sevenrm times}}.\eqno(\hbox{\tenrm S}53)$$
+
+To obtain a linear approximation of $F(\underline x)$ "near" $\underline x^*$, we calculate the Jacobian matrix of $F(\underline x)$ at $\underline x = \underline x^*$,
+$$
+\cj_{ij} = \cj(\underline x^*)_{ij} = {\partial F(\underline x^*)_i \over \partial x_j},
+\eqno(\hbox{\tenrm S}54)$$
+and the $2\times 2$ external stability matrix $\cl=\cl_{ex}$ is as in eqs.\ (37-38)  (note that the upper-right block is $\underline 0$ because $x^*_3=x^*_4=0$)
+$$
+\cj = \left[\matrix{\cl_{in} & \underline 0\cr\noalign{\medskip}
+ * & \cl_{ex}\cr}\right].
+\eqno(\hbox{\tenrm S}55)$$
+
+We calculate the eigenvalues $\lambda_1 > \lambda_2$ of $\cl$ using the quadratic formula as the characteristic polynomial of $\cl$ has degree 2.
+By the Perron-Frobenius theorem, the leading eigenvalue $\lambda_1$ is real and positive. Denote by $\lambda_1(\rho, P)$ the resulting leading eigenvalue with resident rate $\rho$ and invader rate $P$. Note that for any $\rho \in (0,1)$ 
+$$
+\lambda_1(\rho, \rho) = 1.
+\eqno(\hbox{\tenrm S}56)$$
+The evolutionary stable rate $\rho^*$ is defined to be stable to invasion; that is, for a small enough value $\partial P>0$ we have
+$$
+\lambda_1(\rho^*,\rho^* \pm \partial P) < 1 = \lambda_1(\rho^*,\rho^*),
+\eqno(\hbox{\tenrm S}57)$$
+where the equality is given by eq.\ (S56).
+Therefore, 
+$$
+{\partial \lambda_1 \over \partial P} \big(\rho^*,\rho^*\big) = 0. 
+\eqno(\hbox{\tenrm S}58)$$
+
+We use Brent's root-finding method (Brent, 1971) to find $\rho^*$ that satisfies eq.\ (S58).
+If, due to numerical instability of the described numerical process, we have
+$$
+\partial {\lambda_1 \over \partial P} \big(0,0\big) \cdot {\partial \lambda_1 \over \partial P} \big(1,1) > 0,
+\eqno(\hbox{\tenrm S}59)$$
+i.e., the partial derivative sign is identical at $\rho=P=0$ and $\rho=P=1$, then we cannot use Brent's method.
+In these cases we assume that the partial derivative doesn't have a root in $(0,1)$ and we determine the stable rate $\rho^*$ by the rule
+$$
+\rho^* =\left\{\matrix{
+0 &\hbox{\tenrm if}\ {\partial \lambda_1 \over \partial P} \big(0,0\big) \le 0\cr 
+\noalign{\smallskip}
+1 & \hbox{\tenrm if}\ {\partial \lambda_1 \over \partial P} \big(0,0\big) > 0.\cr}\right.\eqno(\hbox{\tenrm S}60)$$
+
+Supplementary Figure S10 shows the leading eigenvalue $\lambda_1$ of the external stability matrix $\cl$ for different choices of environmental cycles $AkBk$, resident rate $\rho$ and invader rate $P$ when $W=1$ and $w=0.5$. The arrows show a series of invading modifiers.
+
+The  numerical analysis above is fine for small $k$, but for large $k$ and especially for $w=0.1$ the calculation is unstable.
+This is probably because when the environment is constant for a long period of time, most of the time the frequencies $x_i$ are very close to the boundaries (i.e., 0 and 1).
+
+Crucially, the Jacobian $\cj$ in eq.\ (S54) is calculated using {\sl automatic differentiation} from a function that iteratively calculates $F(\underline x^*)$ according to eq.\ (S53). Similarly, the partial derivative ${\partial \lambda_1 \over \partial P}$ in eq.\ (S58) is calculated from a function that calculates $\lambda_1$ using simple arithmetic operations.
+Note that {\sl automatic differentiation} does not mean {\sl symbolic} or {\sl numerical differentiation}, which can lead to inefficient or inaccurate estimation of $\cj$ when $k$ is not very small. Rather, from Bartholomew-Biggs et al. (2000): 
+{\sl ``Automatic differentiation is a set of techniques for transforming a program that calculates numerical values of a function, into a program which calculates numerical values for derivatives of that function with about the same accuracy and efficiency as the function values themselves.''}
+\bigskip
+\bigskip
+
+\noindent {\bf References to Supplemental Materials}
+
+\ref Bartholomew-Biggs, M., S. Brown, B. Christianson, and L. Dixon. 2000. Automatic differentiation of algorithms. {\it J. Comput. Appl. Math.} {\bf 124}: 171--190.
+
+\ref Brent, R. P. 1971. An algorithm with guaranteed convergence for finding a zero of a function. {\it Comput. J.} {\bf 14}: 422--425.
+
+\ref Ewens, W. 2004. {\it Mathematical Population Genetics}, 2nd Edition. New York: Springer.
+
+
+
+
+ 
+ \end\bye
+
+

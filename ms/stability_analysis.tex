@@ -22,11 +22,21 @@
 %SetFonts
 
 \pagestyle{headings}
-\markright{Yoav Ram, \today \; v2\hfill}
+\markright{Yoav Ram, \today \; v1\hfill}
 
+\newcommand{\beginsupplement}{%
+	\setcounter{table}{0}
+	\renewcommand{\thetable}{A\arabic{table}}%
+	\setcounter{figure}{0}
+	\renewcommand{\thefigure}{A\arabic{figure}}%
+	\setcounter{equation}{0}
+	\renewcommand{\theequation}{A\arabic{equation}}%
+}
 
 
 \begin{document}
+\beginsupplement
+
 Here I describe how I analyzed the stability of a modifier allele $m$ with vertical transmission rate $\rho$ to invasion by a modifier $M$ with a vertical transmission rate $P$, as described in the main text, eqs. 34-35, in environmental regime $AkBl$.
 \\
 The analysis is similar to that used in the main text to analyze stability in $A1B1$, but it uses computation because the cases where $k>1$ or $l>1$ cannot be analyzed using closed form expressions.
@@ -36,12 +46,12 @@ The analysis includes the following steps for a fixed $W, w, k,$ and $l$:
 
 \item Find the stable frequency vector $\vec{x^*}$ without invader $M$, i.e. $x^*_3=x^*_4=0$. This is done by minimizing the expression $|x_{k+l} - x_{0}|$ where $x_{t}$ is defined in eq. 9 of the main text. The minimization is done by iterating the recurrence until it converges, i.e. until the difference is smaller than machine precision (roughly $10^-8$ when subtracting similar small numbers).
 
-\item Define $F_A(x)$ by eq. 35 of main text with $w_A=W$ and $w_B=w$ ($W>w$), and similarly $F_B(x)$ with $w_B=W$ and $w_A=w$.
+\item Define $F_A(x)$ by eq. 32 of main text with $w_A=W$ and $w_B=w$ ($W>w$), and similarly $F_B(x)$ with $w_B=W$ and $w_A=w$.
 
-\item Define, similar to eq. 37 of main text,
+\item Define, similar to eq. 34 of main text,
 \begin{equation}
-\vec{F} = \underbrace{F_A \circ \ldots \circ F_A}_{k \text{ times}} \circ
-	\underbrace{F_B \circ \ldots \circ F_B}_{l \text{ times}}.
+\vec{F} = \underbrace{F_B \circ \ldots \circ F_B}_{l \text{ times}} \circ
+	\underbrace{F_A \circ \ldots \circ F_A}_{k \text{ times}}.
 \label{eq:F}\end{equation}
 
 \item Calculate the linear approximation $\vec{J}$ of $\vec{F}$  near $\vec{x^*}$, that is, the Jacobian matrix of $\vec{F}$ at $\vec{x^*}$:
