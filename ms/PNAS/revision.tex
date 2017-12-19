@@ -87,7 +87,7 @@ In some animals, transmission of microbes may occur during sharing or manipulati
 Another perspective on the evolutionary consequences of fluctuating environments (and, as a result, fluctuating selection) derives from the phenomenon of phenotypic switching \cite{balaban2004bacterial,kussell2005phenotypic,thattai2004stochastic,salathe2009evolution,liberman2011evolution,gaal2010exact}
 In these studies, mutation causes the organism to switch phenotypes (usually treated as haploid genotypes), and the problem has usually been couched in terms of the optimal rate of mutation in models where the phenotypic fitnesses fluctuate over time. These models did not include social learning, and the evolution was regarded as a mode of bet-hedging against future environmental change. Optimal (that is, evolutionarily stable) mutation rates depend on many features of the fluctuations, for example,  degree of fitness symmetry, strength of selection, and variance in the period of fluctuation \cite{salathe2009evolution}.
 
-In a recent analysis of evolution under fluctuating selection, Xue and Leibler \cite{xue2016evolutionary} allowed an organism to absorb information about the distribution of possible environments by learning the phenotypes of members of its parental lineage from previous generations. They describe this as ``positive feedback that enhances the probability the probability that the offspring expresses the same phenotype as the parent.'' In this formulation there was ``reinforcement of the parent phenotype'' in an offspring, such as might occur through epigenetic inheritance. Although their analysis was not couched in terms of oblique and vertical transmission, as defined by Cavalli-Sforza and Feldman \cite{cavalli1981cultural}, we have been stimulated by their analysis to develop a model in which oblique transmission, at a rate dependent on the trait frequency in the parental generation, occurs in addition to classical vertical transmission. We then ask how fluctuations in selection interact with the rate of oblique transmission to affect evolutionary dynamics and how the rate of oblique transmission itself might evolve. 
+In a recent analysis of evolution under fluctuating selection, Xue and Leibler \cite{xue2016evolutionary} allowed an organism to absorb information about the distribution of possible environments by learning the phenotypes of members of its parental lineage from previous generations. They describe this as ``positive feedback that enhances the probability that the offspring expresses the same phenotype as the parent.'' In this formulation there was ``reinforcement of the parent phenotype'' in an offspring, such as might occur through epigenetic inheritance. Although their analysis was not couched in terms of oblique and vertical transmission, as defined by Cavalli-Sforza and Feldman \cite{cavalli1981cultural}, we have been stimulated by their analysis to develop a model in which oblique transmission, at a rate dependent on the trait frequency in the parental generation, occurs in addition to classical vertical transmission. We then ask how fluctuations in selection interact with the rate of oblique transmission to affect evolutionary dynamics and how the rate of oblique transmission itself might evolve. 
 
 In our formulation, both the parental phenotype and the distribution of phenotypes in the whole population contribute to an offspring's phenotype. Using conventional modifier theory \cite{feldman1986evolutionary}, we show that in a symmetric cyclic selection regime with cycles of periods 1 or 2, an allele reducing the rate of vertical transmission is expected to increase in frequency when rare and in so doing to increase the mean fitness of the population. However, for cycles of greater length or period asymmetry, interesting non-monotonicities emerge, both in the uninvadable rate of vertical transmission, and the rate that maximizes the geometric time average of the population mean fitness, which we will refer to as the ``geometric mean fitness.'' We develop the models in very large populations with cyclic selection and with random fitnesses and also in the case where drift occurs via sampling from generation to generation in a finite population.
 
@@ -217,7 +217,7 @@ and it is impossible that both fixations are stable. Further, since by \eqref{12
 \begin{equation}a^kb^l>1\quad\hbox{\tenrm and}\quad a^lb^k>1,\label{18}\end{equation}
 or equivalently if
 \begin{equation}k\log a +l\log b>0\quad\hbox{\tenrm and}\quad l\log a+k\log b>0.\label{19}\end{equation}
-Now the inequalities of \eqref{19} hold if and only if
+Now the inequalities of (19) hold if and only if
 \begin{equation}k\,{\log(1/b)\over\log a} < l < k\,{\log a\over\log(1/b)}.\label{20}\end{equation} 
 
 These inequalities are consistent if and only if $\log(1/b)<\log a$, i.e., $ab>1$, which is true by \eqref{14}.
@@ -301,17 +301,15 @@ We have not been able to prove that for selection regimes $AkBl$ with $l\ne k$ t
  P\left(\lim_{t\to\infty}x_t =x^*\right)\ge 1-\var.\label{29}\end{equation}
  Thus stochastic local stability holds for $x^*$ provided for any initial $x_0$ sufficiently near $x^*$ the process $x_t$ converges to $x^*$ with high probability.
  
- In our case there are two constant equilibria $x^*=0$ and $x^*=1$ corresponding to fixation in $B$ and $A$, respectively. We can characterize the stochastic local stability of these fixations as follows.
+ In our case there are two constant equilibria $x^*=0$ and $x^*=1$ corresponding to fixation in $B$ and $A$, respectively. We can characterize the stochastic local stability of these fixations with the following results, whose proofs are in SI Appendices B and C.
  \medskip
  
  \noindent {\bf Result 6}. {\sl Suppose $E\left[\log (1+\rho s_t)\right]>0$. Then $x^*=0$, the fixation of phenotype $B$, is not stochastically locally stable. In fact $P\left(\lim_{t\to\infty}x_t=0\right)=0$.}
  \medskip
  
   \noindent {\bf Result 7}. {\sl Suppose $E[\log(1+\rho s_t)]<0$. Then $x^*=0$, the fixation of phenotype $B$, is stochastically locally stable. In particular, if $E(s_t)\le 0$, $x^*=0$ is stochastically locally stable.}
-\smallskip
- 
- The proofs of Results 6 and 7 are in SI Appendices B and C.
- 
+%\smallskip
+  
  
  Using the general notation for the fitness parameters $w_A$ and $w_B$, the stochastic local stability of fixation in $B$ is determined by the sign of $E\left[\log\left(1-\rho+\rho{w_A\over w_B}\right)\right]$ and that of fixation in $A$  by the sign of $E\left[\log\left(1-\rho+\rho{w_B\over w_A}\right)\right]$. For example, if the  sign of the first  is negative, fixation in $B$ is stochastically locally stable, and when it is positive, with probability one convergence to fixation in  $B$ does not occur. It is also true  that if $E(w_A/w_B)\le 1$, then fixation of $B$ is stochastically locally stable. Following \eqref{14}, for all realizations of $w_A$ and $w_B$,
  \begin{equation}
@@ -625,7 +623,7 @@ $k$ & $l$ & $w^{\dagger}$ & $\rho^*$ & $\hat\rho$ \\
  \begin{equation}
  S_n=S_{k+l} =N(k-l)(W-w).
  \label{58}\end{equation}
- Figure 7 shows an example of how $(k-l)$, $\rho$, and $(W-w)$  in \eqref{57} for $u(x)$, interact to affect fixation probabilities. More examples are illustrated in Supplementary Figure S11.
+ Figure 7 shows an example of how $(k-l)$, $\rho$, and $(W-w)$  in \eqref{57} for $u(x)$ interact to affect fixation probabilities. More examples are illustrated in Supplementary Figure S11.
 
 % Figure 7
 \begin{figure}[h]
@@ -648,7 +646,7 @@ Our model differs markedly from that of Xue and Leibler \cite{xue2016evolutionar
 In a constant environment, the higher the vertical transmission rate $\rho$, the faster is the approach to fixation of the favored phenotype: $A$ if $w_A>w_B$ or $B$ if $w_B>w_A$. Here $1-\rho$, the oblique transmission rate, represents the added chance that an offspring becomes $A$ by learning from the parent's population after learning from its parents who have undergone selection (eq.\ 2). This simple phenotypic model does not allow a polymorphism to be achieved in a constant environment, but with more oblique transmission, approach to fixation is retarded.
 
  With fluctuating environments, the dynamics of the phenotype frequencies are, in general, much more complicated. In particular, with deterministically cycling symmetric fitness values (the $AkBl$ model), it is impossible for fixation in $A$ and $B$ to both be stable. If $k=l$, for example, neither fixation is stable, and there is a single stable polymorphic equilibrium (with phenotypes $A$ and $B$ present; see Result 5). In the $A1B1$ case this  polymorphism is globally stable. In the $AkBl$ case, bounds on $l/k$ that determine the instability of both fixations, and hence the protection of polymorphism are given by the inequalities of \eqref{20}, which depend on both the fitness differences and the rate $\rho$ of vertical transmission. We conjecture that with $k\ne l$ there is a unique stable polymorphism if both fixations are unstable.
-This result is similar to the \emph{storage effect} \cite{chesson1981}, in which protection from selection maintains species coexistence: consider two species $A$ and $B$, with overlapping generations, an equal death rate $\rho$, and different growth rates $w_A$ and $w_B$; then \eqref{2} describe the change in frequency of species $A$. In our model, oblique transmission can be said to protect the disfavored phenotype from selection because it allows transmission without reproduction.
+ This result is similar to the \emph{storage effect} \cite{chesson1981}, in which protection from selection maintains species coexistence: consider two species $A$ and $B$, with overlapping generations, an equal death rate $\rho$, and different growth rates $w_A$ and $w_B$; then \eqref{2} describe the change in frequency of species $A$. In our model, oblique transmission can be said to protect the disfavored phenotype from selection because it allows transmission without reproduction.
  
  In deterministic one-locus, two-allele diploid population genetic models with cycling fitness regimes, Haldane and Jayakar \cite{haldane1963polymorphism} first showed the relevance of the geometric mean of genotypic fitnesses (cf.\ \eqref{16} and \eqref{17}) for the maintenance (or loss) of polymorphism. However, with equal homozygote fitnesses, alternating in strength as a two-generation cycle (cf.\ $A1B1$), Karlin and Liberman \cite{karlin1975random} extended the Haldane-Jayakar results and found conditions under which both allelic fixations and polymorphic equilibrium could all be stable, with the evolution depending on initial allele frequencies, as well as the homozygote fitness differences between alternate generations. Our haploid model appears not to produce such dependence on the initial conditions.
  
