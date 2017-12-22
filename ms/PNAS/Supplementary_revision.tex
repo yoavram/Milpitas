@@ -2,7 +2,7 @@
 \usepackage[margin=1in]{geometry} % See geometry.pdf to learn the layout options.
 \geometry{a4paper}
 \usepackage[parfill]{parskip}
-\usepackage{graphicx}
+\usepackage{graphicx,grffile}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{commath}
 \usepackage{longtable}
@@ -11,10 +11,24 @@
 \usepackage[unicode=true]{hyperref}
 \usepackage{authblk}
 
-% messes up nameref
-%\usepackage{titlesec}
-%\titleformat{\subsection}[runin]
-%  {\bf}{\thesection}{1em}{}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
  
 % Yoav & Lee commands
 \newcommand*{\tr}{^\intercal}
@@ -33,6 +47,13 @@
 \newcommand{\cj}{\mathbf{J}}
 \newcommand{\ci}{I}
 
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\@fpsep\textheight
+\makeatother
+
+% supplement
 \newcommand{\beginsupplement}{%
 	\setcounter{table}{0}
 	\renewcommand{\thetable}{S\arabic{table}}%
@@ -54,6 +75,7 @@
 \date{\today}
 
 \begin{document}
+\pagestyle{headings}
 \beginsupplement
 \maketitle
 
@@ -472,6 +494,150 @@ To compute $\mu(x)$, observe that by eq.~(40)
   \begin{equation}
   \sigma^2(x) = x(1-x).
  \end{equation}
+
+% 1
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{../../figures/lk_phase_plane.pdf}
+\caption{Ratios of selection periods \(\frac{k}{l}\) that lead to
+fixation of phenotype \emph{A} (red) or polymorphism of phenotypes
+\emph{A} and \emph{B} (blue). \emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by selection.
+In all cases, \emph{W} = 1, \emph{w} = \(1-s\).}\label{fig:lk_phase_plane}
+\end{figure}
+
+% 2
+\begin{figure}
+\centering
+\includegraphics{../../figures/env_A1B1.pdf}
+\caption{Frequency of phenotype \emph{A} after every two generations in
+selection regime \(A1B1\). The orange line is the finite population model
+(eqs. 52-53; average of 100 simulations). The blue line is the infinite population model
+(eq.\ 21), and the green line is the  solution of \(Q(x)=0\) (eq.\ 22). In all cases, \(W=1\); for the finite population model (orange lines), population size is \(N=10,000\) and initial frequency of \(A\) is \(x_0=0.5\).}\label{fig:env_A1B1}
+\end{figure}
+
+% 3
+\begin{figure}
+\centering
+\includegraphics{../../figures/A1B1_equilibrium.pdf}
+\caption{Properties of stability in \emph{A1B1} selection regime.
+\textbf{(A)} Stable frequency of phenotype $A$ and \textbf{(B)} stable mean fitness as functions of the vertical transmission rate \(\rho\) and the fitness of the disfavored phenotype \(w\).
+Black contour lines join \(\rho\) and \(w\) combinations that result in the same stable value.
+In all cases, fitness of the favored phenotype is \emph{W=1}.
+}\label{fig:A1B1_equilibrium}
+\end{figure}
+
+% 4
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{../../figures/AkBk_x0.pdf}
+\caption{Convergence of the frequency of phenotype \emph{A} to a stable polymorphism in selection regime \emph{AkBk}.
+Comparison of dynamics starting with different initial frequencies of phenotype \(A\) (0.01--0.99), and different $k$, $\rho$ and $w$ values.
+The lines show the $x$ frequency of phenotype \emph{A} at the end of each period, after every $2k$ generations.
+In all cases, $W=1$.}\label{fig:AkBk_x0}
+\end{figure}
+
+% 5
+\begin{figure}
+\centering
+\includegraphics{../../figures/env_A1B2.pdf}
+\caption{Frequency of phenotype \emph{A} after every three generations in
+selection regime $A1B2$. Comparison of dynamics starting with
+different initial frequency of phenotype \(A\) (0.01--0.99).
+See also Figures 1 and  7. In all cases, $W=1$.}\label{fig:env_A1B2}
+\end{figure}
+
+% 6
+\begin{figure}
+\centering
+\includegraphics{../../figures/env_A3B10.pdf}
+\caption{Frequency of phenotype \emph{A} after every thirteen generations in
+selection regime $A3B10$. Comparison of dynamics starting with
+different initial frequency of phenotype \(A\) (0.01--0.99).
+In all cases, $W=1$.}\label{fig:env_A3B10}
+\end{figure}
+
+% 7
+\begin{figure}
+\centering
+\includegraphics{../../figures/AkBk_stable_wbar.pdf}
+\caption{Stable population mean fitness in selection regime \emph{AkBk} as a function of the vertical transmission rate \(\rho\) and the number \(k\) of generations in which phenotypes \emph{A} and \emph{B} are favored by selection, for different selection intensities: \textbf{(A)} \(w=0.1\), \textbf{(B)} \(w=0.5\), and \textbf{(C)} \(w=0.9\).
+Colors represent the geometric average of the stable population mean fitness over \(2k\) generations, calculated by iterating eq. 10 until phenotype frequencies stabilized, and for at least \(1,000 \) generations.
+Blue markers show the maximum average mean fitness for each period \(k\).
+For example, with \(w=0.1\), \(\hat{\rho}=0\) maximizes the average fitness for \(k \le 11\), then \(\hat{\rho}\) increases to \(\hat{\rho} \approx 0.24\), and then continues to decrease as \(k\) increases, down to \(\hat{\rho} \approx 0.15\) for \(k=50\) (see also Fig. 8A).
+Contour lines represent \(\rho\) and \(k\) combinations that produce the same average mean fitness. 
+In all cases, $W=1$.}\label{fig:AkBk_stable_wbar}
+\end{figure}
+
+% 8
+\begin{figure}
+\centering
+\includegraphics{../../figures/AkBk_w0.5_geomwbar.pdf}
+\caption{The geometric average of the stable population mean fitness over the $2k$ generation period peaks at $\rho=0$ for $k \le 30$ (red, blue and green lines) and at $\rho \approx 0.23$ for $k=31$ and $32$ (purple and orange lines). 
+See also Figs. 8A, S5B. The inset zooms out to show that the geometric mean fitness is strictly and significantly decreasing for $\rho>0.3$ (reaching $\approx 0.7$ for $\rho=1$).
+In all cases, $W=1$, $w=0.5$.}\label{fig:AkBk_w0.5_geomwbar}
+\end{figure}
+
+% 9
+\begin{figure}
+\centering
+\includegraphics{../../figures/fixation_prob_time.pdf}
+\caption{Fixation probability and time in a finite population.
+\textbf{(A)} Fixation probability \(u(x)\) of phenotype \(A\) (eq.\ 55), and \textbf{(B)}
+Expected time to fixation \(T(x)\) of phenotype \(A\) (eq.\ 56) conditioned on its
+fixation, starting with a single copy in a population of size \(N\). The
+figure compares two estimates: Wright-Fisher simulations (blue circles) and diffusion
+equation approximation (green solid line). Parameters: selection coefficient, \(s=w_A-w_B=0.1\),
+population size, \(N=10,000\).}\label{fixation_prob_time}
+\end{figure}
+
+% 10
+\begin{figure}
+\centering
+\includegraphics{../../figures/AkBl_stable_modifier_w_0.1.pdf}
+ \caption{Evolutionarily stable vertical transmission rate in $AkBl$ selection regime.
+ The figure shows $\frac{\partial \lambda_1}{\partial P}$ the sensitivity of the leading eigenvalue of the external stability matrix $\mathbf{L}$ to changes in $P$ the vertical transmission rate of the invader allele as a function of $\rho$ the vertical transmission rate of the resident allele (see \emph{Section 2} in main text and \emph{Supplemental Material SP6} for details).
+ The shaded area marks $\rho$ values for which phenotype $B$ fixes and there is no polymorphism (Eq.~(20) in main text).
+ Without polymorphism, selection does not affect the transmission rate, so any rate in the shaded area is neutrally stable.
+ In panels A, B, D, G, J, and M, $\frac{\partial \lambda_1}{\partial P} < 0$ at the vicinity of $\rho=0$ and therefore the stable rate is $\rho^*=0$.
+ In panels B, C, E, F, H, I, K, and L, the stable rate $\rho^*$ can be identified as the $\rho$ value at which $\frac{\partial \lambda_1}{\partial P}$ changes from positive to negative.
+ In panels N and O, $\frac{\partial \lambda_1}{\partial P} > 0$ for all $\rho$ values that protect polymorphism, so there are only neutrally stable rates (in the shaded area).
+   Here, $W=1$ and $w=0.1$.}\label{fig:AkBl_stable_modifier_w_0.1}
+\end{figure}
+
+% 11
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{../../figures/lk_fix_prob.pdf}
+\caption{Fixation in a finite population with different ratios of selection periods \(\frac{k}{l}\). Fixation probability of phenotype $A$ when starting with a single copy in a population of size $N$: $u(1/N) = (1-\exp(-2 \rho \frac{k-l}{k+l}(W-w))/(1-\exp(-2 N \rho \frac{k-l}{k+l}(W-w))$ (see eqs. 59--60).
+\emph{k} and \emph{l} are the number of
+generations in which phenotypes \emph{A} and \emph{B}, respectively, are favored by
+selection. In all cases, fitness of the favored phenotype, $W = 1$; fitness of the unfavored phenotype is $w=1-s$ and the population size is \(N=10,000\).} \label{lk_fix_prob}
+\end{figure}
+
+% 12
+\begin{figure}
+\centering
+\includegraphics{../../figures/A1B1_modifier_invasions.pdf}
+\caption{Consecutive fixation of modifiers that reduce the vertical
+transmission rate in selection regime \emph{A1B1}. The figure shows
+results of numerical simulations of evolution with two modifier alleles
+(Eq. (32) in main text).
+When a modifier allele fixes (frequency\textgreater{}99.9\%), a new modifier allele is introduced with a vertical transmission rate one order of magnitude lower (vertical
+dashed lines). \textbf{(A,D,G)} The frequency of phenotype \emph{A} in
+the population over time. \textbf{(B,E,H)} The frequency of the invading
+modifier allele over time. \textbf{(C,F,I)} The population geometric mean
+fitness over time; insets zoom in to show that the mean fitness 
+decreases slightly with each invasion. 
+Invading alleles are introduced at frequency 0.01\%; whenever their frequency drops below 0.01\% they are re-introduced.
+Parameters: vertical transmission rate of
+the initial resident modifier allele, \(\rho_0 =0.1\); fitness values:
+$W=1$; $w=0.1$ (\textbf{A-C}), 0.5 (\textbf{D-F}), and 0.9
+(\textbf{G-I}). The x-axis is on a log-scale, as each sequential invasion
+takes an order of magnitude longer to complete.
+Panels D-F are the same as in Figure 4 in the main text.
+}\label{fig:A1B1_modifier_invasions}
+\end{figure}
 
 
 % Bibliography
