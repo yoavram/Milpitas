@@ -64,8 +64,11 @@
 }
 
 % NatBib
-\usepackage[round,colon,authoryear]{natbib}
+\usepackage[numbers,sort&compress,merge,round]{natbib}
+\renewcommand{\bibsection}{\section*{SI References}}
+\renewcommand*{\bibnumfmt}[1]{#1.}
 
+% title 
 \title{Evolution of vertical and oblique transmission under fluctuating selection}
 \author[a]{Yoav Ram}
 \author[b]{Uri Liberman}
@@ -75,7 +78,6 @@
 \date{\today}
 
 \begin{document}
-\pagestyle{headings}
 \beginsupplement
 \maketitle
 
@@ -641,7 +643,7 @@ Panels D-F are the same as in Figure 4 in the main text.
 
 
 % Bibliography
-\bibliographystyle{agsm}
+\bibliographystyle{unsrtnat}
 \bibliography{supplementary}
 
 \end{document}  
