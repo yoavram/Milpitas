@@ -1,6 +1,6 @@
 slidenumbers: true
 slidecount: true
-theme:Letters from Sweden, 6
+theme: Libre, 6
 
 # Evolution of Non-Vertical Transmission in Changing Environments
 
