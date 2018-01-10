@@ -176,7 +176,7 @@ Consider environments $$AkBl$$ that favor $$A$$ for $$k$$ generations and $$B$$ 
 - $$A2B1=AABAABAAB...$$
 - $$A2B3=AABBBBAABBBB...$$
 
-- Fitness of the favored phenotype (whatever it is at a given time) is $$W$$
+- Fitness of the favored phenotype (whatever it is at a given time) is $$W=1$$
 - Fitness of the unfavored phenotype is $$w$$
 
 ---
@@ -355,7 +355,7 @@ __Can $$M$$ increase in frequency and invade the population, or is $$m$$ stable 
 # Periodic environment: A1B1
 
 _Result 7._
-A modifier allele $$M$$
+An invading modifier allele $$M$$
 
 - can invade if it decreases vertical transmission $$P<\rho$$,
 - cannot invade if increases vertical transmission $$P>\rho$$. 
