@@ -5,43 +5,33 @@ theme: Libre, 6
 # Evolution of Non-Vertical Transmission in Changing Environments
 
 ### Yoav Ram
-### January 10, 2018
+### Stanford University
 #### Work with 
 #### Marc Feldman & Uri Liberman
+##### January 10, 2018
 
 ![original](images/joshua-sortino-228788.jpg)
 
+[.footer: Photos from **www.unsplash.com**]
 [.slidenumbers: false]
 ---
 
-# Who I am
+> Genetic changes that improve the fitness of individuals will tend to increase in frequency over time. 
+-- Evolution, Bergstrom and Dugatkin 2012
 
-- **Mathematical and Computational Population Biology**
-- Postdoc with Marcus Feldman, Stanford University
-- PhD with Lilach Hadany, Tel Aviv University
-- Interests:
- - Evolution of the genetic system
- - Evolution of cultural transmission
- - Eco-evolutionary dynamics & fitness landscapes
-
-[.footer: Photos from <http://www.unsplash.com>]
-[.autoscale: true]
 ---
 
 # The Modern Synthesis
 
-> Genetic changes that improve the fitness of individuals will tend to increase in frequency over time. 
--- Evolution, Bergstrom and Dugatkin 2012, ch. 1.1
-
 Genetic inheritance as the mode of transmission of traits between generations.
 
-Considered to be __vertical__: parent to offspring.
+Inherently __vertical__: parent to offspring.
 
-
+![right](images/bill-wegener-280985_cropped.jpg)
 
 ---
 
-# Non-genetic inheritance
+# [fit] Non-genetic inheritance
 
 - **Cultural evolution**: imitation, learning...
 - **Epigenetics** with trans-generational effects
@@ -56,16 +46,14 @@ __Often non-vertical__
 
 # Non-vertical genetic inheritance
 
-- _Horizontal gene transfer_: transformation, transduction, conjugation (plasmids & transposable elements), integrons
-- _Host-parasite gene transfer_
-- _Cross-species gene transfer_
-- _Chimerism?_ (Sheets et al, JARG 2017)
-
-![](images/samuel-zeller-249358.jpg)
+-**Horizontal gene transfer**: transformation, transduction, conjugation (plasmids & transposable elements), integrons
+- **Host-parasite gene transfer**
+- **Cross-species gene transfer**
+- **Chimerism?** *(Sheets et al, JARG 2017)*
 
 ---
 
-# Vertical vs. non-vertical transmission
+# [fit] Vertical vs. non-vertical transmission
 
 Differences in
 
@@ -76,18 +64,18 @@ Differences in
 - direction
 - regulation
 
-![](images/william-bout-264829.jpg)
+![right](images/william-bout-264829.jpg)
 
 ---
 
-# Oblique transmission[^*]
+# [fit] Oblique transmission
 
 Offspring inherit traits
 from non-parental adults.
 
-[^*]: Oblique = Diagonal
+\* Oblique = Diagonal
 
-![](images/digital-sennin-464411.jpg)
+![right fit](images/digital-sennin-464411.jpg)
 
 ---
 
@@ -101,12 +89,10 @@ __Examples:__
 - Microbiome
 - Genetic inheritance + horizontal gene transfer
 
-![right](images/bill-wegener-280985_cropped.jpg)
 
 ---
 
-# Model
-## Phenotypes
+# Model: Phenotypes
 
 Two phenotypes that affect fitness
 
@@ -114,20 +100,18 @@ Two phenotypes that affect fitness
 
 ---
 
-# Model
-## Phenotypes
+# Model: Phenotypes
 
 Two phenotypes that affect fitness:
 
 |phenotype | A | B |
 |----------|---|---|
-|freq.| $$x$$ | $$1-x$$ |
-|fitness| $$w_A$$ | $$w_B$$ |
+|frequency | $$x$$   | $$1-x$$ |
+|fitness   | $$w_A$$ | $$w_B$$ |
 
 ---
 
-# Model
-## Transmission
+# Model: Transmission
 
 Offspring inherit phenotype from:
 
@@ -136,12 +120,11 @@ Offspring inherit phenotype from:
 
 where $$\rho$$ is the **vertical transmission rate**.
 
-![](images/liane-metzler-30296.jpg)
+![right](figures/transmission.png)
 
 ---
 
-# Model
-## Recurrence equation
+# Model: Recurrence equation
 
 The frequency of phenotype $$A$$ in the next generation:
 
@@ -154,6 +137,9 @@ and $$\bar{w}$$ is the population mean fitness:
 $$
 \bar{w} = xw_A + (1-x)w_B
 $$
+
+![right](figures/transmission.png)
+
 
 ---
 
@@ -227,7 +213,7 @@ We can find it for $$k=l=1$$.
 
 ---
 
-# Periodic environment
+# Periodic environment: A1B1
 
 _Result 4._
 For A1B1 there is a unique stable polymorphism[^x]
@@ -369,20 +355,20 @@ __Can $$M$$ increase in frequency and invade the population, or is $$m$$ stable 
 # Periodic environment: A1B1
 
 _Result 7._
-A modifier allele with vertical transmission rate $$\rho$$ is
+A modifier allele $$M$$
 
-- stable to invasion of alleles with a higher rate $$P>\rho$$,
-- unstable to invasion of alleles with a lower rate $$P<\rho$$. 
+- can invade if it decreases vertical transmission $$P<\rho$$,
+- cannot invade if increases vertical transmission $$P>\rho$$. 
 
-**The evolutionary stable rate in therefore $$\rho^*=0$$ and _oblique transmission_ is likely to evolve.**
+**The evolutionary stable transmission is complete oblique transmission: $$\rho^*=0$$**
 
 ---
 
 # Periodic environment: A1B1
 
-- $$w_A$$ and $$w_B$$ switch between $$1$$ and $$0.1$$ every generation.
-- Initial resident modifier: $$\rho_0 = 0.1$$.
-- Invaders reduce rate by $$1/10$$.
+- Fitness of $$A$$ and $$B$$ switch between $$1$$ and $$0.1$$ every generation.
+- Initial resident modifier with vertical transmission rate $$\rho_0 = 0.1$$.
+- Invaders reduce transmission rate by $$1/10$$.
 
 ![fit right](figures/A1B1_modifier_invasions.pdf)
 
@@ -414,7 +400,7 @@ With environmental periods $$k=l>2$$ the stable vertical transmission rate is hi
 
 # Periodic environment: AkBk
 
-Moreover, the stable transmission rate __does not__ maximize the geometric mean fitness[^g].
+Moreover, the stable transmission rate __does not__ maximize the geometric mean fitness[^g], $$\hat \rho$$.
 
 ![fit right](figures/AkBk_stable_optimal_rate.pdf)
 
@@ -424,13 +410,12 @@ Moreover, the stable transmission rate __does not__ maximize the geometric mean 
 
 # Periodic environment: AkBk
 
-Moreover, the stable transmission rate __does not__ maximize the geometric mean fitness[^g].
+Also, $$\rho^*<1$$ for a wide range of environment periods. 
 
-_Reminder:_ these modifiers are __not__ neutral as they reduce effect of selection.
+Some oblique transmission is still advantageous.
+
 
 ![fit right](figures/AkBk_stable_optimal_rate.pdf)
-
-[^g]: Geometric average of the population mean fitness over $$2k$$ generations. 
 
 ---
 
@@ -440,10 +425,10 @@ _Reminder:_ these modifiers are __not__ neutral as they reduce effect of selecti
 
 ---
 
-# Polymorphism
+# [fit] Polymorphism
 
 - _Constant environment:_ polymorphism lasts longer with oblique transmission.
-- _Periodic environment:_ polymorphism is maintained in shorter periods with oblique transmission
+- _Periodic environment:_ polymorphism is maintained in more environments with oblique transmission
 
 ![right](images/pana-vasquez-430966.jpg)
 
@@ -453,7 +438,9 @@ _Reminder:_ these modifiers are __not__ neutral as they reduce effect of selecti
 # Evolution of oblique transmission
 
 - Rapidly changing environments favor _oblique_ transmission.
-- Slow and constant environments favor _vertical_ transmission.
+- Slow and constant environments favor _vertical_ transmission 
+- Despite population-level advantage to _oblique_ transmission
+- Some _oblique_ transmission is maintained even in slow environments
 
 ![](images/ray-hennessy-118049.jpg)
 
@@ -476,7 +463,6 @@ Several studies[^ξ] assumed
 # Phenotype switching
 
 - Switching rate evolves toward $$1/n$$ where $$n$$ is the period length[^μ].
-- _Environmental statistics encoded by the modifier._
 
 ![right](images/jakob-owens-209001_cropped.jpg)
 
@@ -488,7 +474,6 @@ Several studies[^ξ] assumed
 With _oblique_ transmission:
 
 - Phenotype switch caused by oblique transmission rather then transmission errors.
-- _Environmental statistics encoded by the stable population phenotype distribution_ if environmental changes are frequent and selection is weak. 
 
 ![right](images/jakob-owens-209001_cropped.jpg)
 
