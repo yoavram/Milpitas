@@ -1,9 +1,9 @@
 # Vertical and Oblique Transmission under Fluctuating Selection
-## Yoav Ram, Uri Liberman, and Marcus W. Feldman
+## Yoav Ram, Uri Liberman, and Marcus W. Feldman, PNAS 2018
 
 This repository contains supporting material for
 
->   Ram, Liberman & Feldman (2017) _Vertical and Oblique Transmission under Fluctuating Selection_, In preparation.
+>   Ram, Liberman & Feldman (2018) _Vertical and Oblique Transmission under Fluctuating Selection_, Proc Natl Acad Sci USA. DOI: [10.1073/pnas.1719171115](https://doi.org/10.1073/pnas.1719171115)
 
 The notebook file [`figures.ipynb`](https://github.com/yoavram/Milpitas/blob/master/notebooks/figures.ipynb) includes Python source code for reproduction of the manuscript figures.
 
